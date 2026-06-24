@@ -1,29 +1,44 @@
 {
   "Argentina": {
-    "formation": "4-3-3",
+    "formation": "4-4-2",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.507,
-    "pressing": 0.636,
-    "line_height": 0.603,
+    "possession_intent": 0.508,
+    "pressing": 0.637,
+    "line_height": 0.604,
     "defensive_solidity": 0.669,
-    "attack_width": 0.46,
+    "attack_width": 0.459,
     "central_progression": 0.659,
     "directness": 0.43,
-    "chance_creation": 0.781,
-    "transition_attack": 0.8,
+    "chance_creation": 0.78,
+    "transition_attack": 0.798,
     "transition_defense": 0.86,
-    "set_piece_threat": 0.555,
+    "set_piece_threat": 0.553,
     "tempo": 0.599,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-22",
+        "opponent": "Austria",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Algeria",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Brazil": {
     "formation": "4-3-3",
@@ -31,25 +46,40 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.54,
-    "pressing": 0.618,
+    "possession_intent": 0.541,
+    "pressing": 0.617,
     "line_height": 0.605,
-    "defensive_solidity": 0.44,
-    "attack_width": 0.6,
+    "defensive_solidity": 0.448,
+    "attack_width": 0.599,
     "central_progression": 0.656,
-    "directness": 0.404,
-    "chance_creation": 0.725,
-    "transition_attack": 0.731,
-    "transition_defense": 0.727,
+    "directness": 0.402,
+    "chance_creation": 0.726,
+    "transition_attack": 0.735,
+    "transition_defense": 0.731,
     "set_piece_threat": 0.647,
-    "tempo": 0.636,
+    "tempo": 0.634,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Haiti",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-13",
+        "opponent": "Morocco",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "England": {
     "formation": "4-3-3",
@@ -57,25 +87,40 @@
     "build_up": "short build-up and positional control",
     "primary_attack": "quick transitions",
     "defensive_block": "high",
-    "possession_intent": 0.653,
-    "pressing": 0.754,
+    "possession_intent": 0.658,
+    "pressing": 0.753,
     "line_height": 0.649,
-    "defensive_solidity": 0.461,
-    "attack_width": 0.74,
-    "central_progression": 0.749,
-    "directness": 0.514,
-    "chance_creation": 0.906,
-    "transition_attack": 0.759,
-    "transition_defense": 0.754,
-    "set_piece_threat": 0.763,
-    "tempo": 0.711,
+    "defensive_solidity": 0.474,
+    "attack_width": 0.741,
+    "central_progression": 0.746,
+    "directness": 0.512,
+    "chance_creation": 0.897,
+    "transition_attack": 0.749,
+    "transition_defense": 0.76,
+    "set_piece_threat": 0.76,
+    "tempo": 0.709,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Ghana",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Croatia",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "France": {
     "formation": "4-3-3",
@@ -84,24 +129,39 @@
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
     "possession_intent": 0.545,
-    "pressing": 0.689,
+    "pressing": 0.691,
     "line_height": 0.62,
-    "defensive_solidity": 0.602,
-    "attack_width": 0.6,
-    "central_progression": 0.7,
-    "directness": 0.474,
-    "chance_creation": 0.887,
-    "transition_attack": 0.873,
-    "transition_defense": 0.816,
-    "set_piece_threat": 0.697,
-    "tempo": 0.63,
+    "defensive_solidity": 0.607,
+    "attack_width": 0.599,
+    "central_progression": 0.699,
+    "directness": 0.475,
+    "chance_creation": 0.888,
+    "transition_attack": 0.874,
+    "transition_defense": 0.819,
+    "set_piece_threat": 0.695,
+    "tempo": 0.631,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-22",
+        "opponent": "Iraq",
+        "formation": "4-3-3",
+        "source": "confirmed-lineup"
+      },
+      {
+        "date": "2026-06-16",
+        "opponent": "Senegal",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Germany": {
     "formation": "4-3-3",
@@ -110,50 +170,80 @@
     "primary_attack": "quick transitions",
     "defensive_block": "high",
     "possession_intent": 0.62,
-    "pressing": 0.766,
+    "pressing": 0.763,
     "line_height": 0.646,
-    "defensive_solidity": 0.388,
+    "defensive_solidity": 0.387,
     "attack_width": 0.72,
-    "central_progression": 0.81,
-    "directness": 0.533,
+    "central_progression": 0.807,
+    "directness": 0.531,
     "chance_creation": 1.0,
     "transition_attack": 1.0,
-    "transition_defense": 0.713,
-    "set_piece_threat": 0.872,
-    "tempo": 0.749,
+    "transition_defense": 0.712,
+    "set_piece_threat": 0.867,
+    "tempo": 0.747,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Ivory Coast",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Curaçao",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Ghana": {
-    "formation": "5-4-1",
+    "formation": "4-1-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.295,
-    "pressing": 0.569,
-    "line_height": 0.558,
-    "defensive_solidity": 0.419,
+    "possession_intent": 0.292,
+    "pressing": 0.568,
+    "line_height": 0.557,
+    "defensive_solidity": 0.415,
     "attack_width": 0.48,
-    "central_progression": 0.477,
+    "central_progression": 0.476,
     "directness": 0.411,
-    "chance_creation": 0.475,
-    "transition_attack": 0.545,
-    "transition_defense": 0.678,
-    "set_piece_threat": 0.472,
+    "chance_creation": 0.472,
+    "transition_attack": 0.543,
+    "transition_defense": 0.674,
+    "set_piece_threat": 0.471,
     "tempo": 0.624,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "England",
+        "formation": "4-1-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Panama",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Mexico": {
     "formation": "4-3-3",
@@ -161,25 +251,40 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.515,
-    "pressing": 0.65,
-    "line_height": 0.607,
-    "defensive_solidity": 0.684,
-    "attack_width": 0.48,
-    "central_progression": 0.619,
-    "directness": 0.441,
-    "chance_creation": 0.694,
-    "transition_attack": 0.678,
-    "transition_defense": 0.883,
-    "set_piece_threat": 0.522,
+    "possession_intent": 0.511,
+    "pressing": 0.648,
+    "line_height": 0.606,
+    "defensive_solidity": 0.68,
+    "attack_width": 0.479,
+    "central_progression": 0.618,
+    "directness": 0.44,
+    "chance_creation": 0.691,
+    "transition_attack": 0.675,
+    "transition_defense": 0.881,
+    "set_piece_threat": 0.52,
     "tempo": 0.605,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-19",
+        "opponent": "South Korea",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-11",
+        "opponent": "South Africa",
+        "formation": "4-1-4-1",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Netherlands": {
     "formation": "4-3-3",
@@ -187,25 +292,40 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.553,
-    "pressing": 0.616,
+    "possession_intent": 0.552,
+    "pressing": 0.617,
     "line_height": 0.606,
-    "defensive_solidity": 0.144,
-    "attack_width": 0.54,
+    "defensive_solidity": 0.145,
+    "attack_width": 0.538,
     "central_progression": 0.703,
-    "directness": 0.399,
-    "chance_creation": 0.856,
-    "transition_attack": 0.917,
+    "directness": 0.4,
+    "chance_creation": 0.86,
+    "transition_attack": 0.924,
     "transition_defense": 0.542,
-    "set_piece_threat": 0.672,
-    "tempo": 0.667,
+    "set_piece_threat": 0.673,
+    "tempo": 0.669,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Sweden",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Japan",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Portugal": {
     "formation": "4-3-3",
@@ -213,51 +333,81 @@
     "build_up": "short build-up and positional control",
     "primary_attack": "quick transitions",
     "defensive_block": "high",
-    "possession_intent": 0.707,
-    "pressing": 0.627,
-    "line_height": 0.631,
-    "defensive_solidity": 0.528,
-    "attack_width": 0.56,
-    "central_progression": 0.709,
-    "directness": 0.374,
-    "chance_creation": 0.812,
-    "transition_attack": 0.849,
-    "transition_defense": 0.776,
-    "set_piece_threat": 0.663,
-    "tempo": 0.624,
+    "possession_intent": 0.705,
+    "pressing": 0.629,
+    "line_height": 0.632,
+    "defensive_solidity": 0.533,
+    "attack_width": 0.559,
+    "central_progression": 0.713,
+    "directness": 0.377,
+    "chance_creation": 0.823,
+    "transition_attack": 0.858,
+    "transition_defense": 0.779,
+    "set_piece_threat": 0.666,
+    "tempo": 0.626,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Uzbekistan",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Congo DR",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "South Korea": {
-    "formation": "4-3-3",
+    "formation": "3-4-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "central progression",
     "defensive_block": "mid",
     "possession_intent": 0.595,
-    "pressing": 0.64,
+    "pressing": 0.638,
     "line_height": 0.617,
     "defensive_solidity": 0.417,
-    "attack_width": 0.52,
-    "central_progression": 0.645,
-    "directness": 0.413,
-    "chance_creation": 0.662,
-    "transition_attack": 0.608,
-    "transition_defense": 0.714,
-    "set_piece_threat": 0.53,
-    "tempo": 0.624,
+    "attack_width": 0.519,
+    "central_progression": 0.643,
+    "directness": 0.412,
+    "chance_creation": 0.657,
+    "transition_attack": 0.603,
+    "transition_defense": 0.715,
+    "set_piece_threat": 0.527,
+    "tempo": 0.623,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-19",
+        "opponent": "Mexico",
+        "formation": "3-4-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-12",
+        "opponent": "Czechia",
+        "formation": "3-4-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Spain": {
     "formation": "4-3-3",
@@ -265,181 +415,286 @@
     "build_up": "short build-up and positional control",
     "primary_attack": "central progression",
     "defensive_block": "high",
-    "possession_intent": 0.707,
-    "pressing": 0.805,
+    "possession_intent": 0.706,
+    "pressing": 0.804,
     "line_height": 0.667,
-    "defensive_solidity": 0.728,
-    "attack_width": 0.74,
+    "defensive_solidity": 0.729,
+    "attack_width": 0.736,
     "central_progression": 0.781,
-    "directness": 0.553,
-    "chance_creation": 0.969,
-    "transition_attack": 0.768,
-    "transition_defense": 0.915,
-    "set_piece_threat": 0.763,
-    "tempo": 0.742,
+    "directness": 0.552,
+    "chance_creation": 0.973,
+    "transition_attack": 0.777,
+    "transition_defense": 0.916,
+    "set_piece_threat": 0.764,
+    "tempo": 0.741,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Saudi Arabia",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Cape Verde",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "United States": {
-    "formation": "4-3-3",
+    "formation": "3-5-2",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "quick transitions",
     "defensive_block": "high",
-    "possession_intent": 0.636,
-    "pressing": 0.649,
+    "possession_intent": 0.635,
+    "pressing": 0.648,
     "line_height": 0.625,
-    "defensive_solidity": 0.543,
-    "attack_width": 0.6,
-    "central_progression": 0.658,
-    "directness": 0.413,
-    "chance_creation": 0.8,
-    "transition_attack": 0.858,
-    "transition_defense": 0.791,
+    "defensive_solidity": 0.549,
+    "attack_width": 0.603,
+    "central_progression": 0.656,
+    "directness": 0.412,
+    "chance_creation": 0.795,
+    "transition_attack": 0.853,
+    "transition_defense": 0.794,
     "set_piece_threat": 0.697,
-    "tempo": 0.63,
+    "tempo": 0.628,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-19",
+        "opponent": "Australia",
+        "formation": "3-5-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-13",
+        "opponent": "Paraguay",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Uruguay": {
-    "formation": "4-3-3",
+    "formation": "4-1-4-1",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "wide attacks and corners",
     "defensive_block": "high",
     "possession_intent": 0.66,
-    "pressing": 0.775,
-    "line_height": 0.654,
-    "defensive_solidity": 0.247,
-    "attack_width": 0.9,
-    "central_progression": 0.723,
-    "directness": 0.533,
-    "chance_creation": 0.869,
-    "transition_attack": 0.701,
-    "transition_defense": 0.606,
-    "set_piece_threat": 0.872,
-    "tempo": 0.774,
+    "pressing": 0.773,
+    "line_height": 0.653,
+    "defensive_solidity": 0.241,
+    "attack_width": 0.898,
+    "central_progression": 0.718,
+    "directness": 0.531,
+    "chance_creation": 0.864,
+    "transition_attack": 0.702,
+    "transition_defense": 0.602,
+    "set_piece_threat": 0.871,
+    "tempo": 0.773,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Cape Verde",
+        "formation": "4-1-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Saudi Arabia",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "South Africa": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "central progression",
     "defensive_block": "mid",
-    "possession_intent": 0.506,
-    "pressing": 0.622,
-    "line_height": 0.6,
-    "defensive_solidity": 0.085,
-    "attack_width": 0.52,
-    "central_progression": 0.588,
-    "directness": 0.416,
-    "chance_creation": 0.581,
-    "transition_attack": 0.546,
-    "transition_defense": 0.517,
-    "set_piece_threat": 0.505,
-    "tempo": 0.693,
+    "possession_intent": 0.51,
+    "pressing": 0.625,
+    "line_height": 0.602,
+    "defensive_solidity": 0.091,
+    "attack_width": 0.523,
+    "central_progression": 0.59,
+    "directness": 0.418,
+    "chance_creation": 0.586,
+    "transition_attack": 0.549,
+    "transition_defense": 0.519,
+    "set_piece_threat": 0.508,
+    "tempo": 0.695,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-18",
+        "opponent": "Czechia",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-11",
+        "opponent": "Mexico",
+        "formation": "5-3-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Canada": {
-    "formation": "4-3-3",
+    "formation": "4-4-2",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "wide attacks and corners",
     "defensive_block": "high",
-    "possession_intent": 0.701,
-    "pressing": 0.777,
-    "line_height": 0.661,
-    "defensive_solidity": 0.602,
-    "attack_width": 0.96,
-    "central_progression": 0.764,
-    "directness": 0.526,
+    "possession_intent": 0.704,
+    "pressing": 0.782,
+    "line_height": 0.662,
+    "defensive_solidity": 0.609,
+    "attack_width": 0.967,
+    "central_progression": 0.768,
+    "directness": 0.53,
     "chance_creation": 1.0,
-    "transition_attack": 0.949,
-    "transition_defense": 0.824,
+    "transition_attack": 0.961,
+    "transition_defense": 0.828,
     "set_piece_threat": 1.0,
-    "tempo": 0.724,
+    "tempo": 0.727,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-18",
+        "opponent": "Qatar",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-12",
+        "opponent": "Bosnia-Herzegovina",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Bosnia-Herzegovina": {
-    "formation": "4-2-3-1",
+    "formation": "4-4-2",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
     "possession_intent": 0.383,
-    "pressing": 0.587,
+    "pressing": 0.586,
     "line_height": 0.575,
     "defensive_solidity": 0.0,
-    "attack_width": 0.54,
+    "attack_width": 0.539,
     "central_progression": 0.548,
-    "directness": 0.409,
-    "chance_creation": 0.569,
+    "directness": 0.408,
+    "chance_creation": 0.568,
     "transition_attack": 0.607,
-    "transition_defense": 0.41,
-    "set_piece_threat": 0.547,
-    "tempo": 0.624,
+    "transition_defense": 0.411,
+    "set_piece_threat": 0.546,
+    "tempo": 0.623,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-18",
+        "opponent": "Switzerland",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-12",
+        "opponent": "Canada",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Czechia": {
-    "formation": "4-2-3-1",
+    "formation": "3-5-2",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
     "possession_intent": 0.384,
-    "pressing": 0.644,
-    "line_height": 0.586,
-    "defensive_solidity": 0.056,
+    "pressing": 0.646,
+    "line_height": 0.587,
+    "defensive_solidity": 0.059,
     "attack_width": 0.6,
-    "central_progression": 0.563,
-    "directness": 0.466,
-    "chance_creation": 0.631,
-    "transition_attack": 0.621,
-    "transition_defense": 0.493,
+    "central_progression": 0.562,
+    "directness": 0.467,
+    "chance_creation": 0.632,
+    "transition_attack": 0.622,
+    "transition_defense": 0.495,
     "set_piece_threat": 0.597,
-    "tempo": 0.711,
+    "tempo": 0.713,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-18",
+        "opponent": "South Africa",
+        "formation": "3-5-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-12",
+        "opponent": "South Korea",
+        "formation": "3-4-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Morocco": {
     "formation": "4-3-3",
@@ -447,103 +702,163 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.537,
-    "pressing": 0.661,
+    "possession_intent": 0.539,
+    "pressing": 0.66,
     "line_height": 0.613,
-    "defensive_solidity": 0.484,
-    "attack_width": 0.54,
-    "central_progression": 0.583,
-    "directness": 0.448,
+    "defensive_solidity": 0.491,
+    "attack_width": 0.542,
+    "central_progression": 0.584,
+    "directness": 0.446,
     "chance_creation": 0.637,
     "transition_attack": 0.617,
-    "transition_defense": 0.736,
-    "set_piece_threat": 0.547,
-    "tempo": 0.655,
+    "transition_defense": 0.741,
+    "set_piece_threat": 0.548,
+    "tempo": 0.653,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-19",
+        "opponent": "Scotland",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-13",
+        "opponent": "Brazil",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Qatar": {
-    "formation": "5-4-1",
+    "formation": "4-3-3",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.265,
+    "possession_intent": 0.263,
     "pressing": 0.565,
-    "line_height": 0.553,
+    "line_height": 0.552,
     "defensive_solidity": 0.0,
-    "attack_width": 0.48,
-    "central_progression": 0.468,
+    "attack_width": 0.479,
+    "central_progression": 0.465,
     "directness": 0.414,
-    "chance_creation": 0.469,
-    "transition_attack": 0.546,
-    "transition_defense": 0.312,
-    "set_piece_threat": 0.472,
-    "tempo": 0.792,
+    "chance_creation": 0.465,
+    "transition_attack": 0.544,
+    "transition_defense": 0.31,
+    "set_piece_threat": 0.47,
+    "tempo": 0.793,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-18",
+        "opponent": "Canada",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-13",
+        "opponent": "Switzerland",
+        "formation": "4-3-3",
+        "source": "confirmed-lineup"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Switzerland": {
-    "formation": "4-3-3",
+    "formation": "4-5-1",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "quick transitions",
     "defensive_block": "high",
-    "possession_intent": 0.652,
-    "pressing": 0.74,
-    "line_height": 0.646,
-    "defensive_solidity": 0.476,
-    "attack_width": 0.74,
+    "possession_intent": 0.65,
+    "pressing": 0.737,
+    "line_height": 0.645,
+    "defensive_solidity": 0.477,
+    "attack_width": 0.738,
     "central_progression": 0.748,
-    "directness": 0.501,
+    "directness": 0.498,
     "chance_creation": 0.925,
-    "transition_attack": 0.818,
+    "transition_attack": 0.824,
     "transition_defense": 0.747,
-    "set_piece_threat": 0.788,
-    "tempo": 0.693,
+    "set_piece_threat": 0.789,
+    "tempo": 0.689,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-18",
+        "opponent": "Bosnia-Herzegovina",
+        "formation": "4-5-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-13",
+        "opponent": "Qatar",
+        "formation": "4-3-3",
+        "source": "confirmed-lineup"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Paraguay": {
-    "formation": "5-4-1",
+    "formation": "4-4-2",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.281,
-    "pressing": 0.621,
+    "possession_intent": 0.279,
+    "pressing": 0.62,
     "line_height": 0.566,
     "defensive_solidity": 0.0,
-    "attack_width": 0.42,
+    "attack_width": 0.419,
     "central_progression": 0.473,
     "directness": 0.466,
     "chance_creation": 0.55,
-    "transition_attack": 0.621,
-    "transition_defense": 0.417,
-    "set_piece_threat": 0.447,
-    "tempo": 0.78,
+    "transition_attack": 0.622,
+    "transition_defense": 0.415,
+    "set_piece_threat": 0.446,
+    "tempo": 0.783,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Türkiye",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-13",
+        "opponent": "United States",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Australia": {
     "formation": "5-4-1",
@@ -551,25 +866,40 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.333,
-    "pressing": 0.6,
+    "possession_intent": 0.334,
+    "pressing": 0.599,
     "line_height": 0.57,
-    "defensive_solidity": 0.05,
-    "attack_width": 0.58,
+    "defensive_solidity": 0.052,
+    "attack_width": 0.579,
     "central_progression": 0.532,
-    "directness": 0.434,
-    "chance_creation": 0.575,
-    "transition_attack": 0.613,
-    "transition_defense": 0.445,
-    "set_piece_threat": 0.58,
-    "tempo": 0.718,
+    "directness": 0.432,
+    "chance_creation": 0.571,
+    "transition_attack": 0.608,
+    "transition_defense": 0.446,
+    "set_piece_threat": 0.578,
+    "tempo": 0.712,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-19",
+        "opponent": "United States",
+        "formation": "5-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Türkiye",
+        "formation": "5-4-1",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Türkiye": {
     "formation": "4-3-3",
@@ -577,25 +907,40 @@
     "build_up": "short build-up and positional control",
     "primary_attack": "wide attacks and corners",
     "defensive_block": "high",
-    "possession_intent": 0.75,
+    "possession_intent": 0.752,
     "pressing": 0.893,
     "line_height": 0.691,
-    "defensive_solidity": 0.291,
-    "attack_width": 0.8,
-    "central_progression": 0.766,
+    "defensive_solidity": 0.296,
+    "attack_width": 0.803,
+    "central_progression": 0.765,
     "directness": 0.63,
-    "chance_creation": 0.9,
+    "chance_creation": 0.899,
     "transition_attack": 0.538,
-    "transition_defense": 0.653,
-    "set_piece_threat": 0.713,
+    "transition_defense": 0.657,
+    "set_piece_threat": 0.716,
     "tempo": 0.867,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Paraguay",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Australia",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Curaçao": {
     "formation": "5-4-1",
@@ -603,155 +948,245 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.304,
-    "pressing": 0.632,
+    "possession_intent": 0.302,
+    "pressing": 0.633,
     "line_height": 0.572,
     "defensive_solidity": 0.0,
-    "attack_width": 0.42,
+    "attack_width": 0.419,
     "central_progression": 0.509,
-    "directness": 0.472,
+    "directness": 0.473,
     "chance_creation": 0.556,
-    "transition_attack": 0.561,
+    "transition_attack": 0.559,
     "transition_defense": 0.402,
-    "set_piece_threat": 0.422,
+    "set_piece_threat": 0.42,
     "tempo": 0.824,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Ecuador",
+        "formation": "5-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Germany",
+        "formation": "4-5-1",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Haiti": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "central progression",
     "defensive_block": "mid",
-    "possession_intent": 0.485,
-    "pressing": 0.639,
-    "line_height": 0.601,
-    "defensive_solidity": 0.166,
+    "possession_intent": 0.483,
+    "pressing": 0.637,
+    "line_height": 0.6,
+    "defensive_solidity": 0.158,
     "attack_width": 0.56,
     "central_progression": 0.567,
-    "directness": 0.437,
-    "chance_creation": 0.55,
+    "directness": 0.436,
+    "chance_creation": 0.549,
     "transition_attack": 0.489,
-    "transition_defense": 0.569,
+    "transition_defense": 0.564,
     "set_piece_threat": 0.513,
-    "tempo": 0.624,
+    "tempo": 0.622,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Brazil",
+        "formation": "5-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Scotland",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Scotland": {
-    "formation": "4-2-3-1",
+    "formation": "4-4-2",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.437,
-    "pressing": 0.595,
+    "possession_intent": 0.436,
+    "pressing": 0.594,
     "line_height": 0.584,
-    "defensive_solidity": 0.352,
-    "attack_width": 0.5,
-    "central_progression": 0.508,
+    "defensive_solidity": 0.349,
+    "attack_width": 0.499,
+    "central_progression": 0.507,
     "directness": 0.404,
-    "chance_creation": 0.5,
-    "transition_attack": 0.544,
-    "transition_defense": 0.656,
-    "set_piece_threat": 0.488,
-    "tempo": 0.643,
+    "chance_creation": 0.497,
+    "transition_attack": 0.541,
+    "transition_defense": 0.654,
+    "set_piece_threat": 0.487,
+    "tempo": 0.641,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-19",
+        "opponent": "Morocco",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Haiti",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Ivory Coast": {
-    "formation": "4-2-3-1",
+    "formation": "4-1-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.445,
-    "pressing": 0.658,
+    "possession_intent": 0.443,
+    "pressing": 0.657,
     "line_height": 0.598,
-    "defensive_solidity": 0.226,
+    "defensive_solidity": 0.216,
     "attack_width": 0.52,
-    "central_progression": 0.568,
-    "directness": 0.466,
-    "chance_creation": 0.637,
+    "central_progression": 0.566,
+    "directness": 0.465,
+    "chance_creation": 0.635,
     "transition_attack": 0.621,
-    "transition_defense": 0.549,
+    "transition_defense": 0.543,
     "set_piece_threat": 0.53,
     "tempo": 0.705,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Germany",
+        "formation": "4-1-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Ecuador",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Ecuador": {
-    "formation": "4-3-3",
+    "formation": "3-5-2",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "central progression",
     "defensive_block": "high",
-    "possession_intent": 0.631,
-    "pressing": 0.743,
-    "line_height": 0.643,
-    "defensive_solidity": 0.381,
-    "attack_width": 0.7,
-    "central_progression": 0.77,
-    "directness": 0.508,
-    "chance_creation": 0.794,
-    "transition_attack": 0.507,
-    "transition_defense": 0.717,
-    "set_piece_threat": 0.63,
-    "tempo": 0.78,
+    "possession_intent": 0.635,
+    "pressing": 0.746,
+    "line_height": 0.645,
+    "defensive_solidity": 0.388,
+    "attack_width": 0.702,
+    "central_progression": 0.779,
+    "directness": 0.51,
+    "chance_creation": 0.803,
+    "transition_attack": 0.508,
+    "transition_defense": 0.722,
+    "set_piece_threat": 0.632,
+    "tempo": 0.782,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Curaçao",
+        "formation": "3-5-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Ivory Coast",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Japan": {
-    "formation": "4-2-3-1",
+    "formation": "3-4-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.512,
-    "pressing": 0.629,
-    "line_height": 0.602,
-    "defensive_solidity": 0.461,
-    "attack_width": 0.58,
-    "central_progression": 0.618,
-    "directness": 0.421,
-    "chance_creation": 0.769,
-    "transition_attack": 0.86,
-    "transition_defense": 0.724,
-    "set_piece_threat": 0.68,
-    "tempo": 0.586,
+    "possession_intent": 0.515,
+    "pressing": 0.628,
+    "line_height": 0.603,
+    "defensive_solidity": 0.474,
+    "attack_width": 0.581,
+    "central_progression": 0.62,
+    "directness": 0.42,
+    "chance_creation": 0.772,
+    "transition_attack": 0.864,
+    "transition_defense": 0.731,
+    "set_piece_threat": 0.682,
+    "tempo": 0.585,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Tunisia",
+        "formation": "3-4-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-14",
+        "opponent": "Netherlands",
+        "formation": "3-4-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Belgium": {
     "formation": "4-3-3",
@@ -759,25 +1194,40 @@
     "build_up": "short build-up and positional control",
     "primary_attack": "central progression",
     "defensive_block": "high",
-    "possession_intent": 0.618,
-    "pressing": 0.737,
-    "line_height": 0.64,
-    "defensive_solidity": 0.44,
-    "attack_width": 0.52,
-    "central_progression": 0.681,
-    "directness": 0.505,
-    "chance_creation": 0.744,
-    "transition_attack": 0.569,
-    "transition_defense": 0.705,
+    "possession_intent": 0.621,
+    "pressing": 0.739,
+    "line_height": 0.641,
+    "defensive_solidity": 0.448,
+    "attack_width": 0.521,
+    "central_progression": 0.684,
+    "directness": 0.506,
+    "chance_creation": 0.746,
+    "transition_attack": 0.567,
+    "transition_defense": 0.71,
     "set_piece_threat": 0.505,
     "tempo": 0.749,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Iran",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Egypt",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Egypt": {
     "formation": "4-3-3",
@@ -785,25 +1235,40 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.51,
-    "pressing": 0.715,
-    "line_height": 0.619,
-    "defensive_solidity": 0.255,
-    "attack_width": 0.62,
-    "central_progression": 0.646,
-    "directness": 0.507,
-    "chance_creation": 0.806,
-    "transition_attack": 0.757,
-    "transition_defense": 0.625,
+    "possession_intent": 0.512,
+    "pressing": 0.716,
+    "line_height": 0.62,
+    "defensive_solidity": 0.258,
+    "attack_width": 0.618,
+    "central_progression": 0.649,
+    "directness": 0.508,
+    "chance_creation": 0.811,
+    "transition_attack": 0.762,
+    "transition_defense": 0.626,
     "set_piece_threat": 0.663,
     "tempo": 0.749,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-22",
+        "opponent": "New Zealand",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Belgium",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Saudi Arabia": {
     "formation": "5-4-1",
@@ -812,102 +1277,162 @@
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
     "possession_intent": 0.33,
-    "pressing": 0.572,
+    "pressing": 0.571,
     "line_height": 0.564,
     "defensive_solidity": 0.0,
-    "attack_width": 0.5,
-    "central_progression": 0.503,
-    "directness": 0.406,
-    "chance_creation": 0.494,
-    "transition_attack": 0.544,
-    "transition_defense": 0.38,
-    "set_piece_threat": 0.488,
-    "tempo": 0.749,
+    "attack_width": 0.498,
+    "central_progression": 0.502,
+    "directness": 0.405,
+    "chance_creation": 0.491,
+    "transition_attack": 0.541,
+    "transition_defense": 0.382,
+    "set_piece_threat": 0.486,
+    "tempo": 0.747,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Spain",
+        "formation": "5-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Uruguay",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Cape Verde": {
-    "formation": "5-4-1",
+    "formation": "4-1-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.302,
-    "pressing": 0.632,
+    "possession_intent": 0.304,
+    "pressing": 0.634,
     "line_height": 0.572,
     "defensive_solidity": 0.0,
-    "attack_width": 0.5,
-    "central_progression": 0.508,
-    "directness": 0.473,
-    "chance_creation": 0.587,
-    "transition_attack": 0.623,
+    "attack_width": 0.502,
+    "central_progression": 0.51,
+    "directness": 0.474,
+    "chance_creation": 0.592,
+    "transition_attack": 0.628,
     "transition_defense": 0.365,
-    "set_piece_threat": 0.513,
-    "tempo": 0.768,
+    "set_piece_threat": 0.517,
+    "tempo": 0.767,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Uruguay",
+        "formation": "4-1-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Spain",
+        "formation": "4-1-4-1",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Sweden": {
-    "formation": "4-3-3",
+    "formation": "3-5-2",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
     "possession_intent": 0.489,
-    "pressing": 0.688,
+    "pressing": 0.689,
     "line_height": 0.611,
     "defensive_solidity": 0.0,
-    "attack_width": 0.58,
+    "attack_width": 0.581,
     "central_progression": 0.711,
-    "directness": 0.486,
-    "chance_creation": 0.906,
-    "transition_attack": 0.876,
+    "directness": 0.487,
+    "chance_creation": 0.903,
+    "transition_attack": 0.868,
     "transition_defense": 0.5,
-    "set_piece_threat": 0.68,
-    "tempo": 0.661,
+    "set_piece_threat": 0.677,
+    "tempo": 0.663,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-20",
+        "opponent": "Netherlands",
+        "formation": "3-5-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Tunisia",
+        "formation": "3-5-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Tunisia": {
-    "formation": "4-2-3-1",
+    "formation": "3-4-3",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.446,
-    "pressing": 0.544,
-    "line_height": 0.576,
+    "possession_intent": 0.444,
+    "pressing": 0.543,
+    "line_height": 0.575,
     "defensive_solidity": 0.0,
-    "attack_width": 0.5,
-    "central_progression": 0.511,
+    "attack_width": 0.501,
+    "central_progression": 0.509,
     "directness": 0.351,
-    "chance_creation": 0.456,
-    "transition_attack": 0.53,
+    "chance_creation": 0.453,
+    "transition_attack": 0.528,
     "transition_defense": 0.462,
     "set_piece_threat": 0.488,
-    "tempo": 0.58,
+    "tempo": 0.579,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Japan",
+        "formation": "3-4-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-15",
+        "opponent": "Sweden",
+        "formation": "5-3-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Senegal": {
     "formation": "4-3-3",
@@ -915,129 +1440,204 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.525,
-    "pressing": 0.634,
+    "possession_intent": 0.527,
+    "pressing": 0.637,
     "line_height": 0.606,
     "defensive_solidity": 0.0,
     "attack_width": 0.56,
-    "central_progression": 0.594,
-    "directness": 0.424,
-    "chance_creation": 0.656,
-    "transition_attack": 0.673,
+    "central_progression": 0.595,
+    "directness": 0.425,
+    "chance_creation": 0.661,
+    "transition_attack": 0.676,
     "transition_defense": 0.448,
-    "set_piece_threat": 0.588,
-    "tempo": 0.667,
+    "set_piece_threat": 0.589,
+    "tempo": 0.67,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Norway",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-16",
+        "opponent": "France",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Iran": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.392,
-    "pressing": 0.664,
-    "line_height": 0.592,
-    "defensive_solidity": 0.094,
-    "attack_width": 0.52,
-    "central_progression": 0.565,
-    "directness": 0.484,
-    "chance_creation": 0.65,
-    "transition_attack": 0.626,
-    "transition_defense": 0.544,
-    "set_piece_threat": 0.53,
+    "possession_intent": 0.389,
+    "pressing": 0.662,
+    "line_height": 0.591,
+    "defensive_solidity": 0.097,
+    "attack_width": 0.519,
+    "central_progression": 0.564,
+    "directness": 0.483,
+    "chance_creation": 0.645,
+    "transition_attack": 0.621,
+    "transition_defense": 0.545,
+    "set_piece_threat": 0.527,
     "tempo": 0.761,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-21",
+        "opponent": "Belgium",
+        "formation": "5-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-16",
+        "opponent": "New Zealand",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "New Zealand": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.48,
-    "pressing": 0.661,
+    "possession_intent": 0.478,
+    "pressing": 0.66,
     "line_height": 0.604,
     "defensive_solidity": 0.0,
-    "attack_width": 0.5,
-    "central_progression": 0.679,
-    "directness": 0.461,
-    "chance_creation": 0.762,
-    "transition_attack": 0.683,
+    "attack_width": 0.502,
+    "central_progression": 0.677,
+    "directness": 0.46,
+    "chance_creation": 0.759,
+    "transition_attack": 0.68,
     "transition_defense": 0.47,
-    "set_piece_threat": 0.538,
+    "set_piece_threat": 0.539,
     "tempo": 0.761,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-22",
+        "opponent": "Egypt",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-16",
+        "opponent": "Iran",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Iraq": {
-    "formation": "4-2-3-1",
+    "formation": "4-1-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.415,
-    "pressing": 0.597,
+    "possession_intent": 0.417,
+    "pressing": 0.595,
     "line_height": 0.582,
     "defensive_solidity": 0.0,
     "attack_width": 0.48,
     "central_progression": 0.487,
-    "directness": 0.412,
-    "chance_creation": 0.487,
-    "transition_attack": 0.545,
-    "transition_defense": 0.462,
-    "set_piece_threat": 0.472,
+    "directness": 0.41,
+    "chance_creation": 0.484,
+    "transition_attack": 0.543,
+    "transition_defense": 0.463,
+    "set_piece_threat": 0.471,
     "tempo": 0.667,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-22",
+        "opponent": "France",
+        "formation": "4-1-4-1",
+        "source": "confirmed-lineup"
+      },
+      {
+        "date": "2026-06-16",
+        "opponent": "Norway",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Norway": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.515,
+    "possession_intent": 0.511,
     "pressing": 0.657,
-    "line_height": 0.609,
-    "defensive_solidity": 0.13,
+    "line_height": 0.608,
+    "defensive_solidity": 0.123,
     "attack_width": 0.6,
     "central_progression": 0.676,
-    "directness": 0.448,
+    "directness": 0.45,
     "chance_creation": 0.875,
-    "transition_attack": 0.93,
-    "transition_defense": 0.556,
-    "set_piece_threat": 0.722,
-    "tempo": 0.705,
+    "transition_attack": 0.928,
+    "transition_defense": 0.552,
+    "set_piece_threat": 0.721,
+    "tempo": 0.706,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Senegal",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-16",
+        "opponent": "Iraq",
+        "formation": "4-4-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Algeria": {
     "formation": "4-3-3",
@@ -1045,25 +1645,40 @@
     "build_up": "short build-up and positional control",
     "primary_attack": "central progression",
     "defensive_block": "high",
-    "possession_intent": 0.621,
-    "pressing": 0.637,
-    "line_height": 0.621,
-    "defensive_solidity": 0.151,
-    "attack_width": 0.64,
-    "central_progression": 0.667,
-    "directness": 0.404,
-    "chance_creation": 0.675,
-    "transition_attack": 0.606,
-    "transition_defense": 0.59,
-    "set_piece_threat": 0.63,
-    "tempo": 0.643,
+    "possession_intent": 0.625,
+    "pressing": 0.639,
+    "line_height": 0.622,
+    "defensive_solidity": 0.16,
+    "attack_width": 0.646,
+    "central_progression": 0.672,
+    "directness": 0.405,
+    "chance_creation": 0.683,
+    "transition_attack": 0.611,
+    "transition_defense": 0.596,
+    "set_piece_threat": 0.637,
+    "tempo": 0.644,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Jordan",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Argentina",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Austria": {
     "formation": "4-3-3",
@@ -1071,51 +1686,81 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.548,
-    "pressing": 0.596,
+    "possession_intent": 0.545,
+    "pressing": 0.595,
     "line_height": 0.601,
-    "defensive_solidity": 0.188,
-    "attack_width": 0.54,
-    "central_progression": 0.587,
-    "directness": 0.38,
-    "chance_creation": 0.613,
-    "transition_attack": 0.662,
-    "transition_defense": 0.604,
-    "set_piece_threat": 0.572,
-    "tempo": 0.63,
+    "defensive_solidity": 0.184,
+    "attack_width": 0.539,
+    "central_progression": 0.584,
+    "directness": 0.379,
+    "chance_creation": 0.607,
+    "transition_attack": 0.656,
+    "transition_defense": 0.602,
+    "set_piece_threat": 0.568,
+    "tempo": 0.629,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-22",
+        "opponent": "Argentina",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Jordan",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Jordan": {
-    "formation": "5-4-1",
+    "formation": "3-4-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.323,
-    "pressing": 0.637,
+    "possession_intent": 0.322,
+    "pressing": 0.636,
     "line_height": 0.576,
     "defensive_solidity": 0.0,
-    "attack_width": 0.48,
-    "central_progression": 0.558,
+    "attack_width": 0.479,
+    "central_progression": 0.557,
     "directness": 0.472,
     "chance_creation": 0.631,
     "transition_attack": 0.623,
-    "transition_defense": 0.425,
-    "set_piece_threat": 0.497,
+    "transition_defense": 0.423,
+    "set_piece_threat": 0.495,
     "tempo": 0.674,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Algeria",
+        "formation": "3-4-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Austria",
+        "formation": "3-4-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Croatia": {
     "formation": "4-3-3",
@@ -1123,103 +1768,163 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.531,
-    "pressing": 0.591,
+    "possession_intent": 0.533,
+    "pressing": 0.589,
     "line_height": 0.598,
     "defensive_solidity": 0.0,
     "attack_width": 0.48,
-    "central_progression": 0.61,
-    "directness": 0.378,
-    "chance_creation": 0.631,
-    "transition_attack": 0.662,
-    "transition_defense": 0.417,
-    "set_piece_threat": 0.522,
-    "tempo": 0.667,
+    "central_progression": 0.609,
+    "directness": 0.377,
+    "chance_creation": 0.628,
+    "transition_attack": 0.659,
+    "transition_defense": 0.418,
+    "set_piece_threat": 0.521,
+    "tempo": 0.663,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Panama",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "England",
+        "formation": "3-4-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   },
   "Panama": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "wide attacks and corners",
     "defensive_block": "mid",
-    "possession_intent": 0.52,
+    "possession_intent": 0.516,
     "pressing": 0.613,
-    "line_height": 0.601,
+    "line_height": 0.6,
     "defensive_solidity": 0.447,
-    "attack_width": 0.58,
-    "central_progression": 0.578,
+    "attack_width": 0.584,
+    "central_progression": 0.575,
     "directness": 0.404,
-    "chance_creation": 0.531,
+    "chance_creation": 0.529,
     "transition_attack": 0.481,
     "transition_defense": 0.746,
-    "set_piece_threat": 0.53,
-    "tempo": 0.58,
+    "set_piece_threat": 0.533,
+    "tempo": 0.579,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.715,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Croatia",
+        "formation": "5-4-1",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Ghana",
+        "formation": "3-4-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-2-3-1"
   },
   "Congo DR": {
-    "formation": "4-2-3-1",
-    "style": "pressing and territory",
+    "formation": "5-3-2",
+    "style": "balanced tournament football",
     "build_up": "mixed build-up",
-    "primary_attack": "quick transitions",
+    "primary_attack": "wide attacks and corners",
     "defensive_block": "mid",
-    "possession_intent": 0.246,
-    "pressing": 0.625,
-    "line_height": 0.562,
-    "defensive_solidity": 0.432,
+    "possession_intent": 0.307,
+    "pressing": 0.617,
+    "line_height": 0.57,
+    "defensive_solidity": 0.234,
     "attack_width": 0.56,
-    "central_progression": 0.476,
-    "directness": 0.478,
-    "chance_creation": 0.562,
-    "transition_attack": 0.625,
-    "transition_defense": 0.693,
-    "set_piece_threat": 0.563,
-    "tempo": 0.568,
-    "sample_size": 1,
+    "central_progression": 0.481,
+    "directness": 0.457,
+    "chance_creation": 0.517,
+    "transition_attack": 0.554,
+    "transition_defense": 0.584,
+    "set_piece_threat": 0.537,
+    "tempo": 0.652,
+    "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 1 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.44
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Colombia",
+        "formation": "5-3-2",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-17",
+        "opponent": "Portugal",
+        "formation": "5-3-2",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Uzbekistan": {
-    "formation": "5-4-1",
+    "formation": "3-4-3",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
     "possession_intent": 0.363,
-    "pressing": 0.604,
+    "pressing": 0.603,
     "line_height": 0.575,
     "defensive_solidity": 0.0,
-    "attack_width": 0.5,
+    "attack_width": 0.499,
     "central_progression": 0.513,
     "directness": 0.43,
-    "chance_creation": 0.525,
-    "transition_attack": 0.55,
-    "transition_defense": 0.477,
-    "set_piece_threat": 0.488,
+    "chance_creation": 0.524,
+    "transition_attack": 0.548,
+    "transition_defense": 0.478,
+    "set_piece_threat": 0.487,
     "tempo": 0.674,
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.56
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-23",
+        "opponent": "Portugal",
+        "formation": "3-4-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-18",
+        "opponent": "Colombia",
+        "formation": "3-4-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "5-4-1"
   },
   "Colombia": {
     "formation": "4-3-3",
@@ -1227,24 +1932,39 @@
     "build_up": "short build-up and positional control",
     "primary_attack": "quick transitions",
     "defensive_block": "high",
-    "possession_intent": 0.614,
-    "pressing": 0.681,
-    "line_height": 0.628,
-    "defensive_solidity": 0.402,
-    "attack_width": 0.56,
-    "central_progression": 0.651,
-    "directness": 0.449,
-    "chance_creation": 0.825,
-    "transition_attack": 0.867,
-    "transition_defense": 0.706,
-    "set_piece_threat": 0.663,
-    "tempo": 0.667,
-    "sample_size": 1,
+    "possession_intent": 0.625,
+    "pressing": 0.716,
+    "line_height": 0.637,
+    "defensive_solidity": 0.518,
+    "attack_width": 0.581,
+    "central_progression": 0.728,
+    "directness": 0.482,
+    "chance_creation": 0.857,
+    "transition_attack": 0.746,
+    "transition_defense": 0.762,
+    "set_piece_threat": 0.629,
+    "tempo": 0.7,
+    "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 1 FIFA World Cup 2026 rich match(es) in ESPN data."
+      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
-    "formation_source": "estimated-from-match-stats",
-    "formation_confidence": 0.44
+    "formation_source": "confirmed-lineups-last-matches",
+    "formation_confidence": 0.86,
+    "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Congo DR",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
+      {
+        "date": "2026-06-18",
+        "opponent": "Uzbekistan",
+        "formation": "4-3-3",
+        "source": "match-record"
+      }
+    ],
+    "estimated_formation": "4-3-3"
   }
 }

@@ -56,6 +56,7 @@ class EspnWorldCupProvider:
     """
 
     endpoint = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard"
+    summary_endpoint = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary"
     all_team_schedule_endpoint = "https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/{team_id}/schedule"
 
     def __init__(self, timeout: int = 20):
@@ -77,7 +78,7 @@ class EspnWorldCupProvider:
                 candidates.append(fixture)
         if not candidates:
             raise ProviderError(f"Не нашел матч ЧМ для пары {home_team} - {away_team}.")
-        return self._best_candidate(candidates)
+        return self.enrich_fixture(self._best_candidate(candidates))
 
     def fixtures(self, start_date: str | None = None, end_date: str | None = None) -> list[dict[str, Any]]:
         start_date, end_date = self._date_window(start_date, end_date)
@@ -122,6 +123,38 @@ class EspnWorldCupProvider:
         fixtures.sort(key=lambda item: item.get("date", ""), reverse=True)
         return fixtures[:limit]
 
+    def enrich_fixture(self, fixture: dict[str, Any]) -> dict[str, Any]:
+        fixture_id = fixture.get("fixture_id")
+        if not fixture_id:
+            return fixture
+        try:
+            summary = self._summary(str(fixture_id))
+        except ProviderError:
+            return fixture
+
+        lineups = self._lineups_from_summary(summary)
+        home_team = fixture.get("home_team", "")
+        away_team = fixture.get("away_team", "")
+        home_lineup = self._matching_lineup(lineups, home_team) or self._empty_lineup(home_team)
+        away_lineup = self._matching_lineup(lineups, away_team) or self._empty_lineup(away_team)
+
+        key_players = self._key_players_from_summary(summary)
+        enriched = dict(fixture)
+        enriched["lineups"] = {
+            home_team: home_lineup,
+            away_team: away_lineup,
+        }
+        enriched["key_players"] = {
+            home_team: self._matching_key_players(key_players, home_team),
+            away_team: self._matching_key_players(key_players, away_team),
+        }
+        enriched["home_formation"] = home_lineup.get("formation")
+        enriched["away_formation"] = away_lineup.get("formation")
+        enriched["lineup_status"] = (
+            "confirmed" if home_lineup.get("confirmed") and away_lineup.get("confirmed") else "not_released"
+        )
+        return enriched
+
     def get_finished_result(self, home_team: str, away_team: str, date: str | None = None) -> dict[str, Any]:
         if date:
             fixture = self.find_fixture(home_team, away_team, start_date=date, end_date=date)
@@ -158,6 +191,16 @@ class EspnWorldCupProvider:
                 return json.loads(response.read().decode("utf-8"))
         except Exception as exc:
             raise ProviderError(f"ESPN scoreboard unavailable: {exc}") from exc
+
+    def _summary(self, event_id: str) -> dict[str, Any]:
+        params = {"event": event_id}
+        url = f"{self.summary_endpoint}?{urllib.parse.urlencode(params)}"
+        request = urllib.request.Request(url, headers={"User-Agent": "national-football-predictor/0.1"})
+        try:
+            with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except Exception as exc:
+            raise ProviderError(f"ESPN summary unavailable: {exc}") from exc
 
     def _team_schedule(self, team_id: str) -> dict[str, Any]:
         url = self.all_team_schedule_endpoint.format(team_id=urllib.parse.quote(str(team_id)))
@@ -326,6 +369,140 @@ class EspnWorldCupProvider:
                 except ValueError:
                     continue
         return stats
+
+    def _lineups_from_summary(self, summary: dict[str, Any]) -> dict[str, dict[str, Any]]:
+        lineups: dict[str, dict[str, Any]] = {}
+        for roster_block in summary.get("rosters") or []:
+            team = roster_block.get("team", {})
+            team_name = team.get("displayName") or team.get("name") or ""
+            if not team_name:
+                continue
+            roster = roster_block.get("roster") or []
+            starters = [self._player_from_roster_item(item) for item in roster if item.get("starter")]
+            bench = [self._player_from_roster_item(item) for item in roster if not item.get("starter")]
+            starters = [item for item in starters if item.get("name")]
+            bench = [item for item in bench if item.get("name")]
+            formation = self._formation_from_starters(starters)
+            lineups[team_name] = {
+                "team": team_name,
+                "confirmed": len(starters) >= 11,
+                "formation": formation,
+                "starters": starters,
+                "bench": bench,
+                "source": "espn-summary-rosters",
+            }
+        return lineups
+
+    def _player_from_roster_item(self, item: dict[str, Any]) -> dict[str, Any]:
+        athlete = item.get("athlete") or {}
+        position = athlete.get("position") or item.get("position") or {}
+        return {
+            "name": athlete.get("displayName") or athlete.get("shortName") or athlete.get("name") or "",
+            "position": position.get("displayName") or position.get("name") or position.get("abbreviation") or "",
+            "formation_place": item.get("formationPlace"),
+        }
+
+    def _formation_from_starters(self, starters: list[dict[str, Any]]) -> str | None:
+        if len(starters) < 11:
+            return None
+        defenders = midfielders = forwards = 0
+        defensive_midfielders = attacking_midfielders = 0
+        for player in starters:
+            category = self._position_category(player.get("position", ""))
+            if category == "G":
+                continue
+            if category == "D":
+                defenders += 1
+            elif category == "F":
+                forwards += 1
+            else:
+                midfielders += 1
+                position = normalize_provider_name(str(player.get("position", "")))
+                defensive_midfielders += 1 if "defensive" in position else 0
+                attacking_midfielders += 1 if "attacking" in position else 0
+
+        if defenders <= 0 or defenders + midfielders + forwards != 10:
+            return None
+        if defenders == 4 and midfielders == 5 and forwards == 1 and defensive_midfielders:
+            return "4-1-4-1"
+        if defenders == 4 and midfielders == 4 and forwards == 2 and attacking_midfielders:
+            return "4-2-3-1"
+        return f"{defenders}-{midfielders}-{forwards}"
+
+    def _position_category(self, position: str) -> str:
+        normalized = normalize_provider_name(position)
+        if "goalkeeper" in normalized or normalized in {"g", "keeper"}:
+            return "G"
+        if "attacking midfielder left" in normalized or "attacking midfielder right" in normalized:
+            return "F"
+        if "back" in normalized or "defender" in normalized or normalized == "d":
+            return "D"
+        if "forward" in normalized or "striker" in normalized or "winger" in normalized or normalized == "f":
+            return "F"
+        return "M"
+
+    def _matching_lineup(self, lineups: dict[str, dict[str, Any]], team_name: str) -> dict[str, Any] | None:
+        query = normalize_provider_name(team_name)
+        for name, lineup in lineups.items():
+            normalized = normalize_provider_name(name)
+            if query == normalized or query in normalized or normalized in query:
+                return lineup
+        return None
+
+    def _empty_lineup(self, team_name: str) -> dict[str, Any]:
+        return {
+            "team": team_name,
+            "confirmed": False,
+            "formation": None,
+            "starters": [],
+            "bench": [],
+            "source": "not-released",
+        }
+
+    def _key_players_from_summary(self, summary: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+        by_team: dict[str, dict[str, dict[str, Any]]] = {}
+        for team_block in summary.get("leaders") or []:
+            team = team_block.get("team", {})
+            team_name = team.get("displayName") or team.get("name") or ""
+            if not team_name:
+                continue
+            players = by_team.setdefault(team_name, {})
+            for category in team_block.get("leaders") or []:
+                category_name = str(category.get("name") or category.get("displayName") or "")
+                impact = self._leader_impact(category_name)
+                if impact <= 0:
+                    continue
+                for leader in (category.get("leaders") or [])[:3]:
+                    athlete = leader.get("athlete") or {}
+                    name = athlete.get("displayName") or athlete.get("shortName") or athlete.get("name")
+                    if not name:
+                        continue
+                    key = normalize_provider_name(name)
+                    existing = players.setdefault(key, {"name": name, "impact": 0.0, "roles": []})
+                    existing["impact"] = max(float(existing.get("impact", 0.0)), impact)
+                    existing.setdefault("roles", []).append(category_name)
+        return {
+            team: sorted(players.values(), key=lambda item: item["impact"], reverse=True)[:6]
+            for team, players in by_team.items()
+        }
+
+    def _leader_impact(self, category_name: str) -> float:
+        normalized = normalize_provider_name(category_name)
+        if any(token in normalized for token in ("goal", "shot", "assist")):
+            return 0.13
+        if any(token in normalized for token in ("pass", "chance")):
+            return 0.08
+        if any(token in normalized for token in ("defensive", "save")):
+            return 0.07
+        return 0.0
+
+    def _matching_key_players(self, key_players: dict[str, list[dict[str, Any]]], team_name: str) -> list[dict[str, Any]]:
+        query = normalize_provider_name(team_name)
+        for name, players in key_players.items():
+            normalized = normalize_provider_name(name)
+            if query == normalized or query in normalized or normalized in query:
+                return players
+        return []
 
 
 class ApiFootballProvider:

@@ -9,6 +9,7 @@ class MatchRecord:
     date: str
     home_team: str
     away_team: str
+    fixture_id: str | None = None
     home_goals: int | None = None
     away_goals: int | None = None
     home_corners: float | None = None
@@ -25,6 +26,10 @@ class MatchRecord:
     stage: str = ""
     neutral: bool = True
     source: str = "manual"
+    home_formation: str | None = None
+    away_formation: str | None = None
+    home_lineup_confirmed: bool = False
+    away_lineup_confirmed: bool = False
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "MatchRecord":
@@ -35,6 +40,7 @@ class MatchRecord:
             "date": self.date,
             "home_team": self.home_team,
             "away_team": self.away_team,
+            "fixture_id": self.fixture_id,
             "home_goals": self.home_goals,
             "away_goals": self.away_goals,
             "home_corners": self.home_corners,
@@ -51,6 +57,10 @@ class MatchRecord:
             "stage": self.stage,
             "neutral": self.neutral,
             "source": self.source,
+            "home_formation": self.home_formation,
+            "away_formation": self.away_formation,
+            "home_lineup_confirmed": self.home_lineup_confirmed,
+            "away_lineup_confirmed": self.away_lineup_confirmed,
         }
 
     def involves(self, team: str) -> bool:
@@ -110,6 +120,20 @@ class MatchRecord:
         if self.away_team == team:
             return self.away_shots_on_target
         return None
+
+    def formation_for(self, team: str) -> str | None:
+        if self.home_team == team:
+            return self.home_formation
+        if self.away_team == team:
+            return self.away_formation
+        return None
+
+    def lineup_confirmed_for(self, team: str) -> bool:
+        if self.home_team == team:
+            return self.home_lineup_confirmed
+        if self.away_team == team:
+            return self.away_lineup_confirmed
+        return False
 
 
 @dataclass

@@ -30,10 +30,22 @@ class WorldCupDataSync:
                 "error": "provider unavailable",
             }
 
+        existing_matches = {
+            (match.date, match.home_team, match.away_team): match
+            for match in self.store.load_matches()
+        }
         imported = 0
         for fixture in fixtures:
             if not fixture.get("completed"):
                 continue
+            existing = existing_matches.get((fixture.get("date"), fixture.get("home_team"), fixture.get("away_team")))
+            if existing is None or not (
+                existing.home_formation
+                and existing.away_formation
+                and existing.home_lineup_confirmed
+                and existing.away_lineup_confirmed
+            ):
+                fixture = self.provider.enrich_fixture(fixture)
             record = self._record_from_fixture(fixture)
             self.store.add_or_update_match(record)
             imported += 1
@@ -105,6 +117,7 @@ class WorldCupDataSync:
             date=fixture["date"],
             home_team=fixture["home_team"],
             away_team=fixture["away_team"],
+            fixture_id=fixture.get("fixture_id"),
             home_goals=fixture.get("home_goals"),
             away_goals=fixture.get("away_goals"),
             home_corners=fixture.get("home_corners"),
@@ -121,6 +134,10 @@ class WorldCupDataSync:
             stage=fixture.get("status_detail", ""),
             neutral=True,
             source=fixture.get("source", "espn-world-cup"),
+            home_formation=fixture.get("home_formation"),
+            away_formation=fixture.get("away_formation"),
+            home_lineup_confirmed=bool(fixture.get("home_formation")),
+            away_lineup_confirmed=bool(fixture.get("away_formation")),
         )
 
     def _update_tactical_profiles(self) -> int:
@@ -134,11 +151,17 @@ class WorldCupDataSync:
             and match.away_shots is not None
         ]
         aggregates: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+        weights_by_team: dict[str, float] = defaultdict(float)
         counts: dict[str, int] = defaultdict(int)
+        formation_weights: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+        formation_history: dict[str, list[dict[str, Any]]] = defaultdict(list)
 
-        for match in matches:
+        for match in sorted(matches, key=lambda item: item.date, reverse=True):
             for team in (match.home_team, match.away_team):
+                recency_rank = counts[team]
+                weight = max(0.35, 1.0 - recency_rank * 0.07)
                 counts[team] += 1
+                weights_by_team[team] += weight
                 gf = match.goals_for(team) or 0
                 ga = match.goals_against(team) or 0
                 corners_for = match.corners_for(team) or 0.0
@@ -148,23 +171,43 @@ class WorldCupDataSync:
                 shots_against = match.shots_against(team) or 0.0
                 sot = match.shots_on_target_for(team) or 0.0
 
-                aggregates[team]["goals_for"] += gf
-                aggregates[team]["goals_against"] += ga
-                aggregates[team]["corners_for"] += corners_for
-                aggregates[team]["corners_against"] += corners_against
-                aggregates[team]["possession"] += possession if possession is not None else 50.0
-                aggregates[team]["shots_for"] += shots_for
-                aggregates[team]["shots_against"] += shots_against
-                aggregates[team]["sot"] += sot
+                aggregates[team]["goals_for"] += gf * weight
+                aggregates[team]["goals_against"] += ga * weight
+                aggregates[team]["corners_for"] += corners_for * weight
+                aggregates[team]["corners_against"] += corners_against * weight
+                aggregates[team]["possession"] += (possession if possession is not None else 50.0) * weight
+                aggregates[team]["shots_for"] += shots_for * weight
+                aggregates[team]["shots_against"] += shots_against * weight
+                aggregates[team]["sot"] += sot * weight
+                formation = match.formation_for(team)
+                if formation:
+                    formation_weights[team][formation] += weight
+                    formation_history[team].append(
+                        {
+                            "date": match.date,
+                            "opponent": match.away_team if match.home_team == team else match.home_team,
+                            "formation": formation,
+                            "source": "confirmed-lineup" if match.lineup_confirmed_for(team) else "match-record",
+                        }
+                    )
 
         profiles = self.store.load_tactical_profiles()
         updated = 0
         for team, count in counts.items():
             if count <= 0:
                 continue
-            avg = {key: value / count for key, value in aggregates[team].items()}
+            total_weight = weights_by_team[team] or count
+            avg = {key: value / total_weight for key, value in aggregates[team].items()}
             existing = profiles.setdefault(team, {})
-            existing.update(self._profile_from_averages(existing, avg, count))
+            existing.update(
+                self._profile_from_averages(
+                    existing,
+                    avg,
+                    count,
+                    formation_weights.get(team, {}),
+                    formation_history.get(team, []),
+                )
+            )
             profiles[team] = existing
             updated += 1
 
@@ -298,7 +341,14 @@ class WorldCupDataSync:
             last = last.replace(tzinfo=timezone.utc)
         return datetime.now(timezone.utc) - last > timedelta(hours=max_age_hours)
 
-    def _profile_from_averages(self, existing: dict[str, Any], avg: dict[str, float], sample_size: int) -> dict[str, Any]:
+    def _profile_from_averages(
+        self,
+        existing: dict[str, Any],
+        avg: dict[str, float],
+        sample_size: int,
+        formation_weights: dict[str, float] | None = None,
+        formation_history: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
         possession = avg.get("possession", 50.0) / 100.0
         shots = avg.get("shots_for", 10.0)
         shots_against = avg.get("shots_against", 10.0)
@@ -335,11 +385,27 @@ class WorldCupDataSync:
             goals_against=goals_against,
         )
         manual_formation = existing.get("formation") if existing.get("formation_source") == "manual" else None
+        formation_source = "estimated-from-match-stats"
+        formation_confidence = round(min(0.82, 0.32 + sample_size * 0.12), 3)
+        selected_formation = derived_formation
+        formation_history = (formation_history or [])[:6]
+        if formation_weights:
+            selected_formation, selected_weight = max(formation_weights.items(), key=lambda item: item[1])
+            total_formation_weight = sum(formation_weights.values()) or 1.0
+            consistency = selected_weight / total_formation_weight
+            formation_source = "confirmed-lineups-last-matches"
+            formation_confidence = round(min(0.96, 0.50 + consistency * 0.30 + min(sample_size, 6) * 0.03), 3)
+        if manual_formation:
+            selected_formation = manual_formation
+            formation_source = "manual"
+            formation_confidence = 1.0
 
         return {
-            "formation": manual_formation or derived_formation,
-            "formation_source": "manual" if manual_formation else "estimated-from-match-stats",
-            "formation_confidence": round(min(0.82, 0.32 + sample_size * 0.12), 3),
+            "formation": selected_formation,
+            "formation_source": formation_source,
+            "formation_confidence": formation_confidence,
+            "formation_history": formation_history,
+            "estimated_formation": derived_formation,
             "style": style_guess(possession, directness, pressing),
             "build_up": build_up_guess(possession, directness),
             "primary_attack": primary_attack_guess(attack_width, central_progression, transition_attack),
@@ -358,7 +424,7 @@ class WorldCupDataSync:
             "tempo": round(tempo, 3),
             "sample_size": sample_size,
             "source": "espn-world-cup-derived",
-            "notes": [f"Estimated from {sample_size} FIFA World Cup 2026 rich match(es) in ESPN data."],
+            "notes": [f"Estimated from {sample_size} recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."],
         }
 
 

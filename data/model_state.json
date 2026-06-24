@@ -4,17 +4,17 @@
   "weights": {
     "home_advantage_goals": 0.18,
     "elo_to_goals": 0.22,
-    "form_to_goals": 0.32560800000000006,
+    "form_to_goals": 0.32813600000000004,
     "class_to_goals": 0.1,
     "chance_to_goals": 0.06,
     "motivation_to_goals": 0.18,
     "injury_to_goals": 0.16,
-    "lineup_to_goals": 0.1,
-    "tactics_to_goals": 0.30747582800000023,
-    "tactics_to_corners": 1.1689776199999997,
+    "lineup_to_goals": 0.24,
+    "tactics_to_goals": 0.3061814160000002,
+    "tactics_to_corners": 1.1679930599999997,
     "world_cup_intensity_goals": 0.05,
-    "corner_bias": -0.2346240000000001,
-    "goal_scale": 0.9486599999999994
+    "corner_bias": -0.2615040000000001,
+    "goal_scale": 0.9426599999999994
   },
   "history": [
     {
@@ -7136,6 +7136,66 @@
       "actual_corners": 20.0,
       "corner_error": 4.0,
       "updated_at": "2026-06-24T03:36:33.779607+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Colombia",
+      "away_team": "Congo DR",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 8.19,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T04:11:22.658316+00:00"
+    },
+    {
+      "date": "2026-06-22",
+      "home_team": "France",
+      "away_team": "Iraq",
+      "prediction_id": "1565f0d0a5f2428a92e3a9e3ceb8a677",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "2-0",
+        "4-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": true,
+      "predicted_corners": 7.51,
+      "actual_corners": 6.0,
+      "corner_error": -1.51,
+      "updated_at": "2026-06-24T04:16:49.901156+00:00"
+    },
+    {
+      "date": "2026-06-13",
+      "home_team": "Qatar",
+      "away_team": "Switzerland",
+      "prediction_id": "163a9cf8031e4bbdb215cbb490678cb0",
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-4",
+        "0-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 14.29,
+      "actual_corners": 13.0,
+      "corner_error": -1.29,
+      "updated_at": "2026-06-24T04:16:51.086589+00:00"
     }
   ],
   "trained_match_keys": [
@@ -7488,6 +7548,7 @@
     "2026-06-23|Jordan|Algeria",
     "2026-06-23|Norway|Senegal",
     "2026-06-23|Panama|Croatia",
-    "2026-06-23|Portugal|Uzbekistan"
+    "2026-06-23|Portugal|Uzbekistan",
+    "2026-06-24|Colombia|Congo DR"
   ]
 }

@@ -44,6 +44,8 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("under_2_5", prediction.to_dict()["goal_total"]["probabilities"])
             self.assertIn("team_reports", prediction.to_dict())
             self.assertIn(home, prediction.to_dict()["team_reports"])
+            self.assertIn("lineup_reports", prediction.to_dict())
+            self.assertIn(home, prediction.to_dict()["lineup_reports"])
             self.assertIn("data_quality", prediction.to_dict())
             for item in prediction.exact_score_probabilities:
                 self.assertGreaterEqual(item["probability"], 0)
@@ -108,6 +110,75 @@ class PredictorTests(unittest.TestCase):
             score_totals = [sum(map(int, score.split("-"))) for score in prediction.exact_scores]
             self.assertGreaterEqual(prediction.goal_total["probabilities"]["over_3_5"], 0.33)
             self.assertTrue(any(total >= 4 for total in score_totals))
+
+    def test_over_total_does_not_rank_one_nil_first(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            predictor = MatchPredictor(store)
+            stats = TeamStats(team="A", sample_size=10, wins=5, draws=3, losses=2)
+            goal_total = predictor._goal_total_forecast(1.75, 1.14)
+            scores = predictor._top_scores(
+                1.75,
+                1.14,
+                "П1",
+                stats,
+                stats,
+                goal_total,
+                {"П1": 0.46, "X": 0.27, "П2": 0.27},
+            )
+            self.assertGreater(goal_total["probabilities"]["over_2_5"], 0.52)
+            self.assertGreaterEqual(sum(map(int, scores[0]["score"].split("-"))), 3)
+
+    def test_close_match_exact_scores_can_include_draw(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            predictor = MatchPredictor(store)
+            stats = TeamStats(team="A", sample_size=10, wins=4, draws=3, losses=3)
+            goal_total = predictor._goal_total_forecast(1.25, 1.18)
+            scores = predictor._top_scores(
+                1.25,
+                1.18,
+                "П1",
+                stats,
+                stats,
+                goal_total,
+                {"П1": 0.38, "X": 0.30, "П2": 0.32},
+            )
+            self.assertIn("X", {item["outcome"] for item in scores})
+            self.assertIn("П1", {item["outcome"] for item in scores})
+
+    def test_confirmed_lineup_changes_formation_and_key_player_strength(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            fixture = {
+                "date": "2099-01-01",
+                "completed": False,
+                "in_progress": False,
+                "lineups": {
+                    "France": {
+                        "confirmed": True,
+                        "formation": "4-3-3",
+                        "starters": [{"name": "Michael Olise"}, {"name": "Ousmane Dembélé"}],
+                        "bench": [],
+                    },
+                    "Iraq": {
+                        "confirmed": True,
+                        "formation": "4-1-4-1",
+                        "starters": [{"name": "Aymen Hussein"}],
+                        "bench": [],
+                    },
+                },
+                "key_players": {
+                    "France": [{"name": "Kylian Mbappé", "impact": 0.20, "roles": ["finisher"]}],
+                    "Iraq": [],
+                },
+            }
+            prediction = MatchPredictor(store).predict("France", "Iraq", fixture=fixture, remember=False)
+            data = prediction.to_dict()
+            self.assertEqual(data["home_tactics"]["formation"], "4-3-3")
+            self.assertEqual(data["home_tactics"]["formation_source"], "confirmed-lineup")
+            self.assertLess(data["lineup_reports"]["France"]["availability_score"], 1.0)
+            self.assertIn("Kylian Mbappé", [item["name"] for item in data["lineup_reports"]["France"]["missing_key_players"]])
 
     def test_dominant_favorite_can_predict_three_nil(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

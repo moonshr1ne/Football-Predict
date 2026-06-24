@@ -3,6 +3,7 @@
     "date": "2025-03-19",
     "home_team": "Chad",
     "away_team": "Ghana",
+    "fixture_id": null,
     "home_goals": 0,
     "away_goals": 5,
     "home_corners": 2,
@@ -18,12 +19,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": true,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-03-21",
     "home_team": "England",
     "away_team": "Albania",
+    "fixture_id": null,
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 7,
@@ -39,12 +45,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-03-24",
     "home_team": "England",
     "away_team": "Latvia",
+    "fixture_id": null,
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": 8,
@@ -60,12 +71,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-03-24",
     "home_team": "Madagascar",
     "away_team": "Ghana",
+    "fixture_id": null,
     "home_goals": 0,
     "away_goals": 3,
     "home_corners": 3,
@@ -81,12 +97,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": true,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-06-02",
     "home_team": "Ghana",
     "away_team": "Trinidad and Tobago",
+    "fixture_id": null,
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": 8,
@@ -102,12 +123,17 @@
     "competition": "Demo seed",
     "stage": "Friendly",
     "neutral": true,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-06-07",
     "home_team": "Andorra",
     "away_team": "England",
+    "fixture_id": null,
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": 1,
@@ -123,12 +149,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-06-07",
     "home_team": "Ghana",
     "away_team": "Nigeria",
+    "fixture_id": null,
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": 5,
@@ -144,12 +175,17 @@
     "competition": "Demo seed",
     "stage": "Friendly",
     "neutral": true,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-06-10",
     "home_team": "England",
     "away_team": "Senegal",
+    "fixture_id": null,
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": 5,
@@ -165,12 +201,17 @@
     "competition": "Demo seed",
     "stage": "Friendly",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-06-10",
     "home_team": "Uzbekistan",
     "away_team": "Qatar",
+    "fixture_id": null,
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -186,12 +227,17 @@
     "competition": "FIFA World Cup Qualifying - AFC",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-08-24",
     "home_team": "Qatar",
     "away_team": "Lebanon",
+    "fixture_id": "755890",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -207,12 +253,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-03",
     "home_team": "Qatar",
     "away_team": "Bahrain",
+    "fixture_id": "755868",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -228,12 +279,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-04",
     "home_team": "Uruguay",
     "away_team": "Peru",
+    "fixture_id": "684662",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -249,12 +305,17 @@
     "competition": "FIFA World Cup Qualifying - CONMEBOL",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-05",
     "home_team": "Ghana",
     "away_team": "Chad",
+    "fixture_id": null,
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 6,
@@ -270,12 +331,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-06",
     "home_team": "England",
     "away_team": "Andorra",
+    "fixture_id": null,
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 7,
@@ -291,12 +357,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-07",
     "home_team": "Qatar",
     "away_team": "Russia",
+    "fixture_id": "755869",
     "home_goals": 1,
     "away_goals": 4,
     "home_corners": null,
@@ -312,12 +383,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-08",
     "home_team": "Croatia",
     "away_team": "Montenegro",
+    "fixture_id": null,
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -333,12 +409,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-08",
     "home_team": "Ghana",
     "away_team": "Mali",
+    "fixture_id": null,
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": 5,
@@ -354,12 +435,17 @@
     "competition": "FIFA World Cup Qualifying - CAF",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Bosnia-Herzegovina",
     "away_team": "Austria",
+    "fixture_id": "725014",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -375,12 +461,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Cape Verde",
     "away_team": "Cameroon",
+    "fixture_id": "687210",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -396,12 +487,17 @@
     "competition": "FIFA World Cup Qualifying - CAF",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Chile",
     "away_team": "Uruguay",
+    "fixture_id": "684664",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -417,12 +513,17 @@
     "competition": "FIFA World Cup Qualifying - CONMEBOL",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Ecuador",
     "away_team": "Argentina",
+    "fixture_id": "684665",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -438,12 +539,17 @@
     "competition": "FIFA World Cup Qualifying - CONMEBOL",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Hungary",
     "away_team": "Portugal",
+    "fixture_id": "725016",
     "home_goals": 2,
     "away_goals": 3,
     "home_corners": null,
@@ -459,12 +565,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Peru",
     "away_team": "Paraguay",
+    "fixture_id": "684666",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -480,12 +591,17 @@
     "competition": "FIFA World Cup Qualifying - CONMEBOL",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Serbia",
     "away_team": "England",
+    "fixture_id": "725017",
     "home_goals": 0,
     "away_goals": 5,
     "home_corners": 3,
@@ -501,12 +617,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "United States",
     "away_team": "Japan",
+    "fixture_id": "735766",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -522,12 +643,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-09-09",
     "home_team": "Venezuela",
     "away_team": "Colombia",
+    "fixture_id": null,
     "home_goals": 3,
     "away_goals": 6,
     "home_corners": null,
@@ -543,12 +669,17 @@
     "competition": "FIFA World Cup Qualifying - CONMEBOL",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-08",
     "home_team": "Central African Republic",
     "away_team": "Ghana",
+    "fixture_id": "687369",
     "home_goals": 0,
     "away_goals": 5,
     "home_corners": null,
@@ -564,12 +695,17 @@
     "competition": "FIFA World Cup Qualifying - CAF",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-08",
     "home_team": "Libya",
     "away_team": "Cape Verde",
+    "fixture_id": "687219",
     "home_goals": 3,
     "away_goals": 3,
     "home_corners": null,
@@ -585,12 +721,17 @@
     "competition": "FIFA World Cup Qualifying - CAF",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-08",
     "home_team": "Oman",
     "away_team": "Qatar",
+    "fixture_id": "753692",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -606,12 +747,17 @@
     "competition": "FIFA World Cup Qualifying - AFC",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-09",
     "home_team": "Austria",
     "away_team": "San Marino",
+    "fixture_id": "725019",
     "home_goals": 10,
     "away_goals": 0,
     "home_corners": null,
@@ -627,12 +773,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-09",
     "home_team": "Cyprus",
     "away_team": "Bosnia-Herzegovina",
+    "fixture_id": "725021",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -648,12 +799,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-09",
     "home_team": "Czechia",
     "away_team": "Croatia",
+    "fixture_id": "725022",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -669,12 +825,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-09",
     "home_team": "England",
     "away_team": "Wales",
+    "fixture_id": "733158",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": 6,
@@ -690,12 +851,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-09",
     "home_team": "Malta",
     "away_team": "Netherlands",
+    "fixture_id": "724833",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": null,
@@ -711,12 +877,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-09",
     "home_team": "Poland",
     "away_team": "New Zealand",
+    "fixture_id": "756251",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -732,12 +903,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-09",
     "home_team": "Scotland",
     "away_team": "Greece",
+    "fixture_id": "724834",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -753,12 +929,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Belgium",
     "away_team": "North Macedonia",
+    "fixture_id": "724838",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -774,12 +955,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Canada",
     "away_team": "Australia",
+    "fixture_id": "749807",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -795,12 +981,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Central African Republic",
     "away_team": "Ghana",
+    "fixture_id": null,
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": 2,
@@ -816,12 +1007,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": true,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "France",
     "away_team": "Azerbaijan",
+    "fixture_id": "724842",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -837,12 +1033,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Germany",
     "away_team": "Luxembourg",
+    "fixture_id": "724839",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -858,12 +1059,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Japan",
     "away_team": "Paraguay",
+    "fixture_id": "739959",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -879,12 +1085,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Jordan",
     "away_team": "Bolivia",
+    "fixture_id": "758719",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -900,12 +1111,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Nicaragua",
     "away_team": "Haiti",
+    "fixture_id": "754248",
     "home_goals": 0,
     "away_goals": 3,
     "home_corners": null,
@@ -921,12 +1137,17 @@
     "competition": "FIFA World Cup Qualifying - Concacaf",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Russia",
     "away_team": "Iran",
+    "fixture_id": "735086",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -942,12 +1163,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "South Korea",
     "away_team": "Brazil",
+    "fixture_id": "757631",
     "home_goals": 0,
     "away_goals": 5,
     "home_corners": null,
@@ -963,12 +1189,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Sweden",
     "away_team": "Switzerland",
+    "fixture_id": "724837",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -984,12 +1215,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-10",
     "home_team": "Uruguay",
     "away_team": "Dominican Republic",
+    "fixture_id": "758400",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -1005,12 +1241,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-11",
     "home_team": "Argentina",
     "away_team": "Venezuela",
+    "fixture_id": "758378",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -1026,12 +1267,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-11",
     "home_team": "Bulgaria",
     "away_team": "Türkiye",
+    "fixture_id": "724847",
     "home_goals": 1,
     "away_goals": 6,
     "home_corners": null,
@@ -1047,12 +1293,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-11",
     "home_team": "Iraq",
     "away_team": "Indonesia",
+    "fixture_id": "753693",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -1068,12 +1319,17 @@
     "competition": "FIFA World Cup Qualifying - AFC",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-11",
     "home_team": "Norway",
     "away_team": "Israel",
+    "fixture_id": "724844",
     "home_goals": 5,
     "away_goals": 0,
     "home_corners": null,
@@ -1089,12 +1345,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-11",
     "home_team": "Portugal",
     "away_team": "Republic of Ireland",
+    "fixture_id": "724849",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -1110,12 +1371,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-11",
     "home_team": "Spain",
     "away_team": "Georgia",
+    "fixture_id": "724850",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -1131,12 +1397,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-11",
     "home_team": "United States",
     "away_team": "Ecuador",
+    "fixture_id": "753161",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -1152,12 +1423,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Croatia",
     "away_team": "Gibraltar",
+    "fixture_id": "724856",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -1173,12 +1449,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Faroe Islands",
     "away_team": "Czechia",
+    "fixture_id": "724852",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -1194,12 +1475,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Ghana",
     "away_team": "Comoros",
+    "fixture_id": "687370",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -1215,12 +1501,17 @@
     "competition": "FIFA World Cup Qualifying - CAF",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Malta",
     "away_team": "Bosnia-Herzegovina",
+    "fixture_id": "733031",
     "home_goals": 1,
     "away_goals": 4,
     "home_corners": null,
@@ -1236,12 +1527,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Mexico",
     "away_team": "Colombia",
+    "fixture_id": "751638",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": null,
@@ -1257,12 +1553,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Netherlands",
     "away_team": "Finland",
+    "fixture_id": "724854",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -1278,12 +1579,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Romania",
     "away_team": "Austria",
+    "fixture_id": "724857",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -1299,12 +1605,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-12",
     "home_team": "Scotland",
     "away_team": "Belarus",
+    "fixture_id": "724853",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -1320,12 +1631,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-13",
     "home_team": "Cape Verde",
     "away_team": "Eswatini",
+    "fixture_id": "687220",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -1341,12 +1657,17 @@
     "competition": "FIFA World Cup Qualifying - CAF",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-13",
     "home_team": "Iceland",
     "away_team": "France",
+    "fixture_id": "724866",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -1362,12 +1683,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-13",
     "home_team": "Northern Ireland",
     "away_team": "Germany",
+    "fixture_id": "724861",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -1383,12 +1709,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-13",
     "home_team": "Slovenia",
     "away_team": "Switzerland",
+    "fixture_id": "724863",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -1404,12 +1735,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-13",
     "home_team": "Sweden",
     "away_team": "Kosovo",
+    "fixture_id": "724864",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -1425,12 +1761,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-13",
     "home_team": "Uzbekistan",
     "away_team": "Uruguay",
+    "fixture_id": "758411",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -1446,12 +1787,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-13",
     "home_team": "Wales",
     "away_team": "Belgium",
+    "fixture_id": "724859",
     "home_goals": 2,
     "away_goals": 4,
     "home_corners": null,
@@ -1467,12 +1813,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Albania",
     "away_team": "Jordan",
+    "fixture_id": "758681",
     "home_goals": 4,
     "away_goals": 2,
     "home_corners": null,
@@ -1488,12 +1839,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Ghana",
     "away_team": "Comoros",
+    "fixture_id": null,
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": 6,
@@ -1509,12 +1865,17 @@
     "competition": "Demo seed",
     "stage": "",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Honduras",
     "away_team": "Haiti",
+    "fixture_id": "754255",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -1530,12 +1891,17 @@
     "competition": "FIFA World Cup Qualifying - Concacaf",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Iran",
     "away_team": "Tanzania",
+    "fixture_id": "759665",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -1551,12 +1917,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Japan",
     "away_team": "Brazil",
+    "fixture_id": "757632",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": null,
@@ -1572,12 +1943,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Latvia",
     "away_team": "England",
+    "fixture_id": "724871",
     "home_goals": 0,
     "away_goals": 5,
     "home_corners": 2,
@@ -1593,12 +1969,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Norway",
     "away_team": "New Zealand",
+    "fixture_id": "733153",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -1614,12 +1995,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Portugal",
     "away_team": "Hungary",
+    "fixture_id": "724867",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -1635,12 +2021,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Qatar",
     "away_team": "United Arab Emirates",
+    "fixture_id": "753695",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -1656,12 +2047,17 @@
     "competition": "FIFA World Cup Qualifying - AFC",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Saudi Arabia",
     "away_team": "Iraq",
+    "fixture_id": "753696",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -1677,12 +2073,17 @@
     "competition": "FIFA World Cup Qualifying - AFC",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "South Korea",
     "away_team": "Paraguay",
+    "fixture_id": "739960",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -1698,12 +2099,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Spain",
     "away_team": "Bulgaria",
+    "fixture_id": "724869",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -1719,12 +2125,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-14",
     "home_team": "Türkiye",
     "away_team": "Georgia",
+    "fixture_id": "724874",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": null,
@@ -1740,12 +2151,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-15",
     "home_team": "Colombia",
     "away_team": "Canada",
+    "fixture_id": "746411",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -1761,12 +2177,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-15",
     "home_team": "Mexico",
     "away_team": "Ecuador",
+    "fixture_id": "755899",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -1782,12 +2203,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-15",
     "home_team": "Puerto Rico",
     "away_team": "Argentina",
+    "fixture_id": "758373",
     "home_goals": 0,
     "away_goals": 6,
     "home_corners": null,
@@ -1803,12 +2229,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-10-15",
     "home_team": "United States",
     "away_team": "Australia",
+    "fixture_id": "753162",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -1824,12 +2255,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-12",
     "home_team": "Japan",
     "away_team": "Ghana",
+    "fixture_id": null,
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 6,
@@ -1845,12 +2281,17 @@
     "competition": "Demo seed",
     "stage": "Friendly",
     "neutral": false,
-    "source": "demo_seed"
+    "source": "demo_seed",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-13",
     "home_team": "Czechia",
     "away_team": "San Marino",
+    "fixture_id": "757634",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -1866,12 +2307,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-13",
     "home_team": "England",
     "away_team": "Serbia",
+    "fixture_id": "724879",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 7,
@@ -1887,12 +2333,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-13",
     "home_team": "France",
     "away_team": "Ukraine",
+    "fixture_id": "724881",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -1908,12 +2359,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-13",
     "home_team": "Iran",
     "away_team": "Cape Verde",
+    "fixture_id": "759987",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -1929,12 +2385,17 @@
     "competition": "International Friendly",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-13",
     "home_team": "Norway",
     "away_team": "Estonia",
+    "fixture_id": "724875",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": null,
@@ -1950,12 +2411,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-13",
     "home_team": "Republic of Ireland",
     "away_team": "Portugal",
+    "fixture_id": "724882",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -1971,12 +2437,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-13",
     "home_team": "United Arab Emirates",
     "away_team": "Iraq",
+    "fixture_id": "760045",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -1992,12 +2463,17 @@
     "competition": "FIFA World Cup Qualifying - AFC",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Angola",
     "away_team": "Argentina",
+    "fixture_id": "760281",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -2013,12 +2489,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Canada",
     "away_team": "Ecuador",
+    "fixture_id": "758183",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -2034,12 +2515,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Croatia",
     "away_team": "Faroe Islands",
+    "fixture_id": "724887",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -2055,12 +2541,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Egypt",
     "away_team": "Uzbekistan",
+    "fixture_id": "759988",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -2076,12 +2567,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Guatemala",
     "away_team": "Panama",
+    "fixture_id": null,
     "home_goals": 2,
     "away_goals": 3,
     "home_corners": null,
@@ -2097,12 +2593,17 @@
     "competition": "FIFA World Cup Qualifying - Concacaf",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Haiti",
     "away_team": "Costa Rica",
+    "fixture_id": "754262",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -2118,12 +2619,17 @@
     "competition": "FIFA World Cup Qualifying - Concacaf",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Japan",
     "away_team": "Ghana",
+    "fixture_id": "760050",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -2139,12 +2645,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Luxembourg",
     "away_team": "Germany",
+    "fixture_id": "724885",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -2160,12 +2671,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Poland",
     "away_team": "Netherlands",
+    "fixture_id": "724886",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -2181,12 +2697,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Saudi Arabia",
     "away_team": "Ivory Coast",
+    "fixture_id": "760376",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -2202,12 +2723,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "South Korea",
     "away_team": "Bolivia",
+    "fixture_id": "758720",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -2223,12 +2749,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-14",
     "home_team": "Tunisia",
     "away_team": "Jordan",
+    "fixture_id": "760186",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": null,
@@ -2244,12 +2775,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Bosnia-Herzegovina",
     "away_team": "Romania",
+    "fixture_id": "724895",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -2265,12 +2801,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Brazil",
     "away_team": "Senegal",
+    "fixture_id": "760051",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -2286,12 +2827,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Cyprus",
     "away_team": "Austria",
+    "fixture_id": "724891",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -2307,12 +2853,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Georgia",
     "away_team": "Spain",
+    "fixture_id": "724890",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": null,
@@ -2328,12 +2879,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Greece",
     "away_team": "Scotland",
+    "fixture_id": "724898",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": null,
@@ -2349,12 +2905,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Kazakhstan",
     "away_team": "Belgium",
+    "fixture_id": "724889",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -2370,12 +2931,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Switzerland",
     "away_team": "Sweden",
+    "fixture_id": "724897",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": null,
@@ -2391,12 +2957,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Türkiye",
     "away_team": "Bulgaria",
+    "fixture_id": "724892",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -2412,12 +2983,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "United States",
     "away_team": "Paraguay",
+    "fixture_id": "758376",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -2433,12 +3009,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-15",
     "home_team": "Venezuela",
     "away_team": "Australia",
+    "fixture_id": "760259",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -2454,12 +3035,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-16",
     "home_team": "Albania",
     "away_team": "England",
+    "fixture_id": "724902",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": 2,
@@ -2475,12 +3061,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-16",
     "home_team": "Azerbaijan",
     "away_team": "France",
+    "fixture_id": "724901",
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": null,
@@ -2496,12 +3087,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-16",
     "home_team": "Colombia",
     "away_team": "New Zealand",
+    "fixture_id": "758715",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -2517,12 +3113,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-16",
     "home_team": "Italy",
     "away_team": "Norway",
+    "fixture_id": "724906",
     "home_goals": 1,
     "away_goals": 4,
     "home_corners": null,
@@ -2538,12 +3139,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-16",
     "home_team": "Mexico",
     "away_team": "Uruguay",
+    "fixture_id": "758718",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -2559,12 +3165,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-16",
     "home_team": "Portugal",
     "away_team": "Armenia",
+    "fixture_id": "724900",
     "home_goals": 9,
     "away_goals": 1,
     "home_corners": null,
@@ -2580,12 +3191,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-17",
     "home_team": "Czechia",
     "away_team": "Gibraltar",
+    "fixture_id": "724909",
     "home_goals": 6,
     "away_goals": 0,
     "home_corners": null,
@@ -2601,12 +3217,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-17",
     "home_team": "Egypt",
     "away_team": "Cape Verde",
+    "fixture_id": "761121",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -2622,12 +3243,17 @@
     "competition": "International Friendly",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-17",
     "home_team": "Germany",
     "away_team": "Slovakia",
+    "fixture_id": "724911",
     "home_goals": 6,
     "away_goals": 0,
     "home_corners": null,
@@ -2643,12 +3269,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-17",
     "home_team": "Montenegro",
     "away_team": "Croatia",
+    "fixture_id": "724907",
     "home_goals": 2,
     "away_goals": 3,
     "home_corners": null,
@@ -2664,12 +3295,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-17",
     "home_team": "Netherlands",
     "away_team": "Lithuania",
+    "fixture_id": "724912",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -2685,12 +3321,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-17",
     "home_team": "Qatar",
     "away_team": "Zimbabwe",
+    "fixture_id": "760915",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -2706,12 +3347,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Austria",
     "away_team": "Bosnia-Herzegovina",
+    "fixture_id": "724913",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -2727,12 +3373,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Belgium",
     "away_team": "Liechtenstein",
+    "fixture_id": "724915",
     "home_goals": 7,
     "away_goals": 0,
     "home_corners": null,
@@ -2748,12 +3399,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Brazil",
     "away_team": "Tunisia",
+    "fixture_id": "760053",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -2769,12 +3425,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Iraq",
     "away_team": "United Arab Emirates",
+    "fixture_id": "760046",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -2790,12 +3451,17 @@
     "competition": "FIFA World Cup Qualifying - AFC",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Japan",
     "away_team": "Bolivia",
+    "fixture_id": "758721",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -2811,12 +3477,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Jordan",
     "away_team": "Mali",
+    "fixture_id": "760899",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -2832,12 +3503,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Kosovo",
     "away_team": "Switzerland",
+    "fixture_id": "724922",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -2853,12 +3529,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Saudi Arabia",
     "away_team": "Algeria",
+    "fixture_id": "760377",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -2874,12 +3555,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Scotland",
     "away_team": "Denmark",
+    "fixture_id": "724921",
     "home_goals": 4,
     "away_goals": 2,
     "home_corners": null,
@@ -2895,12 +3581,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "South Korea",
     "away_team": "Ghana",
+    "fixture_id": "760052",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": 5,
@@ -2916,12 +3607,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Spain",
     "away_team": "Türkiye",
+    "fixture_id": "724917",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -2937,12 +3633,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Sweden",
     "away_team": "Slovenia",
+    "fixture_id": "724919",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -2958,12 +3659,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-18",
     "home_team": "Uzbekistan",
     "away_team": "Iran",
+    "fixture_id": "761122",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -2979,12 +3685,17 @@
     "competition": "International Friendly",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-19",
     "home_team": "Colombia",
     "away_team": "Australia",
+    "fixture_id": "760258",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -3000,12 +3711,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-19",
     "home_team": "Ecuador",
     "away_team": "New Zealand",
+    "fixture_id": "758717",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -3021,12 +3737,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-19",
     "home_team": "Haiti",
     "away_team": "Nicaragua",
+    "fixture_id": "754268",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -3042,12 +3763,17 @@
     "competition": "FIFA World Cup Qualifying - Concacaf",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-19",
     "home_team": "Mexico",
     "away_team": "Paraguay",
+    "fixture_id": "758974",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -3063,12 +3789,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-19",
     "home_team": "Panama",
     "away_team": "El Salvador",
+    "fixture_id": "754266",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -3084,12 +3815,17 @@
     "competition": "FIFA World Cup Qualifying - Concacaf",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-19",
     "home_team": "United States",
     "away_team": "Uruguay",
+    "fixture_id": "758377",
     "home_goals": 5,
     "away_goals": 1,
     "home_corners": null,
@@ -3105,12 +3841,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-11-19",
     "home_team": "Venezuela",
     "away_team": "Canada",
+    "fixture_id": "758716",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -3126,12 +3867,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-16",
     "home_team": "Zambia",
     "away_team": "Congo DR",
+    "fixture_id": null,
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -3147,12 +3893,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-22",
     "home_team": "South Africa",
     "away_team": "Angola",
+    "fixture_id": "732136",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -3168,12 +3919,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-23",
     "home_team": "Congo DR",
     "away_team": "Benin",
+    "fixture_id": "732137",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3189,12 +3945,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-23",
     "home_team": "Tunisia",
     "away_team": "Uganda",
+    "fixture_id": "732140",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -3210,12 +3971,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-24",
     "home_team": "Ivory Coast",
     "away_team": "Mozambique",
+    "fixture_id": "732144",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3231,12 +3997,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-26",
     "home_team": "Egypt",
     "away_team": "South Africa",
+    "fixture_id": "732146",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3252,12 +4023,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-27",
     "home_team": "Nigeria",
     "away_team": "Tunisia",
+    "fixture_id": "732150",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": null,
@@ -3273,12 +4049,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-27",
     "home_team": "Senegal",
     "away_team": "Congo DR",
+    "fixture_id": "732152",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -3294,12 +4075,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-28",
     "home_team": "Algeria",
     "away_team": "Burkina Faso",
+    "fixture_id": "732153",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3315,12 +4101,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-28",
     "home_team": "Ivory Coast",
     "away_team": "Cameroon",
+    "fixture_id": "732155",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -3336,12 +4127,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-29",
     "home_team": "Zimbabwe",
     "away_team": "South Africa",
+    "fixture_id": "732159",
     "home_goals": 2,
     "away_goals": 3,
     "home_corners": null,
@@ -3357,12 +4153,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-30",
     "home_team": "Botswana",
     "away_team": "Congo DR",
+    "fixture_id": "732162",
     "home_goals": 0,
     "away_goals": 3,
     "home_corners": null,
@@ -3378,12 +4179,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-30",
     "home_team": "Tanzania",
     "away_team": "Tunisia",
+    "fixture_id": "732163",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -3399,12 +4205,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-31",
     "home_team": "Equatorial Guinea",
     "away_team": "Algeria",
+    "fixture_id": "732165",
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": null,
@@ -3420,12 +4231,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2025-12-31",
     "home_team": "Gabon",
     "away_team": "Ivory Coast",
+    "fixture_id": "732167",
     "home_goals": 2,
     "away_goals": 3,
     "home_corners": null,
@@ -3441,12 +4257,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-03",
     "home_team": "Mali",
     "away_team": "Tunisia",
+    "fixture_id": "732169",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -3462,12 +4283,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-03",
     "home_team": "Senegal",
     "away_team": "Sudan",
+    "fixture_id": "732170",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -3483,12 +4309,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-04",
     "home_team": "South Africa",
     "away_team": "Cameroon",
+    "fixture_id": "732172",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -3504,12 +4335,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-05",
     "home_team": "Egypt",
     "away_team": "Benin",
+    "fixture_id": "732173",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -3525,12 +4361,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "AET",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-06",
     "home_team": "Algeria",
     "away_team": "Congo DR",
+    "fixture_id": "732175",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3546,12 +4387,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "AET",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-06",
     "home_team": "Ivory Coast",
     "away_team": "Burkina Faso",
+    "fixture_id": "732176",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -3567,12 +4413,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-09",
     "home_team": "Cameroon",
     "away_team": "Morocco",
+    "fixture_id": "732178",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -3588,12 +4439,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-09",
     "home_team": "Mali",
     "away_team": "Senegal",
+    "fixture_id": "732177",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -3609,12 +4465,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-10",
     "home_team": "Algeria",
     "away_team": "Nigeria",
+    "fixture_id": "732180",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -3630,12 +4491,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-10",
     "home_team": "Egypt",
     "away_team": "Ivory Coast",
+    "fixture_id": "732179",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": null,
@@ -3651,12 +4517,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-14",
     "home_team": "Nigeria",
     "away_team": "Morocco",
+    "fixture_id": "732182",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -3672,12 +4543,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-14",
     "home_team": "Senegal",
     "away_team": "Egypt",
+    "fixture_id": "732181",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3693,12 +4569,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-17",
     "home_team": "Egypt",
     "away_team": "Nigeria",
+    "fixture_id": "732183",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -3714,12 +4595,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-18",
     "home_team": "Bolivia",
     "away_team": "Panama",
+    "fixture_id": "762557",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -3735,12 +4621,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-18",
     "home_team": "Canada",
     "away_team": "Guatemala",
+    "fixture_id": "401844264",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3756,12 +4647,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-18",
     "home_team": "Senegal",
     "away_team": "Morocco",
+    "fixture_id": "732184",
     "home_goals": 0,
     "away_goals": 3,
     "home_corners": null,
@@ -3777,12 +4673,17 @@
     "competition": "Africa Cup of Nations",
     "stage": "AET",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-23",
     "home_team": "Panama",
     "away_team": "Mexico",
+    "fixture_id": "401842387",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -3798,12 +4699,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-25",
     "home_team": "Bolivia",
     "away_team": "Mexico",
+    "fixture_id": "401842388",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -3819,12 +4725,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-01-26",
     "home_team": "Uzbekistan",
     "away_team": "China",
+    "fixture_id": "401857718",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -3840,12 +4751,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-02-26",
     "home_team": "Mexico",
     "away_team": "Iceland",
+    "fixture_id": "401842389",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -3861,12 +4777,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-25",
     "home_team": "Congo DR",
     "away_team": "Bermuda",
+    "fixture_id": "401866396",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -3882,12 +4803,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-26",
     "home_team": "Brazil",
     "away_team": "France",
+    "fixture_id": "762452",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -3903,12 +4829,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-26",
     "home_team": "Colombia",
     "away_team": "Croatia",
+    "fixture_id": "401847048",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -3924,12 +4855,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-26",
     "home_team": "Czechia",
     "away_team": "Republic of Ireland",
+    "fixture_id": "761378",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -3945,12 +4881,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-26",
     "home_team": "Türkiye",
     "away_team": "Romania",
+    "fixture_id": "761383",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -3966,12 +4907,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-26",
     "home_team": "Ukraine",
     "away_team": "Sweden",
+    "fixture_id": "761384",
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": null,
@@ -3987,12 +4933,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-26",
     "home_team": "Wales",
     "away_team": "Bosnia-Herzegovina",
+    "fixture_id": "761381",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4008,12 +4959,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Algeria",
     "away_team": "Guatemala",
+    "fixture_id": "401862318",
     "home_goals": 7,
     "away_goals": 0,
     "home_corners": null,
@@ -4029,12 +4985,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Argentina",
     "away_team": "Mauritania",
+    "fixture_id": "401866131",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -4050,12 +5011,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Australia",
     "away_team": "Cameroon",
+    "fixture_id": "401856592",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -4071,12 +5037,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Austria",
     "away_team": "Ghana",
+    "fixture_id": "401856593",
     "home_goals": 5,
     "away_goals": 1,
     "home_corners": null,
@@ -4092,12 +5063,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Chile",
     "away_team": "Cape Verde",
+    "fixture_id": "401856419",
     "home_goals": 4,
     "away_goals": 2,
     "home_corners": null,
@@ -4113,12 +5089,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "China",
     "away_team": "Curaçao",
+    "fixture_id": "401856591",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -4134,12 +5115,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "England",
     "away_team": "Uruguay",
+    "fixture_id": "762553",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4155,12 +5141,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Greece",
     "away_team": "Paraguay",
+    "fixture_id": "401861598",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -4176,12 +5167,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Iran",
     "away_team": "Nigeria",
+    "fixture_id": "401861777",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -4197,12 +5193,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Jordan",
     "away_team": "Costa Rica",
+    "fixture_id": "401862038",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -4218,12 +5219,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Morocco",
     "away_team": "Ecuador",
+    "fixture_id": "401860936",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4239,12 +5245,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Netherlands",
     "away_team": "Norway",
+    "fixture_id": "762549",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -4260,12 +5271,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "New Zealand",
     "away_team": "Finland",
+    "fixture_id": "401856601",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -4281,12 +5297,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Saudi Arabia",
     "away_team": "Egypt",
+    "fixture_id": "401854539",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": null,
@@ -4302,12 +5323,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "South Africa",
     "away_team": "Panama",
+    "fixture_id": "401860541",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4323,12 +5349,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Spain",
     "away_team": "Serbia",
+    "fixture_id": "401865041",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -4344,12 +5375,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Switzerland",
     "away_team": "Germany",
+    "fixture_id": "762550",
     "home_goals": 3,
     "away_goals": 4,
     "home_corners": null,
@@ -4365,12 +5401,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-27",
     "home_team": "Uzbekistan",
     "away_team": "Gabon",
+    "fixture_id": "401866483",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -4386,12 +5427,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-28",
     "home_team": "Canada",
     "away_team": "Iceland",
+    "fixture_id": "401856638",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -4407,12 +5453,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-28",
     "home_team": "Scotland",
     "away_team": "Japan",
+    "fixture_id": "401856618",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -4428,12 +5479,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-28",
     "home_team": "Senegal",
     "away_team": "Peru",
+    "fixture_id": "401861999",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -4449,12 +5505,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-28",
     "home_team": "South Korea",
     "away_team": "Ivory Coast",
+    "fixture_id": "401860779",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": null,
@@ -4470,12 +5531,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-28",
     "home_team": "United States",
     "away_team": "Belgium",
+    "fixture_id": "762258",
     "home_goals": 2,
     "away_goals": 5,
     "home_corners": null,
@@ -4491,12 +5557,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-29",
     "home_team": "Colombia",
     "away_team": "France",
+    "fixture_id": "762453",
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": null,
@@ -4512,12 +5583,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-29",
     "home_team": "Haiti",
     "away_team": "Tunisia",
+    "fixture_id": "401856640",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -4533,12 +5609,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-29",
     "home_team": "Mexico",
     "away_team": "Portugal",
+    "fixture_id": "762263",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -4554,12 +5635,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-30",
     "home_team": "Cape Verde",
     "away_team": "Finland",
+    "fixture_id": "401856602",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4575,12 +5661,17 @@
     "competition": "International Friendly",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-30",
     "home_team": "Germany",
     "away_team": "Ghana",
+    "fixture_id": "762773",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -4596,12 +5687,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-30",
     "home_team": "New Zealand",
     "away_team": "Chile",
+    "fixture_id": "401856420",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": null,
@@ -4617,12 +5713,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-30",
     "home_team": "Uzbekistan",
     "away_team": "Venezuela",
+    "fixture_id": "401861040",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -4638,12 +5739,17 @@
     "competition": "International Friendly",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Algeria",
     "away_team": "Uruguay",
+    "fixture_id": "401862321",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -4659,12 +5765,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Argentina",
     "away_team": "Zambia",
+    "fixture_id": "401866132",
     "home_goals": 5,
     "away_goals": 0,
     "home_corners": null,
@@ -4680,12 +5791,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Australia",
     "away_team": "Curaçao",
+    "fixture_id": "401856595",
     "home_goals": 5,
     "away_goals": 1,
     "home_corners": null,
@@ -4701,12 +5817,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Austria",
     "away_team": "South Korea",
+    "fixture_id": "401856596",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -4722,12 +5843,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Bosnia-Herzegovina",
     "away_team": "Italy",
+    "fixture_id": "761952",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4743,12 +5869,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Congo DR",
     "away_team": "Jamaica",
+    "fixture_id": "761389",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -4764,12 +5895,17 @@
     "competition": "FIFA World Cup Qualifying - Playoff Tournament",
     "stage": "AET",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Czechia",
     "away_team": "Denmark",
+    "fixture_id": "761955",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -4785,12 +5921,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT-Pens",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "England",
     "away_team": "Japan",
+    "fixture_id": "762554",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -4806,12 +5947,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Haiti",
     "away_team": "Iceland",
+    "fixture_id": "401856641",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4827,12 +5973,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Iran",
     "away_team": "Costa Rica",
+    "fixture_id": "401861778",
     "home_goals": 5,
     "away_goals": 0,
     "home_corners": null,
@@ -4848,12 +5999,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Ivory Coast",
     "away_team": "Scotland",
+    "fixture_id": "401859485",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -4869,12 +6025,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Jordan",
     "away_team": "Nigeria",
+    "fixture_id": "401862040",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -4890,12 +6051,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Kosovo",
     "away_team": "Türkiye",
+    "fixture_id": "761953",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -4911,12 +6077,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Morocco",
     "away_team": "Paraguay",
+    "fixture_id": "401860937",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -4932,12 +6103,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Netherlands",
     "away_team": "Ecuador",
+    "fixture_id": "762551",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -4953,12 +6129,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Norway",
     "away_team": "Switzerland",
+    "fixture_id": "762552",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -4974,12 +6155,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Senegal",
     "away_team": "Gambia",
+    "fixture_id": "401862000",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -4995,12 +6181,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Serbia",
     "away_team": "Saudi Arabia",
+    "fixture_id": "401856619",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -5016,12 +6207,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "South Africa",
     "away_team": "Panama",
+    "fixture_id": "401860542",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -5037,12 +6233,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Spain",
     "away_team": "Egypt",
+    "fixture_id": "401851847",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -5058,12 +6259,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "Sweden",
     "away_team": "Poland",
+    "fixture_id": "761954",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": null,
@@ -5079,12 +6285,17 @@
     "competition": "FIFA World Cup Qualifying - UEFA",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-03-31",
     "home_team": "United States",
     "away_team": "Portugal",
+    "fixture_id": "762259",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -5100,12 +6311,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-04-01",
     "home_team": "Brazil",
     "away_team": "Croatia",
+    "fixture_id": "401843261",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -5121,12 +6337,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-04-01",
     "home_team": "Canada",
     "away_team": "Tunisia",
+    "fixture_id": "401856639",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -5142,12 +6363,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-04-01",
     "home_team": "Iraq",
     "away_team": "Bolivia",
+    "fixture_id": "761390",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -5163,12 +6389,17 @@
     "competition": "FIFA World Cup Qualifying - Playoff Tournament",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-04-01",
     "home_team": "Mexico",
     "away_team": "Belgium",
+    "fixture_id": "762264",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -5184,12 +6415,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-23",
     "home_team": "Mexico",
     "away_team": "Ghana",
+    "fixture_id": "401861774",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -5205,12 +6441,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-26",
     "home_team": "Morocco",
     "away_team": "Burundi",
+    "fixture_id": "401872678",
     "home_goals": 5,
     "away_goals": 0,
     "home_corners": null,
@@ -5226,12 +6467,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-28",
     "home_team": "Egypt",
     "away_team": "Russia",
+    "fixture_id": "401870853",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -5247,12 +6493,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-28",
     "home_team": "Republic of Ireland",
     "away_team": "Qatar",
+    "fixture_id": "401860781",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -5268,12 +6519,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-29",
     "home_team": "Bosnia-Herzegovina",
     "away_team": "North Macedonia",
+    "fixture_id": "401869326",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -5289,12 +6545,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-29",
     "home_team": "Iran",
     "away_team": "Gambia",
+    "fixture_id": "401872547",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -5310,12 +6571,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-29",
     "home_team": "Iraq",
     "away_team": "Andorra",
+    "fixture_id": "401871530",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -5331,12 +6597,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-29",
     "home_team": "South Africa",
     "away_team": "Nicaragua",
+    "fixture_id": "401871131",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -5352,12 +6623,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-30",
     "home_team": "Ecuador",
     "away_team": "Saudi Arabia",
+    "fixture_id": "401869431",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -5373,12 +6649,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-30",
     "home_team": "Scotland",
     "away_team": "Curaçao",
+    "fixture_id": "401856621",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": null,
@@ -5394,12 +6675,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "Brazil",
     "away_team": "Panama",
+    "fixture_id": "401864003",
     "home_goals": 6,
     "away_goals": 2,
     "home_corners": null,
@@ -5415,12 +6701,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "Cape Verde",
     "away_team": "Serbia",
+    "fixture_id": "401871172",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -5436,12 +6727,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "Czechia",
     "away_team": "Kosovo",
+    "fixture_id": "401872603",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -5457,12 +6753,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "Germany",
     "away_team": "Finland",
+    "fixture_id": "758381",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -5478,12 +6779,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "Japan",
     "away_team": "Iceland",
+    "fixture_id": "401867618",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -5499,12 +6805,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "Mexico",
     "away_team": "Australia",
+    "fixture_id": "401861775",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -5520,12 +6831,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "South Korea",
     "away_team": "Trinidad and Tobago",
+    "fixture_id": "401872679",
     "home_goals": 5,
     "away_goals": 0,
     "home_corners": null,
@@ -5541,12 +6857,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "Switzerland",
     "away_team": "Jordan",
+    "fixture_id": "401862319",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": null,
@@ -5562,12 +6883,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-05-31",
     "home_team": "United States",
     "away_team": "Senegal",
+    "fixture_id": "762592",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": null,
@@ -5583,12 +6909,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-01",
     "home_team": "Austria",
     "away_team": "Tunisia",
+    "fixture_id": "401856597",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -5604,12 +6935,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-01",
     "home_team": "Colombia",
     "away_team": "Costa Rica",
+    "fixture_id": "401866134",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -5625,12 +6961,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-01",
     "home_team": "Norway",
     "away_team": "Sweden",
+    "fixture_id": "401864055",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -5646,12 +6987,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-01",
     "home_team": "Türkiye",
     "away_team": "North Macedonia",
+    "fixture_id": "401871359",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -5667,12 +7013,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-02",
     "home_team": "Canada",
     "away_team": "Uzbekistan",
+    "fixture_id": "401853575",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -5688,12 +7039,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-02",
     "home_team": "Croatia",
     "away_team": "Belgium",
+    "fixture_id": "401856361",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -5709,12 +7065,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-02",
     "home_team": "Morocco",
     "away_team": "Madagascar",
+    "fixture_id": "401872680",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -5730,12 +7091,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-02",
     "home_team": "Wales",
     "away_team": "Ghana",
+    "fixture_id": "401863573",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -5751,12 +7117,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-03",
     "home_team": "Congo DR",
     "away_team": "Denmark",
+    "fixture_id": "401871169",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -5772,12 +7143,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-03",
     "home_team": "Haiti",
     "away_team": "New Zealand",
+    "fixture_id": "401871830",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -5793,12 +7169,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-03",
     "home_team": "Netherlands",
     "away_team": "Algeria",
+    "fixture_id": "401863500",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -5814,12 +7195,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-04",
     "home_team": "France",
     "away_team": "Ivory Coast",
+    "fixture_id": "401864934",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -5835,12 +7221,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-04",
     "home_team": "Iran",
     "away_team": "Mali",
+    "fixture_id": "401874358",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -5856,12 +7247,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-04",
     "home_team": "Panama",
     "away_team": "Dominican Republic",
+    "fixture_id": "401870075",
     "home_goals": 4,
     "away_goals": 2,
     "home_corners": null,
@@ -5877,12 +7273,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-04",
     "home_team": "South Korea",
     "away_team": "El Salvador",
+    "fixture_id": "401871496",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -5898,12 +7299,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-04",
     "home_team": "Spain",
     "away_team": "Iraq",
+    "fixture_id": "401871471",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -5919,12 +7325,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-04",
     "home_team": "Sweden",
     "away_team": "Greece",
+    "fixture_id": "401870034",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": null,
@@ -5940,12 +7351,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-05",
     "home_team": "Canada",
     "away_team": "Republic of Ireland",
+    "fixture_id": "401860780",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -5961,12 +7377,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-05",
     "home_team": "Czechia",
     "away_team": "Guatemala",
+    "fixture_id": "401870095",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -5982,12 +7403,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-05",
     "home_team": "Mexico",
     "away_team": "Serbia",
+    "fixture_id": "401861776",
     "home_goals": 5,
     "away_goals": 1,
     "home_corners": null,
@@ -6003,12 +7429,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-05",
     "home_team": "Paraguay",
     "away_team": "Nicaragua",
+    "fixture_id": "401871132",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -6024,12 +7455,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-05",
     "home_team": "Puerto Rico",
     "away_team": "Saudi Arabia",
+    "fixture_id": "401873680",
     "home_goals": 0,
     "away_goals": 3,
     "home_corners": null,
@@ -6045,12 +7481,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Belgium",
     "away_team": "Tunisia",
+    "fixture_id": "401856622",
     "home_goals": 5,
     "away_goals": 0,
     "home_corners": null,
@@ -6066,12 +7507,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Bolivia",
     "away_team": "Scotland",
+    "fixture_id": "401868148",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": null,
@@ -6087,12 +7533,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Brazil",
     "away_team": "Egypt",
+    "fixture_id": "401861998",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -6108,12 +7559,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "England",
     "away_team": "New Zealand",
+    "fixture_id": "401860828",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": null,
@@ -6129,12 +7585,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Haiti",
     "away_team": "Peru",
+    "fixture_id": "401871781",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -6150,12 +7611,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Jamaica",
     "away_team": "South Africa",
+    "fixture_id": "401875160",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": null,
@@ -6171,12 +7637,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Panama",
     "away_team": "Bosnia-Herzegovina",
+    "fixture_id": "401871528",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -6192,12 +7663,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Portugal",
     "away_team": "Chile",
+    "fixture_id": "401862883",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -6213,12 +7689,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Qatar",
     "away_team": "El Salvador",
+    "fixture_id": "401870103",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -6234,12 +7715,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Switzerland",
     "away_team": "Australia",
+    "fixture_id": "401869743",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -6255,12 +7741,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "United States",
     "away_team": "Germany",
+    "fixture_id": "762260",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -6276,12 +7767,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-06",
     "home_team": "Venezuela",
     "away_team": "Türkiye",
+    "fixture_id": "401871361",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -6297,12 +7793,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-07",
     "home_team": "Argentina",
     "away_team": "Honduras",
+    "fixture_id": "401868047",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -6318,12 +7819,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-07",
     "home_team": "Colombia",
     "away_team": "Jordan",
+    "fixture_id": "401862320",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": null,
@@ -6339,12 +7845,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-07",
     "home_team": "Croatia",
     "away_team": "Slovenia",
+    "fixture_id": "401856623",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -6360,12 +7871,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-07",
     "home_team": "Curaçao",
     "away_team": "Aruba",
+    "fixture_id": "401873741",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": null,
@@ -6381,12 +7897,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-07",
     "home_team": "Ecuador",
     "away_team": "Guatemala",
+    "fixture_id": "401870000",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -6402,12 +7923,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-07",
     "home_team": "Morocco",
     "away_team": "Norway",
+    "fixture_id": "401866598",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": null,
@@ -6423,12 +7949,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-08",
     "home_team": "France",
     "away_team": "Northern Ireland",
+    "fixture_id": "401869804",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": null,
@@ -6444,12 +7975,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-08",
     "home_team": "Netherlands",
     "away_team": "Uzbekistan",
+    "fixture_id": "401871814",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -6465,12 +8001,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-09",
     "home_team": "Congo DR",
     "away_team": "Chile",
+    "fixture_id": "401871171",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": null,
@@ -6486,12 +8027,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-09",
     "home_team": "Peru",
     "away_team": "Spain",
+    "fixture_id": "401867679",
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": null,
@@ -6507,12 +8053,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-09",
     "home_team": "Saudi Arabia",
     "away_team": "Senegal",
+    "fixture_id": "401871362",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": null,
@@ -6528,12 +8079,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-10",
     "home_team": "Argentina",
     "away_team": "Iceland",
+    "fixture_id": "401867950",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -6549,12 +8105,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-10",
     "home_team": "England",
     "away_team": "Costa Rica",
+    "fixture_id": "401860829",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": null,
@@ -6570,12 +8131,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-10",
     "home_team": "Iraq",
     "away_team": "Venezuela",
+    "fixture_id": "401873603",
     "home_goals": 0,
     "away_goals": 2,
     "home_corners": null,
@@ -6591,12 +8157,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-10",
     "home_team": "Portugal",
     "away_team": "Nigeria",
+    "fixture_id": "401867372",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": null,
@@ -6612,12 +8183,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-11",
     "home_team": "Bolivia",
     "away_team": "Algeria",
+    "fixture_id": "401874117",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": null,
@@ -6633,12 +8209,17 @@
     "competition": "International Friendly",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-team-schedule"
+    "source": "espn-team-schedule",
+    "home_formation": null,
+    "away_formation": null,
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-11",
     "home_team": "Mexico",
     "away_team": "South Africa",
+    "fixture_id": "760415",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 3.0,
@@ -6654,12 +8235,17 @@
     "competition": "FIFA World Cup, Group A",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-1-4-1",
+    "away_formation": "5-3-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-12",
     "home_team": "Canada",
     "away_team": "Bosnia-Herzegovina",
+    "fixture_id": "760416",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": 9.0,
@@ -6675,12 +8261,17 @@
     "competition": "FIFA World Cup, Group B",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-4-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-12",
     "home_team": "South Korea",
     "away_team": "Czechia",
+    "fixture_id": "760414",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": 4.0,
@@ -6696,12 +8287,17 @@
     "competition": "FIFA World Cup, Group A",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-4-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-13",
     "home_team": "Brazil",
     "away_team": "Morocco",
+    "fixture_id": "760419",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": 6.0,
@@ -6717,12 +8313,17 @@
     "competition": "FIFA World Cup, Group C",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-13",
     "home_team": "Qatar",
     "away_team": "Switzerland",
+    "fixture_id": "760420",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": 3.0,
@@ -6738,12 +8339,17 @@
     "competition": "FIFA World Cup, Group B",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-13",
     "home_team": "United States",
     "away_team": "Paraguay",
+    "fixture_id": "760417",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": 3.0,
@@ -6759,12 +8365,17 @@
     "competition": "FIFA World Cup, Group D",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-4-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-14",
     "home_team": "Australia",
     "away_team": "Türkiye",
+    "fixture_id": "760421",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 5.0,
@@ -6780,12 +8391,17 @@
     "competition": "FIFA World Cup, Group D",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "5-4-1",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-14",
     "home_team": "Germany",
     "away_team": "Curaçao",
+    "fixture_id": "760422",
     "home_goals": 7,
     "away_goals": 1,
     "home_corners": 8.0,
@@ -6801,12 +8417,17 @@
     "competition": "FIFA World Cup, Group E",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-5-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-14",
     "home_team": "Haiti",
     "away_team": "Scotland",
+    "fixture_id": "760418",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": 4.0,
@@ -6822,12 +8443,17 @@
     "competition": "FIFA World Cup, Group C",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-4-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-14",
     "home_team": "Ivory Coast",
     "away_team": "Ecuador",
+    "fixture_id": "760423",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": 3.0,
@@ -6843,12 +8469,17 @@
     "competition": "FIFA World Cup, Group E",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-4-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-14",
     "home_team": "Netherlands",
     "away_team": "Japan",
+    "fixture_id": "760425",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": 5.0,
@@ -6864,12 +8495,17 @@
     "competition": "FIFA World Cup, Group F",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-15",
     "home_team": "Belgium",
     "away_team": "Egypt",
+    "fixture_id": "760426",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": 2.0,
@@ -6885,12 +8521,17 @@
     "competition": "FIFA World Cup, Group G",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-15",
     "home_team": "Saudi Arabia",
     "away_team": "Uruguay",
+    "fixture_id": "760429",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": 4.0,
@@ -6906,12 +8547,17 @@
     "competition": "FIFA World Cup, Group H",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-15",
     "home_team": "Spain",
     "away_team": "Cape Verde",
+    "fixture_id": "760428",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": 11.0,
@@ -6927,12 +8573,17 @@
     "competition": "FIFA World Cup, Group H",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-1-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-15",
     "home_team": "Sweden",
     "away_team": "Tunisia",
+    "fixture_id": "760424",
     "home_goals": 5,
     "away_goals": 1,
     "home_corners": 4.0,
@@ -6948,12 +8599,17 @@
     "competition": "FIFA World Cup, Group F",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-5-2",
+    "away_formation": "5-3-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-16",
     "home_team": "France",
     "away_team": "Senegal",
+    "fixture_id": "760432",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": 6.0,
@@ -6969,12 +8625,17 @@
     "competition": "FIFA World Cup, Group I",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-16",
     "home_team": "Iran",
     "away_team": "New Zealand",
+    "fixture_id": "760427",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": 4.0,
@@ -6990,12 +8651,17 @@
     "competition": "FIFA World Cup, Group G",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-16",
     "home_team": "Iraq",
     "away_team": "Norway",
+    "fixture_id": "760430",
     "home_goals": 1,
     "away_goals": 4,
     "home_corners": 2.0,
@@ -7011,12 +8677,17 @@
     "competition": "FIFA World Cup, Group I",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-4-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-17",
     "home_team": "Argentina",
     "away_team": "Algeria",
+    "fixture_id": "760433",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": 2.0,
@@ -7032,12 +8703,17 @@
     "competition": "FIFA World Cup, Group J",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-17",
     "home_team": "Austria",
     "away_team": "Jordan",
+    "fixture_id": "760431",
     "home_goals": 3,
     "away_goals": 1,
     "home_corners": 4.0,
@@ -7053,12 +8729,17 @@
     "competition": "FIFA World Cup, Group J",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-17",
     "home_team": "England",
     "away_team": "Croatia",
+    "fixture_id": "760437",
     "home_goals": 4,
     "away_goals": 2,
     "home_corners": 8.0,
@@ -7074,12 +8755,17 @@
     "competition": "FIFA World Cup, Group L",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-17",
     "home_team": "Ghana",
     "away_team": "Panama",
+    "fixture_id": "760434",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": 2.0,
@@ -7095,12 +8781,17 @@
     "competition": "FIFA World Cup, Group L",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-17",
     "home_team": "Portugal",
     "away_team": "Congo DR",
+    "fixture_id": "760435",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": 5.0,
@@ -7116,12 +8807,17 @@
     "competition": "FIFA World Cup, Group K",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "5-3-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-18",
     "home_team": "Canada",
     "away_team": "Qatar",
+    "fixture_id": "760440",
     "home_goals": 6,
     "away_goals": 0,
     "home_corners": 19.0,
@@ -7137,12 +8833,17 @@
     "competition": "FIFA World Cup, Group B",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-18",
     "home_team": "Czechia",
     "away_team": "South Africa",
+    "fixture_id": "760438",
     "home_goals": 1,
     "away_goals": 1,
     "home_corners": 5.0,
@@ -7158,12 +8859,17 @@
     "competition": "FIFA World Cup, Group A",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-5-2",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-18",
     "home_team": "Switzerland",
     "away_team": "Bosnia-Herzegovina",
+    "fixture_id": "760439",
     "home_goals": 4,
     "away_goals": 1,
     "home_corners": 7.0,
@@ -7179,12 +8885,17 @@
     "competition": "FIFA World Cup, Group B",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-5-1",
+    "away_formation": "4-4-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-18",
     "home_team": "Uzbekistan",
     "away_team": "Colombia",
+    "fixture_id": "760436",
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": 3.0,
@@ -7200,12 +8911,17 @@
     "competition": "FIFA World Cup, Group K",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-4-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-19",
     "home_team": "Mexico",
     "away_team": "South Korea",
+    "fixture_id": "760441",
     "home_goals": 1,
     "away_goals": 0,
     "home_corners": 1.0,
@@ -7221,12 +8937,17 @@
     "competition": "FIFA World Cup, Group A",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-19",
     "home_team": "Scotland",
     "away_team": "Morocco",
+    "fixture_id": "760445",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": 2.0,
@@ -7242,12 +8963,17 @@
     "competition": "FIFA World Cup, Group C",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-19",
     "home_team": "United States",
     "away_team": "Australia",
+    "fixture_id": "760442",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 7.0,
@@ -7263,12 +8989,17 @@
     "competition": "FIFA World Cup, Group D",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-5-2",
+    "away_formation": "5-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-20",
     "home_team": "Brazil",
     "away_team": "Haiti",
+    "fixture_id": "760444",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": 4.0,
@@ -7284,12 +9015,17 @@
     "competition": "FIFA World Cup, Group C",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "5-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-20",
     "home_team": "Germany",
     "away_team": "Ivory Coast",
+    "fixture_id": "760448",
     "home_goals": 2,
     "away_goals": 1,
     "home_corners": 8.0,
@@ -7305,12 +9041,17 @@
     "competition": "FIFA World Cup, Group E",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-1-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-20",
     "home_team": "Netherlands",
     "away_team": "Sweden",
+    "fixture_id": "760447",
     "home_goals": 5,
     "away_goals": 1,
     "home_corners": 2.0,
@@ -7326,12 +9067,17 @@
     "competition": "FIFA World Cup, Group F",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "3-5-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-20",
     "home_team": "Türkiye",
     "away_team": "Paraguay",
+    "fixture_id": "760443",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": 12.0,
@@ -7347,12 +9093,17 @@
     "competition": "FIFA World Cup, Group D",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-4-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-21",
     "home_team": "Belgium",
     "away_team": "Iran",
+    "fixture_id": "760451",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": 4.0,
@@ -7368,12 +9119,17 @@
     "competition": "FIFA World Cup, Group G",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "5-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-21",
     "home_team": "Ecuador",
     "away_team": "Curaçao",
+    "fixture_id": "760446",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": 9.0,
@@ -7389,12 +9145,17 @@
     "competition": "FIFA World Cup, Group E",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-5-2",
+    "away_formation": "5-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-21",
     "home_team": "Spain",
     "away_team": "Saudi Arabia",
+    "fixture_id": "760453",
     "home_goals": 4,
     "away_goals": 0,
     "home_corners": 6.0,
@@ -7410,12 +9171,17 @@
     "competition": "FIFA World Cup, Group H",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "5-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-21",
     "home_team": "Tunisia",
     "away_team": "Japan",
+    "fixture_id": "760449",
     "home_goals": 0,
     "away_goals": 4,
     "home_corners": 3.0,
@@ -7431,12 +9197,17 @@
     "competition": "FIFA World Cup, Group F",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-4-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-21",
     "home_team": "Uruguay",
     "away_team": "Cape Verde",
+    "fixture_id": "760450",
     "home_goals": 2,
     "away_goals": 2,
     "home_corners": 11.0,
@@ -7452,12 +9223,17 @@
     "competition": "FIFA World Cup, Group H",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-1-4-1",
+    "away_formation": "4-1-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-22",
     "home_team": "Argentina",
     "away_team": "Austria",
+    "fixture_id": "760456",
     "home_goals": 2,
     "away_goals": 0,
     "home_corners": 1.0,
@@ -7473,12 +9249,17 @@
     "competition": "FIFA World Cup, Group J",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-4-2",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-22",
     "home_team": "France",
     "away_team": "Iraq",
+    "fixture_id": "760457",
     "home_goals": 3,
     "away_goals": 0,
     "home_corners": 4.0,
@@ -7494,12 +9275,17 @@
     "competition": "FIFA World Cup, Group I",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-1-4-1",
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-22",
     "home_team": "New Zealand",
     "away_team": "Egypt",
+    "fixture_id": "760452",
     "home_goals": 1,
     "away_goals": 3,
     "home_corners": 4.0,
@@ -7515,12 +9301,17 @@
     "competition": "FIFA World Cup, Group G",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-23",
     "home_team": "England",
     "away_team": "Ghana",
+    "fixture_id": "760458",
     "home_goals": 0,
     "away_goals": 0,
     "home_corners": 9.0,
@@ -7536,12 +9327,17 @@
     "competition": "FIFA World Cup, Group L",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-1-4-1",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-23",
     "home_team": "Jordan",
     "away_team": "Algeria",
+    "fixture_id": "760455",
     "home_goals": 1,
     "away_goals": 2,
     "home_corners": 1.0,
@@ -7557,12 +9353,17 @@
     "competition": "FIFA World Cup, Group J",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "3-4-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-23",
     "home_team": "Norway",
     "away_team": "Senegal",
+    "fixture_id": "760454",
     "home_goals": 3,
     "away_goals": 2,
     "home_corners": 5.0,
@@ -7578,18 +9379,23 @@
     "competition": "FIFA World Cup, Group I",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-23",
     "home_team": "Panama",
     "away_team": "Croatia",
+    "fixture_id": "760460",
     "home_goals": 0,
     "away_goals": 1,
     "home_corners": 7.0,
     "away_corners": 2.0,
-    "home_possession": 42.1,
-    "away_possession": 57.9,
+    "home_possession": 42.0,
+    "away_possession": 58.0,
     "home_shots": 8.0,
     "away_shots": 6.0,
     "home_shots_on_target": 1.0,
@@ -7599,12 +9405,17 @@
     "competition": "FIFA World Cup, Group L",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "5-4-1",
+    "away_formation": "4-3-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-23",
     "home_team": "Portugal",
     "away_team": "Uzbekistan",
+    "fixture_id": "760461",
     "home_goals": 5,
     "away_goals": 0,
     "home_corners": 3.0,
@@ -7620,6 +9431,36 @@
     "competition": "FIFA World Cup, Group K",
     "stage": "FT",
     "neutral": true,
-    "source": "espn-world-cup"
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "3-4-3",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
+  },
+  {
+    "date": "2026-06-24",
+    "home_team": "Colombia",
+    "away_team": "Congo DR",
+    "fixture_id": "760459",
+    "home_goals": 1,
+    "away_goals": 0,
+    "home_corners": 5.0,
+    "away_corners": 4.0,
+    "home_possession": 63.6,
+    "away_possession": 36.4,
+    "home_shots": 20.0,
+    "away_shots": 8.0,
+    "home_shots_on_target": 9.0,
+    "away_shots_on_target": 1.0,
+    "home_fouls": 12.0,
+    "away_fouls": 16.0,
+    "competition": "FIFA World Cup, Group K",
+    "stage": "FT",
+    "neutral": true,
+    "source": "espn-world-cup",
+    "home_formation": "4-3-3",
+    "away_formation": "5-3-2",
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   }
 ]

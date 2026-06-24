@@ -22,7 +22,7 @@ DEFAULT_MODEL_STATE = {
         "chance_to_goals": 0.06,
         "motivation_to_goals": 0.18,
         "injury_to_goals": 0.16,
-        "lineup_to_goals": 0.10,
+        "lineup_to_goals": 0.24,
         "tactics_to_goals": 0.24,
         "tactics_to_corners": 1.15,
         "world_cup_intensity_goals": 0.05,
@@ -31,6 +31,54 @@ DEFAULT_MODEL_STATE = {
     },
     "history": [],
     "trained_match_keys": [],
+}
+
+DEFAULT_KEY_PLAYERS = {
+    "Argentina": [
+        {"name": "Lionel Messi", "impact": 0.18, "roles": ["creator", "finisher"]},
+        {"name": "Lautaro Martínez", "impact": 0.12, "roles": ["finisher"]},
+        {"name": "Julián Álvarez", "impact": 0.11, "roles": ["pressing forward"]},
+    ],
+    "Brazil": [
+        {"name": "Vinícius Júnior", "impact": 0.17, "roles": ["creator", "winger"]},
+        {"name": "Rodrygo", "impact": 0.13, "roles": ["creator"]},
+        {"name": "Bruno Guimarães", "impact": 0.10, "roles": ["midfield"]},
+    ],
+    "England": [
+        {"name": "Harry Kane", "impact": 0.17, "roles": ["finisher"]},
+        {"name": "Jude Bellingham", "impact": 0.16, "roles": ["creator", "midfield"]},
+        {"name": "Bukayo Saka", "impact": 0.13, "roles": ["winger"]},
+    ],
+    "France": [
+        {"name": "Kylian Mbappé", "impact": 0.20, "roles": ["creator", "finisher"]},
+        {"name": "Michael Olise", "impact": 0.13, "roles": ["creator"]},
+        {"name": "Ousmane Dembélé", "impact": 0.13, "roles": ["creator"]},
+    ],
+    "Germany": [
+        {"name": "Florian Wirtz", "impact": 0.15, "roles": ["creator"]},
+        {"name": "Jamal Musiala", "impact": 0.15, "roles": ["creator"]},
+        {"name": "Kai Havertz", "impact": 0.11, "roles": ["finisher"]},
+    ],
+    "Norway": [
+        {"name": "Erling Haaland", "impact": 0.20, "roles": ["finisher"]},
+        {"name": "Martin Ødegaard", "impact": 0.16, "roles": ["creator"]},
+    ],
+    "Portugal": [
+        {"name": "Bruno Fernandes", "impact": 0.15, "roles": ["creator"]},
+        {"name": "Bernardo Silva", "impact": 0.13, "roles": ["creator"]},
+        {"name": "Cristiano Ronaldo", "impact": 0.11, "roles": ["finisher"]},
+    ],
+    "Spain": [
+        {"name": "Lamine Yamal", "impact": 0.18, "roles": ["creator", "winger"]},
+        {"name": "Pedri", "impact": 0.14, "roles": ["midfield"]},
+        {"name": "Rodri", "impact": 0.15, "roles": ["midfield", "control"]},
+        {"name": "Nico Williams", "impact": 0.12, "roles": ["winger"]},
+    ],
+    "Uruguay": [
+        {"name": "Federico Valverde", "impact": 0.15, "roles": ["midfield"]},
+        {"name": "Darwin Núñez", "impact": 0.13, "roles": ["finisher"]},
+        {"name": "Ronald Araújo", "impact": 0.11, "roles": ["defense"]},
+    ],
 }
 
 DEFAULT_MATCH_CONTEXT = {
@@ -83,6 +131,7 @@ class DataStore:
         self.sync_state_path = self.data_dir / "sync_state.json"
         self.model_path = self.data_dir / "model_state.json"
         self.predictions_path = self.data_dir / "predictions.json"
+        self.key_players_path = self.data_dir / "key_players.json"
         self.resolver = TeamResolver(self.alias_path)
         self._ensure_files()
 
@@ -98,6 +147,7 @@ class DataStore:
             (self.sync_state_path, {}),
             (self.model_path, DEFAULT_MODEL_STATE),
             (self.predictions_path, []),
+            (self.key_players_path, DEFAULT_KEY_PLAYERS),
         ):
             if not path.exists():
                 path.write_text(json.dumps(default, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -228,6 +278,13 @@ class DataStore:
         merged = json.loads(json.dumps(DEFAULT_MODEL_STATE))
         merged.update({key: value for key, value in state.items() if key != "weights"})
         merged["weights"].update(state.get("weights", {}))
+        return merged
+
+    def load_key_players(self) -> dict[str, Any]:
+        data = self._read_json(self.key_players_path, DEFAULT_KEY_PLAYERS)
+        merged = json.loads(json.dumps(DEFAULT_KEY_PLAYERS))
+        for team, players in data.items():
+            merged[team] = players
         return merged
 
     def save_model_state(self, state: dict[str, Any]) -> None:

@@ -64,6 +64,10 @@ function renderPrediction(data) {
       ${teamReportsBlock(data.team_reports, data.home_team, data.away_team)}
     </article>
     <article class="card wide">
+      <h3>Составы и ключевые игроки</h3>
+      ${lineupReportsBlock(data.lineup_reports, data.home_team, data.away_team)}
+    </article>
+    <article class="card wide">
       <h3>Контекст</h3>
       ${fixtureBlock(data.fixture)}
       <p>Турнир: ${escapeHtml(data.match_context?.competition || "FIFA World Cup")}</p>
@@ -72,18 +76,8 @@ function renderPrediction(data) {
       <p>${escapeHtml(data.away_team)}: ${contextLine(data.away_context)}</p>
     </article>
     <article class="card wide">
-      <h3>${escapeHtml(data.home_team)}: тактика</h3>
-      ${tacticsBlock(data.home_tactics)}
-    </article>
-    <article class="card wide">
-      <h3>${escapeHtml(data.away_team)}: тактика</h3>
-      ${tacticsBlock(data.away_tactics)}
-    </article>
-    <article class="card wide">
-      <h3>Тактическая пара</h3>
-      <p>${escapeHtml(data.tactical_matchup?.summary || "")}</p>
-      <p class="sub">${escapeHtml(data.tactical_matchup?.home_route || "")}</p>
-      <p class="sub">${escapeHtml(data.tactical_matchup?.away_route || "")}</p>
+      <h3>Тактика и схема</h3>
+      ${tacticsComparisonBlock(data)}
     </article>
     <article class="card wide">
       <h3>Качество данных</h3>
@@ -105,7 +99,9 @@ function scorePills(data) {
     .map((item) => {
       const probabilityText =
         item.probability == null ? "" : `<span class="pill-prob">${probability(item.probability)}</span>`;
-      return `<span class="pill">${escapeHtml(item.score)}${probabilityText}</span>`;
+      const outcomeText =
+        item.outcome && item.outcome !== data.market_pick ? `<span class="pill-prob">${escapeHtml(item.outcome)}</span>` : "";
+      return `<span class="pill">${escapeHtml(item.score)}${outcomeText}${probabilityText}</span>`;
     })
     .join("");
 }
@@ -171,12 +167,47 @@ function teamReportRow(report, fallbackTeam) {
   return `
     <tr>
       <th>${escapeHtml(report.team || fallbackTeam)}</th>
-      <td>${escapeHtml(report.level || "нет")} · форма ${percent(report.form_score)}</td>
+      <td>${escapeHtml(report.level || "нет")} · рейтинг ${percent(report.overall_score)} · форма ${percent(report.form_score)}</td>
       <td>${percent(report.attack_score)} · ${listText(report.strengths)}</td>
       <td>${percent(report.defense_score)} · ${listText(report.risks)}</td>
       <td>${Number(report.expected_goals ?? 0).toFixed(2)}</td>
     </tr>
   `;
+}
+
+function lineupReportsBlock(reports, homeTeam, awayTeam) {
+  const home = reports?.[homeTeam] || {};
+  const away = reports?.[awayTeam] || {};
+  return `
+    <table>
+      <tr><th>Сборная</th><th>Статус</th><th>Сила состава</th><th>Ключевые в старте</th><th>Потери/скамейка</th></tr>
+      ${lineupReportRow(home, homeTeam)}
+      ${lineupReportRow(away, awayTeam)}
+    </table>
+  `;
+}
+
+function lineupReportRow(report, fallbackTeam) {
+  const impacted = [...(report.missing_key_players || []), ...(report.benched_key_players || [])];
+  return `
+    <tr>
+      <th>${escapeHtml(report.team || fallbackTeam)}</th>
+      <td>${lineupStatusText(report.status)}</td>
+      <td>${percent(report.availability_score)}</td>
+      <td>${playerNames(report.starting_key_players)}</td>
+      <td>${playerNames(impacted)}</td>
+    </tr>
+  `;
+}
+
+function playerNames(players) {
+  return (players || []).map((player) => escapeHtml(player.name || player)).join(", ") || "нет";
+}
+
+function lineupStatusText(status) {
+  if (status === "confirmed") return "подтвержден";
+  if (status === "not_released") return "не вышел";
+  return escapeHtml(status || "нет");
 }
 
 function statsTable(stats) {
@@ -225,8 +256,9 @@ function targetCell(actual, target, met, direction, asPercent = true) {
 function contextLine(context) {
   const injuries = context.injuries?.length ? `${context.injuries.length} травм/рисков` : "травм не внесено";
   const motivation = context.motivation?.level ?? 0.5;
-  const lineup = context.lineup_strength ?? "World Cup base";
-  return `мотивация ${motivation}, состав ${lineup}, ${injuries}`;
+  const lineup = context.lineup_strength ?? context.lineup_report?.availability_score ?? "World Cup base";
+  const status = context.lineup_status ? `, статус состава ${lineupStatusText(context.lineup_status)}` : "";
+  return `мотивация ${motivation}, состав ${lineup}${status}, ${injuries}`;
 }
 
 function fixtureBlock(fixture) {
@@ -292,6 +324,41 @@ function scoreListText(items) {
       return probabilityValue == null ? escapeHtml(score) : `${escapeHtml(score)} (${probability(probabilityValue)})`;
     })
     .join(", ");
+}
+
+function tacticsComparisonBlock(data) {
+  return `
+    <p>${escapeHtml(data.tactical_matchup?.summary || "")}</p>
+    <table>
+      <tr><th>Сборная</th><th>Схема</th><th>Источник</th><th>Атака</th><th>Защита</th><th>Контроль</th><th>Стандарты</th></tr>
+      ${tacticsRow(data.home_team, data.home_tactics)}
+      ${tacticsRow(data.away_team, data.away_tactics)}
+    </table>
+    <p class="sub">${escapeHtml(data.tactical_matchup?.home_route || "")}</p>
+    <p class="sub">${escapeHtml(data.tactical_matchup?.away_route || "")}</p>
+  `;
+}
+
+function tacticsRow(team, tactics) {
+  return `
+    <tr>
+      <th>${escapeHtml(team)}</th>
+      <td>${escapeHtml(tactics.formation || "unknown")}</td>
+      <td>${formationSourceText(tactics)}</td>
+      <td>${percent(tactics.chance_creation)} · ${escapeHtml(tactics.primary_attack || "mixed")}</td>
+      <td>${percent(tactics.defensive_solidity)} · ${escapeHtml(tactics.defensive_block || "mid")}</td>
+      <td>${percent(tactics.possession_intent)} · прессинг ${percent(tactics.pressing)}</td>
+      <td>${percent(tactics.set_piece_threat)}</td>
+    </tr>
+  `;
+}
+
+function formationSourceText(tactics) {
+  if (tactics.formation_source === "manual") return "manual";
+  if (tactics.formation_source === "confirmed-lineup") return `состав ${percent(tactics.formation_confidence)}`;
+  if (tactics.formation_source === "live-lineup") return `live ${percent(tactics.formation_confidence)}`;
+  if (tactics.formation_source === "confirmed-lineups-last-matches") return `последние составы ${percent(tactics.formation_confidence)}`;
+  return `оценка ${percent(tactics.formation_confidence)}`;
 }
 
 function tacticsBlock(tactics) {

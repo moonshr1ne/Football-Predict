@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import copy
 from collections import Counter
 from dataclasses import dataclass
 from typing import Any
@@ -8,6 +9,7 @@ from typing import Any
 from .data_store import DataStore
 from .features import build_team_stats
 from .models import MatchRecord, TeamStats
+from .providers import normalize_provider_name
 from .tactics import corner_tactical_boost, summarize_matchup, tactical_edge, tactical_tempo
 
 
@@ -34,6 +36,7 @@ class Prediction:
     home_context: dict[str, Any]
     away_context: dict[str, Any]
     team_reports: dict[str, Any]
+    lineup_reports: dict[str, Any]
     match_context: dict[str, Any]
     home_tactics: dict[str, Any]
     away_tactics: dict[str, Any]
@@ -70,6 +73,7 @@ class Prediction:
             "home_context": self.home_context,
             "away_context": self.away_context,
             "team_reports": self.team_reports,
+            "lineup_reports": self.lineup_reports,
             "match_context": self.match_context,
             "home_tactics": self.home_tactics,
             "away_tactics": self.away_tactics,
@@ -106,15 +110,19 @@ class MatchPredictor:
         home_stats = build_team_stats(matches, home_team)
         away_stats = build_team_stats(matches, away_team)
         context = self.store.load_context()
-        home_context = context.get(home_team, {})
-        away_context = context.get(away_team, {})
+        raw_home_context = context.get(home_team, {})
+        raw_away_context = context.get(away_team, {})
         match_context = self.store.load_match_context()
-        home_tactics = self.store.team_tactics(home_team)
-        away_tactics = self.store.team_tactics(away_team)
+        lineup_reports = self._lineup_reports(home_team, away_team, fixture, match_context)
+        home_context = self._context_with_lineup_report(raw_home_context, lineup_reports.get(home_team, {}))
+        away_context = self._context_with_lineup_report(raw_away_context, lineup_reports.get(away_team, {}))
+        home_tactics = self._apply_lineup_tactics(home_team, self.store.team_tactics(home_team), lineup_reports.get(home_team, {}), fixture)
+        away_tactics = self._apply_lineup_tactics(away_team, self.store.team_tactics(away_team), lineup_reports.get(away_team, {}), fixture)
         tactical_matchup = summarize_matchup(home_team, away_team, home_tactics, away_tactics)
         state = self.store.load_model_state()
         weights = state["weights"]
         warnings = self._warnings(home_stats, away_stats, home_tactics, away_tactics)
+        warnings.extend(self._lineup_warnings(home_team, away_team, lineup_reports))
         data_quality = self._data_quality(home_team, away_team, home_stats, away_stats)
         if extra_warnings:
             warnings.extend(extra_warnings)
@@ -138,8 +146,8 @@ class MatchPredictor:
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
         goal_total = self._goal_total_forecast(home_xg, away_xg)
         team_reports = {
-            home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg),
-            away_team: self._team_report(away_team, away_stats, away_tactics, away_context, away_xg),
+            home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg, lineup_reports.get(home_team, {})),
+            away_team: self._team_report(away_team, away_stats, away_tactics, away_context, away_xg, lineup_reports.get(away_team, {})),
         }
         exact_score_probabilities = self._top_scores(
             home_xg,
@@ -148,6 +156,7 @@ class MatchPredictor:
             home_stats,
             away_stats,
             goal_total,
+            probabilities,
             limit=3,
         )
         exact_scores = [item["score"] for item in exact_score_probabilities]
@@ -183,6 +192,7 @@ class MatchPredictor:
             home_context=home_context,
             away_context=away_context,
             team_reports=team_reports,
+            lineup_reports=lineup_reports,
             match_context=match_context,
             home_tactics=home_tactics,
             away_tactics=away_tactics,
@@ -195,6 +205,139 @@ class MatchPredictor:
         if remember and match_date:
             self.store.save_prediction(prediction.to_dict())
         return prediction
+
+    def _lineup_reports(
+        self,
+        home_team: str,
+        away_team: str,
+        fixture: dict[str, Any] | None,
+        match_context: dict[str, Any],
+    ) -> dict[str, Any]:
+        return {
+            team: self._lineup_report(team, fixture, match_context)
+            for team in (home_team, away_team)
+        }
+
+    def _lineup_report(
+        self,
+        team: str,
+        fixture: dict[str, Any] | None,
+        match_context: dict[str, Any],
+    ) -> dict[str, Any]:
+        floor = float(match_context.get("lineup_strength_floor", 0.92))
+        lineup = (fixture or {}).get("lineups", {}).get(team) if fixture else None
+        key_players = self._key_players_for_team(team, fixture)
+        if not lineup or not lineup.get("confirmed"):
+            return {
+                "team": team,
+                "status": "not_released",
+                "availability_score": round(floor, 3),
+                "confidence": 0.25,
+                "formation": None,
+                "formation_source": "recent-match-projection",
+                "key_players": key_players,
+                "starting_key_players": [],
+                "benched_key_players": [],
+                "missing_key_players": [],
+                "starters": [],
+                "message": "Состав еще не вышел; используется базовая сила ЧМ и схема по последним матчам.",
+            }
+
+        starters = lineup.get("starters") or []
+        bench = lineup.get("bench") or []
+        starter_names = {normalize_provider_name(player.get("name", "")) for player in starters}
+        squad_names = starter_names | {normalize_provider_name(player.get("name", "")) for player in bench}
+        starting_key_players = []
+        benched_key_players = []
+        missing_key_players = []
+        penalty = 0.0
+        for player in key_players:
+            normalized = normalize_provider_name(player.get("name", ""))
+            impact = float(player.get("impact", 0.08))
+            if normalized in starter_names:
+                starting_key_players.append(player)
+            elif normalized in squad_names:
+                item = dict(player)
+                item["status"] = "bench"
+                benched_key_players.append(item)
+                penalty += impact * 0.55
+            else:
+                item = dict(player)
+                item["status"] = "absent"
+                missing_key_players.append(item)
+                penalty += impact
+
+        availability = max(0.58, min(1.03, 1.0 - penalty))
+        return {
+            "team": team,
+            "status": "confirmed",
+            "availability_score": round(availability, 3),
+            "confidence": 0.92,
+            "formation": lineup.get("formation"),
+            "formation_source": "current-lineup",
+            "key_players": key_players,
+            "starting_key_players": starting_key_players,
+            "benched_key_players": benched_key_players,
+            "missing_key_players": missing_key_players,
+            "starters": [player.get("name") for player in starters[:11] if player.get("name")],
+            "message": "Состав подтвержден источником; схема и сила состава применены к прогнозу.",
+        }
+
+    def _key_players_for_team(self, team: str, fixture: dict[str, Any] | None) -> list[dict[str, Any]]:
+        combined: dict[str, dict[str, Any]] = {}
+        for player in self.store.load_key_players().get(team, []):
+            key = normalize_provider_name(player.get("name", ""))
+            if key:
+                combined[key] = dict(player)
+        for player in (fixture or {}).get("key_players", {}).get(team, []):
+            key = normalize_provider_name(player.get("name", ""))
+            if not key:
+                continue
+            existing = combined.get(key, {})
+            merged = dict(player)
+            merged["impact"] = max(float(existing.get("impact", 0.0)), float(player.get("impact", 0.0)))
+            merged["roles"] = sorted(set(existing.get("roles", []) + player.get("roles", [])))
+            combined[key] = merged
+        return sorted(combined.values(), key=lambda item: float(item.get("impact", 0.0)), reverse=True)[:8]
+
+    def _context_with_lineup_report(self, context: dict[str, Any], lineup_report: dict[str, Any]) -> dict[str, Any]:
+        merged = copy.deepcopy(context)
+        merged["lineup_status"] = lineup_report.get("status", "not_released")
+        merged["lineup_report"] = lineup_report
+        if lineup_report.get("status") != "confirmed":
+            return merged
+        auto_strength = float(lineup_report.get("availability_score", 1.0))
+        if "lineup_strength" in merged:
+            merged["lineup_strength"] = min(float(merged["lineup_strength"]), auto_strength)
+        else:
+            merged["lineup_strength"] = auto_strength
+        auto_absences = []
+        for player in lineup_report.get("missing_key_players", []):
+            auto_absences.append({"player": player.get("name"), "status": "absent", "impact": player.get("impact", 0.08)})
+        for player in lineup_report.get("benched_key_players", []):
+            auto_absences.append({"player": player.get("name"), "status": "bench", "impact": float(player.get("impact", 0.08)) * 0.55})
+        if auto_absences:
+            merged["auto_absences"] = auto_absences
+        return merged
+
+    def _apply_lineup_tactics(
+        self,
+        team: str,
+        tactics: dict[str, Any],
+        lineup_report: dict[str, Any],
+        fixture: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        adjusted = copy.deepcopy(tactics)
+        formation = lineup_report.get("formation")
+        if lineup_report.get("status") == "confirmed" and formation:
+            adjusted["formation"] = formation
+            adjusted["formation_source"] = "live-lineup" if (fixture or {}).get("in_progress") else "confirmed-lineup"
+            adjusted["formation_confidence"] = 0.96
+            adjusted["starters"] = lineup_report.get("starters", [])
+        adjusted["lineup_status"] = lineup_report.get("status", "not_released")
+        adjusted["lineup_availability"] = lineup_report.get("availability_score")
+        adjusted["team"] = team
+        return adjusted
 
     def _expected_goals(
         self,
@@ -231,7 +374,7 @@ class MatchPredictor:
             + weights["form_to_goals"] * form_diff
             + weights.get("class_to_goals", 0.10) * class_diff
             + weights["motivation_to_goals"] * motivation_diff
-            + weights.get("lineup_to_goals", 0.10) * lineup_diff
+            + weights.get("lineup_to_goals", 0.24) * lineup_diff
             + weights.get("tactics_to_goals", 0.24) * tactics_diff
             - weights["injury_to_goals"] * injury_diff
             + home_advantage
@@ -280,6 +423,7 @@ class MatchPredictor:
         home_stats: TeamStats,
         away_stats: TeamStats,
         goal_total: dict[str, Any] | None = None,
+        outcome_probabilities: dict[str, float] | None = None,
         limit: int = 3,
     ) -> list[dict[str, Any]]:
         score_counts_by_outcome = {
@@ -287,6 +431,9 @@ class MatchPredictor:
         }
         candidate_counts = {outcome: len(self._candidate_scores(outcome)) for outcome in ("П1", "X", "П2")}
         goal_total = goal_total or self._goal_total_forecast(home_xg, away_xg)
+        if outcome_probabilities is None:
+            home_win, draw, away_win = self._outcome_probabilities(home_xg, away_xg)
+            outcome_probabilities = {"П1": home_win, "X": draw, "П2": away_win}
         grid = []
         for home_goals in range(9):
             for away_goals in range(9):
@@ -304,18 +451,18 @@ class MatchPredictor:
                     * self._tournament_total_factor(home_goals, away_goals, home_xg + away_xg)
                     * self._score_total_factor(home_goals, away_goals, home_xg, away_xg, goal_total)
                     * self._mismatch_score_factor(home_goals, away_goals, home_xg, away_xg, market_pick)
+                    * self._outcome_score_factor(outcome, market_pick, outcome_probabilities)
                 )
                 grid.append((weight, outcome, score))
 
         total_weight = sum(weight for weight, _, _ in grid)
-        picked = [(weight, score) for weight, outcome, score in grid if outcome == market_pick]
-        if not picked or total_weight <= 0:
+        if total_weight <= 0:
             fallback = ["1-1", "0-0", "2-2"] if market_pick == "X" else ["1-0", "2-1", "2-0"]
             return [{"score": score, "probability": 0.0} for score in fallback[:limit]]
-        selected = self._select_score_mix(picked, market_pick, home_xg, away_xg, goal_total, limit)
+        selected = self._select_score_mix(grid, market_pick, home_xg, away_xg, goal_total, outcome_probabilities, limit)
         return [
-            {"score": score, "probability": round(weight / total_weight, 4)}
-            for weight, score in selected
+            {"score": score, "outcome": outcome, "probability": round(weight / total_weight, 4)}
+            for weight, outcome, score in selected
         ]
 
     def _goal_total_forecast(self, home_xg: float, away_xg: float) -> dict[str, Any]:
@@ -368,15 +515,70 @@ class MatchPredictor:
         probabilities[max_goals] = max(0.0, 1.0 - sum(probabilities.values()))
         return probabilities
 
-    @staticmethod
     def _score_total_factor(
+        self,
         home_goals: int,
         away_goals: int,
         home_xg: float,
         away_xg: float,
         goal_total: dict[str, Any],
     ) -> float:
-        return 1.0
+        total_goals = home_goals + away_goals
+        likely_totals = {
+            int(item["goals"]): float(item["probability"])
+            for item in goal_total.get("most_likely_totals", [])
+            if item.get("goals") is not None
+        }
+        if likely_totals:
+            best_probability = max(likely_totals.values()) or 1.0
+            total_probability = likely_totals.get(total_goals, self._poisson(total_goals, home_xg + away_xg))
+            factor = 0.76 + 0.54 * min(1.25, total_probability / best_probability)
+        else:
+            factor = 1.0
+
+        probabilities = goal_total.get("probabilities", {})
+        over_2_5 = float(probabilities.get("over_2_5", 0.0))
+        under_2_5 = float(probabilities.get("under_2_5", 0.0))
+        over_3_5 = float(probabilities.get("over_3_5", 0.0))
+        under_3_5 = float(probabilities.get("under_3_5", 0.0))
+
+        if over_2_5 >= 0.52:
+            if total_goals <= 1:
+                factor *= 0.52
+            elif total_goals == 2:
+                factor *= 0.82
+            else:
+                factor *= 1.12
+        elif under_2_5 >= 0.56:
+            if total_goals <= 2:
+                factor *= 1.10
+            elif total_goals >= 4:
+                factor *= 0.68
+
+        if over_3_5 >= 0.31:
+            if total_goals >= 4:
+                factor *= 1.16
+            elif total_goals <= 1:
+                factor *= 0.70
+        elif under_3_5 >= 0.64 and total_goals >= 5:
+            factor *= 0.62
+
+        return max(0.30, min(1.85, factor))
+
+    @staticmethod
+    def _outcome_score_factor(outcome: str, market_pick: str, probabilities: dict[str, float]) -> float:
+        if outcome == market_pick:
+            return 1.08
+        favorite_probability = float(probabilities.get(market_pick, 0.0))
+        outcome_probability = float(probabilities.get(outcome, 0.0))
+        gap = favorite_probability - outcome_probability
+        if outcome == "X" and (outcome_probability >= 0.27 or gap <= 0.12):
+            return 0.92
+        if gap <= 0.04:
+            return 0.72
+        if outcome_probability >= 0.25:
+            return 0.34
+        return 0.24
 
     @staticmethod
     def _mismatch_score_factor(
@@ -412,32 +614,61 @@ class MatchPredictor:
 
     def _select_score_mix(
         self,
-        picked: list[tuple[float, str]],
+        candidates: list[tuple[float, str, str]],
         market_pick: str,
         home_xg: float,
         away_xg: float,
         goal_total: dict[str, Any],
+        outcome_probabilities: dict[str, float],
         limit: int,
-    ) -> list[tuple[float, str]]:
-        ordered = sorted(picked, reverse=True)
+    ) -> list[tuple[float, str, str]]:
+        ordered = sorted(candidates, reverse=True)
         selected = ordered[:limit]
         probabilities = goal_total.get("probabilities", {})
+        over_2_5 = float(probabilities.get("over_2_5", 0.0))
         over_3_5 = float(probabilities.get("over_3_5", 0.0))
         over_4_5 = float(probabilities.get("over_4_5", 0.0))
         btts = (1.0 - math.exp(-home_xg)) * (1.0 - math.exp(-away_xg))
 
-        if over_3_5 >= 0.38 and not any(self._score_total(score) >= 4 for _, score in selected):
+        if over_2_5 >= 0.52 and selected and self._score_total(selected[0][2]) <= 1:
+            richer = next(
+                (
+                    item
+                    for item in ordered
+                    if self._score_total(item[2]) >= 3 and item[0] >= selected[0][0] * 0.54
+                ),
+                None,
+            )
+            selected = self._promote_score_candidate(selected, richer)
+
+        if not any(outcome == market_pick for _, outcome, _ in selected):
+            market_candidate = next((item for item in ordered if item[1] == market_pick), None)
+            selected = self._include_score_candidate(selected, market_candidate)
+
+        draw_probability = float(outcome_probabilities.get("X", 0.0))
+        market_probability = float(outcome_probabilities.get(market_pick, 0.0))
+        if (
+            market_pick != "X"
+            and (draw_probability >= 0.29 or market_probability - draw_probability <= 0.10)
+            and not any(outcome == "X" for _, outcome, _ in selected)
+        ):
+            draw_candidate = next((item for item in ordered if item[1] == "X"), None)
+            selected = self._include_score_candidate(selected, draw_candidate)
+
+        selected = self._remove_weak_opposite_scores(selected, ordered, market_pick, outcome_probabilities, limit)
+
+        if over_3_5 >= 0.38 and not any(self._score_total(score) >= 4 for _, _, score in selected):
             pool = ordered
             if btts >= 0.56:
-                pool = [item for item in ordered if self._both_score(item[1]) and self._score_total(item[1]) >= 4] or ordered
-            high = next((item for item in pool if self._score_total(item[1]) >= 4), None)
+                pool = [item for item in ordered if self._both_score(item[2]) and self._score_total(item[2]) >= 4] or ordered
+            high = next((item for item in pool if self._score_total(item[2]) >= 4), None)
             selected = self._include_score_candidate(selected, high)
 
-        if over_4_5 >= 0.26 and btts >= 0.60 and not any(self._score_total(score) >= 5 for _, score in selected):
+        if over_4_5 >= 0.26 and btts >= 0.60 and not any(self._score_total(score) >= 5 for _, _, score in selected):
             high5_pool = [
                 item
                 for item in ordered
-                if self._both_score(item[1]) and self._score_total(item[1]) >= 5
+                if self._both_score(item[2]) and self._score_total(item[2]) >= 5
             ]
             high5 = self._competitive_high_total_candidate(high5_pool, min(home_xg, away_xg))
             selected = self._include_score_candidate(selected, high5)
@@ -449,37 +680,81 @@ class MatchPredictor:
                 (
                     item
                     for item in ordered
-                    if self._is_big_clean_favorite_score(item[1], home_xg >= away_xg, market_pick)
+                    if self._is_big_clean_favorite_score(item[2], home_xg >= away_xg, market_pick)
                 ),
                 None,
             )
             selected = self._include_score_candidate(selected, clean_big)
 
+        if not any(outcome == market_pick for _, outcome, _ in selected):
+            market_candidate = next((item for item in ordered if item[1] == market_pick), None)
+            selected = self._include_score_candidate(selected, market_candidate)
+
         return sorted(selected, reverse=True)[:limit]
 
     @staticmethod
+    def _remove_weak_opposite_scores(
+        selected: list[tuple[float, str, str]],
+        ordered: list[tuple[float, str, str]],
+        market_pick: str,
+        outcome_probabilities: dict[str, float],
+        limit: int,
+    ) -> list[tuple[float, str, str]]:
+        if market_pick == "X":
+            return selected
+        market_probability = float(outcome_probabilities.get(market_pick, 0.0))
+
+        def allowed(item: tuple[float, str, str]) -> bool:
+            outcome = item[1]
+            if outcome in {market_pick, "X"}:
+                return True
+            return market_probability - float(outcome_probabilities.get(outcome, 0.0)) <= 0.04
+
+        next_selected = [item for item in selected if allowed(item)]
+        for item in ordered:
+            if len(next_selected) >= limit:
+                break
+            if not allowed(item):
+                continue
+            if any(score == item[2] for _, _, score in next_selected):
+                continue
+            next_selected.append(item)
+        return next_selected or selected
+
+    @staticmethod
     def _include_score_candidate(
-        selected: list[tuple[float, str]],
-        candidate: tuple[float, str] | None,
-    ) -> list[tuple[float, str]]:
-        if candidate is None or any(score == candidate[1] for _, score in selected):
+        selected: list[tuple[float, str, str]],
+        candidate: tuple[float, str, str] | None,
+    ) -> list[tuple[float, str, str]]:
+        if candidate is None or any(score == candidate[2] for _, _, score in selected):
             return selected
         next_selected = selected[:]
         next_selected[-1] = candidate
         return next_selected
 
     @staticmethod
+    def _promote_score_candidate(
+        selected: list[tuple[float, str, str]],
+        candidate: tuple[float, str, str] | None,
+    ) -> list[tuple[float, str, str]]:
+        if candidate is None or any(score == candidate[2] for _, _, score in selected):
+            return selected
+        next_selected = selected[:]
+        next_selected[0] = candidate
+        return next_selected
+
+    @staticmethod
     def _competitive_high_total_candidate(
-        candidates: list[tuple[float, str]],
+        candidates: list[tuple[float, str, str]],
         underdog_xg: float,
-    ) -> tuple[float, str] | None:
+    ) -> tuple[float, str, str] | None:
         if not candidates:
             return None
         best = candidates[0]
         if underdog_xg < 0.95:
             return best
         for candidate in candidates:
-            home, away = [int(value) for value in candidate[1].split("-")]
+            home, away = [int(value) for value in candidate[2].split("-")]
             if min(home, away) >= 2 and candidate[0] >= best[0] * 0.70:
                 return candidate
         return best
@@ -531,6 +806,7 @@ class MatchPredictor:
         tactics: dict[str, Any],
         context: dict[str, Any],
         expected_goals: float,
+        lineup_report: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         attack_score = self._rating01(
             0.28 * min(stats.avg_goals_for / 3.0, 1.0)
@@ -554,16 +830,23 @@ class MatchPredictor:
         class_score = self._rating01(0.50 + self._team_class_score(stats) / 3.2)
         strengths = self._team_strengths(stats, tactics, attack_score, defense_score, form_score)
         risks = self._team_risks(stats, tactics, context)
+        lineup_report = lineup_report or {}
         return {
             "team": team,
             "level": self._level_label(class_score),
             "class_score": round(class_score, 3),
+            "overall_score": round(self._rating01(class_score * 0.38 + attack_score * 0.24 + defense_score * 0.18 + form_score * 0.20), 3),
             "attack_score": round(attack_score, 3),
             "defense_score": round(defense_score, 3),
             "form_score": round(form_score, 3),
             "expected_goals": round(expected_goals, 2),
             "formation": tactics.get("formation"),
             "formation_confidence": tactics.get("formation_confidence"),
+            "lineup_status": lineup_report.get("status", "not_released"),
+            "lineup_strength": lineup_report.get("availability_score"),
+            "missing_key_players": lineup_report.get("missing_key_players", []),
+            "benched_key_players": lineup_report.get("benched_key_players", []),
+            "starting_key_players": lineup_report.get("starting_key_players", []),
             "strengths": strengths,
             "risks": risks,
             "data_note": f"{stats.sample_size} матчей, rich {min(stats.corner_samples, stats.possession_samples, stats.shot_samples)}",
@@ -836,7 +1119,7 @@ class MatchPredictor:
     @staticmethod
     def _injury_impact(context: dict[str, Any]) -> float:
         total = 0.0
-        for injury in context.get("injuries", []):
+        for injury in context.get("injuries", []) + context.get("auto_absences", []):
             status = str(injury.get("status", "")).lower()
             if status in {"fit", "available", "ok"}:
                 continue
@@ -860,6 +1143,33 @@ class MatchPredictor:
         if home_tactics.get("is_fallback") or away_tactics.get("is_fallback"):
             warnings.append("Для одной из команд нет тактического профиля, используется нейтральный шаблон.")
         warnings.append("World Cup mode: мотивация и сила состава считаются высокими для обеих команд, если вы явно не внесли травмы или изменения состава.")
+        return warnings
+
+    @staticmethod
+    def _lineup_warnings(home_team: str, away_team: str, lineup_reports: dict[str, Any]) -> list[str]:
+        warnings = []
+        not_released = [
+            team
+            for team in (home_team, away_team)
+            if lineup_reports.get(team, {}).get("status") != "confirmed"
+        ]
+        if not_released:
+            warnings.append(
+                "Составы еще не подтверждены для: "
+                + ", ".join(not_released)
+                + ". За час до матча модель попробует подтянуть стартовые составы и пересчитать схему/xG."
+            )
+        impacted = []
+        for team, report in lineup_reports.items():
+            missing = report.get("missing_key_players", [])
+            benched = report.get("benched_key_players", [])
+            if missing or benched:
+                impacted.append(
+                    f"{team}: вне старта/заявки "
+                    + ", ".join(player.get("name", "") for player in (missing + benched)[:4])
+                )
+        if impacted:
+            warnings.append("Состав влияет на прогноз: " + "; ".join(impacted) + ".")
         return warnings
 
     def _data_quality(
