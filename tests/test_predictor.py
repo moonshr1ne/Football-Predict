@@ -8,6 +8,7 @@ from football_predictor.autocheck import AutoChecker
 from football_predictor.data_store import DataStore
 from football_predictor.learning import OnlineLearner
 from football_predictor.predictor import MatchPredictor
+from football_predictor.providers import EspnWorldCupProvider
 
 
 def make_store(tmp_dir):
@@ -47,6 +48,15 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(predictions[0]["status"], "reviewed")
             self.assertEqual(predictions[0]["review"]["actual_score"], "2-1")
 
+    def test_espn_fixture_maps_scores_to_requested_order(self):
+        provider = EspnWorldCupProvider()
+        fixture = provider._fixture_from_event(sample_espn_event(), "Uruguay", "Spain")
+        self.assertIsNotNone(fixture)
+        self.assertEqual(fixture["date"], "2026-06-24")
+        self.assertTrue(fixture["completed"])
+        self.assertEqual(fixture["home_goals"], 1)
+        self.assertEqual(fixture["away_goals"], 2)
+
 
 class FakeProvider:
     def get_finished_result(self, home_team, away_team, match_date):
@@ -60,6 +70,37 @@ class FakeProvider:
             "away_corners": 4,
             "source": "fake",
         }
+
+
+def sample_espn_event():
+    return {
+        "id": "123",
+        "date": "2026-06-24T19:00Z",
+        "competitions": [
+            {
+                "status": {
+                    "type": {
+                        "name": "STATUS_FINAL",
+                        "state": "post",
+                        "completed": True,
+                        "shortDetail": "FT",
+                    }
+                },
+                "competitors": [
+                    {
+                        "homeAway": "home",
+                        "score": "2",
+                        "team": {"displayName": "Spain", "shortDisplayName": "Spain", "abbreviation": "ESP"},
+                    },
+                    {
+                        "homeAway": "away",
+                        "score": "1",
+                        "team": {"displayName": "Uruguay", "shortDisplayName": "Uruguay", "abbreviation": "URU"},
+                    },
+                ],
+            }
+        ],
+    }
 
 
 if __name__ == "__main__":

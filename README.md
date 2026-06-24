@@ -10,7 +10,7 @@
 
 ```powershell
 cd outputs\football-national-predictor
-python -m football_predictor.cli predict "Англия, Гана" --date 2026-06-24
+python -m football_predictor.cli predict "Уругвай, Испания"
 ```
 
 Пример короткого вывода:
@@ -27,46 +27,48 @@ python -m football_predictor.cli serve --port 8765
 
 Откройте `http://127.0.0.1:8765`.
 
-## Проверка после матча и самообучение
+Пока веб-сервер запущен, он сам примерно раз в час проверяет pending-прогнозы и обучается по завершенным матчам. Кнопка в интерфейсе нужна только для проверки прямо сейчас.
 
-Когда матч завершился, внесите результат:
+## Автодата, проверка результата и самообучение
+
+Если дата не указана, приложение само ищет матч в расписании чемпионата мира через ESPN World Cup scoreboard. Если матч найден, дата сохраняется в прогнозе, а прогноз попадает в очередь автопроверки.
 
 ```powershell
-python -m football_predictor.cli result "Англия, Гана" --date 2026-06-24 --score 2-1 --corners 10
+python -m football_predictor.cli predict "Уругвай, Испания"
 ```
 
-Что происходит:
-
-- матч попадает в `data/matches.json`;
-- приложение сравнивает прогноз с фактом;
-- обновляет веса в `data/model_state.json`;
-- следующие прогнозы уже используют новый матч и новую калибровку.
-
-Если есть ключ API-Football:
+После матча приложение может само проверить все pending-прогнозы и обучиться:
 
 ```powershell
-$env:API_FOOTBALL_KEY="ваш_ключ"
-python -m football_predictor.cli check "Англия, Гана" --date 2026-06-24
-```
-
-## Автопроверка своих прогнозов
-
-Если прогноз сделан с `--date`, он сохраняется в `data/predictions.json` со статусом `pending`.
-После матча приложение может само пройтись по очереди, забрать финальные результаты через API-Football и обучиться:
-
-```powershell
-$env:API_FOOTBALL_KEY="ваш_ключ"
 python -m football_predictor.cli auto-check
 ```
 
 Для постоянной проверки:
 
 ```powershell
-$env:API_FOOTBALL_KEY="ваш_ключ"
 python -m football_predictor.cli watch --interval 3600
 ```
 
-`watch` надо держать запущенным или повесить на планировщик Windows. Без ключа API приложение все равно обучается, но результат нужно внести вручную через `result`.
+Что происходит после найденного финального результата:
+
+- матч попадает в `data/matches.json`;
+- приложение сравнивает прогноз с фактом;
+- обновляет веса в `data/model_state.json`;
+- следующие прогнозы уже используют новый матч и новую калибровку.
+
+Ручной ввод результата оставлен только как запасной вариант, если внешний источник временно недоступен:
+
+```powershell
+python -m football_predictor.cli result "Уругвай, Испания" --date 2026-06-24 --score 2-1 --corners 10
+```
+
+Можно проверить конкретный матч без даты:
+
+```powershell
+python -m football_predictor.cli check "Уругвай, Испания"
+```
+
+`watch` надо держать запущенным или повесить на планировщик Windows. Для автодаты и счета API-ключ не нужен; используется публичный scoreboard ESPN. Угловые из ESPN обычно недоступны, поэтому обучение по угловым включается, когда вы добавляете их вручную или подключаете источник со статистикой угловых.
 
 ## Травмы, мотивация и заметки
 
@@ -103,6 +105,7 @@ python -m football_predictor.cli predict "Англия, Гана" --json
 
 - `football_predictor/predictor.py` - расчет xG, исхода, счетов и угловых.
 - `football_predictor/tactics.py` - тактические матчапы: владение, прессинг, фланги, стандарты, переходы.
+- `football_predictor/providers.py` - поиск даты матча и финального счета через ESPN World Cup scoreboard.
 - `football_predictor/learning.py` - проверка результата и онлайн-обучение.
 - `football_predictor/providers.py` - опциональная интеграция API-Football.
 - `data/matches.json` - история матчей.

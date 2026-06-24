@@ -1,36 +1,21 @@
 const prediction = document.querySelector("#prediction");
-const today = new Date().toISOString().slice(0, 10);
-document.querySelector("#result-date").value = today;
 
 document.querySelector("#predict-form").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const matchup = document.querySelector("#matchup").value;
-  const homeVenue = document.querySelector("#home-venue").checked;
-  const date = document.querySelector("#match-date").value;
-  const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&home_venue=${homeVenue}&date=${encodeURIComponent(date)}`);
-  renderPrediction(data);
+  await runPrediction(true);
 });
 
-document.querySelector("#result-form").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const payload = {
-    matchup: document.querySelector("#result-matchup").value,
-    date: document.querySelector("#result-date").value,
-    score: document.querySelector("#score").value,
-    corners: document.querySelector("#corners").value,
-  };
-  const response = await fetch("/api/result", {
+document.querySelector("#auto-check").addEventListener("click", async () => {
+  const response = await fetch("/api/auto-check", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
   });
   const data = await response.json();
   if (!response.ok) {
-    document.querySelector("#review").textContent = data.error || "Ошибка";
+    document.querySelector("#review").textContent = data.error || "Ошибка автопроверки";
     return;
   }
   document.querySelector("#review").textContent =
-    `Исход: ${data.outcome_hit ? "угадан" : "не угадан"}, счет: ${data.score_hit ? "угадан" : "не угадан"}. Модель обновлена.`;
+    `Проверено: ${data.checked}, обучено: ${data.learned}, ожидают: ${data.pending}, ошибок: ${data.errors}.`;
 });
 
 async function getJson(url) {
@@ -46,7 +31,7 @@ function renderPrediction(data) {
     <article class="card">
       <h3>Исход</h3>
       <div class="metric">${data.market_pick}</div>
-      <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%${data.match_date ? `, очередь ${data.match_date}` : ""}</p>
+      <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%${data.match_date ? `, найдено ${data.match_date}` : ""}</p>
     </article>
     <article class="card">
       <h3>Угловые</h3>
@@ -73,6 +58,7 @@ function renderPrediction(data) {
     </article>
     <article class="card wide">
       <h3>Контекст</h3>
+      ${fixtureBlock(data.fixture)}
       <p>Турнир: ${escapeHtml(data.match_context?.competition || "FIFA World Cup")}</p>
       <p>Важность: ${Number(data.match_context?.importance ?? 1).toFixed(2)}, базовая сила состава: ${Number(data.match_context?.lineup_strength_floor ?? 0.92).toFixed(2)}</p>
       <p>${escapeHtml(data.home_team)}: ${contextLine(data.home_context)}</p>
@@ -116,6 +102,15 @@ function contextLine(context) {
   return `мотивация ${motivation}, состав ${lineup}, ${injuries}`;
 }
 
+function fixtureBlock(fixture) {
+  if (!fixture) {
+    return "<p class='warn'>Дата матча не найдена автоматически. Проверьте, есть ли такая пара в расписании ЧМ.</p>";
+  }
+  const status = fixture.completed ? "завершен" : (fixture.status_detail || fixture.status || "запланирован");
+  const kickoff = fixture.kickoff ? ` · ${escapeHtml(fixture.kickoff)}` : "";
+  return `<p><strong>Матч найден:</strong> ${escapeHtml(fixture.date)} · ${escapeHtml(status)}${kickoff}</p>`;
+}
+
 function tacticsBlock(tactics) {
   return `
     <p><strong>${escapeHtml(tactics.formation || "unknown")}</strong> · ${escapeHtml(tactics.style || "balanced")}</p>
@@ -142,4 +137,11 @@ function escapeHtml(value) {
   })[char]);
 }
 
-document.querySelector("#predict-form").dispatchEvent(new Event("submit"));
+async function runPrediction(remember) {
+  const matchup = document.querySelector("#matchup").value;
+  const homeVenue = document.querySelector("#home-venue").checked;
+  const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&home_venue=${homeVenue}&remember=${remember}`);
+  renderPrediction(data);
+}
+
+runPrediction(false);

@@ -173,6 +173,20 @@ class DataStore:
         prediction.setdefault("prediction_id", uuid.uuid4().hex)
         prediction.setdefault("created_at", datetime.now(timezone.utc).isoformat())
         prediction.setdefault("status", "pending" if prediction.get("match_date") else "recorded")
+        for existing in predictions:
+            same_match = (
+                existing.get("home_team") == prediction.get("home_team")
+                and existing.get("away_team") == prediction.get("away_team")
+                and existing.get("match_date") == prediction.get("match_date")
+                and existing.get("status") == "pending"
+                and prediction.get("status") == "pending"
+            )
+            if same_match:
+                prediction["prediction_id"] = existing.get("prediction_id", prediction["prediction_id"])
+                prediction["created_at"] = existing.get("created_at", prediction["created_at"])
+                existing.update(prediction)
+                self._write_json(self.predictions_path, predictions[-500:])
+                return
         predictions.append(prediction)
         self._write_json(self.predictions_path, predictions[-500:])
 

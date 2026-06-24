@@ -5,13 +5,13 @@ from typing import Any
 
 from .data_store import DataStore
 from .learning import OnlineLearner
-from .providers import ApiFootballProvider, ProviderError
+from .providers import EspnWorldCupProvider, ProviderError
 
 
 class AutoChecker:
-    def __init__(self, store: DataStore, provider: ApiFootballProvider | None = None):
+    def __init__(self, store: DataStore, provider=None):
         self.store = store
-        self.provider = provider or ApiFootballProvider()
+        self.provider = provider or EspnWorldCupProvider()
 
     def check_pending(self, limit: int = 25, today: str | None = None) -> dict[str, Any]:
         today = today or date.today().isoformat()

@@ -11,7 +11,7 @@ from .autocheck import AutoChecker
 from .data_store import DataStore
 from .learning import OnlineLearner
 from .predictor import MatchPredictor
-from .providers import ApiFootballProvider, ProviderError
+from .providers import EspnWorldCupProvider, ProviderError
 from .server import run_server
 
 
@@ -22,6 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
     predict = subparsers.add_parser("predict", help="Сделать прогноз: nfp predict \"Англия, Гана\"")
     predict.add_argument("matchup")
     predict.add_argument("--date", help="Дата матча YYYY-MM-DD. Если указана, прогноз попадет в очередь автопроверки.")
+    predict.add_argument("--no-auto-date", action="store_true", help="Не искать дату матча автоматически.")
     predict.add_argument("--home-venue", action="store_true", help="Считать, что первая команда играет дома.")
     predict.add_argument("--json", action="store_true")
 
@@ -39,7 +40,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     check = subparsers.add_parser("check", help="Проверить результат через API-Football и обучиться.")
     check.add_argument("matchup")
-    check.add_argument("--date", required=True)
+    check.add_argument("--date")
     check.add_argument("--home-venue", action="store_true")
     check.add_argument("--json", action="store_true")
 
@@ -96,6 +97,7 @@ def main(argv: list[str] | None = None) -> int:
         args.command = "predict"
         args.matchup = "Англия, Гана"
         args.date = None
+        args.no_auto_date = False
         args.home_venue = False
         args.json = False
 
@@ -103,18 +105,26 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "predict":
         home_team, away_team = parse_matchup(args.matchup, store.resolver)
+        fixture = None
+        lookup_warnings = []
+        match_date = args.date
+        if not match_date and not args.no_auto_date:
+            fixture, lookup_warnings = _find_fixture_for_prediction(home_team, away_team)
+            match_date = fixture.get("date") if fixture else None
         prediction = MatchPredictor(store).predict(
             home_team,
             away_team,
             neutral=not args.home_venue,
-            match_date=args.date,
+            match_date=match_date,
+            fixture=fixture,
+            extra_warnings=lookup_warnings,
         )
         if args.json:
             print(json.dumps(prediction.to_dict(), ensure_ascii=False, indent=2))
         else:
             print(prediction.short_text())
-            if args.date:
-                print(f"Добавил в очередь автопроверки на дату: {args.date}")
+            if match_date:
+                print(f"Дата матча найдена: {match_date}. Прогноз добавлен в очередь автопроверки.")
             print(_details_text(prediction.to_dict()))
         return 0
 
@@ -169,11 +179,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "check":
         home_team, away_team = parse_matchup(args.matchup, store.resolver)
         try:
-            provider = ApiFootballProvider()
+            provider = EspnWorldCupProvider()
             result = provider.get_finished_result(home_team, away_team, args.date)
         except ProviderError as exc:
             parser.error(str(exc))
-        baseline = store.latest_prediction(home_team, away_team, match_date=args.date, status="pending")
+        baseline = store.latest_prediction(home_team, away_team, match_date=result["date"], status="pending")
         review = OnlineLearner(store).record_result(
             home_team=home_team,
             away_team=away_team,
@@ -250,6 +260,14 @@ def _parse_score(value: str) -> tuple[int, int]:
     return int(parts[0]), int(parts[1])
 
 
+def _find_fixture_for_prediction(home_team: str, away_team: str) -> tuple[dict | None, list[str]]:
+    try:
+        fixture = EspnWorldCupProvider().find_fixture(home_team, away_team)
+        return fixture, []
+    except ProviderError as exc:
+        return None, [f"Автодата: {exc} Можно указать дату вручную, если матч есть вне найденного окна."]
+
+
 def _details_text(data: dict) -> str:
     lines = [
         f"Вероятности: П1 {data['probabilities']['П1']:.1%}, X {data['probabilities']['X']:.1%}, П2 {data['probabilities']['П2']:.1%}",
@@ -260,6 +278,9 @@ def _details_text(data: dict) -> str:
         f"Тактика: {data['home_team']} {data['home_tactics']['formation']} vs {data['away_team']} {data['away_tactics']['formation']}; "
         f"{data['tactical_matchup']['summary']}",
     ]
+    if data.get("fixture"):
+        fixture = data["fixture"]
+        lines.insert(0, f"Матч найден: {fixture['date']} ({fixture.get('status_detail') or fixture.get('status') or 'scheduled'})")
     if data["warnings"]:
         lines.append("Важно: " + " ".join(data["warnings"]))
     return "\n".join(lines)

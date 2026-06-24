@@ -1,14 +1,18 @@
 from __future__ import annotations
 
 import json
+import threading
+import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from .aliases import parse_matchup
 from .data_store import DataStore, project_root
+from .autocheck import AutoChecker
 from .learning import OnlineLearner
 from .predictor import MatchPredictor
+from .providers import EspnWorldCupProvider, ProviderError
 
 
 class PredictorHandler(SimpleHTTPRequestHandler):
@@ -24,13 +28,25 @@ class PredictorHandler(SimpleHTTPRequestHandler):
             matchup = query.get("matchup", [""])[0]
             home_venue = query.get("home_venue", ["false"])[0] == "true"
             match_date = query.get("date", [None])[0] or None
+            remember = query.get("remember", ["true"])[0] != "false"
             try:
                 home, away = parse_matchup(matchup, self.store.resolver)
+                fixture = None
+                warnings = []
+                if not match_date:
+                    try:
+                        fixture = EspnWorldCupProvider().find_fixture(home, away)
+                        match_date = fixture.get("date")
+                    except ProviderError as exc:
+                        warnings.append(f"Автодата: {exc}")
                 prediction = MatchPredictor(self.store).predict(
                     home,
                     away,
                     neutral=not home_venue,
+                    remember=remember,
                     match_date=match_date,
+                    fixture=fixture,
+                    extra_warnings=warnings,
                 )
                 self._json(200, prediction.to_dict())
             except Exception as exc:
@@ -40,6 +56,13 @@ class PredictorHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
+        if parsed.path == "/api/auto-check":
+            try:
+                summary = AutoChecker(self.store).check_pending()
+                self._json(200, summary)
+            except Exception as exc:
+                self._json(400, {"error": str(exc)})
+            return
         if parsed.path != "/api/result":
             self._json(404, {"error": "Not found"})
             return
@@ -92,6 +115,20 @@ def _optional_float(value) -> float | None:
 
 
 def run_server(host: str = "127.0.0.1", port: int = 8765) -> None:
+    _start_auto_check_worker(PredictorHandler.store)
     server = ThreadingHTTPServer((host, port), PredictorHandler)
     print(f"Открывайте: http://{host}:{port}")
     server.serve_forever()
+
+
+def _start_auto_check_worker(store: DataStore, interval_seconds: int = 3600) -> None:
+    def worker() -> None:
+        while True:
+            try:
+                AutoChecker(store).check_pending()
+            except Exception:
+                pass
+            time.sleep(interval_seconds)
+
+    thread = threading.Thread(target=worker, daemon=True)
+    thread.start()

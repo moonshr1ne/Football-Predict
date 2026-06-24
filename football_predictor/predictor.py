@@ -33,6 +33,7 @@ class Prediction:
     home_tactics: dict[str, Any]
     away_tactics: dict[str, Any]
     tactical_matchup: dict[str, Any]
+    fixture: dict[str, Any] | None
     warnings: list[str]
 
     def to_dict(self) -> dict[str, Any]:
@@ -62,6 +63,7 @@ class Prediction:
             "home_tactics": self.home_tactics,
             "away_tactics": self.away_tactics,
             "tactical_matchup": self.tactical_matchup,
+            "fixture": self.fixture,
             "warnings": self.warnings,
         }
 
@@ -81,6 +83,8 @@ class MatchPredictor:
         neutral: bool = True,
         remember: bool = True,
         match_date: str | None = None,
+        fixture: dict[str, Any] | None = None,
+        extra_warnings: list[str] | None = None,
     ) -> Prediction:
         matches = self.store.load_matches()
         home_stats = build_team_stats(matches, home_team)
@@ -95,6 +99,8 @@ class MatchPredictor:
         state = self.store.load_model_state()
         weights = state["weights"]
         warnings = self._warnings(home_stats, away_stats, home_tactics, away_tactics)
+        if extra_warnings:
+            warnings.extend(extra_warnings)
 
         home_xg, away_xg = self._expected_goals(
             home_stats,
@@ -136,6 +142,7 @@ class MatchPredictor:
             home_tactics=home_tactics,
             away_tactics=away_tactics,
             tactical_matchup=tactical_matchup,
+            fixture=fixture,
             warnings=warnings,
         )
         if remember and match_date:
