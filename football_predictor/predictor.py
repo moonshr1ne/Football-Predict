@@ -7,6 +7,7 @@ from typing import Any
 from .data_store import DataStore
 from .features import build_team_stats
 from .models import TeamStats
+from .tactics import corner_tactical_boost, summarize_matchup, tactical_edge, tactical_tempo
 
 
 @dataclass
@@ -28,6 +29,10 @@ class Prediction:
     away_stats: TeamStats
     home_context: dict[str, Any]
     away_context: dict[str, Any]
+    match_context: dict[str, Any]
+    home_tactics: dict[str, Any]
+    away_tactics: dict[str, Any]
+    tactical_matchup: dict[str, Any]
     warnings: list[str]
 
     def to_dict(self) -> dict[str, Any]:
@@ -53,6 +58,10 @@ class Prediction:
             "away_stats": self.away_stats.as_dict(),
             "home_context": self.home_context,
             "away_context": self.away_context,
+            "match_context": self.match_context,
+            "home_tactics": self.home_tactics,
+            "away_tactics": self.away_tactics,
+            "tactical_matchup": self.tactical_matchup,
             "warnings": self.warnings,
         }
 
@@ -79,16 +88,30 @@ class MatchPredictor:
         context = self.store.load_context()
         home_context = context.get(home_team, {})
         away_context = context.get(away_team, {})
+        match_context = self.store.load_match_context()
+        home_tactics = self.store.team_tactics(home_team)
+        away_tactics = self.store.team_tactics(away_team)
+        tactical_matchup = summarize_matchup(home_team, away_team, home_tactics, away_tactics)
         state = self.store.load_model_state()
         weights = state["weights"]
-        warnings = self._warnings(home_stats, away_stats)
+        warnings = self._warnings(home_stats, away_stats, home_tactics, away_tactics)
 
-        home_xg, away_xg = self._expected_goals(home_stats, away_stats, home_context, away_context, weights, neutral)
+        home_xg, away_xg = self._expected_goals(
+            home_stats,
+            away_stats,
+            home_context,
+            away_context,
+            home_tactics,
+            away_tactics,
+            match_context,
+            weights,
+            neutral,
+        )
         home_win, draw, away_win = self._outcome_probabilities(home_xg, away_xg)
         probabilities = {"П1": home_win, "X": draw, "П2": away_win}
         market_pick = max(probabilities, key=probabilities.get)
         confidence = probabilities[market_pick]
-        corners = self._expected_corners(home_stats, away_stats, home_xg + away_xg, weights)
+        corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
         exact_scores = self._top_scores(home_xg, away_xg, limit=2)
 
         prediction = Prediction(
@@ -109,6 +132,10 @@ class MatchPredictor:
             away_stats=away_stats,
             home_context=home_context,
             away_context=away_context,
+            match_context=match_context,
+            home_tactics=home_tactics,
+            away_tactics=away_tactics,
+            tactical_matchup=tactical_matchup,
             warnings=warnings,
         )
         if remember and match_date:
@@ -121,6 +148,9 @@ class MatchPredictor:
         away_stats: TeamStats,
         home_context: dict[str, Any],
         away_context: dict[str, Any],
+        home_tactics: dict[str, Any],
+        away_tactics: dict[str, Any],
+        match_context: dict[str, Any],
         weights: dict[str, float],
         neutral: bool,
     ) -> tuple[float, float]:
@@ -131,33 +161,43 @@ class MatchPredictor:
         elo_away = float(away_context.get("elo") or 1500)
         elo_diff = max(-1.4, min(1.4, (elo_home - elo_away) / 400))
         form_diff = max(-1.2, min(1.2, home_stats.points_per_match - away_stats.points_per_match))
-        motivation_diff = self._motivation(home_context) - self._motivation(away_context)
+        motivation_diff = self._motivation(home_context, match_context) - self._motivation(away_context, match_context)
         injury_diff = self._injury_impact(home_context) - self._injury_impact(away_context)
+        lineup_diff = self._lineup_strength(home_context, match_context) - self._lineup_strength(away_context, match_context)
+        tactics_diff = tactical_edge(home_tactics, away_tactics)
+        tempo = tactical_tempo(home_tactics, away_tactics)
+        intensity = max(0.0, min(1.0, float(match_context.get("importance", 1.0))))
 
         home_advantage = 0.0 if neutral else weights["home_advantage_goals"]
         adjustment = (
             weights["elo_to_goals"] * elo_diff
             + weights["form_to_goals"] * form_diff
             + weights["motivation_to_goals"] * motivation_diff
+            + weights.get("lineup_to_goals", 0.10) * lineup_diff
+            + weights.get("tactics_to_goals", 0.24) * tactics_diff
             - weights["injury_to_goals"] * injury_diff
             + home_advantage
         )
+        intensity_boost = weights.get("world_cup_intensity_goals", 0.05) * intensity
         goal_scale = weights.get("goal_scale", 1.0)
-        home_xg = max(0.15, (home_base + adjustment) * goal_scale)
-        away_xg = max(0.15, (away_base - adjustment * 0.78) * goal_scale)
+        home_xg = max(0.15, (home_base + adjustment + tempo + intensity_boost) * goal_scale)
+        away_xg = max(0.15, (away_base - adjustment * 0.78 + tempo + intensity_boost) * goal_scale)
         return min(home_xg, 4.6), min(away_xg, 4.6)
 
     def _expected_corners(
         self,
         home_stats: TeamStats,
         away_stats: TeamStats,
+        home_tactics: dict[str, Any],
+        away_tactics: dict[str, Any],
         total_xg: float,
         weights: dict[str, float],
     ) -> float:
         samples = [value for value in (home_stats.avg_total_corners, away_stats.avg_total_corners) if value is not None]
         base = sum(samples) / len(samples) if samples else 9.2
         tempo = max(-0.6, min(1.1, (total_xg - 2.35) * 0.42))
-        return max(4.0, min(16.0, base + tempo + weights.get("corner_bias", 0.0)))
+        tactics = corner_tactical_boost(home_tactics, away_tactics) * weights.get("tactics_to_corners", 1.15)
+        return max(4.0, min(16.0, base + tempo + tactics + weights.get("corner_bias", 0.0)))
 
     def _outcome_probabilities(self, home_xg: float, away_xg: float) -> tuple[float, float, float]:
         home_win = draw = away_win = 0.0
@@ -186,11 +226,22 @@ class MatchPredictor:
         return math.exp(-rate) * rate**k / math.factorial(k)
 
     @staticmethod
-    def _motivation(context: dict[str, Any]) -> float:
+    def _motivation(context: dict[str, Any], match_context: dict[str, Any]) -> float:
         motivation = context.get("motivation", {})
         if isinstance(motivation, dict):
-            return float(motivation.get("level", 0.5))
-        return 0.5
+            level = float(motivation.get("level", 0.5))
+        else:
+            level = 0.5
+        floor = float(match_context.get("motivation_floor", 0.5))
+        return max(level, floor)
+
+    @staticmethod
+    def _lineup_strength(context: dict[str, Any], match_context: dict[str, Any]) -> float:
+        if "lineup_strength" in context:
+            strength = float(context["lineup_strength"])
+        else:
+            strength = float(match_context.get("lineup_strength_floor", 0.92))
+        return max(0.0, min(1.0, strength))
 
     @staticmethod
     def _injury_impact(context: dict[str, Any]) -> float:
@@ -203,7 +254,12 @@ class MatchPredictor:
         return min(total, 2.0)
 
     @staticmethod
-    def _warnings(home_stats: TeamStats, away_stats: TeamStats) -> list[str]:
+    def _warnings(
+        home_stats: TeamStats,
+        away_stats: TeamStats,
+        home_tactics: dict[str, Any],
+        away_tactics: dict[str, Any],
+    ) -> list[str]:
         warnings = []
         if home_stats.sample_size < 10 or away_stats.sample_size < 10:
             warnings.append("В базе меньше 10 последних матчей для одной из команд.")
@@ -211,4 +267,7 @@ class MatchPredictor:
             warnings.append("По угловым есть неполная статистика, часть оценки построена на среднем темпе.")
         if any(match.source == "demo_seed" for match in home_stats.recent + away_stats.recent):
             warnings.append("В стартовой базе есть демо-матчи: для боевого прогноза обновите данные через API или вручную.")
+        if home_tactics.get("is_fallback") or away_tactics.get("is_fallback"):
+            warnings.append("Для одной из команд нет тактического профиля, используется нейтральный шаблон.")
+        warnings.append("World Cup mode: мотивация и сила состава считаются высокими для обеих команд, если вы явно не внесли травмы или изменения состава.")
         return warnings

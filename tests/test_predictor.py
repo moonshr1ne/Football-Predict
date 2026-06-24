@@ -26,6 +26,9 @@ class PredictorTests(unittest.TestCase):
             self.assertIn(prediction.market_pick, {"П1", "X", "П2"})
             self.assertEqual(len(prediction.exact_scores), 2)
             self.assertGreater(prediction.predicted_corners, 0)
+            self.assertEqual(prediction.match_context["competition"], "FIFA World Cup")
+            self.assertIn("formation", prediction.home_tactics)
+            self.assertIn("tactical_matchup", prediction.to_dict())
 
     def test_learning_records_review(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

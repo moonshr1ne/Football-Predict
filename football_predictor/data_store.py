@@ -19,10 +19,45 @@ DEFAULT_MODEL_STATE = {
         "form_to_goals": 0.20,
         "motivation_to_goals": 0.18,
         "injury_to_goals": 0.16,
+        "lineup_to_goals": 0.10,
+        "tactics_to_goals": 0.24,
+        "tactics_to_corners": 1.15,
+        "world_cup_intensity_goals": 0.05,
         "corner_bias": 0.0,
         "goal_scale": 1.0,
     },
     "history": [],
+}
+
+DEFAULT_MATCH_CONTEXT = {
+    "competition": "FIFA World Cup",
+    "importance": 1.0,
+    "motivation_floor": 0.92,
+    "lineup_strength_floor": 0.92,
+    "notes": [
+        "World Cup mode: every match is treated as high-importance, with near-first-choice lineups unless overridden."
+    ],
+}
+
+DEFAULT_TACTICAL_PROFILE = {
+    "formation": "4-2-3-1",
+    "style": "balanced",
+    "build_up": "mixed",
+    "primary_attack": "mixed",
+    "defensive_block": "mid",
+    "possession_intent": 0.55,
+    "pressing": 0.55,
+    "line_height": 0.52,
+    "defensive_solidity": 0.55,
+    "attack_width": 0.55,
+    "central_progression": 0.55,
+    "directness": 0.50,
+    "chance_creation": 0.55,
+    "transition_attack": 0.55,
+    "transition_defense": 0.55,
+    "set_piece_threat": 0.50,
+    "tempo": 0.55,
+    "notes": ["Neutral tactical fallback. Add a real profile for sharper predictions."],
 }
 
 
@@ -37,6 +72,8 @@ class DataStore:
         self.alias_path = self.data_dir / "team_aliases.json"
         self.matches_path = self.data_dir / "matches.json"
         self.context_path = self.data_dir / "team_context.json"
+        self.match_context_path = self.data_dir / "match_context.json"
+        self.tactics_path = self.data_dir / "tactical_profiles.json"
         self.model_path = self.data_dir / "model_state.json"
         self.predictions_path = self.data_dir / "predictions.json"
         self.resolver = TeamResolver(self.alias_path)
@@ -47,6 +84,8 @@ class DataStore:
         for path, default in (
             (self.matches_path, []),
             (self.context_path, {}),
+            (self.match_context_path, DEFAULT_MATCH_CONTEXT),
+            (self.tactics_path, {}),
             (self.model_path, DEFAULT_MODEL_STATE),
             (self.predictions_path, []),
         ):
@@ -92,6 +131,31 @@ class DataStore:
     def team_context(self, team: str) -> dict[str, Any]:
         context = self.load_context()
         return context.get(team, {})
+
+    def load_match_context(self) -> dict[str, Any]:
+        context = self._read_json(self.match_context_path, DEFAULT_MATCH_CONTEXT)
+        merged = json.loads(json.dumps(DEFAULT_MATCH_CONTEXT))
+        merged.update(context)
+        return merged
+
+    def save_match_context(self, context: dict[str, Any]) -> None:
+        merged = self.load_match_context()
+        merged.update(context)
+        self._write_json(self.match_context_path, merged)
+
+    def load_tactical_profiles(self) -> dict[str, Any]:
+        return self._read_json(self.tactics_path, {})
+
+    def save_tactical_profiles(self, profiles: dict[str, Any]) -> None:
+        self._write_json(self.tactics_path, profiles)
+
+    def team_tactics(self, team: str) -> dict[str, Any]:
+        profiles = self.load_tactical_profiles()
+        profile = json.loads(json.dumps(DEFAULT_TACTICAL_PROFILE))
+        profile.update(profiles.get(team, {}))
+        profile["team"] = team
+        profile["is_fallback"] = team not in profiles
+        return profile
 
     def load_model_state(self) -> dict[str, Any]:
         state = self._read_json(self.model_path, DEFAULT_MODEL_STATE)

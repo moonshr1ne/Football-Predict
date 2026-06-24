@@ -1,0 +1,9 @@
+{
+  "competition": "FIFA World Cup",
+  "importance": 1.0,
+  "motivation_floor": 0.92,
+  "lineup_strength_floor": 0.92,
+  "notes": [
+    "World Cup mode: every match is treated as high-importance, with near-first-choice lineups unless overridden."
+  ]
+}

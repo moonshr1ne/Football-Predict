@@ -1,0 +1,46 @@
+{
+  "England": {
+    "formation": "4-2-3-1",
+    "style": "possession with controlled pressing",
+    "build_up": "short build-up, full-back support, half-space entries",
+    "primary_attack": "wide overloads and cutbacks",
+    "defensive_block": "mid-high",
+    "possession_intent": 0.68,
+    "pressing": 0.64,
+    "line_height": 0.62,
+    "defensive_solidity": 0.70,
+    "attack_width": 0.72,
+    "central_progression": 0.66,
+    "directness": 0.46,
+    "chance_creation": 0.70,
+    "transition_attack": 0.60,
+    "transition_defense": 0.68,
+    "set_piece_threat": 0.66,
+    "tempo": 0.58,
+    "notes": [
+      "Default profile. Update before a real match if the coach changes shape or starters."
+    ]
+  },
+  "Ghana": {
+    "formation": "4-2-3-1",
+    "style": "athletic transitions with selective pressing",
+    "build_up": "mixed build-up, quick forward passes when space appears",
+    "primary_attack": "transitions, wide runners, second balls",
+    "defensive_block": "mid",
+    "possession_intent": 0.48,
+    "pressing": 0.58,
+    "line_height": 0.50,
+    "defensive_solidity": 0.56,
+    "attack_width": 0.62,
+    "central_progression": 0.50,
+    "directness": 0.66,
+    "chance_creation": 0.58,
+    "transition_attack": 0.70,
+    "transition_defense": 0.54,
+    "set_piece_threat": 0.55,
+    "tempo": 0.64,
+    "notes": [
+      "Default profile. Update before a real match if the coach changes shape or starters."
+    ]
+  }
+}

@@ -70,11 +70,26 @@ class OnlineLearner:
             0.40,
         )
         weights["form_to_goals"] = self._clamp(weights.get("form_to_goals", 0.20) + lr * side_error * 0.01, 0.02, 0.50)
+        tactical_matchup = prediction.get("tactical_matchup", {})
+        tactical_edge = float(tactical_matchup.get("edge", 0.0))
+        if abs(tactical_edge) > 0.02:
+            weights["tactics_to_goals"] = self._clamp(
+                weights.get("tactics_to_goals", 0.24) + lr * side_error * tactical_edge * 0.035,
+                0.02,
+                0.55,
+            )
 
         corner_error = None
         if actual_corners_total is not None:
             corner_error = actual_corners_total - predicted_corners
             weights["corner_bias"] = self._clamp(weights.get("corner_bias", 0.0) + lr * corner_error * 0.12, -2.4, 2.4)
+            corner_boost = float(tactical_matchup.get("corner_boost", 0.0))
+            if abs(corner_boost) > 0.03:
+                weights["tactics_to_corners"] = self._clamp(
+                    weights.get("tactics_to_corners", 1.15) + lr * corner_error * corner_boost * 0.025,
+                    0.20,
+                    2.40,
+                )
 
         actual_outcome = outcome_label(home_goals, away_goals)
         score = f"{home_goals}-{away_goals}"

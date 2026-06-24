@@ -73,8 +73,24 @@ function renderPrediction(data) {
     </article>
     <article class="card wide">
       <h3>Контекст</h3>
+      <p>Турнир: ${escapeHtml(data.match_context?.competition || "FIFA World Cup")}</p>
+      <p>Важность: ${Number(data.match_context?.importance ?? 1).toFixed(2)}, базовая сила состава: ${Number(data.match_context?.lineup_strength_floor ?? 0.92).toFixed(2)}</p>
       <p>${escapeHtml(data.home_team)}: ${contextLine(data.home_context)}</p>
       <p>${escapeHtml(data.away_team)}: ${contextLine(data.away_context)}</p>
+    </article>
+    <article class="card wide">
+      <h3>${escapeHtml(data.home_team)}: тактика</h3>
+      ${tacticsBlock(data.home_tactics)}
+    </article>
+    <article class="card wide">
+      <h3>${escapeHtml(data.away_team)}: тактика</h3>
+      ${tacticsBlock(data.away_tactics)}
+    </article>
+    <article class="card wide">
+      <h3>Тактическая пара</h3>
+      <p>${escapeHtml(data.tactical_matchup?.summary || "")}</p>
+      <p class="sub">${escapeHtml(data.tactical_matchup?.home_route || "")}</p>
+      <p class="sub">${escapeHtml(data.tactical_matchup?.away_route || "")}</p>
     </article>
     <article class="card wide">
       <h3>Качество данных</h3>
@@ -96,7 +112,24 @@ function statsTable(stats) {
 function contextLine(context) {
   const injuries = context.injuries?.length ? `${context.injuries.length} травм/рисков` : "травм не внесено";
   const motivation = context.motivation?.level ?? 0.5;
-  return `мотивация ${motivation}, ${injuries}`;
+  const lineup = context.lineup_strength ?? "World Cup base";
+  return `мотивация ${motivation}, состав ${lineup}, ${injuries}`;
+}
+
+function tacticsBlock(tactics) {
+  return `
+    <p><strong>${escapeHtml(tactics.formation || "unknown")}</strong> · ${escapeHtml(tactics.style || "balanced")}</p>
+    <p class="sub">${escapeHtml(tactics.primary_attack || "mixed attack")} · ${escapeHtml(tactics.defensive_block || "mid")} block</p>
+    <table>
+      <tr><th>Владение</th><td>${percent(tactics.possession_intent)}</td><th>Прессинг</th><td>${percent(tactics.pressing)}</td></tr>
+      <tr><th>Защита</th><td>${percent(tactics.defensive_solidity)}</td><th>Темп</th><td>${percent(tactics.tempo)}</td></tr>
+      <tr><th>Фланги</th><td>${percent(tactics.attack_width)}</td><th>Стандарты</th><td>${percent(tactics.set_piece_threat)}</td></tr>
+    </table>
+  `;
+}
+
+function percent(value) {
+  return `${Math.round(Number(value ?? 0.5) * 100)}%`;
 }
 
 function escapeHtml(value) {

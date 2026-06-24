@@ -1,19 +1,21 @@
 {
   "England": {
     "elo": 1500,
+    "lineup_strength": 0.94,
     "injuries": [],
     "motivation": {
-      "level": 0.55,
-      "notes": ["Стартовая нейтральная оценка. Обновите перед реальным матчем."]
+      "level": 0.95,
+      "notes": ["World Cup mode: high-importance match, first-choice lineup expected unless injuries are entered."]
     },
     "notes": []
   },
   "Ghana": {
     "elo": 1500,
+    "lineup_strength": 0.93,
     "injuries": [],
     "motivation": {
-      "level": 0.5,
-      "notes": ["Стартовая нейтральная оценка. Обновите перед реальным матчем."]
+      "level": 0.95,
+      "notes": ["World Cup mode: high-importance match, first-choice lineup expected unless injuries are entered."]
     },
     "notes": []
   }

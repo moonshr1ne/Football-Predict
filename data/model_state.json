@@ -7,6 +7,10 @@
     "form_to_goals": 0.2,
     "motivation_to_goals": 0.18,
     "injury_to_goals": 0.16,
+    "lineup_to_goals": 0.1,
+    "tactics_to_goals": 0.24,
+    "tactics_to_corners": 1.15,
+    "world_cup_intensity_goals": 0.05,
     "corner_bias": 0.0,
     "goal_scale": 1.0
   },

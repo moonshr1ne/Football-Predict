@@ -6,7 +6,7 @@ import time
 from datetime import date
 
 from .aliases import parse_matchup
-from .context_tools import update_team_context
+from .context_tools import update_team_context, update_team_tactics
 from .autocheck import AutoChecker
 from .data_store import DataStore
 from .learning import OnlineLearner
@@ -54,10 +54,33 @@ def build_parser() -> argparse.ArgumentParser:
     context = subparsers.add_parser("context", help="Добавить травмы, мотивацию и заметки по сборной.")
     context.add_argument("team")
     context.add_argument("--motivation", type=float, help="0..1")
+    context.add_argument("--lineup-strength", type=float, help="0..1, ожидаемая сила состава")
     context.add_argument("--note")
     context.add_argument("--injury", help='Формат: "Игрок:out:0.6"')
     context.add_argument("--clear-injuries", action="store_true")
     context.add_argument("--json", action="store_true")
+
+    tactics = subparsers.add_parser("tactics", help="Обновить схему и стиль игры сборной.")
+    tactics.add_argument("team")
+    tactics.add_argument("--formation")
+    tactics.add_argument("--style")
+    tactics.add_argument("--build-up")
+    tactics.add_argument("--primary-attack")
+    tactics.add_argument("--defensive-block")
+    tactics.add_argument("--possession", type=float, dest="possession_intent")
+    tactics.add_argument("--pressing", type=float)
+    tactics.add_argument("--line-height", type=float)
+    tactics.add_argument("--defense", type=float, dest="defensive_solidity")
+    tactics.add_argument("--width", type=float, dest="attack_width")
+    tactics.add_argument("--central", type=float, dest="central_progression")
+    tactics.add_argument("--directness", type=float)
+    tactics.add_argument("--creation", type=float, dest="chance_creation")
+    tactics.add_argument("--transition-attack", type=float)
+    tactics.add_argument("--transition-defense", type=float)
+    tactics.add_argument("--set-pieces", type=float, dest="set_piece_threat")
+    tactics.add_argument("--tempo", type=float)
+    tactics.add_argument("--note")
+    tactics.add_argument("--json", action="store_true")
 
     serve = subparsers.add_parser("serve", help="Запустить локальный веб-интерфейс.")
     serve.add_argument("--host", default="127.0.0.1")
@@ -177,11 +200,39 @@ def main(argv: list[str] | None = None) -> int:
             store,
             team,
             motivation=args.motivation,
+            lineup_strength=args.lineup_strength,
             note=args.note,
             injury=args.injury,
             clear_injuries=args.clear_injuries,
         )
         print(json.dumps(updated, ensure_ascii=False, indent=2) if args.json else f"Обновил контекст для {team}.")
+        return 0
+
+    if args.command == "tactics":
+        team = store.resolver.resolve(args.team)
+        updated = update_team_tactics(
+            store,
+            team,
+            formation=args.formation,
+            style=args.style,
+            build_up=args.build_up,
+            primary_attack=args.primary_attack,
+            defensive_block=args.defensive_block,
+            possession_intent=args.possession_intent,
+            pressing=args.pressing,
+            line_height=args.line_height,
+            defensive_solidity=args.defensive_solidity,
+            attack_width=args.attack_width,
+            central_progression=args.central_progression,
+            directness=args.directness,
+            chance_creation=args.chance_creation,
+            transition_attack=args.transition_attack,
+            transition_defense=args.transition_defense,
+            set_piece_threat=args.set_piece_threat,
+            tempo=args.tempo,
+            note=args.note,
+        )
+        print(json.dumps(updated, ensure_ascii=False, indent=2) if args.json else f"Обновил тактику для {team}.")
         return 0
 
     if args.command == "serve":
@@ -205,6 +256,9 @@ def _details_text(data: dict) -> str:
         f"xG: {data['home_team']} {data['expected_goals'][data['home_team']]}, {data['away_team']} {data['expected_goals'][data['away_team']]}",
         f"Последние 10: {data['home_team']} {data['home_stats']['wins']}-{data['home_stats']['draws']}-{data['home_stats']['losses']}, "
         f"{data['away_team']} {data['away_stats']['wins']}-{data['away_stats']['draws']}-{data['away_stats']['losses']}",
+        f"Турнир: {data['match_context']['competition']}, важность {data['match_context']['importance']}",
+        f"Тактика: {data['home_team']} {data['home_tactics']['formation']} vs {data['away_team']} {data['away_tactics']['formation']}; "
+        f"{data['tactical_matchup']['summary']}",
     ]
     if data["warnings"]:
         lines.append("Важно: " + " ".join(data["warnings"]))
