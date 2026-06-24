@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -102,10 +103,38 @@ class DataStore:
     def _read_json(self, path: Path, default: Any) -> Any:
         if not path.exists():
             return default
-        return json.loads(path.read_text(encoding="utf-8"))
+        last_error: json.JSONDecodeError | None = None
+        for _ in range(3):
+            text = path.read_text(encoding="utf-8")
+            if text.strip():
+                try:
+                    return json.loads(text)
+                except json.JSONDecodeError as exc:
+                    last_error = exc
+            time.sleep(0.05)
+        if last_error:
+            raise last_error
+        return default
 
     def _write_json(self, path: Path, data: Any) -> None:
-        path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        payload = json.dumps(data, ensure_ascii=False, indent=2)
+        temp_path = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+        try:
+            temp_path.write_text(payload, encoding="utf-8")
+            last_error: PermissionError | None = None
+            for _ in range(8):
+                try:
+                    temp_path.replace(path)
+                    last_error = None
+                    break
+                except PermissionError as exc:
+                    last_error = exc
+                    time.sleep(0.05)
+            if last_error:
+                raise last_error
+        finally:
+            if temp_path.exists():
+                temp_path.unlink()
 
     def load_matches(self) -> list[MatchRecord]:
         return [MatchRecord.from_dict(item) for item in self._read_json(self.matches_path, [])]

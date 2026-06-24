@@ -1,10 +1,10 @@
 {
-  "matches": 351,
-  "outcome_accuracy": 0.564,
-  "exact_score_accuracy": 0.148,
-  "corner_mae": 2.31,
+  "matches": 350,
+  "outcome_accuracy": 0.563,
+  "exact_score_accuracy": 0.171,
+  "corner_mae": 2.32,
   "trained_match_keys": 350,
-  "updated_at": "2026-06-24T01:56:16.879671+00:00",
+  "updated_at": "2026-06-24T02:13:44.540499+00:00",
   "by_team": {
     "Albania": {
       "matches": 2,
@@ -395,8 +395,8 @@
       "outcome_accuracy": 0.333
     },
     "Portugal": {
-      "matches": 12,
-      "outcome_accuracy": 0.667
+      "matches": 11,
+      "outcome_accuracy": 0.636
     },
     "Puerto Rico": {
       "matches": 2,
@@ -507,8 +507,8 @@
       "outcome_accuracy": 0.3
     },
     "Uzbekistan": {
-      "matches": 12,
-      "outcome_accuracy": 0.583
+      "matches": 11,
+      "outcome_accuracy": 0.545
     },
     "Venezuela": {
       "matches": 7,

@@ -1,12 +1,14 @@
+import json
 import shutil
 import tempfile
 import unittest
 from pathlib import Path
 
-from football_predictor.aliases import parse_matchup
+from football_predictor.aliases import has_cyrillic, parse_matchup
 from football_predictor.autocheck import AutoChecker
 from football_predictor.data_store import DataStore
 from football_predictor.learning import OnlineLearner
+from football_predictor.models import TeamStats
 from football_predictor.predictor import MatchPredictor
 from football_predictor.providers import EspnWorldCupProvider
 
@@ -57,6 +59,34 @@ class PredictorTests(unittest.TestCase):
             self.assertFalse(data["away_tactics"]["is_fallback"])
             self.assertNotEqual(data["home_tactics"]["possession_intent"], 0.55)
             self.assertNotEqual(data["away_tactics"]["possession_intent"], 0.55)
+
+    def test_all_world_cup_participants_have_russian_aliases(self):
+        data_dir = Path(__file__).resolve().parents[1] / "data"
+        participants = json.loads((data_dir / "participants.json").read_text(encoding="utf-8"))
+        aliases = json.loads((data_dir / "team_aliases.json").read_text(encoding="utf-8"))
+        missing = [
+            item["team"]
+            for item in participants
+            if item["team"] not in aliases or not any(has_cyrillic(alias) for alias in aliases[item["team"]])
+        ]
+        self.assertEqual(missing, [])
+
+    def test_unknown_russian_team_does_not_fallback_silently(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            with self.assertRaisesRegex(ValueError, "Не распознал"):
+                parse_matchup("Нарния, Гана", store.resolver)
+
+    def test_exact_scores_can_use_learned_score_frequency(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            state = store.load_model_state()
+            state["history"] = [{"actual_outcome": "П1", "actual_score": "2-0"} for _ in range(80)]
+            store.save_model_state(state)
+            home_stats = TeamStats(team="Home", sample_size=10, wins=7, draws=2, losses=1, clean_sheets=6)
+            away_stats = TeamStats(team="Away", sample_size=10, wins=2, draws=2, losses=6, failed_to_score=4)
+            scores = MatchPredictor(store)._top_scores(1.35, 0.55, "П1", home_stats, away_stats)
+            self.assertIn("2-0", scores)
 
     def test_learning_records_review(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

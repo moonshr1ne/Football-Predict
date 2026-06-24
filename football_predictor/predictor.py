@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+from collections import Counter
 from dataclasses import dataclass
 from typing import Any
 
@@ -122,7 +123,7 @@ class MatchPredictor:
         market_pick = max(probabilities, key=probabilities.get)
         confidence = probabilities[market_pick]
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
-        exact_scores = self._top_scores(home_xg, away_xg, market_pick, limit=2)
+        exact_scores = self._top_scores(home_xg, away_xg, market_pick, home_stats, away_stats, limit=2)
 
         prediction = Prediction(
             home_team=home_team,
@@ -225,21 +226,99 @@ class MatchPredictor:
         total = home_win + draw + away_win
         return home_win / total, draw / total, away_win / total
 
-    def _top_scores(self, home_xg: float, away_xg: float, market_pick: str, limit: int = 2) -> list[str]:
+    def _top_scores(
+        self,
+        home_xg: float,
+        away_xg: float,
+        market_pick: str,
+        home_stats: TeamStats,
+        away_stats: TeamStats,
+        limit: int = 2,
+    ) -> list[str]:
+        score_counts = self._historical_score_counts(market_pick)
         grid = []
-        for home_goals in range(6):
-            for away_goals in range(6):
-                if market_pick == "П1" and home_goals <= away_goals:
-                    continue
-                if market_pick == "П2" and home_goals >= away_goals:
-                    continue
-                if market_pick == "X" and home_goals != away_goals:
-                    continue
-                probability = self._poisson(home_goals, home_xg) * self._poisson(away_goals, away_xg)
-                grid.append((probability, f"{home_goals}-{away_goals}"))
+        candidates = self._candidate_scores(market_pick)
+        candidate_count = len(candidates)
+        for home_goals, away_goals in candidates:
+            if market_pick == "П1" and home_goals <= away_goals:
+                continue
+            if market_pick == "П2" and home_goals >= away_goals:
+                continue
+            if market_pick == "X" and home_goals != away_goals:
+                continue
+            probability = (
+                self._poisson(home_goals, home_xg)
+                * self._poisson(away_goals, away_xg)
+                * self._empirical_score_factor(f"{home_goals}-{away_goals}", score_counts, candidate_count)
+                * self._team_zero_factor(home_goals, away_goals, home_stats, away_stats)
+                * self._tournament_total_factor(home_goals, away_goals, home_xg + away_xg)
+            )
+            grid.append((probability, f"{home_goals}-{away_goals}"))
         if not grid:
             return ["1-1", "0-0"][:limit]
         return [score for _, score in sorted(grid, reverse=True)[:limit]]
+
+    @staticmethod
+    def _candidate_scores(market_pick: str) -> list[tuple[int, int]]:
+        scores = []
+        for home_goals in range(7):
+            for away_goals in range(7):
+                if market_pick == "П1" and home_goals > away_goals:
+                    scores.append((home_goals, away_goals))
+                elif market_pick == "П2" and away_goals > home_goals:
+                    scores.append((home_goals, away_goals))
+                elif market_pick == "X" and home_goals == away_goals:
+                    scores.append((home_goals, away_goals))
+        return scores
+
+    def _historical_score_counts(self, market_pick: str) -> Counter[str]:
+        history = self.store.load_model_state().get("history", [])
+        return Counter(
+            item.get("actual_score")
+            for item in history
+            if item.get("actual_outcome") == market_pick and item.get("actual_score")
+        )
+
+    @staticmethod
+    def _empirical_score_factor(score: str, score_counts: Counter[str], candidate_count: int) -> float:
+        if not score_counts:
+            return 1.0
+        total = sum(score_counts.values())
+        smoothing = 0.35
+        prior = (score_counts.get(score, 0) + smoothing) / (total + smoothing * max(candidate_count, 1))
+        average_prior = 1.0 / max(candidate_count, 1)
+        return max(0.70, min(2.60, 0.80 + 0.55 * (prior / average_prior)))
+
+    @staticmethod
+    def _team_zero_factor(
+        home_goals: int,
+        away_goals: int,
+        home_stats: TeamStats,
+        away_stats: TeamStats,
+    ) -> float:
+        home_zero = MatchPredictor._zero_goal_probability(home_stats, away_stats)
+        away_zero = MatchPredictor._zero_goal_probability(away_stats, home_stats)
+        factor = 1.0
+        factor *= 0.74 + (home_zero if home_goals == 0 else 1.0 - home_zero)
+        factor *= 0.74 + (away_zero if away_goals == 0 else 1.0 - away_zero)
+        return max(0.64, min(1.42, factor))
+
+    @staticmethod
+    def _zero_goal_probability(attacking: TeamStats, defending: TeamStats) -> float:
+        attacking_blank = attacking.failed_to_score / attacking.sample_size if attacking.sample_size else 0.25
+        defending_clean = defending.clean_sheets / defending.sample_size if defending.sample_size else 0.25
+        return max(0.05, min(0.72, 0.5 * attacking_blank + 0.5 * defending_clean))
+
+    @staticmethod
+    def _tournament_total_factor(home_goals: int, away_goals: int, total_xg: float) -> float:
+        total_goals = home_goals + away_goals
+        if total_xg < 2.15 and total_goals <= 2:
+            return 1.08
+        if total_xg > 3.15 and total_goals >= 3:
+            return 1.06
+        if total_goals >= 5 and total_xg < 2.7:
+            return 0.72
+        return 1.0
 
     @staticmethod
     def _poisson(k: int, rate: float) -> float:

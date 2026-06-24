@@ -14,6 +14,10 @@ def normalize_name(value: str) -> str:
     return value.strip()
 
 
+def has_cyrillic(value: str) -> bool:
+    return any("а" <= char.casefold() <= "я" or char in "ёЁ" for char in value)
+
+
 class TeamResolver:
     def __init__(self, alias_path: Path):
         self.alias_path = alias_path
@@ -29,12 +33,31 @@ class TeamResolver:
         return aliases
 
     def resolve(self, value: str) -> str:
+        resolved, _ = self.resolve_with_status(value)
+        return resolved
+
+    def resolve_with_status(self, value: str) -> tuple[str, bool]:
         normalized = normalize_name(value)
-        return self.aliases.get(normalized, value.strip().strip("'\"`’‘“”"))
+        if normalized in self.aliases:
+            return self.aliases[normalized], True
+        return value.strip().strip("'\"`’‘“”"), False
 
 
 def parse_matchup(text: str, resolver: TeamResolver) -> tuple[str, str]:
     parts = [part.strip() for part in re.split(r"\s*(?:,| vs | v | - |—|–)\s*", text, maxsplit=1, flags=re.I)]
     if len(parts) != 2 or not parts[0] or not parts[1]:
         raise ValueError('Введите пару команд, например: "Англия, Гана"')
-    return resolver.resolve(parts[0]), resolver.resolve(parts[1])
+    resolved: list[str] = []
+    unknown: list[str] = []
+    for part in parts:
+        team, known = resolver.resolve_with_status(part)
+        if not known and has_cyrillic(part):
+            unknown.append(part)
+        resolved.append(team)
+    if unknown:
+        raise ValueError(
+            "Не распознал сборную: "
+            + ", ".join(unknown)
+            + ". Используйте название из списка участников ЧМ или добавьте алиас в data/team_aliases.json."
+        )
+    return resolved[0], resolved[1]

@@ -4,11 +4,11 @@
   "recent_imported": 476,
   "backtest": {
     "matches": 350,
-    "outcome_accuracy": 0.577,
-    "exact_score_accuracy": 0.177,
-    "corner_mae": 1.21,
+    "outcome_accuracy": 0.563,
+    "exact_score_accuracy": 0.171,
+    "corner_mae": 2.32,
     "trained_match_keys": 350,
-    "updated_at": "2026-06-24T01:32:32.079945+00:00",
+    "updated_at": "2026-06-24T02:10:33.928105+00:00",
     "by_team": {
       "Albania": {
         "matches": 2,
@@ -40,7 +40,7 @@
       },
       "Australia": {
         "matches": 10,
-        "outcome_accuracy": 0.5
+        "outcome_accuracy": 0.4
       },
       "Austria": {
         "matches": 10,
@@ -152,7 +152,7 @@
       },
       "Czechia": {
         "matches": 10,
-        "outcome_accuracy": 0.6
+        "outcome_accuracy": 0.5
       },
       "Denmark": {
         "matches": 3,
@@ -220,7 +220,7 @@
       },
       "Ghana": {
         "matches": 11,
-        "outcome_accuracy": 0.545
+        "outcome_accuracy": 0.455
       },
       "Gibraltar": {
         "matches": 2,
@@ -384,11 +384,11 @@
       },
       "Panama": {
         "matches": 11,
-        "outcome_accuracy": 0.545
+        "outcome_accuracy": 0.455
       },
       "Paraguay": {
         "matches": 10,
-        "outcome_accuracy": 0.7
+        "outcome_accuracy": 0.6
       },
       "Peru": {
         "matches": 5,
@@ -456,7 +456,7 @@
       },
       "South Korea": {
         "matches": 10,
-        "outcome_accuracy": 0.5
+        "outcome_accuracy": 0.4
       },
       "Spain": {
         "matches": 10,
@@ -468,7 +468,7 @@
       },
       "Sweden": {
         "matches": 10,
-        "outcome_accuracy": 0.7
+        "outcome_accuracy": 0.6
       },
       "Switzerland": {
         "matches": 10,
@@ -484,11 +484,11 @@
       },
       "Tunisia": {
         "matches": 12,
-        "outcome_accuracy": 0.5
+        "outcome_accuracy": 0.417
       },
       "Türkiye": {
         "matches": 10,
-        "outcome_accuracy": 0.9
+        "outcome_accuracy": 0.7
       },
       "Uganda": {
         "matches": 1,
