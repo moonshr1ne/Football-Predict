@@ -40,6 +40,10 @@ function renderPrediction(data) {
       <p class="sub">ожидаемый тотал</p>
     </article>
     <article class="card">
+      <h3>Голы</h3>
+      ${goalTotalBlock(data.goal_total)}
+    </article>
+    <article class="card">
       <h3>Точные счета</h3>
       <div class="pill-row">${scorePills(data)}</div>
     </article>
@@ -127,6 +131,24 @@ function marketTable(data) {
   `;
 }
 
+function goalTotalBlock(goalTotal) {
+  if (!goalTotal) {
+    return "<p class='muted'>нет расчета</p>";
+  }
+  const probabilities = goalTotal.probabilities || {};
+  const likely = (goalTotal.most_likely_totals || [])
+    .map((item) => `${escapeHtml(item.goals)} (${probability(item.probability)})`)
+    .join(", ");
+  return `
+    <div class="metric">${Number(goalTotal.expected ?? 0).toFixed(2)}</div>
+    <p class="sub">${escapeHtml(goalTotal.label || "тотал")}</p>
+    <table class="compact">
+      <tr><th>ТБ 2.5</th><td>${probability(probabilities.over_2_5)}</td><th>ТБ 3.5</th><td>${probability(probabilities.over_3_5)}</td></tr>
+      <tr><th>ТБ 4.5</th><td>${probability(probabilities.over_4_5)}</td><th>Чаще всего</th><td>${likely || "нет"}</td></tr>
+    </table>
+  `;
+}
+
 function statsTable(stats) {
   return `
     <table>
@@ -196,7 +218,7 @@ function resultSummaryBlock(data) {
   const predictedScores = scoreListText(predicted.scores || data.exact_score_probabilities || []);
   const predictedLine = `<p><strong>Предикт:</strong> ${escapeHtml(
     predicted.outcome_label || data.market_pick
-  )}; счета ${predictedScores}; угловые ${Number(predicted.corners ?? data.predicted_corners).toFixed(2)}</p>`;
+  )}; счета ${predictedScores}; голы ${Number(predicted.goal_total?.expected ?? data.goal_total?.expected ?? 0).toFixed(2)}; угловые ${Number(predicted.corners ?? data.predicted_corners).toFixed(2)}</p>`;
 
   if (summary.status === "completed" && summary.actual) {
     const cornerText = summary.actual.corners == null ? "угловые: нет данных" : `угловые ${summary.actual.corners}`;

@@ -24,6 +24,7 @@ class Prediction:
     away_win_probability: float
     expected_home_goals: float
     expected_away_goals: float
+    goal_total: dict[str, Any]
     predicted_corners: float
     exact_scores: list[str]
     exact_score_probabilities: list[dict[str, Any]]
@@ -58,6 +59,7 @@ class Prediction:
                 self.home_team: round(self.expected_home_goals, 2),
                 self.away_team: round(self.expected_away_goals, 2),
             },
+            "goal_total": self.goal_total,
             "predicted_corners": round(self.predicted_corners, 2),
             "exact_scores": self.exact_scores,
             "exact_score_probabilities": self.exact_score_probabilities,
@@ -132,12 +134,14 @@ class MatchPredictor:
         confidence = probabilities[market_pick]
         markets = self._markets(home_team, away_team, probabilities)
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
+        goal_total = self._goal_total_forecast(home_xg, away_xg)
         exact_score_probabilities = self._top_scores(
             home_xg,
             away_xg,
             market_pick,
             home_stats,
             away_stats,
+            goal_total,
             limit=3,
         )
         exact_scores = [item["score"] for item in exact_score_probabilities]
@@ -145,6 +149,7 @@ class MatchPredictor:
             market_pick,
             exact_score_probabilities,
             corners,
+            goal_total,
             fixture,
             home_team,
             away_team,
@@ -162,6 +167,7 @@ class MatchPredictor:
             away_win_probability=away_win,
             expected_home_goals=home_xg,
             expected_away_goals=away_xg,
+            goal_total=goal_total,
             predicted_corners=corners,
             exact_scores=exact_scores,
             exact_score_probabilities=exact_score_probabilities,
@@ -202,6 +208,7 @@ class MatchPredictor:
         elo_away = float(away_context.get("elo") or 1500)
         elo_diff = max(-1.4, min(1.4, (elo_home - elo_away) / 400))
         form_diff = max(-1.2, min(1.2, home_stats.points_per_match - away_stats.points_per_match))
+        class_diff = self._team_class_score(home_stats) - self._team_class_score(away_stats)
         motivation_diff = self._motivation(home_context, match_context) - self._motivation(away_context, match_context)
         injury_diff = self._injury_impact(home_context) - self._injury_impact(away_context)
         lineup_diff = self._lineup_strength(home_context, match_context) - self._lineup_strength(away_context, match_context)
@@ -213,6 +220,7 @@ class MatchPredictor:
         adjustment = (
             weights["elo_to_goals"] * elo_diff
             + weights["form_to_goals"] * form_diff
+            + weights.get("class_to_goals", 0.10) * class_diff
             + weights["motivation_to_goals"] * motivation_diff
             + weights.get("lineup_to_goals", 0.10) * lineup_diff
             + weights.get("tactics_to_goals", 0.24) * tactics_diff
@@ -261,15 +269,17 @@ class MatchPredictor:
         market_pick: str,
         home_stats: TeamStats,
         away_stats: TeamStats,
+        goal_total: dict[str, Any] | None = None,
         limit: int = 3,
     ) -> list[dict[str, Any]]:
         score_counts_by_outcome = {
             outcome: self._historical_score_counts(outcome) for outcome in ("П1", "X", "П2")
         }
         candidate_counts = {outcome: len(self._candidate_scores(outcome)) for outcome in ("П1", "X", "П2")}
+        goal_total = goal_total or self._goal_total_forecast(home_xg, away_xg)
         grid = []
-        for home_goals in range(7):
-            for away_goals in range(7):
+        for home_goals in range(9):
+            for away_goals in range(9):
                 score = f"{home_goals}-{away_goals}"
                 outcome = self._outcome_from_score(home_goals, away_goals)
                 weight = (
@@ -282,6 +292,8 @@ class MatchPredictor:
                     )
                     * self._team_zero_factor(home_goals, away_goals, home_stats, away_stats)
                     * self._tournament_total_factor(home_goals, away_goals, home_xg + away_xg)
+                    * self._score_total_factor(home_goals, away_goals, home_xg, away_xg, goal_total)
+                    * self._mismatch_score_factor(home_goals, away_goals, home_xg, away_xg, market_pick)
                 )
                 grid.append((weight, outcome, score))
 
@@ -290,10 +302,190 @@ class MatchPredictor:
         if not picked or total_weight <= 0:
             fallback = ["1-1", "0-0", "2-2"] if market_pick == "X" else ["1-0", "2-1", "2-0"]
             return [{"score": score, "probability": 0.0} for score in fallback[:limit]]
+        selected = self._select_score_mix(picked, market_pick, home_xg, away_xg, goal_total, limit)
         return [
             {"score": score, "probability": round(weight / total_weight, 4)}
-            for weight, score in sorted(picked, reverse=True)[:limit]
+            for weight, score in selected
         ]
+
+    def _goal_total_forecast(self, home_xg: float, away_xg: float) -> dict[str, Any]:
+        total_xg = home_xg + away_xg
+        total_probs = self._total_goal_probabilities(total_xg, max_goals=9)
+        over_1_5 = sum(prob for goals, prob in total_probs.items() if goals >= 2)
+        over_2_5 = sum(prob for goals, prob in total_probs.items() if goals >= 3)
+        over_3_5 = sum(prob for goals, prob in total_probs.items() if goals >= 4)
+        over_4_5 = sum(prob for goals, prob in total_probs.items() if goals >= 5)
+        buckets = {
+            "0-1": sum(prob for goals, prob in total_probs.items() if goals <= 1),
+            "2-3": sum(prob for goals, prob in total_probs.items() if 2 <= goals <= 3),
+            "4+": over_3_5,
+            "5+": over_4_5,
+        }
+        top_totals = sorted(total_probs.items(), key=lambda item: item[1], reverse=True)[:3]
+        if over_3_5 >= 0.44:
+            label = "верховой матч"
+        elif over_2_5 >= 0.58:
+            label = "скорее 3+ гола"
+        elif buckets["0-1"] >= 0.34:
+            label = "низовой матч"
+        else:
+            label = "умеренный тотал"
+        return {
+            "expected": round(total_xg, 2),
+            "label": label,
+            "most_likely_totals": [
+                {"goals": goals, "probability": round(probability, 4)}
+                for goals, probability in top_totals
+            ],
+            "probabilities": {
+                "under_1_5": round(buckets["0-1"], 4),
+                "over_1_5": round(over_1_5, 4),
+                "over_2_5": round(over_2_5, 4),
+                "over_3_5": round(over_3_5, 4),
+                "over_4_5": round(over_4_5, 4),
+            },
+            "buckets": {key: round(value, 4) for key, value in buckets.items()},
+        }
+
+    def _total_goal_probabilities(self, total_xg: float, max_goals: int = 9) -> dict[int, float]:
+        probabilities = {goals: self._poisson(goals, total_xg) for goals in range(max_goals)}
+        probabilities[max_goals] = max(0.0, 1.0 - sum(probabilities.values()))
+        return probabilities
+
+    @staticmethod
+    def _score_total_factor(
+        home_goals: int,
+        away_goals: int,
+        home_xg: float,
+        away_xg: float,
+        goal_total: dict[str, Any],
+    ) -> float:
+        return 1.0
+
+    @staticmethod
+    def _mismatch_score_factor(
+        home_goals: int,
+        away_goals: int,
+        home_xg: float,
+        away_xg: float,
+        market_pick: str,
+    ) -> float:
+        favorite_xg = max(home_xg, away_xg)
+        underdog_xg = min(home_xg, away_xg)
+        margin = abs(home_xg - away_xg)
+        if favorite_xg < 2.05 or margin < 1.25:
+            return 1.0
+
+        favorite_goals = home_goals if home_xg >= away_xg else away_goals
+        underdog_goals = away_goals if home_xg >= away_xg else home_goals
+        expected_pick = "П1" if home_xg >= away_xg else "П2"
+        if market_pick != expected_pick:
+            return 1.0
+
+        factor = 1.0
+        if underdog_xg <= 0.85 and underdog_goals == 0:
+            if favorite_goals == 1:
+                factor *= 0.66
+            elif favorite_goals == 2:
+                factor *= 1.02
+            elif favorite_goals >= 3:
+                factor *= 1.30
+        if favorite_xg >= 2.35 and favorite_goals >= 3:
+            factor *= 1.12
+        return max(0.55, min(1.70, factor))
+
+    def _select_score_mix(
+        self,
+        picked: list[tuple[float, str]],
+        market_pick: str,
+        home_xg: float,
+        away_xg: float,
+        goal_total: dict[str, Any],
+        limit: int,
+    ) -> list[tuple[float, str]]:
+        ordered = sorted(picked, reverse=True)
+        selected = ordered[:limit]
+        probabilities = goal_total.get("probabilities", {})
+        over_3_5 = float(probabilities.get("over_3_5", 0.0))
+        over_4_5 = float(probabilities.get("over_4_5", 0.0))
+        btts = (1.0 - math.exp(-home_xg)) * (1.0 - math.exp(-away_xg))
+
+        if over_3_5 >= 0.38 and not any(self._score_total(score) >= 4 for _, score in selected):
+            pool = ordered
+            if btts >= 0.56:
+                pool = [item for item in ordered if self._both_score(item[1]) and self._score_total(item[1]) >= 4] or ordered
+            high = next((item for item in pool if self._score_total(item[1]) >= 4), None)
+            selected = self._include_score_candidate(selected, high)
+
+        if over_4_5 >= 0.26 and btts >= 0.60 and not any(self._score_total(score) >= 5 for _, score in selected):
+            high5_pool = [
+                item
+                for item in ordered
+                if self._both_score(item[1]) and self._score_total(item[1]) >= 5
+            ]
+            high5 = self._competitive_high_total_candidate(high5_pool, min(home_xg, away_xg))
+            selected = self._include_score_candidate(selected, high5)
+
+        favorite_xg = max(home_xg, away_xg)
+        underdog_xg = min(home_xg, away_xg)
+        if favorite_xg >= 2.25 and underdog_xg <= 0.85:
+            clean_big = next(
+                (
+                    item
+                    for item in ordered
+                    if self._is_big_clean_favorite_score(item[1], home_xg >= away_xg, market_pick)
+                ),
+                None,
+            )
+            selected = self._include_score_candidate(selected, clean_big)
+
+        return sorted(selected, reverse=True)[:limit]
+
+    @staticmethod
+    def _include_score_candidate(
+        selected: list[tuple[float, str]],
+        candidate: tuple[float, str] | None,
+    ) -> list[tuple[float, str]]:
+        if candidate is None or any(score == candidate[1] for _, score in selected):
+            return selected
+        next_selected = selected[:]
+        next_selected[-1] = candidate
+        return next_selected
+
+    @staticmethod
+    def _competitive_high_total_candidate(
+        candidates: list[tuple[float, str]],
+        underdog_xg: float,
+    ) -> tuple[float, str] | None:
+        if not candidates:
+            return None
+        best = candidates[0]
+        if underdog_xg < 0.95:
+            return best
+        for candidate in candidates:
+            home, away = [int(value) for value in candidate[1].split("-")]
+            if min(home, away) >= 2 and candidate[0] >= best[0] * 0.70:
+                return candidate
+        return best
+
+    @staticmethod
+    def _score_total(score: str) -> int:
+        home, away = score.split("-")
+        return int(home) + int(away)
+
+    @staticmethod
+    def _both_score(score: str) -> bool:
+        home, away = score.split("-")
+        return int(home) > 0 and int(away) > 0
+
+    @staticmethod
+    def _is_big_clean_favorite_score(score: str, home_favorite: bool, market_pick: str) -> bool:
+        home, away = [int(value) for value in score.split("-")]
+        if home_favorite and market_pick == "П1":
+            return home >= 3 and away == 0
+        if not home_favorite and market_pick == "П2":
+            return away >= 3 and home == 0
+        return False
 
     @staticmethod
     def _outcome_from_score(home_goals: int, away_goals: int) -> str:
@@ -321,6 +513,7 @@ class MatchPredictor:
         market_pick: str,
         exact_score_probabilities: list[dict[str, Any]],
         predicted_corners: float,
+        goal_total: dict[str, Any],
         fixture: dict[str, Any] | None,
         home_team: str,
         away_team: str,
@@ -330,6 +523,7 @@ class MatchPredictor:
             "outcome_label": self._market_label(market_pick, home_team, away_team),
             "scores": exact_score_probabilities,
             "corners": round(predicted_corners, 2),
+            "goal_total": goal_total,
         }
         if not fixture:
             return {
@@ -396,8 +590,8 @@ class MatchPredictor:
     @staticmethod
     def _candidate_scores(market_pick: str) -> list[tuple[int, int]]:
         scores = []
-        for home_goals in range(7):
-            for away_goals in range(7):
+        for home_goals in range(9):
+            for away_goals in range(9):
                 if market_pick == "П1" and home_goals > away_goals:
                     scores.append((home_goals, away_goals))
                 elif market_pick == "П2" and away_goals > home_goals:
@@ -423,6 +617,19 @@ class MatchPredictor:
         prior = (score_counts.get(score, 0) + smoothing) / (total + smoothing * max(candidate_count, 1))
         average_prior = 1.0 / max(candidate_count, 1)
         return max(0.35, min(6.00, 0.50 + 1.30 * (prior / average_prior)))
+
+    @staticmethod
+    def _team_class_score(stats: TeamStats) -> float:
+        if not stats.sample_size:
+            return 0.0
+        goal_diff = (stats.goals_for - stats.goals_against) / stats.sample_size
+        clean_rate = stats.clean_sheets / stats.sample_size
+        blank_rate = stats.failed_to_score / stats.sample_size
+        attack = stats.avg_goals_for - 1.25
+        defense = 1.15 - stats.avg_goals_against
+        points = stats.points_per_match - 1.55
+        score = 0.34 * goal_diff + 0.22 * attack + 0.18 * defense + 0.16 * points + 0.12 * clean_rate - 0.14 * blank_rate
+        return max(-1.6, min(1.6, score))
 
     @staticmethod
     def _team_zero_factor(

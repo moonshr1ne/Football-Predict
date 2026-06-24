@@ -319,9 +319,19 @@ def _details_text(data: dict) -> str:
         item["score"] if item.get("probability") is None else f"{item['score']} ({float(item['probability']):.1%})"
         for item in score_items
     )
+    goal_total = data.get("goal_total", {})
+    goal_probabilities = goal_total.get("probabilities", {})
+    likely_totals = ", ".join(
+        f"{item['goals']} ({float(item['probability']):.1%})"
+        for item in goal_total.get("most_likely_totals", [])
+    )
     lines = [
         f"Вероятности: {market_text}",
         f"Точные счета: {score_text}",
+        f"Голы: ожидание {float(goal_total.get('expected', 0)):.2f}, "
+        f"ТБ2.5 {float(goal_probabilities.get('over_2_5', 0)):.1%}, "
+        f"ТБ3.5 {float(goal_probabilities.get('over_3_5', 0)):.1%}; "
+        f"чаще всего {likely_totals or 'нет'}",
         f"xG: {data['home_team']} {data['expected_goals'][data['home_team']]}, {data['away_team']} {data['expected_goals'][data['away_team']]}",
         f"Последние 10: {data['home_team']} {data['home_stats']['wins']}-{data['home_stats']['draws']}-{data['home_stats']['losses']}, "
         f"{data['away_team']} {data['away_stats']['wins']}-{data['away_stats']['draws']}-{data['away_stats']['losses']}",

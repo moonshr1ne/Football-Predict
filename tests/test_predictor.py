@@ -38,6 +38,8 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("formation", prediction.home_tactics)
             self.assertIn("tactical_matchup", prediction.to_dict())
             self.assertIn("result_summary", prediction.to_dict())
+            self.assertIn("goal_total", prediction.to_dict())
+            self.assertIn("over_2_5", prediction.to_dict()["goal_total"]["probabilities"])
             self.assertIn("data_quality", prediction.to_dict())
             for item in prediction.exact_score_probabilities:
                 self.assertGreaterEqual(item["probability"], 0)
@@ -94,6 +96,26 @@ class PredictorTests(unittest.TestCase):
             away_stats = TeamStats(team="Away", sample_size=10, wins=2, draws=2, losses=6, failed_to_score=4)
             scores = [item["score"] for item in MatchPredictor(store)._top_scores(1.35, 0.55, "П1", home_stats, away_stats)]
             self.assertIn("2-0", scores)
+
+    def test_high_total_matchup_gets_high_score_candidate(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            prediction = MatchPredictor(store).predict("Norway", "Senegal", remember=False)
+            score_totals = [sum(map(int, score.split("-"))) for score in prediction.exact_scores]
+            self.assertGreaterEqual(prediction.goal_total["probabilities"]["over_3_5"], 0.33)
+            self.assertTrue(any(total >= 4 for total in score_totals))
+
+    def test_dominant_favorite_can_predict_three_nil(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            prediction = MatchPredictor(store).predict("France", "Iraq", remember=False)
+            self.assertIn("3-0", prediction.exact_scores)
+
+    def test_strong_favorite_keeps_two_nil_candidate(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            prediction = MatchPredictor(store).predict("Argentina", "Algeria", remember=False)
+            self.assertIn("2-0", prediction.exact_scores)
 
     def test_result_summary_completed_fixture(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

@@ -18,6 +18,7 @@ DEFAULT_MODEL_STATE = {
         "home_advantage_goals": 0.18,
         "elo_to_goals": 0.22,
         "form_to_goals": 0.20,
+        "class_to_goals": 0.10,
         "motivation_to_goals": 0.18,
         "injury_to_goals": 0.16,
         "lineup_to_goals": 0.10,
@@ -104,14 +105,23 @@ class DataStore:
         if not path.exists():
             return default
         last_error: json.JSONDecodeError | None = None
-        for _ in range(3):
-            text = path.read_text(encoding="utf-8")
+        permission_error: PermissionError | None = None
+        for _ in range(8):
+            try:
+                text = path.read_text(encoding="utf-8")
+                permission_error = None
+            except PermissionError as exc:
+                permission_error = exc
+                time.sleep(0.05)
+                continue
             if text.strip():
                 try:
                     return json.loads(text)
                 except json.JSONDecodeError as exc:
                     last_error = exc
             time.sleep(0.05)
+        if permission_error:
+            raise permission_error
         if last_error:
             raise last_error
         return default
@@ -122,14 +132,14 @@ class DataStore:
         try:
             temp_path.write_text(payload, encoding="utf-8")
             last_error: PermissionError | None = None
-            for _ in range(8):
+            for attempt in range(40):
                 try:
                     temp_path.replace(path)
                     last_error = None
                     break
                 except PermissionError as exc:
                     last_error = exc
-                    time.sleep(0.05)
+                    time.sleep(min(0.25, 0.03 + attempt * 0.01))
             if last_error:
                 raise last_error
         finally:
