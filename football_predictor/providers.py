@@ -16,6 +16,20 @@ class ProviderError(RuntimeError):
 
 FINISHED_STATES = {"post"}
 FINISHED_STATUS_NAMES = {"STATUS_FINAL", "STATUS_FULL_TIME", "FT", "AET", "PEN"}
+LIVE_STATES = {"in"}
+LIVE_STATUS_NAMES = {
+    "STATUS_FIRST_HALF",
+    "STATUS_HALFTIME",
+    "STATUS_SECOND_HALF",
+    "STATUS_EXTRA_TIME",
+    "STATUS_PENALTY_SHOOTOUT",
+    "1H",
+    "HT",
+    "2H",
+    "ET",
+    "P",
+    "LIVE",
+}
 
 
 def normalize_provider_name(value: str) -> str:
@@ -184,6 +198,16 @@ class EspnWorldCupProvider:
         completed = bool(status_type.get("completed")) or status_type.get("state") in FINISHED_STATES
         status_name = status_type.get("name") or status_type.get("shortDetail") or status_type.get("description") or ""
         completed = completed or status_name in FINISHED_STATUS_NAMES
+        status_detail = status_type.get("detail") or status_type.get("shortDetail") or ""
+        in_progress = (
+            not completed
+            and (
+                status_type.get("state") in LIVE_STATES
+                or status_name in LIVE_STATUS_NAMES
+                or bool(re.search(r"\d+\s*'", str(status_detail)))
+            )
+        )
+        has_score = completed or in_progress
 
         event_date = event.get("date") or competition.get("date") or ""
         actual_home = self._home_away_competitor(competitors, "home")
@@ -204,8 +228,8 @@ class EspnWorldCupProvider:
             "away_team": away_team,
             "actual_home_team": self._team_name(actual_home) if actual_home else None,
             "actual_away_team": self._team_name(actual_away) if actual_away else None,
-            "home_goals": self._score(requested_home) if completed else None,
-            "away_goals": self._score(requested_away) if completed else None,
+            "home_goals": self._score(requested_home) if has_score else None,
+            "away_goals": self._score(requested_away) if has_score else None,
             "home_corners": requested_home_stats.get("wonCorners"),
             "away_corners": requested_away_stats.get("wonCorners"),
             "home_possession": requested_home_stats.get("possessionPct"),
@@ -217,8 +241,9 @@ class EspnWorldCupProvider:
             "home_fouls": requested_home_stats.get("foulsCommitted"),
             "away_fouls": requested_away_stats.get("foulsCommitted"),
             "completed": completed,
+            "in_progress": in_progress,
             "status": status_name,
-            "status_detail": status_type.get("detail") or status_type.get("shortDetail") or "",
+            "status_detail": status_detail,
             "competition": competition_label,
             "source": source,
         }

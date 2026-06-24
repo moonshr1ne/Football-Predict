@@ -306,8 +306,22 @@ def _sync_prediction_warning(sync_info: dict) -> str:
 
 
 def _details_text(data: dict) -> str:
+    markets = data.get("markets") or [
+        {"code": "П1", "label": f"Победа {data['home_team']}", "probability": data["probabilities"]["П1"]},
+        {"code": "X", "label": "Ничья", "probability": data["probabilities"]["X"]},
+        {"code": "П2", "label": f"Победа {data['away_team']}", "probability": data["probabilities"]["П2"]},
+    ]
+    market_text = ", ".join(f"{item['code']} {float(item['probability']):.1%}" for item in markets)
+    score_items = data.get("exact_score_probabilities") or [
+        {"score": score, "probability": None} for score in data.get("exact_scores", [])
+    ]
+    score_text = ", ".join(
+        item["score"] if item.get("probability") is None else f"{item['score']} ({float(item['probability']):.1%})"
+        for item in score_items
+    )
     lines = [
-        f"Вероятности: П1 {data['probabilities']['П1']:.1%}, X {data['probabilities']['X']:.1%}, П2 {data['probabilities']['П2']:.1%}",
+        f"Вероятности: {market_text}",
+        f"Точные счета: {score_text}",
         f"xG: {data['home_team']} {data['expected_goals'][data['home_team']]}, {data['away_team']} {data['expected_goals'][data['away_team']]}",
         f"Последние 10: {data['home_team']} {data['home_stats']['wins']}-{data['home_stats']['draws']}-{data['home_stats']['losses']}, "
         f"{data['away_team']} {data['away_stats']['wins']}-{data['away_stats']['draws']}-{data['away_stats']['losses']}",
@@ -327,6 +341,21 @@ def _details_text(data: dict) -> str:
     if data.get("fixture"):
         fixture = data["fixture"]
         lines.insert(0, f"Матч найден: {fixture['date']} ({fixture.get('status_detail') or fixture.get('status') or 'scheduled'})")
+    if data.get("result_summary"):
+        summary = data["result_summary"]
+        predicted = summary.get("predicted", {})
+        actual = summary.get("actual")
+        lines.append(
+            f"Предикт: {predicted.get('outcome_label', data['market_pick'])}; угловые {predicted.get('corners', data['predicted_corners'])}."
+        )
+        if summary.get("status") == "completed" and actual:
+            lines.append(f"Факт: {actual.get('outcome_label')} {actual.get('score')}.")
+        elif summary.get("status") == "live":
+            lines.append(f"Факт: матч идет{'; счет ' + actual.get('score') if actual and actual.get('score') else ''}.")
+        elif summary.get("status") == "scheduled":
+            lines.append("Факт: матч еще не начался.")
+        else:
+            lines.append(f"Факт: {summary.get('message', 'настоящий счет пока неизвестен.')}")
     if data["warnings"]:
         lines.append("Важно: " + " ".join(data["warnings"]))
     return "\n".join(lines)

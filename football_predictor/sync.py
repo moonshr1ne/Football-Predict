@@ -242,6 +242,15 @@ class WorldCupDataSync:
         outcome_hits = sum(1 for item in history if item.get("outcome_hit"))
         score_hits = sum(1 for item in history if item.get("score_hit"))
         corner_errors = [abs(float(item["corner_error"])) for item in history if item.get("corner_error") is not None]
+        outcome_accuracy = outcome_hits / total
+        exact_score_accuracy = score_hits / total
+        corner_mae = None if not corner_errors else sum(corner_errors) / len(corner_errors)
+        corner_within_one_rate = None if not corner_errors else sum(1 for error in corner_errors if error <= 1.0) / len(corner_errors)
+        targets = {
+            "outcome_accuracy": 0.75,
+            "exact_score_accuracy": 0.30,
+            "corner_mae": 1.0,
+        }
         by_team: dict[str, dict[str, int]] = defaultdict(lambda: {"matches": 0, "outcome_hits": 0})
         for item in history:
             for team in (item.get("home_team"), item.get("away_team")):
@@ -253,9 +262,16 @@ class WorldCupDataSync:
 
         backtest = {
             "matches": total,
-            "outcome_accuracy": round(outcome_hits / total, 3),
-            "exact_score_accuracy": round(score_hits / total, 3),
-            "corner_mae": None if not corner_errors else round(sum(corner_errors) / len(corner_errors), 2),
+            "outcome_accuracy": round(outcome_accuracy, 3),
+            "exact_score_accuracy": round(exact_score_accuracy, 3),
+            "corner_mae": None if corner_mae is None else round(corner_mae, 2),
+            "corner_within_one_rate": None if corner_within_one_rate is None else round(corner_within_one_rate, 3),
+            "targets": targets,
+            "target_status": {
+                "outcome_accuracy": outcome_accuracy >= targets["outcome_accuracy"],
+                "exact_score_accuracy": exact_score_accuracy >= targets["exact_score_accuracy"],
+                "corner_mae": corner_mae is not None and corner_mae <= targets["corner_mae"],
+            },
             "trained_match_keys": len(state.get("trained_match_keys", [])),
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "by_team": {

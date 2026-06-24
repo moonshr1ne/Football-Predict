@@ -154,6 +154,13 @@ button:hover {
   font-weight: 700;
 }
 
+.pill-prob {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 6px;
+}
+
 .warn {
   color: var(--warn);
 }
@@ -169,6 +176,11 @@ th {
   padding: 8px 4px;
   border-bottom: 1px solid var(--line);
   text-align: left;
+}
+
+.compact td,
+.compact th {
+  padding: 6px 4px;
 }
 
 @media (max-width: 860px) {

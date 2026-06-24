@@ -41,13 +41,11 @@ function renderPrediction(data) {
     </article>
     <article class="card">
       <h3>Точные счета</h3>
-      <div class="pill-row">${data.exact_scores.map((score) => `<span class="pill">${score}</span>`).join("")}</div>
+      <div class="pill-row">${scorePills(data)}</div>
     </article>
     <article class="card">
       <h3>Вероятности</h3>
-      <p>П1 ${(data.probabilities["П1"] * 100).toFixed(1)}%</p>
-      <p>X ${(data.probabilities.X * 100).toFixed(1)}%</p>
-      <p>П2 ${(data.probabilities["П2"] * 100).toFixed(1)}%</p>
+      ${marketTable(data)}
     </article>
     <article class="card wide">
       <h3>${escapeHtml(data.home_team)}: последние матчи</h3>
@@ -84,6 +82,48 @@ function renderPrediction(data) {
       ${dataQualityBlock(data.data_quality)}
       ${warnings || "<p class='muted'>Предупреждений нет.</p>"}
     </article>
+    <article class="card wide">
+      <h3>Прогноз и факт</h3>
+      ${resultSummaryBlock(data)}
+    </article>
+  `;
+}
+
+function scorePills(data) {
+  const items = data.exact_score_probabilities?.length
+    ? data.exact_score_probabilities
+    : (data.exact_scores || []).map((score) => ({ score, probability: null }));
+  return items
+    .map((item) => {
+      const probabilityText =
+        item.probability == null ? "" : `<span class="pill-prob">${probability(item.probability)}</span>`;
+      return `<span class="pill">${escapeHtml(item.score)}${probabilityText}</span>`;
+    })
+    .join("");
+}
+
+function marketTable(data) {
+  const markets = data.markets?.length
+    ? data.markets
+    : [
+        { code: "П1", label: `Победа ${data.home_team}`, probability: data.probabilities?.["П1"] },
+        { code: "X", label: "Ничья", probability: data.probabilities?.X },
+        { code: "П2", label: `Победа ${data.away_team}`, probability: data.probabilities?.["П2"] },
+      ];
+  return `
+    <table class="compact">
+      ${markets
+        .map(
+          (market) => `
+            <tr>
+              <th>${escapeHtml(market.code)}</th>
+              <td>${escapeHtml(market.label)}</td>
+              <td>${probability(market.probability)}</td>
+            </tr>
+          `
+        )
+        .join("")}
+    </table>
   `;
 }
 
@@ -105,14 +145,29 @@ function dataQualityBlock(quality) {
     return "<p class='muted'>Сводка качества пока не рассчитана.</p>";
   }
   const backtest = quality.backtest || {};
+  const targets = backtest.targets || {};
+  const targetStatus = backtest.target_status || {};
   return `
     <table>
       <tr><th>Общая база</th><td>${percent(quality.score)}</td><th>Участники ЧМ</th><td>${quality.participants || 0}</td></tr>
       <tr><th>Матчи команд</th><td>${quality.home_matches || 0} / ${quality.away_matches || 0}</td><th>Богатые матчи</th><td>${quality.home_rich_matches || 0} / ${quality.away_rich_matches || 0}</td></tr>
       <tr><th>Бэктест</th><td>${backtest.matches || 0} матчей</td><th>Исходы</th><td>${backtest.outcome_accuracy == null ? "нет" : percent(backtest.outcome_accuracy)}</td></tr>
       <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"}</td></tr>
+      <tr><th>Цель исходов</th><td>${targetCell(backtest.outcome_accuracy, targets.outcome_accuracy, targetStatus.outcome_accuracy, "higher")}</td><th>Цель счетов</th><td>${targetCell(backtest.exact_score_accuracy, targets.exact_score_accuracy, targetStatus.exact_score_accuracy, "higher")}</td></tr>
+      <tr><th>Цель угловых</th><td>${targetCell(backtest.corner_mae, targets.corner_mae, targetStatus.corner_mae, "lower", false)}</td><th>Угл. ±1</th><td>${backtest.corner_within_one_rate == null ? "нет" : probability(backtest.corner_within_one_rate)}</td></tr>
     </table>
   `;
+}
+
+function targetCell(actual, target, met, direction, asPercent = true) {
+  if (actual == null || target == null) {
+    return "нет";
+  }
+  const actualText = asPercent ? probability(actual) : Number(actual).toFixed(2);
+  const targetText = asPercent ? probability(target) : Number(target).toFixed(2);
+  const sign = direction === "lower" ? "≤" : "≥";
+  const mark = met ? "достигнута" : direction === "lower" ? "выше цели" : "ниже цели";
+  return `${actualText} / ${sign} ${targetText} · ${mark}`;
 }
 
 function contextLine(context) {
@@ -126,9 +181,65 @@ function fixtureBlock(fixture) {
   if (!fixture) {
     return "<p class='warn'>Дата матча не найдена автоматически. Проверьте, есть ли такая пара в расписании ЧМ.</p>";
   }
-  const status = fixture.completed ? "завершен" : (fixture.status_detail || fixture.status || "запланирован");
+  const status = fixture.completed
+    ? "завершен"
+    : fixture.in_progress
+      ? "матч идет"
+      : (fixture.status_detail || fixture.status || "запланирован");
   const kickoff = fixture.kickoff ? ` · ${escapeHtml(fixture.kickoff)}` : "";
   return `<p><strong>Матч найден:</strong> ${escapeHtml(fixture.date)} · ${escapeHtml(status)}${kickoff}</p>`;
+}
+
+function resultSummaryBlock(data) {
+  const summary = data.result_summary || {};
+  const predicted = summary.predicted || {};
+  const predictedScores = scoreListText(predicted.scores || data.exact_score_probabilities || []);
+  const predictedLine = `<p><strong>Предикт:</strong> ${escapeHtml(
+    predicted.outcome_label || data.market_pick
+  )}; счета ${predictedScores}; угловые ${Number(predicted.corners ?? data.predicted_corners).toFixed(2)}</p>`;
+
+  if (summary.status === "completed" && summary.actual) {
+    const cornerText = summary.actual.corners == null ? "угловые: нет данных" : `угловые ${summary.actual.corners}`;
+    const cornerError = summary.corner_error == null ? "" : `, ошибка угловых ${Math.abs(summary.corner_error).toFixed(2)}`;
+    return `
+      ${predictedLine}
+      <p><strong>Факт:</strong> ${escapeHtml(summary.actual.outcome_label)}; счет ${escapeHtml(summary.actual.score)}, ${cornerText}${cornerError}</p>
+      <p class="sub">Исход: ${summary.outcome_hit ? "угадан" : "мимо"}, точный счет: ${summary.score_hit ? "угадан" : "мимо"}.</p>
+    `;
+  }
+
+  if (summary.status === "live") {
+    const score = summary.actual?.score ? ` Текущий счет ${escapeHtml(summary.actual.score)}.` : "";
+    return `
+      ${predictedLine}
+      <p><strong>Факт:</strong> матч сейчас идет.${score} Финальный счет еще не известен.</p>
+    `;
+  }
+
+  if (summary.status === "scheduled") {
+    return `
+      ${predictedLine}
+      <p><strong>Факт:</strong> матч еще не начался.</p>
+    `;
+  }
+
+  return `
+    ${predictedLine}
+    <p><strong>Факт:</strong> матч не найден в расписании, настоящий счет пока неизвестен.</p>
+  `;
+}
+
+function scoreListText(items) {
+  if (!items.length) {
+    return "нет";
+  }
+  return items
+    .map((item) => {
+      const score = typeof item === "string" ? item : item.score;
+      const probabilityValue = typeof item === "string" ? null : item.probability;
+      return probabilityValue == null ? escapeHtml(score) : `${escapeHtml(score)} (${probability(probabilityValue)})`;
+    })
+    .join(", ");
 }
 
 function tacticsBlock(tactics) {
@@ -145,6 +256,13 @@ function tacticsBlock(tactics) {
 
 function percent(value) {
   return `${Math.round(Number(value ?? 0.5) * 100)}%`;
+}
+
+function probability(value) {
+  if (value == null || Number.isNaN(Number(value))) {
+    return "нет";
+  }
+  return `${(Number(value) * 100).toFixed(1)}%`;
 }
 
 function escapeHtml(value) {

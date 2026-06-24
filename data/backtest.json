@@ -1,10 +1,21 @@
 {
   "matches": 350,
   "outcome_accuracy": 0.563,
-  "exact_score_accuracy": 0.171,
+  "exact_score_accuracy": 0.254,
   "corner_mae": 2.32,
+  "corner_within_one_rate": 0.333,
+  "targets": {
+    "outcome_accuracy": 0.75,
+    "exact_score_accuracy": 0.3,
+    "corner_mae": 1.0
+  },
+  "target_status": {
+    "outcome_accuracy": false,
+    "exact_score_accuracy": false,
+    "corner_mae": false
+  },
   "trained_match_keys": 350,
-  "updated_at": "2026-06-24T02:13:44.540499+00:00",
+  "updated_at": "2026-06-24T02:48:43.519821+00:00",
   "by_team": {
     "Albania": {
       "matches": 2,

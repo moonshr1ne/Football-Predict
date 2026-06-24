@@ -26,6 +26,8 @@ class Prediction:
     expected_away_goals: float
     predicted_corners: float
     exact_scores: list[str]
+    exact_score_probabilities: list[dict[str, Any]]
+    markets: list[dict[str, Any]]
     home_stats: TeamStats
     away_stats: TeamStats
     home_context: dict[str, Any]
@@ -35,6 +37,7 @@ class Prediction:
     away_tactics: dict[str, Any]
     tactical_matchup: dict[str, Any]
     fixture: dict[str, Any] | None
+    result_summary: dict[str, Any]
     data_quality: dict[str, Any]
     warnings: list[str]
 
@@ -57,6 +60,8 @@ class Prediction:
             },
             "predicted_corners": round(self.predicted_corners, 2),
             "exact_scores": self.exact_scores,
+            "exact_score_probabilities": self.exact_score_probabilities,
+            "markets": self.markets,
             "home_stats": self.home_stats.as_dict(),
             "away_stats": self.away_stats.as_dict(),
             "home_context": self.home_context,
@@ -66,12 +71,15 @@ class Prediction:
             "away_tactics": self.away_tactics,
             "tactical_matchup": self.tactical_matchup,
             "fixture": self.fixture,
+            "result_summary": self.result_summary,
             "data_quality": self.data_quality,
             "warnings": self.warnings,
         }
 
     def short_text(self) -> str:
-        scores = ", ".join(self.exact_scores)
+        scores = ", ".join(
+            f"{item['score']} ({item['probability']:.1%})" for item in self.exact_score_probabilities
+        )
         return f"{self.market_pick}, средние угловые: {self.predicted_corners:.2f}, точные счеты: {scores}"
 
 
@@ -122,8 +130,25 @@ class MatchPredictor:
         probabilities = {"П1": home_win, "X": draw, "П2": away_win}
         market_pick = max(probabilities, key=probabilities.get)
         confidence = probabilities[market_pick]
+        markets = self._markets(home_team, away_team, probabilities)
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
-        exact_scores = self._top_scores(home_xg, away_xg, market_pick, home_stats, away_stats, limit=2)
+        exact_score_probabilities = self._top_scores(
+            home_xg,
+            away_xg,
+            market_pick,
+            home_stats,
+            away_stats,
+            limit=3,
+        )
+        exact_scores = [item["score"] for item in exact_score_probabilities]
+        result_summary = self._result_summary(
+            market_pick,
+            exact_score_probabilities,
+            corners,
+            fixture,
+            home_team,
+            away_team,
+        )
 
         prediction = Prediction(
             home_team=home_team,
@@ -139,6 +164,8 @@ class MatchPredictor:
             expected_away_goals=away_xg,
             predicted_corners=corners,
             exact_scores=exact_scores,
+            exact_score_probabilities=exact_score_probabilities,
+            markets=markets,
             home_stats=home_stats,
             away_stats=away_stats,
             home_context=home_context,
@@ -148,6 +175,7 @@ class MatchPredictor:
             away_tactics=away_tactics,
             tactical_matchup=tactical_matchup,
             fixture=fixture,
+            result_summary=result_summary,
             data_quality=data_quality,
             warnings=warnings,
         )
@@ -233,30 +261,137 @@ class MatchPredictor:
         market_pick: str,
         home_stats: TeamStats,
         away_stats: TeamStats,
-        limit: int = 2,
-    ) -> list[str]:
-        score_counts = self._historical_score_counts(market_pick)
+        limit: int = 3,
+    ) -> list[dict[str, Any]]:
+        score_counts_by_outcome = {
+            outcome: self._historical_score_counts(outcome) for outcome in ("П1", "X", "П2")
+        }
+        candidate_counts = {outcome: len(self._candidate_scores(outcome)) for outcome in ("П1", "X", "П2")}
         grid = []
-        candidates = self._candidate_scores(market_pick)
-        candidate_count = len(candidates)
-        for home_goals, away_goals in candidates:
-            if market_pick == "П1" and home_goals <= away_goals:
-                continue
-            if market_pick == "П2" and home_goals >= away_goals:
-                continue
-            if market_pick == "X" and home_goals != away_goals:
-                continue
-            probability = (
-                self._poisson(home_goals, home_xg)
-                * self._poisson(away_goals, away_xg)
-                * self._empirical_score_factor(f"{home_goals}-{away_goals}", score_counts, candidate_count)
-                * self._team_zero_factor(home_goals, away_goals, home_stats, away_stats)
-                * self._tournament_total_factor(home_goals, away_goals, home_xg + away_xg)
-            )
-            grid.append((probability, f"{home_goals}-{away_goals}"))
-        if not grid:
-            return ["1-1", "0-0"][:limit]
-        return [score for _, score in sorted(grid, reverse=True)[:limit]]
+        for home_goals in range(7):
+            for away_goals in range(7):
+                score = f"{home_goals}-{away_goals}"
+                outcome = self._outcome_from_score(home_goals, away_goals)
+                weight = (
+                    self._poisson(home_goals, home_xg)
+                    * self._poisson(away_goals, away_xg)
+                    * self._empirical_score_factor(
+                        score,
+                        score_counts_by_outcome[outcome],
+                        candidate_counts[outcome],
+                    )
+                    * self._team_zero_factor(home_goals, away_goals, home_stats, away_stats)
+                    * self._tournament_total_factor(home_goals, away_goals, home_xg + away_xg)
+                )
+                grid.append((weight, outcome, score))
+
+        total_weight = sum(weight for weight, _, _ in grid)
+        picked = [(weight, score) for weight, outcome, score in grid if outcome == market_pick]
+        if not picked or total_weight <= 0:
+            fallback = ["1-1", "0-0", "2-2"] if market_pick == "X" else ["1-0", "2-1", "2-0"]
+            return [{"score": score, "probability": 0.0} for score in fallback[:limit]]
+        return [
+            {"score": score, "probability": round(weight / total_weight, 4)}
+            for weight, score in sorted(picked, reverse=True)[:limit]
+        ]
+
+    @staticmethod
+    def _outcome_from_score(home_goals: int, away_goals: int) -> str:
+        if home_goals > away_goals:
+            return "П1"
+        if home_goals == away_goals:
+            return "X"
+        return "П2"
+
+    @staticmethod
+    def _markets(home_team: str, away_team: str, probabilities: dict[str, float]) -> list[dict[str, Any]]:
+        home_win = probabilities["П1"]
+        draw = probabilities["X"]
+        away_win = probabilities["П2"]
+        return [
+            {"code": "П1", "label": f"Победа {home_team}", "probability": round(home_win, 3)},
+            {"code": "X", "label": "Ничья", "probability": round(draw, 3)},
+            {"code": "П2", "label": f"Победа {away_team}", "probability": round(away_win, 3)},
+            {"code": "1X", "label": f"{home_team} не проиграет", "probability": round(home_win + draw, 3)},
+            {"code": "X2", "label": f"{away_team} не проиграет", "probability": round(away_win + draw, 3)},
+        ]
+
+    def _result_summary(
+        self,
+        market_pick: str,
+        exact_score_probabilities: list[dict[str, Any]],
+        predicted_corners: float,
+        fixture: dict[str, Any] | None,
+        home_team: str,
+        away_team: str,
+    ) -> dict[str, Any]:
+        predicted = {
+            "outcome": market_pick,
+            "outcome_label": self._market_label(market_pick, home_team, away_team),
+            "scores": exact_score_probabilities,
+            "corners": round(predicted_corners, 2),
+        }
+        if not fixture:
+            return {
+                "status": "unknown",
+                "predicted": predicted,
+                "actual": None,
+                "message": "Матч не найден в расписании, фактический счет пока неизвестен.",
+            }
+
+        home_goals = fixture.get("home_goals")
+        away_goals = fixture.get("away_goals")
+        has_score = home_goals is not None and away_goals is not None
+        if fixture.get("completed") and has_score:
+            actual_score = f"{int(home_goals)}-{int(away_goals)}"
+            actual_outcome = self._outcome_from_score(int(home_goals), int(away_goals))
+            actual_corners = self._fixture_total_corners(fixture)
+            return {
+                "status": "completed",
+                "predicted": predicted,
+                "actual": {
+                    "score": actual_score,
+                    "outcome": actual_outcome,
+                    "outcome_label": self._market_label(actual_outcome, home_team, away_team),
+                    "corners": actual_corners,
+                },
+                "outcome_hit": market_pick == actual_outcome,
+                "score_hit": actual_score in [item["score"] for item in exact_score_probabilities],
+                "corner_error": None if actual_corners is None else round(predicted_corners - actual_corners, 2),
+                "message": "Матч завершен, факт уже доступен.",
+            }
+
+        if fixture.get("in_progress"):
+            current_score = f"{int(home_goals)}-{int(away_goals)}" if has_score else None
+            return {
+                "status": "live",
+                "predicted": predicted,
+                "actual": {"score": current_score, "outcome": None, "corners": None},
+                "message": "Матч сейчас идет, финальный счет еще не известен.",
+            }
+
+        return {
+            "status": "scheduled",
+            "predicted": predicted,
+            "actual": None,
+            "message": "Матч еще не начался.",
+        }
+
+    @staticmethod
+    def _fixture_total_corners(fixture: dict[str, Any]) -> float | None:
+        home = fixture.get("home_corners")
+        away = fixture.get("away_corners")
+        if home is None or away is None:
+            return None
+        return round(float(home) + float(away), 2)
+
+    @staticmethod
+    def _market_label(code: str, home_team: str, away_team: str) -> str:
+        if code == "П1":
+            return f"Победа {home_team}"
+        if code == "П2":
+            return f"Победа {away_team}"
+        return "Ничья"
 
     @staticmethod
     def _candidate_scores(market_pick: str) -> list[tuple[int, int]]:
@@ -287,7 +422,7 @@ class MatchPredictor:
         smoothing = 0.35
         prior = (score_counts.get(score, 0) + smoothing) / (total + smoothing * max(candidate_count, 1))
         average_prior = 1.0 / max(candidate_count, 1)
-        return max(0.70, min(2.60, 0.80 + 0.55 * (prior / average_prior)))
+        return max(0.35, min(6.00, 0.50 + 1.30 * (prior / average_prior)))
 
     @staticmethod
     def _team_zero_factor(
@@ -410,6 +545,9 @@ class MatchPredictor:
                 "outcome_accuracy": backtest.get("outcome_accuracy") if isinstance(backtest, dict) else None,
                 "exact_score_accuracy": backtest.get("exact_score_accuracy") if isinstance(backtest, dict) else None,
                 "corner_mae": backtest.get("corner_mae") if isinstance(backtest, dict) else None,
+                "corner_within_one_rate": backtest.get("corner_within_one_rate") if isinstance(backtest, dict) else None,
+                "targets": backtest.get("targets", {}) if isinstance(backtest, dict) else {},
+                "target_status": backtest.get("target_status", {}) if isinstance(backtest, dict) else {},
                 "trained_match_keys": backtest.get("trained_match_keys") if isinstance(backtest, dict) else None,
                 "updated_at": backtest.get("updated_at") if isinstance(backtest, dict) else None,
             },

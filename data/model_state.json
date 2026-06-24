@@ -25,14 +25,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.290793+00:00"
+      "updated_at": "2026-06-24T02:44:43.021187+00:00"
     },
     {
       "date": "2025-08-24",
@@ -44,14 +45,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-3"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 9.34,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.339385+00:00"
+      "updated_at": "2026-06-24T02:44:43.090299+00:00"
     },
     {
       "date": "2025-09-03",
@@ -63,14 +65,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.14,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.403144+00:00"
+      "updated_at": "2026-06-24T02:44:43.165128+00:00"
     },
     {
       "date": "2025-09-04",
@@ -82,14 +85,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-1"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.481523+00:00"
+      "updated_at": "2026-06-24T02:44:43.236077+00:00"
     },
     {
       "date": "2025-09-07",
@@ -101,14 +105,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-4",
       "score_hit": false,
       "predicted_corners": 9.3,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.548285+00:00"
+      "updated_at": "2026-06-24T02:44:43.297688+00:00"
     },
     {
       "date": "2025-09-08",
@@ -120,14 +125,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.615408+00:00"
+      "updated_at": "2026-06-24T02:44:43.357400+00:00"
     },
     {
       "date": "2025-09-08",
@@ -139,14 +145,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.24,
       "actual_corners": 9.0,
       "corner_error": -0.24,
-      "updated_at": "2026-06-24T02:10:08.680315+00:00"
+      "updated_at": "2026-06-24T02:44:43.433242+00:00"
     },
     {
       "date": "2025-09-09",
@@ -158,14 +165,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "1-2",
       "score_hit": true,
       "predicted_corners": 9.33,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.742373+00:00"
+      "updated_at": "2026-06-24T02:44:43.495873+00:00"
     },
     {
       "date": "2025-09-09",
@@ -177,14 +185,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.34,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.802891+00:00"
+      "updated_at": "2026-06-24T02:44:43.558512+00:00"
     },
     {
       "date": "2025-09-09",
@@ -196,6 +205,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
+        "1-2",
         "0-2"
       ],
       "actual_score": "0-0",
@@ -203,7 +213,7 @@
       "predicted_corners": 10.02,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.859047+00:00"
+      "updated_at": "2026-06-24T02:44:43.620462+00:00"
     },
     {
       "date": "2025-09-09",
@@ -215,14 +225,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.915269+00:00"
+      "updated_at": "2026-06-24T02:44:43.684290+00:00"
     },
     {
       "date": "2025-09-09",
@@ -234,14 +245,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "2-3",
       "score_hit": false,
       "predicted_corners": 9.37,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:08.971647+00:00"
+      "updated_at": "2026-06-24T02:44:43.745907+00:00"
     },
     {
       "date": "2025-09-09",
@@ -253,6 +265,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
+        "1-2",
         "0-2"
       ],
       "actual_score": "0-1",
@@ -260,7 +273,7 @@
       "predicted_corners": 9.32,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.029027+00:00"
+      "updated_at": "2026-06-24T02:44:43.806758+00:00"
     },
     {
       "date": "2025-09-09",
@@ -272,14 +285,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "0-5",
       "score_hit": false,
       "predicted_corners": 9.64,
       "actual_corners": 9.0,
       "corner_error": -0.64,
-      "updated_at": "2026-06-24T02:10:09.086714+00:00"
+      "updated_at": "2026-06-24T02:44:43.868877+00:00"
     },
     {
       "date": "2025-09-09",
@@ -291,6 +305,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-1"
       ],
       "actual_score": "2-0",
@@ -298,7 +313,7 @@
       "predicted_corners": 9.54,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.143546+00:00"
+      "updated_at": "2026-06-24T02:44:43.931527+00:00"
     },
     {
       "date": "2025-09-09",
@@ -310,14 +325,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "3-6",
       "score_hit": false,
       "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.199762+00:00"
+      "updated_at": "2026-06-24T02:44:43.998532+00:00"
     },
     {
       "date": "2025-10-08",
@@ -329,6 +345,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
+        "1-2",
         "0-2"
       ],
       "actual_score": "0-5",
@@ -336,7 +353,7 @@
       "predicted_corners": 8.75,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.263831+00:00"
+      "updated_at": "2026-06-24T02:44:44.065811+00:00"
     },
     {
       "date": "2025-10-08",
@@ -348,6 +365,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
+        "1-2",
         "0-2"
       ],
       "actual_score": "3-3",
@@ -355,7 +373,7 @@
       "predicted_corners": 9.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.324976+00:00"
+      "updated_at": "2026-06-24T02:44:44.132796+00:00"
     },
     {
       "date": "2025-10-08",
@@ -367,14 +385,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "3-0"
+        "3-0",
+        "2-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.385131+00:00"
+      "updated_at": "2026-06-24T02:44:44.204580+00:00"
     },
     {
       "date": "2025-10-09",
@@ -386,6 +405,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "10-0",
@@ -393,7 +413,7 @@
       "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.451128+00:00"
+      "updated_at": "2026-06-24T02:44:44.272770+00:00"
     },
     {
       "date": "2025-10-09",
@@ -405,6 +425,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "2-2",
@@ -412,7 +433,7 @@
       "predicted_corners": 9.5,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.513329+00:00"
+      "updated_at": "2026-06-24T02:44:44.337656+00:00"
     },
     {
       "date": "2025-10-09",
@@ -424,14 +445,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-5"
+        "0-5",
+        "1-2"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.84,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.575723+00:00"
+      "updated_at": "2026-06-24T02:44:44.413105+00:00"
     },
     {
       "date": "2025-10-09",
@@ -443,14 +465,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "1-0"
       ],
       "actual_score": "3-0",
       "score_hit": true,
       "predicted_corners": 10.18,
       "actual_corners": 9.0,
       "corner_error": -1.18,
-      "updated_at": "2026-06-24T02:10:09.638422+00:00"
+      "updated_at": "2026-06-24T02:44:44.477868+00:00"
     },
     {
       "date": "2025-10-09",
@@ -462,14 +485,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "0-4",
       "score_hit": false,
       "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.724651+00:00"
+      "updated_at": "2026-06-24T02:44:44.542208+00:00"
     },
     {
       "date": "2025-10-09",
@@ -481,14 +505,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.36,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.782310+00:00"
+      "updated_at": "2026-06-24T02:44:44.629047+00:00"
     },
     {
       "date": "2025-10-09",
@@ -500,14 +525,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.845000+00:00"
+      "updated_at": "2026-06-24T02:44:44.694043+00:00"
     },
     {
       "date": "2025-10-10",
@@ -519,14 +545,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.904869+00:00"
+      "updated_at": "2026-06-24T02:44:44.760886+00:00"
     },
     {
       "date": "2025-10-10",
@@ -538,6 +565,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "0-1",
@@ -545,7 +573,7 @@
       "predicted_corners": 10.03,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:09.963734+00:00"
+      "updated_at": "2026-06-24T02:44:44.824680+00:00"
     },
     {
       "date": "2025-10-10",
@@ -557,14 +585,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.48,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.023917+00:00"
+      "updated_at": "2026-06-24T02:44:44.888688+00:00"
     },
     {
       "date": "2025-10-10",
@@ -576,6 +605,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "4-0",
@@ -583,7 +613,7 @@
       "predicted_corners": 9.71,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.085256+00:00"
+      "updated_at": "2026-06-24T02:44:44.953110+00:00"
     },
     {
       "date": "2025-10-10",
@@ -595,14 +625,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-4"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.143980+00:00"
+      "updated_at": "2026-06-24T02:44:45.020785+00:00"
     },
     {
       "date": "2025-10-10",
@@ -614,14 +645,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 9.3,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.201757+00:00"
+      "updated_at": "2026-06-24T02:44:45.091419+00:00"
     },
     {
       "date": "2025-10-10",
@@ -633,6 +665,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "0-3",
@@ -640,7 +673,7 @@
       "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.282342+00:00"
+      "updated_at": "2026-06-24T02:44:45.164436+00:00"
     },
     {
       "date": "2025-10-10",
@@ -652,6 +685,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
+        "1-0",
         "4-0"
       ],
       "actual_score": "2-1",
@@ -659,7 +693,7 @@
       "predicted_corners": 10.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.344031+00:00"
+      "updated_at": "2026-06-24T02:44:45.236771+00:00"
     },
     {
       "date": "2025-10-10",
@@ -671,14 +705,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-3"
       ],
       "actual_score": "0-5",
       "score_hit": false,
       "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.404117+00:00"
+      "updated_at": "2026-06-24T02:44:45.305384+00:00"
     },
     {
       "date": "2025-10-10",
@@ -690,14 +725,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-3"
       ],
       "actual_score": "0-2",
       "score_hit": false,
       "predicted_corners": 9.82,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.464047+00:00"
+      "updated_at": "2026-06-24T02:44:45.371491+00:00"
     },
     {
       "date": "2025-10-10",
@@ -709,6 +745,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "1-0",
@@ -716,7 +753,7 @@
       "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.522789+00:00"
+      "updated_at": "2026-06-24T02:44:45.439027+00:00"
     },
     {
       "date": "2025-10-11",
@@ -728,14 +765,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
-        "3-1"
+        "3-1",
+        "3-0"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 10.3,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.582231+00:00"
+      "updated_at": "2026-06-24T02:44:45.506356+00:00"
     },
     {
       "date": "2025-10-11",
@@ -747,14 +785,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "1-6",
       "score_hit": false,
       "predicted_corners": 9.79,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.642655+00:00"
+      "updated_at": "2026-06-24T02:44:45.573162+00:00"
     },
     {
       "date": "2025-10-11",
@@ -766,14 +805,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.705127+00:00"
+      "updated_at": "2026-06-24T02:44:45.642936+00:00"
     },
     {
       "date": "2025-10-11",
@@ -785,14 +825,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "3-0"
       ],
       "actual_score": "5-0",
       "score_hit": false,
       "predicted_corners": 9.48,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.765443+00:00"
+      "updated_at": "2026-06-24T02:44:45.707884+00:00"
     },
     {
       "date": "2025-10-11",
@@ -804,14 +845,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
+        "1-0",
         "2-1"
       ],
       "actual_score": "1-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 10.01,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.825665+00:00"
+      "updated_at": "2026-06-24T02:44:45.794274+00:00"
     },
     {
       "date": "2025-10-11",
@@ -823,14 +865,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "3-0"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.7,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.889273+00:00"
+      "updated_at": "2026-06-24T02:44:45.860744+00:00"
     },
     {
       "date": "2025-10-11",
@@ -842,14 +885,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:10.950154+00:00"
+      "updated_at": "2026-06-24T02:44:45.930735+00:00"
     },
     {
       "date": "2025-10-12",
@@ -861,14 +905,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.24,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.011121+00:00"
+      "updated_at": "2026-06-24T02:44:45.998579+00:00"
     },
     {
       "date": "2025-10-12",
@@ -880,14 +925,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 8.95,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.071443+00:00"
+      "updated_at": "2026-06-24T02:44:46.071596+00:00"
     },
     {
       "date": "2025-10-12",
@@ -898,15 +944,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "3-0",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.130051+00:00"
+      "updated_at": "2026-06-24T02:44:46.140468+00:00"
     },
     {
       "date": "2025-10-12",
@@ -918,14 +965,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-3"
+        "0-3",
+        "0-2"
       ],
       "actual_score": "1-4",
       "score_hit": false,
       "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.206649+00:00"
+      "updated_at": "2026-06-24T02:44:46.212419+00:00"
     },
     {
       "date": "2025-10-12",
@@ -937,14 +985,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-4",
-        "2-3"
+        "2-3",
+        "0-5"
       ],
       "actual_score": "0-4",
       "score_hit": false,
       "predicted_corners": 10.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.271068+00:00"
+      "updated_at": "2026-06-24T02:44:46.286169+00:00"
     },
     {
       "date": "2025-10-12",
@@ -956,6 +1005,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
+        "1-0",
         "2-0"
       ],
       "actual_score": "4-0",
@@ -963,7 +1013,7 @@
       "predicted_corners": 9.83,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.333014+00:00"
+      "updated_at": "2026-06-24T02:44:46.353107+00:00"
     },
     {
       "date": "2025-10-12",
@@ -975,14 +1025,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-5",
-        "0-4"
+        "0-4",
+        "1-4"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 10.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.398909+00:00"
+      "updated_at": "2026-06-24T02:44:46.417964+00:00"
     },
     {
       "date": "2025-10-12",
@@ -993,15 +1044,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "3-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "2-1",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.67,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.470313+00:00"
+      "updated_at": "2026-06-24T02:44:46.482689+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1012,15 +1064,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.6,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.531971+00:00"
+      "updated_at": "2026-06-24T02:44:46.551694+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1032,14 +1085,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.63,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.597325+00:00"
+      "updated_at": "2026-06-24T02:44:46.615589+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1051,14 +1105,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-4"
+        "0-4",
+        "0-5"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 10.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.663894+00:00"
+      "updated_at": "2026-06-24T02:44:46.685437+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1070,14 +1125,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.58,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.734783+00:00"
+      "updated_at": "2026-06-24T02:44:46.748928+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1089,14 +1145,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 9.32,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.800473+00:00"
+      "updated_at": "2026-06-24T02:44:46.814176+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1108,14 +1165,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "3-0"
+        "3-0",
+        "2-1"
       ],
       "actual_score": "1-2",
       "score_hit": false,
       "predicted_corners": 9.83,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.867448+00:00"
+      "updated_at": "2026-06-24T02:44:46.880742+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1127,14 +1185,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "2-4",
       "score_hit": false,
       "predicted_corners": 8.86,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:11.939213+00:00"
+      "updated_at": "2026-06-24T02:44:46.945114+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1146,6 +1205,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "3-0",
         "2-0"
       ],
       "actual_score": "4-2",
@@ -1153,7 +1213,7 @@
       "predicted_corners": 9.02,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.005220+00:00"
+      "updated_at": "2026-06-24T02:44:47.010764+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1165,14 +1225,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 9.51,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.073151+00:00"
+      "updated_at": "2026-06-24T02:44:47.081590+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1184,14 +1245,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.47,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.147417+00:00"
+      "updated_at": "2026-06-24T02:44:47.168971+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1202,15 +1264,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-5",
         "0-4",
-        "0-5"
+        "0-1"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 10.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.214699+00:00"
+      "updated_at": "2026-06-24T02:44:47.237076+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1222,14 +1285,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-4"
+        "0-4",
+        "0-5"
       ],
       "actual_score": "0-5",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.85,
       "actual_corners": 10.0,
       "corner_error": 0.15,
-      "updated_at": "2026-06-24T02:10:12.285944+00:00"
+      "updated_at": "2026-06-24T02:44:47.308176+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1241,14 +1305,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "1-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 10.01,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.353349+00:00"
+      "updated_at": "2026-06-24T02:44:47.374810+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1259,15 +1324,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "3-0",
         "2-1",
-        "3-0"
+        "1-0"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 10.12,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.417679+00:00"
+      "updated_at": "2026-06-24T02:44:47.445106+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1279,6 +1345,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
+        "1-2",
         "0-2"
       ],
       "actual_score": "2-1",
@@ -1286,7 +1353,7 @@
       "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.484950+00:00"
+      "updated_at": "2026-06-24T02:44:47.513491+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1298,14 +1365,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 8.94,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.551477+00:00"
+      "updated_at": "2026-06-24T02:44:47.582050+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1316,6 +1384,7 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-1",
         "0-5",
         "0-4"
       ],
@@ -1324,7 +1393,7 @@
       "predicted_corners": 9.77,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.616332+00:00"
+      "updated_at": "2026-06-24T02:44:47.647452+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1336,14 +1405,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "2-0"
       ],
       "actual_score": "4-0",
       "score_hit": true,
       "predicted_corners": 10.59,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.686140+00:00"
+      "updated_at": "2026-06-24T02:44:47.715976+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1355,14 +1425,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "2-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 10.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.748478+00:00"
+      "updated_at": "2026-06-24T02:44:47.780857+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1374,14 +1445,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "1-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 10.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.809023+00:00"
+      "updated_at": "2026-06-24T02:44:47.850999+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1393,14 +1465,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-4"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.65,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.870972+00:00"
+      "updated_at": "2026-06-24T02:44:47.934109+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1412,14 +1485,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "0-6",
       "score_hit": false,
       "predicted_corners": 8.97,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:12.936920+00:00"
+      "updated_at": "2026-06-24T02:44:48.001593+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1431,6 +1505,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
+        "1-2",
         "0-2"
       ],
       "actual_score": "2-1",
@@ -1438,7 +1513,7 @@
       "predicted_corners": 9.2,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.003863+00:00"
+      "updated_at": "2026-06-24T02:44:48.072561+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1450,14 +1525,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "2-0"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 10.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.066245+00:00"
+      "updated_at": "2026-06-24T02:44:48.144324+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1469,14 +1545,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "2-0"
       ],
       "actual_score": "2-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 10.51,
       "actual_corners": 10.0,
       "corner_error": -0.51,
-      "updated_at": "2026-06-24T02:10:13.127188+00:00"
+      "updated_at": "2026-06-24T02:44:48.219790+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1488,14 +1565,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "3-0"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.186894+00:00"
+      "updated_at": "2026-06-24T02:44:48.289979+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1507,14 +1585,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.65,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.253627+00:00"
+      "updated_at": "2026-06-24T02:44:48.366317+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1525,15 +1604,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "3-0",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 9.75,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.317849+00:00"
+      "updated_at": "2026-06-24T02:44:48.433147+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1545,14 +1625,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.381153+00:00"
+      "updated_at": "2026-06-24T02:44:48.502385+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1564,14 +1645,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 8.96,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.451310+00:00"
+      "updated_at": "2026-06-24T02:44:48.570606+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1583,6 +1665,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
+        "1-2",
         "0-2"
       ],
       "actual_score": "0-2",
@@ -1590,7 +1673,7 @@
       "predicted_corners": 9.33,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.525035+00:00"
+      "updated_at": "2026-06-24T02:44:48.637086+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1602,14 +1685,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.65,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.592883+00:00"
+      "updated_at": "2026-06-24T02:44:48.709520+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1621,14 +1705,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.41,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.662925+00:00"
+      "updated_at": "2026-06-24T02:44:48.776875+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1640,14 +1725,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "0-2",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.63,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.731881+00:00"
+      "updated_at": "2026-06-24T02:44:48.843637+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1659,14 +1745,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "2-3",
       "score_hit": false,
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.794683+00:00"
+      "updated_at": "2026-06-24T02:44:48.918659+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1678,14 +1765,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.45,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.860278+00:00"
+      "updated_at": "2026-06-24T02:44:48.989235+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1697,14 +1785,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:13.937141+00:00"
+      "updated_at": "2026-06-24T02:44:49.071468+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1716,6 +1805,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
+        "0-1",
         "0-5"
       ],
       "actual_score": "0-2",
@@ -1723,7 +1813,7 @@
       "predicted_corners": 10.13,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.002110+00:00"
+      "updated_at": "2026-06-24T02:44:49.148641+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1735,14 +1825,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.5,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.072244+00:00"
+      "updated_at": "2026-06-24T02:44:49.226413+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1754,14 +1845,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 8.8,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.132750+00:00"
+      "updated_at": "2026-06-24T02:44:49.301030+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1773,14 +1865,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.21,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.202026+00:00"
+      "updated_at": "2026-06-24T02:44:49.376951+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1791,15 +1884,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 9.41,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.268349+00:00"
+      "updated_at": "2026-06-24T02:44:49.471215+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1811,14 +1905,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.337893+00:00"
+      "updated_at": "2026-06-24T02:44:49.546468+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1829,15 +1924,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-1",
-        "2-0"
+        "1-0",
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-0",
       "score_hit": true,
       "predicted_corners": 10.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.407643+00:00"
+      "updated_at": "2026-06-24T02:44:49.618490+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1849,6 +1945,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
+        "0-1",
         "1-2"
       ],
       "actual_score": "0-2",
@@ -1856,7 +1953,7 @@
       "predicted_corners": 10.15,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.476087+00:00"
+      "updated_at": "2026-06-24T02:44:49.691551+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1868,14 +1965,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-4"
+        "0-1",
+        "0-5"
       ],
       "actual_score": "0-4",
-      "score_hit": true,
+      "score_hit": false,
       "predicted_corners": 10.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.550066+00:00"
+      "updated_at": "2026-06-24T02:44:49.766814+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1887,14 +1985,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-4"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 9.78,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.616685+00:00"
+      "updated_at": "2026-06-24T02:44:49.833714+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1906,14 +2005,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.681008+00:00"
+      "updated_at": "2026-06-24T02:44:49.919760+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1925,14 +2025,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 9.45,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.749423+00:00"
+      "updated_at": "2026-06-24T02:44:49.995157+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1944,14 +2045,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
-        "4-0"
+        "4-0",
+        "2-0"
       ],
       "actual_score": "2-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 10.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.815511+00:00"
+      "updated_at": "2026-06-24T02:44:50.067357+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1963,14 +2065,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.877208+00:00"
+      "updated_at": "2026-06-24T02:44:50.138199+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1982,14 +2085,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.78,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:14.939782+00:00"
+      "updated_at": "2026-06-24T02:44:50.209436+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2001,14 +2105,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-3",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "0-2",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 10.93,
       "actual_corners": 8.0,
       "corner_error": -2.93,
-      "updated_at": "2026-06-24T02:10:15.001429+00:00"
+      "updated_at": "2026-06-24T02:44:50.278102+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2020,6 +2125,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
+        "0-1",
         "0-4"
       ],
       "actual_score": "1-3",
@@ -2027,7 +2133,7 @@
       "predicted_corners": 9.79,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.065571+00:00"
+      "updated_at": "2026-06-24T02:44:50.345732+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2039,6 +2145,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
+        "1-0",
         "3-0"
       ],
       "actual_score": "2-1",
@@ -2046,7 +2153,7 @@
       "predicted_corners": 9.7,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.130616+00:00"
+      "updated_at": "2026-06-24T02:44:50.418541+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2058,14 +2165,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-4",
       "score_hit": false,
       "predicted_corners": 9.76,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.190885+00:00"
+      "updated_at": "2026-06-24T02:44:50.485801+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2077,14 +2185,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-4"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.74,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.267481+00:00"
+      "updated_at": "2026-06-24T02:44:50.559097+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2096,6 +2205,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "2-0",
         "2-1"
       ],
       "actual_score": "9-1",
@@ -2103,7 +2213,7 @@
       "predicted_corners": 9.44,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.341429+00:00"
+      "updated_at": "2026-06-24T02:44:50.647058+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2114,15 +2224,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "6-0",
       "score_hit": false,
       "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.407771+00:00"
+      "updated_at": "2026-06-24T02:44:50.725719+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2134,14 +2245,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-4"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.474603+00:00"
+      "updated_at": "2026-06-24T02:44:50.796229+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2152,15 +2264,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "6-0",
       "score_hit": false,
       "predicted_corners": 9.71,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.553871+00:00"
+      "updated_at": "2026-06-24T02:44:50.867659+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2172,14 +2285,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-4"
+        "0-4",
+        "0-1"
       ],
       "actual_score": "2-3",
       "score_hit": false,
       "predicted_corners": 9.69,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.622964+00:00"
+      "updated_at": "2026-06-24T02:44:50.938971+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2191,14 +2305,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
-        "1-0"
+        "1-0",
+        "3-0"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.61,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.692395+00:00"
+      "updated_at": "2026-06-24T02:44:51.008279+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2210,14 +2325,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-2",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.757276+00:00"
+      "updated_at": "2026-06-24T02:44:51.082262+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2229,14 +2345,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
-        "2-0"
+        "2-0",
+        "1-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 10.07,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.820689+00:00"
+      "updated_at": "2026-06-24T02:44:51.154600+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2248,14 +2365,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "7-0",
       "score_hit": false,
       "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.882735+00:00"
+      "updated_at": "2026-06-24T02:44:51.244924+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2267,14 +2385,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
-        "3-2"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 10.23,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:15.945100+00:00"
+      "updated_at": "2026-06-24T02:44:51.319497+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2286,14 +2405,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-1",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 8.99,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.008239+00:00"
+      "updated_at": "2026-06-24T02:44:51.407157+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2305,14 +2425,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.088067+00:00"
+      "updated_at": "2026-06-24T02:44:51.498336+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2324,6 +2445,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
+        "0-2",
         "1-2"
       ],
       "actual_score": "0-0",
@@ -2331,7 +2453,7 @@
       "predicted_corners": 9.08,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.149694+00:00"
+      "updated_at": "2026-06-24T02:44:51.589708+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2343,14 +2465,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.215830+00:00"
+      "updated_at": "2026-06-24T02:44:51.680150+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2362,14 +2485,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "0-2",
       "score_hit": false,
       "predicted_corners": 9.01,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.284866+00:00"
+      "updated_at": "2026-06-24T02:44:51.771666+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2380,15 +2504,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "4-2",
       "score_hit": false,
       "predicted_corners": 9.59,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.353452+00:00"
+      "updated_at": "2026-06-24T02:44:51.845910+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2399,15 +2524,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.14,
       "actual_corners": 9.0,
       "corner_error": -0.14,
-      "updated_at": "2026-06-24T02:10:16.420425+00:00"
+      "updated_at": "2026-06-24T02:44:51.930570+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2419,6 +2545,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
+        "1-0",
         "3-2"
       ],
       "actual_score": "2-2",
@@ -2426,7 +2553,7 @@
       "predicted_corners": 10.96,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.498681+00:00"
+      "updated_at": "2026-06-24T02:44:52.022166+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2438,14 +2565,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 8.99,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.569108+00:00"
+      "updated_at": "2026-06-24T02:44:52.102919+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2457,14 +2585,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.651803+00:00"
+      "updated_at": "2026-06-24T02:44:52.186844+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2475,15 +2604,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.724432+00:00"
+      "updated_at": "2026-06-24T02:44:52.271591+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2495,14 +2625,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-0",
       "score_hit": true,
       "predicted_corners": 9.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.799026+00:00"
+      "updated_at": "2026-06-24T02:44:52.365136+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2513,15 +2644,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "2-0",
       "score_hit": true,
       "predicted_corners": 9.41,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.863611+00:00"
+      "updated_at": "2026-06-24T02:44:52.441628+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2533,14 +2665,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-2",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.11,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.926105+00:00"
+      "updated_at": "2026-06-24T02:44:52.516751+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2552,14 +2685,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
-        "2-0"
+        "2-0",
+        "1-0"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 9.87,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:16.993937+00:00"
+      "updated_at": "2026-06-24T02:44:52.598357+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2571,14 +2705,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "5-1",
       "score_hit": false,
       "predicted_corners": 9.81,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.062870+00:00"
+      "updated_at": "2026-06-24T02:44:52.672438+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2590,14 +2725,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-2",
       "score_hit": true,
       "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.130303+00:00"
+      "updated_at": "2026-06-24T02:44:52.745057+00:00"
     },
     {
       "date": "2025-12-16",
@@ -2609,14 +2745,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "0-2",
       "score_hit": false,
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.197375+00:00"
+      "updated_at": "2026-06-24T02:44:52.824560+00:00"
     },
     {
       "date": "2025-12-22",
@@ -2628,14 +2765,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 9.18,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.266239+00:00"
+      "updated_at": "2026-06-24T02:44:52.904707+00:00"
     },
     {
       "date": "2025-12-23",
@@ -2647,14 +2785,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.335827+00:00"
+      "updated_at": "2026-06-24T02:44:52.980708+00:00"
     },
     {
       "date": "2025-12-23",
@@ -2666,6 +2805,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
+        "2-0",
         "2-1"
       ],
       "actual_score": "3-1",
@@ -2673,7 +2813,7 @@
       "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.411712+00:00"
+      "updated_at": "2026-06-24T02:44:53.057448+00:00"
     },
     {
       "date": "2025-12-24",
@@ -2684,15 +2824,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 8.97,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.483921+00:00"
+      "updated_at": "2026-06-24T02:44:53.136260+00:00"
     },
     {
       "date": "2025-12-26",
@@ -2704,14 +2845,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.557226+00:00"
+      "updated_at": "2026-06-24T02:44:53.220634+00:00"
     },
     {
       "date": "2025-12-27",
@@ -2723,14 +2865,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.630687+00:00"
+      "updated_at": "2026-06-24T02:44:53.299881+00:00"
     },
     {
       "date": "2025-12-27",
@@ -2742,14 +2885,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-4"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.703461+00:00"
+      "updated_at": "2026-06-24T02:44:53.385845+00:00"
     },
     {
       "date": "2025-12-28",
@@ -2761,14 +2905,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.38,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.777307+00:00"
+      "updated_at": "2026-06-24T02:44:53.463005+00:00"
     },
     {
       "date": "2025-12-28",
@@ -2780,14 +2925,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 8.78,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.841612+00:00"
+      "updated_at": "2026-06-24T02:44:53.543606+00:00"
     },
     {
       "date": "2025-12-29",
@@ -2799,14 +2945,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-3",
       "score_hit": false,
       "predicted_corners": 9.38,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.913267+00:00"
+      "updated_at": "2026-06-24T02:44:53.626708+00:00"
     },
     {
       "date": "2025-12-30",
@@ -2817,15 +2964,16 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "0-3",
       "score_hit": false,
       "predicted_corners": 9.15,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:17.998578+00:00"
+      "updated_at": "2026-06-24T02:44:53.700808+00:00"
     },
     {
       "date": "2025-12-30",
@@ -2837,14 +2985,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.065518+00:00"
+      "updated_at": "2026-06-24T02:44:53.772281+00:00"
     },
     {
       "date": "2025-12-31",
@@ -2855,15 +3004,16 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "1-3",
       "score_hit": false,
       "predicted_corners": 9.21,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.130402+00:00"
+      "updated_at": "2026-06-24T02:44:53.844517+00:00"
     },
     {
       "date": "2025-12-31",
@@ -2875,14 +3025,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-3",
       "score_hit": false,
       "predicted_corners": 9.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.193579+00:00"
+      "updated_at": "2026-06-24T02:44:53.917817+00:00"
     },
     {
       "date": "2026-01-03",
@@ -2893,15 +3044,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 8.84,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.263128+00:00"
+      "updated_at": "2026-06-24T02:44:53.992660+00:00"
     },
     {
       "date": "2026-01-03",
@@ -2912,15 +3064,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.22,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.330713+00:00"
+      "updated_at": "2026-06-24T02:44:54.064588+00:00"
     },
     {
       "date": "2026-01-04",
@@ -2932,14 +3085,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-2",
       "score_hit": false,
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.404371+00:00"
+      "updated_at": "2026-06-24T02:44:54.144002+00:00"
     },
     {
       "date": "2026-01-05",
@@ -2951,14 +3105,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.07,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.477451+00:00"
+      "updated_at": "2026-06-24T02:44:54.228029+00:00"
     },
     {
       "date": "2026-01-06",
@@ -2970,14 +3125,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.47,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.553645+00:00"
+      "updated_at": "2026-06-24T02:44:54.309848+00:00"
     },
     {
       "date": "2026-01-06",
@@ -2989,14 +3145,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.627767+00:00"
+      "updated_at": "2026-06-24T02:44:54.391610+00:00"
     },
     {
       "date": "2026-01-09",
@@ -3008,14 +3165,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-2",
       "score_hit": true,
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.702066+00:00"
+      "updated_at": "2026-06-24T02:44:54.484297+00:00"
     },
     {
       "date": "2026-01-09",
@@ -3027,14 +3185,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 8.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.776055+00:00"
+      "updated_at": "2026-06-24T02:44:54.564452+00:00"
     },
     {
       "date": "2026-01-10",
@@ -3046,14 +3205,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "0-2",
       "score_hit": false,
       "predicted_corners": 9.95,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.845714+00:00"
+      "updated_at": "2026-06-24T02:44:54.637902+00:00"
     },
     {
       "date": "2026-01-10",
@@ -3064,15 +3224,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.912565+00:00"
+      "updated_at": "2026-06-24T02:44:54.711952+00:00"
     },
     {
       "date": "2026-01-14",
@@ -3083,6 +3244,7 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
         "1-2"
       ],
@@ -3091,7 +3253,7 @@
       "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:18.977624+00:00"
+      "updated_at": "2026-06-24T02:44:54.784721+00:00"
     },
     {
       "date": "2026-01-14",
@@ -3102,15 +3264,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.64,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.044017+00:00"
+      "updated_at": "2026-06-24T02:44:54.860131+00:00"
     },
     {
       "date": "2026-01-17",
@@ -3121,15 +3284,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "0-1",
-        "0-2"
+        "1-2"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.108241+00:00"
+      "updated_at": "2026-06-24T02:44:54.931202+00:00"
     },
     {
       "date": "2026-01-18",
@@ -3141,14 +3305,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-3"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.175587+00:00"
+      "updated_at": "2026-06-24T02:44:55.004206+00:00"
     },
     {
       "date": "2026-01-18",
@@ -3159,15 +3324,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 10.13,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.243071+00:00"
+      "updated_at": "2026-06-24T02:44:55.076695+00:00"
     },
     {
       "date": "2026-01-18",
@@ -3179,14 +3345,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-3",
       "score_hit": false,
       "predicted_corners": 9.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.309471+00:00"
+      "updated_at": "2026-06-24T02:44:55.153378+00:00"
     },
     {
       "date": "2026-01-23",
@@ -3197,15 +3364,16 @@
       "actual_outcome": "П2",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "0-1",
       "score_hit": false,
       "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.392915+00:00"
+      "updated_at": "2026-06-24T02:44:55.244010+00:00"
     },
     {
       "date": "2026-01-25",
@@ -3217,14 +3385,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 9.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.464273+00:00"
+      "updated_at": "2026-06-24T02:44:55.326606+00:00"
     },
     {
       "date": "2026-01-26",
@@ -3236,14 +3405,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.17,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.536472+00:00"
+      "updated_at": "2026-06-24T02:44:55.406452+00:00"
     },
     {
       "date": "2026-02-26",
@@ -3255,6 +3425,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
+        "0-2",
         "1-2"
       ],
       "actual_score": "4-0",
@@ -3262,7 +3433,7 @@
       "predicted_corners": 9.47,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.610583+00:00"
+      "updated_at": "2026-06-24T02:44:55.479142+00:00"
     },
     {
       "date": "2026-03-25",
@@ -3274,14 +3445,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-0",
       "score_hit": true,
       "predicted_corners": 9.22,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.682788+00:00"
+      "updated_at": "2026-06-24T02:44:55.555056+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3292,15 +3464,16 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
+        "0-2",
         "1-2",
-        "0-2"
+        "0-1"
       ],
       "actual_score": "1-2",
       "score_hit": true,
       "predicted_corners": 10.11,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.756864+00:00"
+      "updated_at": "2026-06-24T02:44:55.637973+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3312,14 +3485,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "1-2",
       "score_hit": false,
       "predicted_corners": 9.89,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.849542+00:00"
+      "updated_at": "2026-06-24T02:44:55.714592+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3331,14 +3505,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.922739+00:00"
+      "updated_at": "2026-06-24T02:44:55.794055+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3350,14 +3525,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
-        "3-0"
+        "3-0",
+        "1-0"
       ],
       "actual_score": "1-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 10.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:19.993020+00:00"
+      "updated_at": "2026-06-24T02:44:55.872091+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3369,14 +3545,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-3",
       "score_hit": false,
       "predicted_corners": 9.68,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.065365+00:00"
+      "updated_at": "2026-06-24T02:44:55.947751+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3388,14 +3565,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "1-2"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.71,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.137738+00:00"
+      "updated_at": "2026-06-24T02:44:56.025497+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3407,14 +3585,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "7-0",
       "score_hit": false,
       "predicted_corners": 9.47,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.205325+00:00"
+      "updated_at": "2026-06-24T02:44:56.099982+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3426,14 +3605,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 9.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.270996+00:00"
+      "updated_at": "2026-06-24T02:44:56.176052+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3445,14 +3625,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.16,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.343236+00:00"
+      "updated_at": "2026-06-24T02:44:56.261751+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3464,14 +3645,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "5-1",
       "score_hit": false,
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.423381+00:00"
+      "updated_at": "2026-06-24T02:44:56.343502+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3483,14 +3665,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "4-2",
       "score_hit": false,
       "predicted_corners": 8.81,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.498229+00:00"
+      "updated_at": "2026-06-24T02:44:56.431305+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3502,6 +3685,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-2",
+        "0-2",
         "0-1"
       ],
       "actual_score": "2-0",
@@ -3509,7 +3693,7 @@
       "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.566675+00:00"
+      "updated_at": "2026-06-24T02:44:56.505454+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3521,6 +3705,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-0",
+        "1-0",
         "3-0"
       ],
       "actual_score": "1-1",
@@ -3528,7 +3713,7 @@
       "predicted_corners": 10.44,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.651349+00:00"
+      "updated_at": "2026-06-24T02:44:56.581934+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3540,14 +3725,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "0-1",
       "score_hit": false,
       "predicted_corners": 9.7,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.719849+00:00"
+      "updated_at": "2026-06-24T02:44:56.659080+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3559,14 +3745,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-2",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 8.97,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.787638+00:00"
+      "updated_at": "2026-06-24T02:44:56.749906+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3578,14 +3765,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.08,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.859429+00:00"
+      "updated_at": "2026-06-24T02:44:56.828551+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3597,14 +3785,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:20.942750+00:00"
+      "updated_at": "2026-06-24T02:44:56.905714+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3616,14 +3805,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
-        "3-1"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "2-1",
       "score_hit": true,
       "predicted_corners": 10.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.031437+00:00"
+      "updated_at": "2026-06-24T02:44:56.982031+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3634,15 +3824,16 @@
       "actual_outcome": "П2",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "0-2",
       "score_hit": false,
       "predicted_corners": 9.5,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.109616+00:00"
+      "updated_at": "2026-06-24T02:44:57.057748+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3654,14 +3845,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-4",
       "score_hit": false,
       "predicted_corners": 9.12,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.182343+00:00"
+      "updated_at": "2026-06-24T02:44:57.137848+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3672,15 +3864,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "1-2",
-        "0-1"
+        "0-2",
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.53,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.255221+00:00"
+      "updated_at": "2026-06-24T02:44:57.216926+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3692,14 +3885,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "3-0",
-        "2-0"
+        "2-0",
+        "1-0"
       ],
       "actual_score": "3-0",
       "score_hit": true,
       "predicted_corners": 10.48,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.333010+00:00"
+      "updated_at": "2026-06-24T02:44:57.301702+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3711,14 +3905,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "3-4",
       "score_hit": false,
       "predicted_corners": 10.23,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.408975+00:00"
+      "updated_at": "2026-06-24T02:44:57.387954+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3730,6 +3925,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
+        "1-0",
         "2-0"
       ],
       "actual_score": "3-1",
@@ -3737,7 +3933,7 @@
       "predicted_corners": 9.84,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.486005+00:00"
+      "updated_at": "2026-06-24T02:44:57.472169+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3748,15 +3944,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.92,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.564594+00:00"
+      "updated_at": "2026-06-24T02:44:57.551477+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3768,14 +3965,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
-        "3-1"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "0-1",
       "score_hit": false,
       "predicted_corners": 10.0,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.636254+00:00"
+      "updated_at": "2026-06-24T02:44:57.627723+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3787,14 +3985,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-0",
       "score_hit": true,
       "predicted_corners": 9.22,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.717024+00:00"
+      "updated_at": "2026-06-24T02:44:57.705055+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3806,14 +4005,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "0-4",
       "score_hit": false,
       "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.803132+00:00"
+      "updated_at": "2026-06-24T02:44:57.781838+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3825,14 +4025,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
-        "0-2"
+        "0-2",
+        "0-1"
       ],
       "actual_score": "2-5",
       "score_hit": false,
       "predicted_corners": 10.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.889686+00:00"
+      "updated_at": "2026-06-24T02:44:57.861922+00:00"
     },
     {
       "date": "2026-03-29",
@@ -3844,14 +4045,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
-        "0-2"
+        "0-2",
+        "0-1"
       ],
       "actual_score": "1-3",
       "score_hit": false,
       "predicted_corners": 10.16,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:21.967512+00:00"
+      "updated_at": "2026-06-24T02:44:57.944831+00:00"
     },
     {
       "date": "2026-03-29",
@@ -3863,6 +4065,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
+        "2-0",
         "2-1"
       ],
       "actual_score": "0-1",
@@ -3870,7 +4073,7 @@
       "predicted_corners": 9.45,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.044945+00:00"
+      "updated_at": "2026-06-24T02:44:58.048672+00:00"
     },
     {
       "date": "2026-03-29",
@@ -3881,15 +4084,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-2",
         "1-2",
-        "0-2"
+        "0-1"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.128900+00:00"
+      "updated_at": "2026-06-24T02:44:58.132665+00:00"
     },
     {
       "date": "2026-03-30",
@@ -3900,15 +4104,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.206966+00:00"
+      "updated_at": "2026-06-24T02:44:58.219402+00:00"
     },
     {
       "date": "2026-03-30",
@@ -3920,6 +4125,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
+        "1-0",
         "3-0"
       ],
       "actual_score": "2-1",
@@ -3927,7 +4133,7 @@
       "predicted_corners": 9.88,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.285260+00:00"
+      "updated_at": "2026-06-24T02:44:58.308202+00:00"
     },
     {
       "date": "2026-03-30",
@@ -3939,14 +4145,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 9.33,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.352838+00:00"
+      "updated_at": "2026-06-24T02:44:58.392842+00:00"
     },
     {
       "date": "2026-03-30",
@@ -3957,15 +4164,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.51,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.421811+00:00"
+      "updated_at": "2026-06-24T02:44:58.472854+00:00"
     },
     {
       "date": "2026-03-31",
@@ -3977,14 +4185,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 10.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.493254+00:00"
+      "updated_at": "2026-06-24T02:44:58.554894+00:00"
     },
     {
       "date": "2026-03-31",
@@ -3995,15 +4204,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "5-0",
       "score_hit": false,
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.573626+00:00"
+      "updated_at": "2026-06-24T02:44:58.655893+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4015,14 +4225,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "5-1",
       "score_hit": false,
       "predicted_corners": 9.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.655403+00:00"
+      "updated_at": "2026-06-24T02:44:58.737254+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4034,14 +4245,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
+        "1-0",
         "3-0"
       ],
       "actual_score": "1-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.730242+00:00"
+      "updated_at": "2026-06-24T02:44:58.814603+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4052,15 +4264,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "2-0",
         "3-0",
-        "2-0"
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 10.01,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.810120+00:00"
+      "updated_at": "2026-06-24T02:44:58.893853+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4072,14 +4285,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.23,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.889003+00:00"
+      "updated_at": "2026-06-24T02:44:58.971908+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4091,6 +4305,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
+        "2-0",
         "3-0"
       ],
       "actual_score": "2-2",
@@ -4098,7 +4313,7 @@
       "predicted_corners": 10.24,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:22.964862+00:00"
+      "updated_at": "2026-06-24T02:44:59.052029+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4109,6 +4324,7 @@
       "actual_outcome": "П2",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
         "2-1"
       ],
@@ -4117,7 +4333,7 @@
       "predicted_corners": 10.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.044706+00:00"
+      "updated_at": "2026-06-24T02:44:59.134279+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4128,15 +4344,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.120788+00:00"
+      "updated_at": "2026-06-24T02:44:59.221535+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4148,14 +4365,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "5-0",
       "score_hit": false,
       "predicted_corners": 9.19,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.193607+00:00"
+      "updated_at": "2026-06-24T02:44:59.307022+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4167,14 +4385,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.267910+00:00"
+      "updated_at": "2026-06-24T02:44:59.404146+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4186,14 +4405,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.3,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.345961+00:00"
+      "updated_at": "2026-06-24T02:44:59.494772+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4205,14 +4425,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 9.88,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.426028+00:00"
+      "updated_at": "2026-06-24T02:44:59.577987+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4224,14 +4445,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-1",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.14,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.506985+00:00"
+      "updated_at": "2026-06-24T02:44:59.656116+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4242,15 +4464,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.71,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.586965+00:00"
+      "updated_at": "2026-06-24T02:44:59.749956+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4262,6 +4485,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
+        "1-0",
         "2-0"
       ],
       "actual_score": "0-0",
@@ -4269,7 +4493,7 @@
       "predicted_corners": 10.33,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.665644+00:00"
+      "updated_at": "2026-06-24T02:44:59.827501+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4281,14 +4505,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.751731+00:00"
+      "updated_at": "2026-06-24T02:44:59.909737+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4300,14 +4525,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.835662+00:00"
+      "updated_at": "2026-06-24T02:44:59.991522+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4319,6 +4545,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
+        "0-2",
         "1-2"
       ],
       "actual_score": "1-2",
@@ -4326,7 +4553,7 @@
       "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.921494+00:00"
+      "updated_at": "2026-06-24T02:45:00.087185+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4337,6 +4564,7 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
         "2-1"
       ],
@@ -4345,7 +4573,7 @@
       "predicted_corners": 10.13,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:23.999591+00:00"
+      "updated_at": "2026-06-24T02:45:00.167415+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4357,14 +4585,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.086022+00:00"
+      "updated_at": "2026-06-24T02:45:00.273404+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4376,6 +4605,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
+        "0-1",
         "0-2"
       ],
       "actual_score": "0-2",
@@ -4383,7 +4613,7 @@
       "predicted_corners": 10.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.168760+00:00"
+      "updated_at": "2026-06-24T02:45:00.363862+00:00"
     },
     {
       "date": "2026-04-01",
@@ -4394,15 +4624,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
-        "1-2",
-        "0-2"
+        "0-2",
+        "0-1",
+        "1-2"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.69,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.247526+00:00"
+      "updated_at": "2026-06-24T02:45:00.458216+00:00"
     },
     {
       "date": "2026-04-01",
@@ -4414,6 +4645,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
+        "0-2",
         "1-2"
       ],
       "actual_score": "0-0",
@@ -4421,7 +4653,7 @@
       "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.327756+00:00"
+      "updated_at": "2026-06-24T02:45:00.540331+00:00"
     },
     {
       "date": "2026-04-01",
@@ -4433,14 +4665,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 8.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.405839+00:00"
+      "updated_at": "2026-06-24T02:45:00.633170+00:00"
     },
     {
       "date": "2026-04-01",
@@ -4452,6 +4685,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
+        "0-1",
         "1-2"
       ],
       "actual_score": "1-1",
@@ -4459,7 +4693,7 @@
       "predicted_corners": 9.64,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.491605+00:00"
+      "updated_at": "2026-06-24T02:45:00.718648+00:00"
     },
     {
       "date": "2026-05-23",
@@ -4471,14 +4705,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "2-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 8.93,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.568287+00:00"
+      "updated_at": "2026-06-24T02:45:00.799404+00:00"
     },
     {
       "date": "2026-05-26",
@@ -4490,14 +4725,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "5-0",
       "score_hit": false,
       "predicted_corners": 9.24,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.642655+00:00"
+      "updated_at": "2026-06-24T02:45:00.879687+00:00"
     },
     {
       "date": "2026-05-28",
@@ -4509,6 +4745,7 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
+        "0-1",
         "1-2"
       ],
       "actual_score": "1-0",
@@ -4516,7 +4753,7 @@
       "predicted_corners": 9.74,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.721339+00:00"
+      "updated_at": "2026-06-24T02:45:00.964448+00:00"
     },
     {
       "date": "2026-05-28",
@@ -4528,14 +4765,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.819246+00:00"
+      "updated_at": "2026-06-24T02:45:01.051469+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4547,14 +4785,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 8.94,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.895650+00:00"
+      "updated_at": "2026-06-24T02:45:01.144984+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4565,15 +4804,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.58,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:24.970388+00:00"
+      "updated_at": "2026-06-24T02:45:01.233080+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4585,14 +4825,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.07,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.042909+00:00"
+      "updated_at": "2026-06-24T02:45:01.318875+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4604,14 +4845,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.32,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.112089+00:00"
+      "updated_at": "2026-06-24T02:45:01.407367+00:00"
     },
     {
       "date": "2026-05-30",
@@ -4623,14 +4865,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.184210+00:00"
+      "updated_at": "2026-06-24T02:45:01.493336+00:00"
     },
     {
       "date": "2026-05-30",
@@ -4642,14 +4885,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
-        "3-0"
+        "1-0",
+        "2-1"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 9.62,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.255869+00:00"
+      "updated_at": "2026-06-24T02:45:01.575531+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4660,15 +4904,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "6-2",
       "score_hit": false,
       "predicted_corners": 9.66,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.327395+00:00"
+      "updated_at": "2026-06-24T02:45:01.655721+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4679,15 +4924,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 9.81,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.400026+00:00"
+      "updated_at": "2026-06-24T02:45:01.740884+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4699,14 +4945,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-1",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.474763+00:00"
+      "updated_at": "2026-06-24T02:45:01.838026+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4717,6 +4964,7 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
         "3-0"
       ],
@@ -4725,7 +4973,7 @@
       "predicted_corners": 10.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.555758+00:00"
+      "updated_at": "2026-06-24T02:45:01.920605+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4736,15 +4984,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.63,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.633705+00:00"
+      "updated_at": "2026-06-24T02:45:02.000196+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4756,14 +5005,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.24,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.715029+00:00"
+      "updated_at": "2026-06-24T02:45:02.081608+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4775,14 +5025,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "5-0",
       "score_hit": false,
       "predicted_corners": 9.03,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.797252+00:00"
+      "updated_at": "2026-06-24T02:45:02.170481+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4793,15 +5044,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.873948+00:00"
+      "updated_at": "2026-06-24T02:45:02.261987+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4812,15 +5064,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 9.7,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:25.955983+00:00"
+      "updated_at": "2026-06-24T02:45:02.351697+00:00"
     },
     {
       "date": "2026-06-01",
@@ -4831,15 +5084,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.53,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.026314+00:00"
+      "updated_at": "2026-06-24T02:45:02.448377+00:00"
     },
     {
       "date": "2026-06-01",
@@ -4850,6 +5104,7 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
         "3-0"
       ],
@@ -4858,7 +5113,7 @@
       "predicted_corners": 9.83,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.096528+00:00"
+      "updated_at": "2026-06-24T02:45:02.529522+00:00"
     },
     {
       "date": "2026-06-01",
@@ -4869,6 +5124,7 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
         "2-0"
       ],
@@ -4877,7 +5133,7 @@
       "predicted_corners": 9.95,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.185371+00:00"
+      "updated_at": "2026-06-24T02:45:02.610291+00:00"
     },
     {
       "date": "2026-06-01",
@@ -4889,14 +5145,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.5,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.258416+00:00"
+      "updated_at": "2026-06-24T02:45:02.691677+00:00"
     },
     {
       "date": "2026-06-02",
@@ -4908,14 +5165,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.6,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.330178+00:00"
+      "updated_at": "2026-06-24T02:45:02.778473+00:00"
     },
     {
       "date": "2026-06-02",
@@ -4927,6 +5185,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
+        "0-1",
         "0-2"
       ],
       "actual_score": "0-2",
@@ -4934,7 +5193,7 @@
       "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.401943+00:00"
+      "updated_at": "2026-06-24T02:45:02.859987+00:00"
     },
     {
       "date": "2026-06-02",
@@ -4946,14 +5205,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.476944+00:00"
+      "updated_at": "2026-06-24T02:45:02.943639+00:00"
     },
     {
       "date": "2026-06-02",
@@ -4965,14 +5225,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.22,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.552898+00:00"
+      "updated_at": "2026-06-24T02:45:03.022656+00:00"
     },
     {
       "date": "2026-06-03",
@@ -4983,6 +5244,7 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
         "2-0"
       ],
@@ -4991,7 +5253,7 @@
       "predicted_corners": 9.71,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.627252+00:00"
+      "updated_at": "2026-06-24T02:45:03.101683+00:00"
     },
     {
       "date": "2026-06-03",
@@ -5003,14 +5265,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.702711+00:00"
+      "updated_at": "2026-06-24T02:45:03.186265+00:00"
     },
     {
       "date": "2026-06-03",
@@ -5022,14 +5285,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "0-1",
       "score_hit": false,
       "predicted_corners": 9.68,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.776926+00:00"
+      "updated_at": "2026-06-24T02:45:03.273954+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5040,15 +5304,16 @@
       "actual_outcome": "П2",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "1-2",
       "score_hit": false,
       "predicted_corners": 9.84,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.853700+00:00"
+      "updated_at": "2026-06-24T02:45:03.370066+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5060,14 +5325,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "2-0",
       "score_hit": true,
       "predicted_corners": 8.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.925190+00:00"
+      "updated_at": "2026-06-24T02:45:03.458432+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5079,14 +5345,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "4-2",
       "score_hit": false,
       "predicted_corners": 9.21,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:26.994591+00:00"
+      "updated_at": "2026-06-24T02:45:03.540489+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5097,15 +5364,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.24,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.067053+00:00"
+      "updated_at": "2026-06-24T02:45:03.622188+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5117,14 +5385,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.57,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.140694+00:00"
+      "updated_at": "2026-06-24T02:45:03.702201+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5135,15 +5404,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.74,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.214636+00:00"
+      "updated_at": "2026-06-24T02:45:03.781793+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5155,14 +5425,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.57,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.286730+00:00"
+      "updated_at": "2026-06-24T02:45:03.866189+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5174,6 +5445,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
+        "1-0",
         "3-0"
       ],
       "actual_score": "3-1",
@@ -5181,7 +5453,7 @@
       "predicted_corners": 9.87,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.364472+00:00"
+      "updated_at": "2026-06-24T02:45:03.946764+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5193,14 +5465,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "5-1",
       "score_hit": false,
       "predicted_corners": 9.53,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.449119+00:00"
+      "updated_at": "2026-06-24T02:45:04.029160+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5212,14 +5485,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.547232+00:00"
+      "updated_at": "2026-06-24T02:45:04.107678+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5231,6 +5505,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
+        "0-1",
         "1-2"
       ],
       "actual_score": "0-3",
@@ -5238,7 +5513,7 @@
       "predicted_corners": 9.78,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.638345+00:00"
+      "updated_at": "2026-06-24T02:45:04.192099+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5249,6 +5524,7 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
         "2-0"
       ],
@@ -5257,7 +5533,7 @@
       "predicted_corners": 9.58,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.728847+00:00"
+      "updated_at": "2026-06-24T02:45:04.293897+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5268,15 +5544,16 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
+        "0-1",
         "0-2",
-        "0-1"
+        "1-2"
       ],
       "actual_score": "0-4",
       "score_hit": false,
       "predicted_corners": 9.34,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.820708+00:00"
+      "updated_at": "2026-06-24T02:45:04.394413+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5287,15 +5564,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "2-1",
       "score_hit": true,
       "predicted_corners": 9.89,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.898059+00:00"
+      "updated_at": "2026-06-24T02:45:04.489030+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5306,15 +5584,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.87,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:27.982361+00:00"
+      "updated_at": "2026-06-24T02:45:04.581732+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5326,14 +5605,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "1-2",
       "score_hit": false,
       "predicted_corners": 9.19,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.072008+00:00"
+      "updated_at": "2026-06-24T02:45:04.670000+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5345,14 +5625,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 8.93,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.152016+00:00"
+      "updated_at": "2026-06-24T02:45:04.757377+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5363,15 +5644,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.66,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.231476+00:00"
+      "updated_at": "2026-06-24T02:45:04.855781+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5383,6 +5665,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
+        "1-0",
         "2-0"
       ],
       "actual_score": "2-1",
@@ -5390,7 +5673,7 @@
       "predicted_corners": 9.82,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.306861+00:00"
+      "updated_at": "2026-06-24T02:45:04.942886+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5402,14 +5685,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.11,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.381846+00:00"
+      "updated_at": "2026-06-24T02:45:05.027148+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5421,14 +5705,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.81,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.463129+00:00"
+      "updated_at": "2026-06-24T02:45:05.111513+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5440,14 +5725,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
-        "0-2"
+        "0-2",
+        "0-1"
       ],
       "actual_score": "1-2",
       "score_hit": true,
       "predicted_corners": 10.36,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.543310+00:00"
+      "updated_at": "2026-06-24T02:45:05.193414+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5459,14 +5745,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "1-2",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.95,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.627833+00:00"
+      "updated_at": "2026-06-24T02:45:05.283371+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5478,14 +5765,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-2",
-        "0-1"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.709668+00:00"
+      "updated_at": "2026-06-24T02:45:05.370859+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5497,6 +5785,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
+        "1-0",
         "2-0"
       ],
       "actual_score": "2-0",
@@ -5504,7 +5793,7 @@
       "predicted_corners": 9.89,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.792705+00:00"
+      "updated_at": "2026-06-24T02:45:05.457587+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5516,14 +5805,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-1",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.879990+00:00"
+      "updated_at": "2026-06-24T02:45:05.547239+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5535,14 +5825,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 9.46,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:28.964080+00:00"
+      "updated_at": "2026-06-24T02:45:05.632779+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5553,15 +5844,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.74,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.044799+00:00"
+      "updated_at": "2026-06-24T02:45:05.722119+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5573,14 +5865,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.8,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.124063+00:00"
+      "updated_at": "2026-06-24T02:45:05.808082+00:00"
     },
     {
       "date": "2026-06-08",
@@ -5592,14 +5885,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.194889+00:00"
+      "updated_at": "2026-06-24T02:45:05.891098+00:00"
     },
     {
       "date": "2026-06-08",
@@ -5611,14 +5905,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-1",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.268189+00:00"
+      "updated_at": "2026-06-24T02:45:05.976851+00:00"
     },
     {
       "date": "2026-06-09",
@@ -5630,14 +5925,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-2",
       "score_hit": false,
       "predicted_corners": 9.36,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.344350+00:00"
+      "updated_at": "2026-06-24T02:45:06.061620+00:00"
     },
     {
       "date": "2026-06-09",
@@ -5649,14 +5945,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-3"
       ],
       "actual_score": "1-3",
       "score_hit": false,
       "predicted_corners": 9.62,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.421107+00:00"
+      "updated_at": "2026-06-24T02:45:06.142951+00:00"
     },
     {
       "date": "2026-06-09",
@@ -5668,14 +5965,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.500778+00:00"
+      "updated_at": "2026-06-24T02:45:06.242158+00:00"
     },
     {
       "date": "2026-06-10",
@@ -5686,15 +5984,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "3-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 9.47,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.584973+00:00"
+      "updated_at": "2026-06-24T02:45:06.338971+00:00"
     },
     {
       "date": "2026-06-10",
@@ -5705,6 +6004,7 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
         "3-0"
       ],
@@ -5713,7 +6013,7 @@
       "predicted_corners": 9.88,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.662373+00:00"
+      "updated_at": "2026-06-24T02:45:06.429846+00:00"
     },
     {
       "date": "2026-06-10",
@@ -5725,14 +6025,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "0-2",
       "score_hit": false,
       "predicted_corners": 9.12,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.738646+00:00"
+      "updated_at": "2026-06-24T02:45:06.521018+00:00"
     },
     {
       "date": "2026-06-10",
@@ -5744,14 +6045,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "2-1",
       "score_hit": true,
       "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.816157+00:00"
+      "updated_at": "2026-06-24T02:45:06.604133+00:00"
     },
     {
       "date": "2026-06-11",
@@ -5763,14 +6065,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "0-3"
       ],
       "actual_score": "0-4",
       "score_hit": false,
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T02:10:29.894043+00:00"
+      "updated_at": "2026-06-24T02:45:06.689493+00:00"
     },
     {
       "date": "2026-06-11",
@@ -5782,14 +6085,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-0",
       "score_hit": true,
       "predicted_corners": 9.16,
       "actual_corners": 4.0,
       "corner_error": -5.16,
-      "updated_at": "2026-06-24T02:10:29.971059+00:00"
+      "updated_at": "2026-06-24T02:45:06.773585+00:00"
     },
     {
       "date": "2026-06-12",
@@ -5801,14 +6105,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.69,
       "actual_corners": 13.0,
       "corner_error": 3.31,
-      "updated_at": "2026-06-24T02:10:30.047260+00:00"
+      "updated_at": "2026-06-24T02:45:06.857290+00:00"
     },
     {
       "date": "2026-06-12",
@@ -5820,14 +6125,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-2",
-        "0-1"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "2-1",
       "score_hit": false,
       "predicted_corners": 9.36,
       "actual_corners": 9.0,
       "corner_error": -0.36,
-      "updated_at": "2026-06-24T02:10:30.136446+00:00"
+      "updated_at": "2026-06-24T02:45:06.944667+00:00"
     },
     {
       "date": "2026-06-13",
@@ -5839,14 +6145,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-2",
-        "0-1"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.78,
       "actual_corners": 8.0,
       "corner_error": -1.78,
-      "updated_at": "2026-06-24T02:10:30.216341+00:00"
+      "updated_at": "2026-06-24T02:45:07.049935+00:00"
     },
     {
       "date": "2026-06-13",
@@ -5857,15 +6164,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-1",
         "0-2",
-        "0-1"
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.53,
       "actual_corners": 13.0,
       "corner_error": 3.47,
-      "updated_at": "2026-06-24T02:10:30.290598+00:00"
+      "updated_at": "2026-06-24T02:45:07.141143+00:00"
     },
     {
       "date": "2026-06-13",
@@ -5877,14 +6185,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 9.62,
       "actual_corners": 4.0,
       "corner_error": -5.62,
-      "updated_at": "2026-06-24T02:10:30.369723+00:00"
+      "updated_at": "2026-06-24T02:45:07.238162+00:00"
     },
     {
       "date": "2026-06-14",
@@ -5896,14 +6205,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-1"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "2-0",
       "score_hit": false,
       "predicted_corners": 9.91,
       "actual_corners": 13.0,
       "corner_error": 3.09,
-      "updated_at": "2026-06-24T02:10:30.444063+00:00"
+      "updated_at": "2026-06-24T02:45:07.338060+00:00"
     },
     {
       "date": "2026-06-14",
@@ -5914,15 +6224,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "3-0",
-        "2-0"
+        "2-0",
+        "2-1",
+        "3-0"
       ],
       "actual_score": "7-1",
       "score_hit": false,
       "predicted_corners": 10.24,
       "actual_corners": 9.0,
       "corner_error": -1.24,
-      "updated_at": "2026-06-24T02:10:30.525730+00:00"
+      "updated_at": "2026-06-24T02:45:07.447074+00:00"
     },
     {
       "date": "2026-06-14",
@@ -5934,14 +6245,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
-        "0-1"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 9.46,
       "actual_corners": 7.0,
       "corner_error": -2.46,
-      "updated_at": "2026-06-24T02:10:30.603942+00:00"
+      "updated_at": "2026-06-24T02:45:07.561045+00:00"
     },
     {
       "date": "2026-06-14",
@@ -5953,14 +6265,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 9.5,
       "actual_corners": 9.0,
       "corner_error": -0.5,
-      "updated_at": "2026-06-24T02:10:30.677624+00:00"
+      "updated_at": "2026-06-24T02:45:07.681683+00:00"
     },
     {
       "date": "2026-06-14",
@@ -5972,14 +6285,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.46,
       "actual_corners": 9.0,
       "corner_error": -0.46,
-      "updated_at": "2026-06-24T02:10:30.757415+00:00"
+      "updated_at": "2026-06-24T02:45:07.796157+00:00"
     },
     {
       "date": "2026-06-15",
@@ -5990,6 +6304,7 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
         "2-0"
       ],
@@ -5998,7 +6313,7 @@
       "predicted_corners": 9.75,
       "actual_corners": 9.0,
       "corner_error": -0.75,
-      "updated_at": "2026-06-24T02:10:30.833216+00:00"
+      "updated_at": "2026-06-24T02:45:07.906089+00:00"
     },
     {
       "date": "2026-06-15",
@@ -6010,14 +6325,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.45,
       "actual_corners": 18.0,
       "corner_error": 8.55,
-      "updated_at": "2026-06-24T02:10:30.913680+00:00"
+      "updated_at": "2026-06-24T02:45:07.998024+00:00"
     },
     {
       "date": "2026-06-15",
@@ -6028,15 +6344,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 9.9,
       "actual_corners": 12.0,
       "corner_error": 2.1,
-      "updated_at": "2026-06-24T02:10:30.991055+00:00"
+      "updated_at": "2026-06-24T02:45:08.096452+00:00"
     },
     {
       "date": "2026-06-15",
@@ -6047,15 +6364,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-1",
         "1-2",
-        "0-1"
+        "0-2"
       ],
       "actual_score": "5-1",
       "score_hit": false,
       "predicted_corners": 9.55,
       "actual_corners": 6.0,
       "corner_error": -3.55,
-      "updated_at": "2026-06-24T02:10:31.069813+00:00"
+      "updated_at": "2026-06-24T02:45:08.203353+00:00"
     },
     {
       "date": "2026-06-16",
@@ -6066,15 +6384,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "3-1",
       "score_hit": false,
       "predicted_corners": 9.75,
       "actual_corners": 10.0,
       "corner_error": 0.25,
-      "updated_at": "2026-06-24T02:10:31.141926+00:00"
+      "updated_at": "2026-06-24T02:45:08.309965+00:00"
     },
     {
       "date": "2026-06-16",
@@ -6086,14 +6405,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 9.27,
       "actual_corners": 5.0,
       "corner_error": -4.27,
-      "updated_at": "2026-06-24T02:10:31.217074+00:00"
+      "updated_at": "2026-06-24T02:45:08.415274+00:00"
     },
     {
       "date": "2026-06-16",
@@ -6105,14 +6425,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-4",
       "score_hit": false,
       "predicted_corners": 9.37,
       "actual_corners": 7.0,
       "corner_error": -2.37,
-      "updated_at": "2026-06-24T02:10:31.299698+00:00"
+      "updated_at": "2026-06-24T02:45:08.522441+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6124,14 +6445,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 9.45,
       "actual_corners": 4.0,
       "corner_error": -5.45,
-      "updated_at": "2026-06-24T02:10:31.381974+00:00"
+      "updated_at": "2026-06-24T02:45:08.625434+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6142,6 +6464,7 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
         "3-0"
       ],
@@ -6150,7 +6473,7 @@
       "predicted_corners": 9.54,
       "actual_corners": 7.0,
       "corner_error": -2.54,
-      "updated_at": "2026-06-24T02:10:31.481739+00:00"
+      "updated_at": "2026-06-24T02:45:08.719366+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6161,15 +6484,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "4-2",
       "score_hit": false,
       "predicted_corners": 9.66,
       "actual_corners": 10.0,
       "corner_error": 0.34,
-      "updated_at": "2026-06-24T02:10:31.574754+00:00"
+      "updated_at": "2026-06-24T02:45:08.820786+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6180,15 +6504,16 @@
       "actual_outcome": "П1",
       "outcome_hit": false,
       "predicted_scores": [
+        "0-1",
         "1-2",
-        "0-1"
+        "0-2"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.1,
       "actual_corners": 4.0,
       "corner_error": -5.1,
-      "updated_at": "2026-06-24T02:10:31.686128+00:00"
+      "updated_at": "2026-06-24T02:45:08.927955+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6200,14 +6525,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 9.26,
       "actual_corners": 9.0,
       "corner_error": -0.26,
-      "updated_at": "2026-06-24T02:10:31.772907+00:00"
+      "updated_at": "2026-06-24T02:45:09.035269+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6219,14 +6545,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "6-0",
       "score_hit": false,
       "predicted_corners": 13.22,
       "actual_corners": 20.0,
       "corner_error": 6.78,
-      "updated_at": "2026-06-24T02:10:31.863625+00:00"
+      "updated_at": "2026-06-24T02:45:09.146080+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6238,14 +6565,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
       "predicted_corners": 6.68,
       "actual_corners": 10.0,
       "corner_error": 3.32,
-      "updated_at": "2026-06-24T02:10:31.944689+00:00"
+      "updated_at": "2026-06-24T02:45:09.253724+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6257,14 +6585,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
       "predicted_corners": 13.46,
       "actual_corners": 10.0,
       "corner_error": -3.46,
-      "updated_at": "2026-06-24T02:10:32.026978+00:00"
+      "updated_at": "2026-06-24T02:45:09.362858+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6275,15 +6604,16 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "1-2",
-        "0-2"
+        "0-1",
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-3",
       "score_hit": false,
       "predicted_corners": 9.44,
       "actual_corners": 7.0,
       "corner_error": -2.44,
-      "updated_at": "2026-06-24T02:10:32.111276+00:00"
+      "updated_at": "2026-06-24T02:45:09.465588+00:00"
     },
     {
       "date": "2026-06-19",
@@ -6295,14 +6625,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
       "predicted_corners": 6.43,
       "actual_corners": 3.0,
       "corner_error": -3.43,
-      "updated_at": "2026-06-24T02:10:32.194273+00:00"
+      "updated_at": "2026-06-24T02:45:09.569955+00:00"
     },
     {
       "date": "2026-06-19",
@@ -6314,14 +6645,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
-        "0-1"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 7.63,
       "actual_corners": 7.0,
       "corner_error": -0.63,
-      "updated_at": "2026-06-24T02:10:32.273007+00:00"
+      "updated_at": "2026-06-24T02:45:09.665257+00:00"
     },
     {
       "date": "2026-06-19",
@@ -6332,15 +6664,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "2-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 8.85,
       "actual_corners": 11.0,
       "corner_error": 2.15,
-      "updated_at": "2026-06-24T02:10:32.350874+00:00"
+      "updated_at": "2026-06-24T02:45:09.750617+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6351,15 +6684,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 7.8,
       "actual_corners": 8.0,
       "corner_error": 0.2,
-      "updated_at": "2026-06-24T02:10:32.434244+00:00"
+      "updated_at": "2026-06-24T02:45:09.838479+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6371,6 +6705,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
+        "1-0",
         "2-0"
       ],
       "actual_score": "2-1",
@@ -6378,7 +6713,7 @@
       "predicted_corners": 9.81,
       "actual_corners": 11.0,
       "corner_error": 1.19,
-      "updated_at": "2026-06-24T02:10:32.516801+00:00"
+      "updated_at": "2026-06-24T02:45:09.926175+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6390,6 +6725,7 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
+        "1-0",
         "2-0"
       ],
       "actual_score": "5-1",
@@ -6397,7 +6733,7 @@
       "predicted_corners": 8.03,
       "actual_corners": 7.0,
       "corner_error": -1.03,
-      "updated_at": "2026-06-24T02:10:32.596598+00:00"
+      "updated_at": "2026-06-24T02:45:10.043074+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6408,6 +6744,7 @@
       "actual_outcome": "П2",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
         "2-0"
       ],
@@ -6416,7 +6753,7 @@
       "predicted_corners": 9.13,
       "actual_corners": 12.0,
       "corner_error": 2.87,
-      "updated_at": "2026-06-24T02:10:32.685144+00:00"
+      "updated_at": "2026-06-24T02:45:10.136534+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6427,15 +6764,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 7.31,
       "actual_corners": 6.0,
       "corner_error": -1.31,
-      "updated_at": "2026-06-24T02:10:32.782402+00:00"
+      "updated_at": "2026-06-24T02:45:10.223392+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6446,6 +6784,7 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
         "2-1"
       ],
@@ -6454,7 +6793,7 @@
       "predicted_corners": 9.51,
       "actual_corners": 9.0,
       "corner_error": -0.51,
-      "updated_at": "2026-06-24T02:10:32.866441+00:00"
+      "updated_at": "2026-06-24T02:45:10.325511+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6466,14 +6805,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "4-0",
       "score_hit": false,
       "predicted_corners": 15.24,
       "actual_corners": 7.0,
       "corner_error": -8.24,
-      "updated_at": "2026-06-24T02:10:32.946542+00:00"
+      "updated_at": "2026-06-24T02:45:10.413405+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6484,15 +6824,16 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
+        "0-1",
         "0-2",
-        "0-1"
+        "1-2"
       ],
       "actual_score": "0-4",
       "score_hit": false,
       "predicted_corners": 7.37,
       "actual_corners": 8.0,
       "corner_error": 0.63,
-      "updated_at": "2026-06-24T02:10:33.042226+00:00"
+      "updated_at": "2026-06-24T02:45:10.504313+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6504,14 +6845,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "2-2",
       "score_hit": false,
       "predicted_corners": 15.32,
       "actual_corners": 15.0,
       "corner_error": -0.32,
-      "updated_at": "2026-06-24T02:10:33.136945+00:00"
+      "updated_at": "2026-06-24T02:45:10.600706+00:00"
     },
     {
       "date": "2026-06-22",
@@ -6523,14 +6865,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "2-0",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 5.65,
       "actual_corners": 4.0,
       "corner_error": -1.65,
-      "updated_at": "2026-06-24T02:10:33.236123+00:00"
+      "updated_at": "2026-06-24T02:45:10.703385+00:00"
     },
     {
       "date": "2026-06-22",
@@ -6541,15 +6884,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "2-1"
       ],
       "actual_score": "3-0",
       "score_hit": false,
       "predicted_corners": 8.64,
       "actual_corners": 6.0,
       "corner_error": -2.64,
-      "updated_at": "2026-06-24T02:10:33.318064+00:00"
+      "updated_at": "2026-06-24T02:45:10.801754+00:00"
     },
     {
       "date": "2026-06-22",
@@ -6561,14 +6905,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-1",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "1-3",
       "score_hit": false,
       "predicted_corners": 6.96,
       "actual_corners": 8.0,
       "corner_error": 1.04,
-      "updated_at": "2026-06-24T02:10:33.401525+00:00"
+      "updated_at": "2026-06-24T02:45:10.899262+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6579,15 +6924,16 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
+        "1-0",
         "2-0",
-        "1-0"
+        "3-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
       "predicted_corners": 8.57,
       "actual_corners": 11.0,
       "corner_error": 2.43,
-      "updated_at": "2026-06-24T02:10:33.488972+00:00"
+      "updated_at": "2026-06-24T02:45:10.995343+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6598,15 +6944,16 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
+        "0-1",
         "0-2",
-        "0-1"
+        "1-2"
       ],
       "actual_score": "1-2",
-      "score_hit": false,
+      "score_hit": true,
       "predicted_corners": 5.6,
       "actual_corners": 11.0,
       "corner_error": 5.4,
-      "updated_at": "2026-06-24T02:10:33.577358+00:00"
+      "updated_at": "2026-06-24T02:45:11.090729+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6617,15 +6964,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
+        "1-0",
         "2-1",
-        "1-0"
+        "2-0"
       ],
       "actual_score": "3-2",
       "score_hit": false,
       "predicted_corners": 8.87,
       "actual_corners": 9.0,
       "corner_error": 0.13,
-      "updated_at": "2026-06-24T02:10:33.677874+00:00"
+      "updated_at": "2026-06-24T02:45:11.183461+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6637,14 +6985,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-2",
-        "0-1"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "0-1",
       "score_hit": true,
       "predicted_corners": 7.2,
       "actual_corners": 9.0,
       "corner_error": 1.8,
-      "updated_at": "2026-06-24T02:10:33.767428+00:00"
+      "updated_at": "2026-06-24T02:45:11.276599+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6656,14 +7005,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "5-0",
       "score_hit": false,
       "predicted_corners": 8.13,
       "actual_corners": 5.0,
       "corner_error": -3.13,
-      "updated_at": "2026-06-24T02:10:33.849890+00:00"
+      "updated_at": "2026-06-24T02:45:11.374791+00:00"
     }
   ],
   "trained_match_keys": [

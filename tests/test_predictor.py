@@ -29,12 +29,19 @@ class PredictorTests(unittest.TestCase):
             home, away = parse_matchup("Англия, Гана", store.resolver)
             prediction = MatchPredictor(store).predict(home, away, remember=False)
             self.assertIn(prediction.market_pick, {"П1", "X", "П2"})
-            self.assertEqual(len(prediction.exact_scores), 2)
+            self.assertEqual(len(prediction.exact_scores), 3)
+            self.assertEqual(len(prediction.exact_score_probabilities), 3)
+            self.assertIn("1X", {item["code"] for item in prediction.markets})
+            self.assertIn("X2", {item["code"] for item in prediction.markets})
             self.assertGreater(prediction.predicted_corners, 0)
             self.assertEqual(prediction.match_context["competition"], "FIFA World Cup")
             self.assertIn("formation", prediction.home_tactics)
             self.assertIn("tactical_matchup", prediction.to_dict())
+            self.assertIn("result_summary", prediction.to_dict())
             self.assertIn("data_quality", prediction.to_dict())
+            for item in prediction.exact_score_probabilities:
+                self.assertGreaterEqual(item["probability"], 0)
+                self.assertLessEqual(item["probability"], 1)
             for score in prediction.exact_scores:
                 home_goals, away_goals = map(int, score.split("-"))
                 if prediction.market_pick == "П1":
@@ -85,8 +92,25 @@ class PredictorTests(unittest.TestCase):
             store.save_model_state(state)
             home_stats = TeamStats(team="Home", sample_size=10, wins=7, draws=2, losses=1, clean_sheets=6)
             away_stats = TeamStats(team="Away", sample_size=10, wins=2, draws=2, losses=6, failed_to_score=4)
-            scores = MatchPredictor(store)._top_scores(1.35, 0.55, "П1", home_stats, away_stats)
+            scores = [item["score"] for item in MatchPredictor(store)._top_scores(1.35, 0.55, "П1", home_stats, away_stats)]
             self.assertIn("2-0", scores)
+
+    def test_result_summary_completed_fixture(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            fixture = {
+                "date": "2099-01-01",
+                "home_goals": 2,
+                "away_goals": 1,
+                "home_corners": 5,
+                "away_corners": 4,
+                "completed": True,
+            }
+            prediction = MatchPredictor(store).predict("England", "Ghana", fixture=fixture, remember=False)
+            data = prediction.to_dict()
+            self.assertEqual(data["result_summary"]["status"], "completed")
+            self.assertEqual(data["result_summary"]["actual"]["score"], "2-1")
+            self.assertIn("predicted", data["result_summary"])
 
     def test_learning_records_review(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -113,9 +137,22 @@ class PredictorTests(unittest.TestCase):
         self.assertTrue(fixture["completed"])
         self.assertEqual(fixture["home_goals"], 1)
         self.assertEqual(fixture["away_goals"], 2)
+        self.assertFalse(fixture["in_progress"])
         self.assertEqual(fixture["home_corners"], 4)
         self.assertEqual(fixture["away_corners"], 6)
         self.assertEqual(fixture["away_possession"], 58)
+
+    def test_espn_fixture_keeps_live_score_for_running_match(self):
+        event = sample_espn_event()
+        status_type = event["competitions"][0]["status"]["type"]
+        status_type.update({"name": "STATUS_SECOND_HALF", "state": "in", "completed": False, "shortDetail": "62'"})
+        provider = EspnWorldCupProvider()
+        fixture = provider._fixture_from_event(event, "Uruguay", "Spain")
+        self.assertIsNotNone(fixture)
+        self.assertFalse(fixture["completed"])
+        self.assertTrue(fixture["in_progress"])
+        self.assertEqual(fixture["home_goals"], 1)
+        self.assertEqual(fixture["away_goals"], 2)
 
 
 class FakeProvider:
