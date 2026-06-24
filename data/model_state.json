@@ -4,16 +4,17 @@
   "weights": {
     "home_advantage_goals": 0.18,
     "elo_to_goals": 0.22,
-    "form_to_goals": 0.3154959999999998,
+    "form_to_goals": 0.32560800000000006,
     "class_to_goals": 0.1,
+    "chance_to_goals": 0.06,
     "motivation_to_goals": 0.18,
     "injury_to_goals": 0.16,
     "lineup_to_goals": 0.1,
-    "tactics_to_goals": 0.2958842199999998,
-    "tactics_to_corners": 1.1619519399999996,
+    "tactics_to_goals": 0.30747582800000023,
+    "tactics_to_corners": 1.1689776199999997,
     "world_cup_intensity_goals": 0.05,
-    "corner_bias": -0.25891200000000003,
-    "goal_scale": 0.9374999999999998
+    "corner_bias": -0.2346240000000001,
+    "goal_scale": 0.9486599999999994
   },
   "history": [
     {
@@ -31,10 +32,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": false,
-      "predicted_corners": 9.25,
+      "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:17.572610+00:00"
+      "updated_at": "2026-06-24T03:33:40.371358+00:00"
     },
     {
       "date": "2025-08-24",
@@ -51,10 +52,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 9.32,
+      "predicted_corners": 9.34,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:17.630675+00:00"
+      "updated_at": "2026-06-24T03:33:40.396180+00:00"
     },
     {
       "date": "2025-09-03",
@@ -71,10 +72,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.13,
+      "predicted_corners": 9.14,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:17.702128+00:00"
+      "updated_at": "2026-06-24T03:33:40.424812+00:00"
     },
     {
       "date": "2025-09-04",
@@ -91,10 +92,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 9.85,
+      "predicted_corners": 9.86,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:17.769335+00:00"
+      "updated_at": "2026-06-24T03:33:40.453446+00:00"
     },
     {
       "date": "2025-09-07",
@@ -111,10 +112,10 @@
       ],
       "actual_score": "1-4",
       "score_hit": false,
-      "predicted_corners": 9.29,
+      "predicted_corners": 9.3,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:17.840461+00:00"
+      "updated_at": "2026-06-24T03:33:40.482702+00:00"
     },
     {
       "date": "2025-09-08",
@@ -131,10 +132,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 9.26,
+      "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:17.906588+00:00"
+      "updated_at": "2026-06-24T03:33:40.511830+00:00"
     },
     {
       "date": "2025-09-08",
@@ -154,7 +155,7 @@
       "predicted_corners": 9.24,
       "actual_corners": 9.0,
       "corner_error": -0.24,
-      "updated_at": "2026-06-24T03:08:17.974001+00:00"
+      "updated_at": "2026-06-24T03:33:40.540833+00:00"
     },
     {
       "date": "2025-09-09",
@@ -171,10 +172,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": true,
-      "predicted_corners": 9.33,
+      "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.053499+00:00"
+      "updated_at": "2026-06-24T03:33:40.569005+00:00"
     },
     {
       "date": "2025-09-09",
@@ -191,10 +192,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.34,
+      "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.127192+00:00"
+      "updated_at": "2026-06-24T03:33:40.597296+00:00"
     },
     {
       "date": "2025-09-09",
@@ -211,10 +212,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 10.0,
+      "predicted_corners": 10.01,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.208269+00:00"
+      "updated_at": "2026-06-24T03:33:40.625969+00:00"
     },
     {
       "date": "2025-09-09",
@@ -231,10 +232,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.55,
+      "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.282903+00:00"
+      "updated_at": "2026-06-24T03:33:40.655860+00:00"
     },
     {
       "date": "2025-09-09",
@@ -254,7 +255,7 @@
       "predicted_corners": 9.37,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.362829+00:00"
+      "updated_at": "2026-06-24T03:33:40.686058+00:00"
     },
     {
       "date": "2025-09-09",
@@ -271,10 +272,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 9.3,
+      "predicted_corners": 9.32,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.434154+00:00"
+      "updated_at": "2026-06-24T03:33:40.718076+00:00"
     },
     {
       "date": "2025-09-09",
@@ -291,10 +292,10 @@
       ],
       "actual_score": "0-5",
       "score_hit": false,
-      "predicted_corners": 9.64,
+      "predicted_corners": 9.65,
       "actual_corners": 9.0,
-      "corner_error": -0.64,
-      "updated_at": "2026-06-24T03:08:18.504523+00:00"
+      "corner_error": -0.65,
+      "updated_at": "2026-06-24T03:33:40.749370+00:00"
     },
     {
       "date": "2025-09-09",
@@ -311,10 +312,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": false,
-      "predicted_corners": 9.54,
+      "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.574687+00:00"
+      "updated_at": "2026-06-24T03:33:40.777676+00:00"
     },
     {
       "date": "2025-09-09",
@@ -334,7 +335,7 @@
       "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.648943+00:00"
+      "updated_at": "2026-06-24T03:33:40.807588+00:00"
     },
     {
       "date": "2025-10-08",
@@ -351,10 +352,10 @@
       ],
       "actual_score": "0-5",
       "score_hit": false,
-      "predicted_corners": 8.75,
+      "predicted_corners": 8.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.722534+00:00"
+      "updated_at": "2026-06-24T03:33:40.837299+00:00"
     },
     {
       "date": "2025-10-08",
@@ -374,7 +375,7 @@
       "predicted_corners": 9.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.790557+00:00"
+      "updated_at": "2026-06-24T03:33:40.866667+00:00"
     },
     {
       "date": "2025-10-08",
@@ -391,10 +392,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.5,
+      "predicted_corners": 9.51,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.859778+00:00"
+      "updated_at": "2026-06-24T03:33:40.896682+00:00"
     },
     {
       "date": "2025-10-09",
@@ -411,10 +412,10 @@
       ],
       "actual_score": "10-0",
       "score_hit": false,
-      "predicted_corners": 9.53,
+      "predicted_corners": 9.54,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:18.940717+00:00"
+      "updated_at": "2026-06-24T03:33:40.926930+00:00"
     },
     {
       "date": "2025-10-09",
@@ -431,10 +432,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.51,
+      "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.014009+00:00"
+      "updated_at": "2026-06-24T03:33:40.956831+00:00"
     },
     {
       "date": "2025-10-09",
@@ -451,10 +452,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.83,
+      "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.097967+00:00"
+      "updated_at": "2026-06-24T03:33:40.987743+00:00"
     },
     {
       "date": "2025-10-09",
@@ -471,10 +472,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 10.19,
+      "predicted_corners": 10.21,
       "actual_corners": 9.0,
-      "corner_error": -1.19,
-      "updated_at": "2026-06-24T03:08:19.174110+00:00"
+      "corner_error": -1.21,
+      "updated_at": "2026-06-24T03:33:41.016977+00:00"
     },
     {
       "date": "2025-10-09",
@@ -491,10 +492,10 @@
       ],
       "actual_score": "0-4",
       "score_hit": false,
-      "predicted_corners": 9.39,
+      "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.252512+00:00"
+      "updated_at": "2026-06-24T03:33:41.046272+00:00"
     },
     {
       "date": "2025-10-09",
@@ -511,10 +512,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 9.36,
+      "predicted_corners": 9.37,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.328233+00:00"
+      "updated_at": "2026-06-24T03:33:41.076449+00:00"
     },
     {
       "date": "2025-10-09",
@@ -534,7 +535,7 @@
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.402536+00:00"
+      "updated_at": "2026-06-24T03:33:41.107118+00:00"
     },
     {
       "date": "2025-10-10",
@@ -554,7 +555,7 @@
       "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.475621+00:00"
+      "updated_at": "2026-06-24T03:33:41.137616+00:00"
     },
     {
       "date": "2025-10-10",
@@ -571,10 +572,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 10.03,
+      "predicted_corners": 10.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.548200+00:00"
+      "updated_at": "2026-06-24T03:33:41.168703+00:00"
     },
     {
       "date": "2025-10-10",
@@ -594,7 +595,7 @@
       "predicted_corners": 9.48,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.615486+00:00"
+      "updated_at": "2026-06-24T03:33:41.200144+00:00"
     },
     {
       "date": "2025-10-10",
@@ -611,10 +612,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 9.71,
+      "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.680464+00:00"
+      "updated_at": "2026-06-24T03:33:41.230217+00:00"
     },
     {
       "date": "2025-10-10",
@@ -631,10 +632,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.14,
+      "predicted_corners": 9.15,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.746501+00:00"
+      "updated_at": "2026-06-24T03:33:41.264157+00:00"
     },
     {
       "date": "2025-10-10",
@@ -651,10 +652,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 9.3,
+      "predicted_corners": 9.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.811709+00:00"
+      "updated_at": "2026-06-24T03:33:41.296610+00:00"
     },
     {
       "date": "2025-10-10",
@@ -674,7 +675,7 @@
       "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.879012+00:00"
+      "updated_at": "2026-06-24T03:33:41.326750+00:00"
     },
     {
       "date": "2025-10-10",
@@ -691,10 +692,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 10.05,
+      "predicted_corners": 10.07,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:19.961230+00:00"
+      "updated_at": "2026-06-24T03:33:41.356074+00:00"
     },
     {
       "date": "2025-10-10",
@@ -711,10 +712,10 @@
       ],
       "actual_score": "0-5",
       "score_hit": false,
-      "predicted_corners": 9.42,
+      "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.039871+00:00"
+      "updated_at": "2026-06-24T03:33:41.387094+00:00"
     },
     {
       "date": "2025-10-10",
@@ -731,10 +732,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": false,
-      "predicted_corners": 9.82,
+      "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.115265+00:00"
+      "updated_at": "2026-06-24T03:33:41.418346+00:00"
     },
     {
       "date": "2025-10-10",
@@ -754,7 +755,7 @@
       "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.191262+00:00"
+      "updated_at": "2026-06-24T03:33:41.449304+00:00"
     },
     {
       "date": "2025-10-11",
@@ -774,7 +775,7 @@
       "predicted_corners": 10.3,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.270112+00:00"
+      "updated_at": "2026-06-24T03:33:41.480971+00:00"
     },
     {
       "date": "2025-10-11",
@@ -791,10 +792,10 @@
       ],
       "actual_score": "1-6",
       "score_hit": false,
-      "predicted_corners": 9.79,
+      "predicted_corners": 9.8,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.351627+00:00"
+      "updated_at": "2026-06-24T03:33:41.512153+00:00"
     },
     {
       "date": "2025-10-11",
@@ -811,10 +812,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.25,
+      "predicted_corners": 9.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.420394+00:00"
+      "updated_at": "2026-06-24T03:33:41.541937+00:00"
     },
     {
       "date": "2025-10-11",
@@ -827,14 +828,14 @@
       "predicted_scores": [
         "1-0",
         "2-1",
-        "2-0"
+        "3-0"
       ],
       "actual_score": "5-0",
       "score_hit": false,
-      "predicted_corners": 9.48,
+      "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.496794+00:00"
+      "updated_at": "2026-06-24T03:33:41.572044+00:00"
     },
     {
       "date": "2025-10-11",
@@ -851,10 +852,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 10.02,
+      "predicted_corners": 10.03,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.582719+00:00"
+      "updated_at": "2026-06-24T03:33:41.602358+00:00"
     },
     {
       "date": "2025-10-11",
@@ -874,7 +875,7 @@
       "predicted_corners": 9.7,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.663602+00:00"
+      "updated_at": "2026-06-24T03:33:41.633822+00:00"
     },
     {
       "date": "2025-10-11",
@@ -891,10 +892,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.44,
+      "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.736931+00:00"
+      "updated_at": "2026-06-24T03:33:41.665154+00:00"
     },
     {
       "date": "2025-10-12",
@@ -914,7 +915,7 @@
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.812557+00:00"
+      "updated_at": "2026-06-24T03:33:41.696405+00:00"
     },
     {
       "date": "2025-10-12",
@@ -931,10 +932,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 8.95,
+      "predicted_corners": 8.94,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.884626+00:00"
+      "updated_at": "2026-06-24T03:33:41.732618+00:00"
     },
     {
       "date": "2025-10-12",
@@ -954,7 +955,7 @@
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:20.956855+00:00"
+      "updated_at": "2026-06-24T03:33:41.765727+00:00"
     },
     {
       "date": "2025-10-12",
@@ -971,10 +972,10 @@
       ],
       "actual_score": "1-4",
       "score_hit": false,
-      "predicted_corners": 9.84,
+      "predicted_corners": 9.86,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.035876+00:00"
+      "updated_at": "2026-06-24T03:33:41.799576+00:00"
     },
     {
       "date": "2025-10-12",
@@ -994,7 +995,7 @@
       "predicted_corners": 10.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.115185+00:00"
+      "updated_at": "2026-06-24T03:33:41.832934+00:00"
     },
     {
       "date": "2025-10-12",
@@ -1011,10 +1012,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": true,
-      "predicted_corners": 9.85,
+      "predicted_corners": 9.86,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.191503+00:00"
+      "updated_at": "2026-06-24T03:33:41.869648+00:00"
     },
     {
       "date": "2025-10-12",
@@ -1031,10 +1032,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 10.27,
+      "predicted_corners": 10.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.276122+00:00"
+      "updated_at": "2026-06-24T03:33:41.903039+00:00"
     },
     {
       "date": "2025-10-12",
@@ -1051,10 +1052,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.68,
+      "predicted_corners": 9.69,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.363551+00:00"
+      "updated_at": "2026-06-24T03:33:41.935594+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1071,10 +1072,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": false,
-      "predicted_corners": 9.6,
+      "predicted_corners": 9.61,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.446296+00:00"
+      "updated_at": "2026-06-24T03:33:41.969243+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1094,7 +1095,7 @@
       "predicted_corners": 9.62,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.527594+00:00"
+      "updated_at": "2026-06-24T03:33:42.004552+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1111,10 +1112,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 10.08,
+      "predicted_corners": 10.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.601113+00:00"
+      "updated_at": "2026-06-24T03:33:42.036639+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1134,7 +1135,7 @@
       "predicted_corners": 9.57,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.671963+00:00"
+      "updated_at": "2026-06-24T03:33:42.068793+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1151,10 +1152,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 9.31,
+      "predicted_corners": 9.32,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.750038+00:00"
+      "updated_at": "2026-06-24T03:33:42.100454+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1171,10 +1172,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": false,
-      "predicted_corners": 9.84,
+      "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.858075+00:00"
+      "updated_at": "2026-06-24T03:33:42.131553+00:00"
     },
     {
       "date": "2025-10-13",
@@ -1191,10 +1192,10 @@
       ],
       "actual_score": "2-4",
       "score_hit": false,
-      "predicted_corners": 8.9,
+      "predicted_corners": 8.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:21.936259+00:00"
+      "updated_at": "2026-06-24T03:33:42.163228+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1211,10 +1212,10 @@
       ],
       "actual_score": "4-2",
       "score_hit": false,
-      "predicted_corners": 9.02,
+      "predicted_corners": 9.03,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.025342+00:00"
+      "updated_at": "2026-06-24T03:33:42.194494+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1234,7 +1235,7 @@
       "predicted_corners": 9.5,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.111725+00:00"
+      "updated_at": "2026-06-24T03:33:42.226446+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1251,10 +1252,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": false,
-      "predicted_corners": 9.46,
+      "predicted_corners": 9.47,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.184220+00:00"
+      "updated_at": "2026-06-24T03:33:42.257768+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1271,10 +1272,10 @@
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 10.26,
+      "predicted_corners": 10.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.260058+00:00"
+      "updated_at": "2026-06-24T03:33:42.290211+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1294,7 +1295,7 @@
       "predicted_corners": 9.84,
       "actual_corners": 10.0,
       "corner_error": 0.16,
-      "updated_at": "2026-06-24T03:08:22.341155+00:00"
+      "updated_at": "2026-06-24T03:33:42.338243+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1311,10 +1312,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 10.12,
+      "predicted_corners": 10.15,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.425053+00:00"
+      "updated_at": "2026-06-24T03:33:42.368740+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1331,10 +1332,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 10.14,
+      "predicted_corners": 10.15,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.509914+00:00"
+      "updated_at": "2026-06-24T03:33:42.400117+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1346,15 +1347,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-1",
-        "1-2",
-        "0-2"
+        "0-2",
+        "1-2"
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.27,
+      "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.589542+00:00"
+      "updated_at": "2026-06-24T03:33:42.432966+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1374,7 +1375,7 @@
       "predicted_corners": 8.94,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.677858+00:00"
+      "updated_at": "2026-06-24T03:33:42.465819+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1391,10 +1392,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": false,
-      "predicted_corners": 9.75,
+      "predicted_corners": 9.77,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.769906+00:00"
+      "updated_at": "2026-06-24T03:33:42.500871+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1411,10 +1412,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": true,
-      "predicted_corners": 10.59,
+      "predicted_corners": 10.57,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.856658+00:00"
+      "updated_at": "2026-06-24T03:33:42.532989+00:00"
     },
     {
       "date": "2025-10-14",
@@ -1434,7 +1435,7 @@
       "predicted_corners": 10.64,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:22.938082+00:00"
+      "updated_at": "2026-06-24T03:33:42.564049+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1451,10 +1452,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 10.74,
+      "predicted_corners": 10.77,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.021859+00:00"
+      "updated_at": "2026-06-24T03:33:42.595555+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1471,10 +1472,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.72,
+      "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.100337+00:00"
+      "updated_at": "2026-06-24T03:33:42.628243+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1491,10 +1492,10 @@
       ],
       "actual_score": "0-6",
       "score_hit": false,
-      "predicted_corners": 8.97,
+      "predicted_corners": 8.96,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.189666+00:00"
+      "updated_at": "2026-06-24T03:33:42.661456+00:00"
     },
     {
       "date": "2025-10-15",
@@ -1514,7 +1515,7 @@
       "predicted_corners": 9.19,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.296043+00:00"
+      "updated_at": "2026-06-24T03:33:42.715881+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1534,7 +1535,7 @@
       "predicted_corners": 10.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.388256+00:00"
+      "updated_at": "2026-06-24T03:33:42.750317+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1554,7 +1555,7 @@
       "predicted_corners": 10.51,
       "actual_corners": 10.0,
       "corner_error": -0.51,
-      "updated_at": "2026-06-24T03:08:23.473238+00:00"
+      "updated_at": "2026-06-24T03:33:42.786313+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1574,7 +1575,7 @@
       "predicted_corners": 9.74,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.556237+00:00"
+      "updated_at": "2026-06-24T03:33:42.823512+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1591,10 +1592,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.64,
+      "predicted_corners": 9.66,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.637454+00:00"
+      "updated_at": "2026-06-24T03:33:42.861545+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1611,10 +1612,10 @@
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 9.76,
+      "predicted_corners": 9.77,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.717296+00:00"
+      "updated_at": "2026-06-24T03:33:42.900409+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1634,7 +1635,7 @@
       "predicted_corners": 9.24,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.800343+00:00"
+      "updated_at": "2026-06-24T03:33:42.936724+00:00"
     },
     {
       "date": "2025-11-13",
@@ -1651,10 +1652,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 8.95,
+      "predicted_corners": 8.94,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.886843+00:00"
+      "updated_at": "2026-06-24T03:33:42.992175+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1671,10 +1672,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": true,
-      "predicted_corners": 9.32,
+      "predicted_corners": 9.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:23.976084+00:00"
+      "updated_at": "2026-06-24T03:33:43.027624+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1694,7 +1695,7 @@
       "predicted_corners": 9.64,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.062778+00:00"
+      "updated_at": "2026-06-24T03:33:43.063163+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1714,7 +1715,7 @@
       "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.151923+00:00"
+      "updated_at": "2026-06-24T03:33:43.098576+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1731,10 +1732,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": true,
-      "predicted_corners": 9.62,
+      "predicted_corners": 9.64,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.235625+00:00"
+      "updated_at": "2026-06-24T03:33:43.133898+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1754,7 +1755,7 @@
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.318536+00:00"
+      "updated_at": "2026-06-24T03:33:43.168847+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1774,7 +1775,7 @@
       "predicted_corners": 9.45,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.402490+00:00"
+      "updated_at": "2026-06-24T03:33:43.202711+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1794,7 +1795,7 @@
       "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.490105+00:00"
+      "updated_at": "2026-06-24T03:33:43.238499+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1811,10 +1812,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": true,
-      "predicted_corners": 10.24,
+      "predicted_corners": 10.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.571384+00:00"
+      "updated_at": "2026-06-24T03:33:43.274291+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1834,7 +1835,7 @@
       "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.658618+00:00"
+      "updated_at": "2026-06-24T03:33:43.308870+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1854,7 +1855,7 @@
       "predicted_corners": 8.8,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.731663+00:00"
+      "updated_at": "2026-06-24T03:33:43.345968+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1874,7 +1875,7 @@
       "predicted_corners": 9.19,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.803520+00:00"
+      "updated_at": "2026-06-24T03:33:43.381847+00:00"
     },
     {
       "date": "2025-11-14",
@@ -1891,10 +1892,10 @@
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 9.42,
+      "predicted_corners": 9.44,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.880277+00:00"
+      "updated_at": "2026-06-24T03:33:43.416982+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1914,7 +1915,7 @@
       "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:24.963539+00:00"
+      "updated_at": "2026-06-24T03:33:43.452923+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1931,10 +1932,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": false,
-      "predicted_corners": 10.05,
+      "predicted_corners": 10.07,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.043009+00:00"
+      "updated_at": "2026-06-24T03:33:43.491398+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1951,10 +1952,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": true,
-      "predicted_corners": 10.13,
+      "predicted_corners": 10.15,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.129748+00:00"
+      "updated_at": "2026-06-24T03:33:43.526530+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1971,10 +1972,10 @@
       ],
       "actual_score": "0-4",
       "score_hit": true,
-      "predicted_corners": 10.14,
+      "predicted_corners": 10.16,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.212067+00:00"
+      "updated_at": "2026-06-24T03:33:43.564694+00:00"
     },
     {
       "date": "2025-11-15",
@@ -1994,7 +1995,7 @@
       "predicted_corners": 9.76,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.305338+00:00"
+      "updated_at": "2026-06-24T03:33:43.599206+00:00"
     },
     {
       "date": "2025-11-15",
@@ -2014,7 +2015,7 @@
       "predicted_corners": 9.48,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.384254+00:00"
+      "updated_at": "2026-06-24T03:33:43.643073+00:00"
     },
     {
       "date": "2025-11-15",
@@ -2031,10 +2032,10 @@
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 9.53,
+      "predicted_corners": 9.54,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.470706+00:00"
+      "updated_at": "2026-06-24T03:33:43.677593+00:00"
     },
     {
       "date": "2025-11-15",
@@ -2051,10 +2052,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 10.72,
+      "predicted_corners": 10.71,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.546713+00:00"
+      "updated_at": "2026-06-24T03:33:43.713928+00:00"
     },
     {
       "date": "2025-11-15",
@@ -2066,15 +2067,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
-        "1-0",
-        "3-0"
+        "3-0",
+        "1-0"
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.4,
+      "predicted_corners": 9.41,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.618473+00:00"
+      "updated_at": "2026-06-24T03:33:43.751825+00:00"
     },
     {
       "date": "2025-11-15",
@@ -2091,10 +2092,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.76,
+      "predicted_corners": 9.78,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.688646+00:00"
+      "updated_at": "2026-06-24T03:33:43.790527+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2114,7 +2115,7 @@
       "predicted_corners": 10.93,
       "actual_corners": 8.0,
       "corner_error": -2.93,
-      "updated_at": "2026-06-24T03:08:25.761302+00:00"
+      "updated_at": "2026-06-24T03:33:43.831397+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2131,10 +2132,10 @@
       ],
       "actual_score": "1-3",
       "score_hit": false,
-      "predicted_corners": 9.89,
+      "predicted_corners": 9.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.834066+00:00"
+      "updated_at": "2026-06-24T03:33:43.870416+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2151,10 +2152,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.72,
+      "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.906063+00:00"
+      "updated_at": "2026-06-24T03:33:43.909659+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2171,10 +2172,10 @@
       ],
       "actual_score": "1-4",
       "score_hit": false,
-      "predicted_corners": 9.74,
+      "predicted_corners": 9.75,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:25.977114+00:00"
+      "updated_at": "2026-06-24T03:33:43.949277+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2194,7 +2195,7 @@
       "predicted_corners": 9.76,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.106546+00:00"
+      "updated_at": "2026-06-24T03:33:43.986741+00:00"
     },
     {
       "date": "2025-11-16",
@@ -2214,7 +2215,7 @@
       "predicted_corners": 9.44,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.210474+00:00"
+      "updated_at": "2026-06-24T03:33:44.027448+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2231,10 +2232,10 @@
       ],
       "actual_score": "6-0",
       "score_hit": false,
-      "predicted_corners": 9.32,
+      "predicted_corners": 9.33,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.294888+00:00"
+      "updated_at": "2026-06-24T03:33:44.063557+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2254,7 +2255,7 @@
       "predicted_corners": 9.44,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.375818+00:00"
+      "updated_at": "2026-06-24T03:33:44.098152+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2274,7 +2275,7 @@
       "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.459733+00:00"
+      "updated_at": "2026-06-24T03:33:44.130875+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2291,10 +2292,10 @@
       ],
       "actual_score": "2-3",
       "score_hit": false,
-      "predicted_corners": 9.79,
+      "predicted_corners": 9.8,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.544551+00:00"
+      "updated_at": "2026-06-24T03:33:44.163892+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2311,10 +2312,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": true,
-      "predicted_corners": 9.62,
+      "predicted_corners": 9.63,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.621116+00:00"
+      "updated_at": "2026-06-24T03:33:44.198219+00:00"
     },
     {
       "date": "2025-11-17",
@@ -2334,7 +2335,7 @@
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.710209+00:00"
+      "updated_at": "2026-06-24T03:33:44.232167+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2351,10 +2352,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 10.08,
+      "predicted_corners": 10.1,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.796388+00:00"
+      "updated_at": "2026-06-24T03:33:44.269071+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2371,10 +2372,10 @@
       ],
       "actual_score": "7-0",
       "score_hit": false,
-      "predicted_corners": 9.43,
+      "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.883344+00:00"
+      "updated_at": "2026-06-24T03:33:44.307009+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2391,10 +2392,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 10.23,
+      "predicted_corners": 10.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:26.971808+00:00"
+      "updated_at": "2026-06-24T03:33:44.342012+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2414,7 +2415,7 @@
       "predicted_corners": 8.99,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.066786+00:00"
+      "updated_at": "2026-06-24T03:33:44.376516+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2434,7 +2435,7 @@
       "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.142861+00:00"
+      "updated_at": "2026-06-24T03:33:44.410939+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2451,10 +2452,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.08,
+      "predicted_corners": 9.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.221421+00:00"
+      "updated_at": "2026-06-24T03:33:44.444683+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2471,10 +2472,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.38,
+      "predicted_corners": 9.37,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.306532+00:00"
+      "updated_at": "2026-06-24T03:33:44.478179+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2494,7 +2495,7 @@
       "predicted_corners": 9.01,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.390180+00:00"
+      "updated_at": "2026-06-24T03:33:44.528901+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2514,7 +2515,7 @@
       "predicted_corners": 9.59,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.474896+00:00"
+      "updated_at": "2026-06-24T03:33:44.561264+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2531,10 +2532,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.13,
+      "predicted_corners": 9.12,
       "actual_corners": 9.0,
-      "corner_error": -0.13,
-      "updated_at": "2026-06-24T03:08:27.572941+00:00"
+      "corner_error": -0.12,
+      "updated_at": "2026-06-24T03:33:44.596727+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2551,10 +2552,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 10.95,
+      "predicted_corners": 10.97,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.649546+00:00"
+      "updated_at": "2026-06-24T03:33:44.633398+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2574,7 +2575,7 @@
       "predicted_corners": 9.03,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.724461+00:00"
+      "updated_at": "2026-06-24T03:33:44.670092+00:00"
     },
     {
       "date": "2025-11-18",
@@ -2591,10 +2592,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.28,
+      "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.799141+00:00"
+      "updated_at": "2026-06-24T03:33:44.706129+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2611,10 +2612,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 9.75,
+      "predicted_corners": 9.76,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.888052+00:00"
+      "updated_at": "2026-06-24T03:33:44.741816+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2631,10 +2632,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 9.32,
+      "predicted_corners": 9.33,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:27.981333+00:00"
+      "updated_at": "2026-06-24T03:33:44.781275+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2654,7 +2655,7 @@
       "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.064374+00:00"
+      "updated_at": "2026-06-24T03:33:44.818666+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2674,7 +2675,7 @@
       "predicted_corners": 9.1,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.148248+00:00"
+      "updated_at": "2026-06-24T03:33:44.860895+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2694,7 +2695,7 @@
       "predicted_corners": 9.88,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.234598+00:00"
+      "updated_at": "2026-06-24T03:33:44.898916+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2711,10 +2712,10 @@
       ],
       "actual_score": "5-1",
       "score_hit": false,
-      "predicted_corners": 9.81,
+      "predicted_corners": 9.82,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.323806+00:00"
+      "updated_at": "2026-06-24T03:33:44.952559+00:00"
     },
     {
       "date": "2025-11-19",
@@ -2734,7 +2735,7 @@
       "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.410814+00:00"
+      "updated_at": "2026-06-24T03:33:44.989293+00:00"
     },
     {
       "date": "2025-12-16",
@@ -2754,7 +2755,7 @@
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.501162+00:00"
+      "updated_at": "2026-06-24T03:33:45.026978+00:00"
     },
     {
       "date": "2025-12-22",
@@ -2774,7 +2775,7 @@
       "predicted_corners": 9.19,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.585551+00:00"
+      "updated_at": "2026-06-24T03:33:45.061796+00:00"
     },
     {
       "date": "2025-12-23",
@@ -2791,10 +2792,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 9.31,
+      "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.667252+00:00"
+      "updated_at": "2026-06-24T03:33:45.095575+00:00"
     },
     {
       "date": "2025-12-23",
@@ -2814,7 +2815,7 @@
       "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.750068+00:00"
+      "updated_at": "2026-06-24T03:33:45.132662+00:00"
     },
     {
       "date": "2025-12-24",
@@ -2834,7 +2835,7 @@
       "predicted_corners": 8.96,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.831194+00:00"
+      "updated_at": "2026-06-24T03:33:45.167503+00:00"
     },
     {
       "date": "2025-12-26",
@@ -2851,10 +2852,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.51,
+      "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:28.910026+00:00"
+      "updated_at": "2026-06-24T03:33:45.204469+00:00"
     },
     {
       "date": "2025-12-27",
@@ -2871,10 +2872,10 @@
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 9.42,
+      "predicted_corners": 9.43,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.005462+00:00"
+      "updated_at": "2026-06-24T03:33:45.238981+00:00"
     },
     {
       "date": "2025-12-27",
@@ -2891,10 +2892,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.34,
+      "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.082870+00:00"
+      "updated_at": "2026-06-24T03:33:45.275081+00:00"
     },
     {
       "date": "2025-12-28",
@@ -2914,7 +2915,7 @@
       "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.161130+00:00"
+      "updated_at": "2026-06-24T03:33:45.309024+00:00"
     },
     {
       "date": "2025-12-28",
@@ -2931,10 +2932,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 8.82,
+      "predicted_corners": 8.81,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.243880+00:00"
+      "updated_at": "2026-06-24T03:33:45.343868+00:00"
     },
     {
       "date": "2025-12-29",
@@ -2951,10 +2952,10 @@
       ],
       "actual_score": "2-3",
       "score_hit": false,
-      "predicted_corners": 9.38,
+      "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.335550+00:00"
+      "updated_at": "2026-06-24T03:33:45.379249+00:00"
     },
     {
       "date": "2025-12-30",
@@ -2971,10 +2972,10 @@
       ],
       "actual_score": "0-3",
       "score_hit": false,
-      "predicted_corners": 9.15,
+      "predicted_corners": 9.14,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.426500+00:00"
+      "updated_at": "2026-06-24T03:33:45.422810+00:00"
     },
     {
       "date": "2025-12-30",
@@ -2991,10 +2992,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.38,
+      "predicted_corners": 9.39,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.519644+00:00"
+      "updated_at": "2026-06-24T03:33:45.460594+00:00"
     },
     {
       "date": "2025-12-31",
@@ -3014,7 +3015,7 @@
       "predicted_corners": 9.19,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.609173+00:00"
+      "updated_at": "2026-06-24T03:33:45.499076+00:00"
     },
     {
       "date": "2025-12-31",
@@ -3034,7 +3035,7 @@
       "predicted_corners": 9.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.696861+00:00"
+      "updated_at": "2026-06-24T03:33:45.537340+00:00"
     },
     {
       "date": "2026-01-03",
@@ -3051,10 +3052,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 8.83,
+      "predicted_corners": 8.82,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.779119+00:00"
+      "updated_at": "2026-06-24T03:33:45.573196+00:00"
     },
     {
       "date": "2026-01-03",
@@ -3071,10 +3072,10 @@
       ],
       "actual_score": "3-1",
       "score_hit": false,
-      "predicted_corners": 9.21,
+      "predicted_corners": 9.22,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.859259+00:00"
+      "updated_at": "2026-06-24T03:33:45.612135+00:00"
     },
     {
       "date": "2026-01-04",
@@ -3091,10 +3092,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": false,
-      "predicted_corners": 9.27,
+      "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:29.960258+00:00"
+      "updated_at": "2026-06-24T03:33:45.650125+00:00"
     },
     {
       "date": "2026-01-05",
@@ -3114,7 +3115,7 @@
       "predicted_corners": 9.08,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.052373+00:00"
+      "updated_at": "2026-06-24T03:33:45.686616+00:00"
     },
     {
       "date": "2026-01-06",
@@ -3134,7 +3135,7 @@
       "predicted_corners": 9.46,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.146789+00:00"
+      "updated_at": "2026-06-24T03:33:45.724239+00:00"
     },
     {
       "date": "2026-01-06",
@@ -3151,10 +3152,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 9.05,
+      "predicted_corners": 9.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.238431+00:00"
+      "updated_at": "2026-06-24T03:33:45.762233+00:00"
     },
     {
       "date": "2026-01-09",
@@ -3171,10 +3172,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": true,
-      "predicted_corners": 9.25,
+      "predicted_corners": 9.24,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.347188+00:00"
+      "updated_at": "2026-06-24T03:33:45.803772+00:00"
     },
     {
       "date": "2026-01-09",
@@ -3194,7 +3195,7 @@
       "predicted_corners": 8.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.427689+00:00"
+      "updated_at": "2026-06-24T03:33:45.843808+00:00"
     },
     {
       "date": "2026-01-10",
@@ -3214,7 +3215,7 @@
       "predicted_corners": 9.95,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.518082+00:00"
+      "updated_at": "2026-06-24T03:33:45.882715+00:00"
     },
     {
       "date": "2026-01-10",
@@ -3231,10 +3232,10 @@
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 9.54,
+      "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.602207+00:00"
+      "updated_at": "2026-06-24T03:33:45.920316+00:00"
     },
     {
       "date": "2026-01-14",
@@ -3251,10 +3252,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.56,
+      "predicted_corners": 9.55,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.686548+00:00"
+      "updated_at": "2026-06-24T03:33:45.960341+00:00"
     },
     {
       "date": "2026-01-14",
@@ -3271,10 +3272,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.64,
+      "predicted_corners": 9.65,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.769106+00:00"
+      "updated_at": "2026-06-24T03:33:45.999438+00:00"
     },
     {
       "date": "2026-01-17",
@@ -3294,7 +3295,7 @@
       "predicted_corners": 9.51,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.865390+00:00"
+      "updated_at": "2026-06-24T03:33:46.038846+00:00"
     },
     {
       "date": "2026-01-18",
@@ -3314,7 +3315,7 @@
       "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:30.972278+00:00"
+      "updated_at": "2026-06-24T03:33:46.075757+00:00"
     },
     {
       "date": "2026-01-18",
@@ -3331,10 +3332,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 10.13,
+      "predicted_corners": 10.14,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.072073+00:00"
+      "updated_at": "2026-06-24T03:33:46.115206+00:00"
     },
     {
       "date": "2026-01-18",
@@ -3354,7 +3355,7 @@
       "predicted_corners": 9.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.159401+00:00"
+      "updated_at": "2026-06-24T03:33:46.151235+00:00"
     },
     {
       "date": "2026-01-23",
@@ -3374,7 +3375,7 @@
       "predicted_corners": 9.5,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.244888+00:00"
+      "updated_at": "2026-06-24T03:33:46.188498+00:00"
     },
     {
       "date": "2026-01-25",
@@ -3391,10 +3392,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 9.06,
+      "predicted_corners": 9.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.333219+00:00"
+      "updated_at": "2026-06-24T03:33:46.224237+00:00"
     },
     {
       "date": "2026-01-26",
@@ -3411,10 +3412,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.18,
+      "predicted_corners": 9.17,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.419253+00:00"
+      "updated_at": "2026-06-24T03:33:46.260085+00:00"
     },
     {
       "date": "2026-02-26",
@@ -3431,10 +3432,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 9.47,
+      "predicted_corners": 9.46,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.507364+00:00"
+      "updated_at": "2026-06-24T03:33:46.297894+00:00"
     },
     {
       "date": "2026-03-25",
@@ -3451,10 +3452,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 9.22,
+      "predicted_corners": 9.21,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.586675+00:00"
+      "updated_at": "2026-06-24T03:33:46.336634+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3471,10 +3472,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": true,
-      "predicted_corners": 10.1,
+      "predicted_corners": 10.11,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.668629+00:00"
+      "updated_at": "2026-06-24T03:33:46.374952+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3491,10 +3492,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": false,
-      "predicted_corners": 9.89,
+      "predicted_corners": 9.9,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.748988+00:00"
+      "updated_at": "2026-06-24T03:33:46.413541+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3514,7 +3515,7 @@
       "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.836796+00:00"
+      "updated_at": "2026-06-24T03:33:46.452081+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3531,10 +3532,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 10.3,
+      "predicted_corners": 10.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:31.925855+00:00"
+      "updated_at": "2026-06-24T03:33:46.492112+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3551,10 +3552,10 @@
       ],
       "actual_score": "1-3",
       "score_hit": true,
-      "predicted_corners": 9.67,
+      "predicted_corners": 9.69,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.019959+00:00"
+      "updated_at": "2026-06-24T03:33:46.530026+00:00"
     },
     {
       "date": "2026-03-26",
@@ -3571,10 +3572,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.69,
+      "predicted_corners": 9.7,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.129611+00:00"
+      "updated_at": "2026-06-24T03:33:46.569964+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3591,10 +3592,10 @@
       ],
       "actual_score": "7-0",
       "score_hit": false,
-      "predicted_corners": 9.48,
+      "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.249109+00:00"
+      "updated_at": "2026-06-24T03:33:46.606113+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3611,10 +3612,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.32,
+      "predicted_corners": 9.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.373660+00:00"
+      "updated_at": "2026-06-24T03:33:46.642276+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3634,7 +3635,7 @@
       "predicted_corners": 9.16,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.483587+00:00"
+      "updated_at": "2026-06-24T03:33:46.678675+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3654,7 +3655,7 @@
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.625205+00:00"
+      "updated_at": "2026-06-24T03:33:46.713755+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3671,10 +3672,10 @@
       ],
       "actual_score": "4-2",
       "score_hit": false,
-      "predicted_corners": 8.8,
+      "predicted_corners": 8.79,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.725049+00:00"
+      "updated_at": "2026-06-24T03:33:46.751676+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3691,10 +3692,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": false,
-      "predicted_corners": 9.55,
+      "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.814675+00:00"
+      "updated_at": "2026-06-24T03:33:46.791132+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3711,10 +3712,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 10.45,
+      "predicted_corners": 10.46,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.907761+00:00"
+      "updated_at": "2026-06-24T03:33:46.831205+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3731,10 +3732,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 9.7,
+      "predicted_corners": 9.71,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:32.994018+00:00"
+      "updated_at": "2026-06-24T03:33:46.872503+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3754,7 +3755,7 @@
       "predicted_corners": 8.96,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.098582+00:00"
+      "updated_at": "2026-06-24T03:33:46.914762+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3774,7 +3775,7 @@
       "predicted_corners": 9.08,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.192557+00:00"
+      "updated_at": "2026-06-24T03:33:46.957400+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3794,7 +3795,7 @@
       "predicted_corners": 9.31,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.294097+00:00"
+      "updated_at": "2026-06-24T03:33:46.999682+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3811,10 +3812,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": true,
-      "predicted_corners": 10.25,
+      "predicted_corners": 10.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.394839+00:00"
+      "updated_at": "2026-06-24T03:33:47.042389+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3831,10 +3832,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": false,
-      "predicted_corners": 9.51,
+      "predicted_corners": 9.52,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.495152+00:00"
+      "updated_at": "2026-06-24T03:33:47.082108+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3851,10 +3852,10 @@
       ],
       "actual_score": "0-4",
       "score_hit": false,
-      "predicted_corners": 9.11,
+      "predicted_corners": 9.12,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.598378+00:00"
+      "updated_at": "2026-06-24T03:33:47.120537+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3871,10 +3872,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.52,
+      "predicted_corners": 9.53,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.694690+00:00"
+      "updated_at": "2026-06-24T03:33:47.160902+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3891,10 +3892,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 10.61,
+      "predicted_corners": 10.63,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.785632+00:00"
+      "updated_at": "2026-06-24T03:33:47.200892+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3911,10 +3912,10 @@
       ],
       "actual_score": "3-4",
       "score_hit": false,
-      "predicted_corners": 10.22,
+      "predicted_corners": 10.23,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.878263+00:00"
+      "updated_at": "2026-06-24T03:33:47.240173+00:00"
     },
     {
       "date": "2026-03-27",
@@ -3934,7 +3935,7 @@
       "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:33.972839+00:00"
+      "updated_at": "2026-06-24T03:33:47.281258+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3954,7 +3955,7 @@
       "predicted_corners": 9.93,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.063389+00:00"
+      "updated_at": "2026-06-24T03:33:47.320130+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3971,10 +3972,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 10.0,
+      "predicted_corners": 10.01,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.149994+00:00"
+      "updated_at": "2026-06-24T03:33:47.361220+00:00"
     },
     {
       "date": "2026-03-28",
@@ -3994,7 +3995,7 @@
       "predicted_corners": 9.23,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.238418+00:00"
+      "updated_at": "2026-06-24T03:33:47.401439+00:00"
     },
     {
       "date": "2026-03-28",
@@ -4011,10 +4012,10 @@
       ],
       "actual_score": "0-4",
       "score_hit": false,
-      "predicted_corners": 9.27,
+      "predicted_corners": 9.28,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.334147+00:00"
+      "updated_at": "2026-06-24T03:33:47.440044+00:00"
     },
     {
       "date": "2026-03-28",
@@ -4034,7 +4035,7 @@
       "predicted_corners": 10.04,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.428176+00:00"
+      "updated_at": "2026-06-24T03:33:47.477923+00:00"
     },
     {
       "date": "2026-03-29",
@@ -4051,10 +4052,10 @@
       ],
       "actual_score": "1-3",
       "score_hit": false,
-      "predicted_corners": 10.15,
+      "predicted_corners": 10.16,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.518328+00:00"
+      "updated_at": "2026-06-24T03:33:47.515346+00:00"
     },
     {
       "date": "2026-03-29",
@@ -4071,10 +4072,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 9.45,
+      "predicted_corners": 9.46,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.613720+00:00"
+      "updated_at": "2026-06-24T03:33:47.553117+00:00"
     },
     {
       "date": "2026-03-29",
@@ -4094,7 +4095,7 @@
       "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.703968+00:00"
+      "updated_at": "2026-06-24T03:33:47.589755+00:00"
     },
     {
       "date": "2026-03-30",
@@ -4111,10 +4112,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.55,
+      "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.799595+00:00"
+      "updated_at": "2026-06-24T03:33:47.627855+00:00"
     },
     {
       "date": "2026-03-30",
@@ -4131,10 +4132,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.89,
+      "predicted_corners": 9.9,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.879371+00:00"
+      "updated_at": "2026-06-24T03:33:47.666894+00:00"
     },
     {
       "date": "2026-03-30",
@@ -4151,10 +4152,10 @@
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 9.31,
+      "predicted_corners": 9.32,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:34.959581+00:00"
+      "updated_at": "2026-06-24T03:33:47.704164+00:00"
     },
     {
       "date": "2026-03-30",
@@ -4171,10 +4172,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.52,
+      "predicted_corners": 9.53,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.039879+00:00"
+      "updated_at": "2026-06-24T03:33:47.742961+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4191,10 +4192,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 10.05,
+      "predicted_corners": 10.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.126467+00:00"
+      "updated_at": "2026-06-24T03:33:47.783844+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4214,7 +4215,7 @@
       "predicted_corners": 9.4,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.236718+00:00"
+      "updated_at": "2026-06-24T03:33:47.822763+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4231,10 +4232,10 @@
       ],
       "actual_score": "5-1",
       "score_hit": false,
-      "predicted_corners": 9.1,
+      "predicted_corners": 9.11,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.326521+00:00"
+      "updated_at": "2026-06-24T03:33:47.864673+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4254,7 +4255,7 @@
       "predicted_corners": 9.58,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.422922+00:00"
+      "updated_at": "2026-06-24T03:33:47.910760+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4267,14 +4268,14 @@
       "predicted_scores": [
         "3-0",
         "2-0",
-        "4-0"
+        "3-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 10.02,
+      "predicted_corners": 10.03,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.514859+00:00"
+      "updated_at": "2026-06-24T03:33:47.952493+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4291,10 +4292,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 9.23,
+      "predicted_corners": 9.22,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.610263+00:00"
+      "updated_at": "2026-06-24T03:33:47.993075+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4311,10 +4312,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 10.25,
+      "predicted_corners": 10.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.706162+00:00"
+      "updated_at": "2026-06-24T03:33:48.035925+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4334,7 +4335,7 @@
       "predicted_corners": 10.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.809348+00:00"
+      "updated_at": "2026-06-24T03:33:48.076301+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4354,7 +4355,7 @@
       "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.902710+00:00"
+      "updated_at": "2026-06-24T03:33:48.130573+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4374,7 +4375,7 @@
       "predicted_corners": 9.19,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:35.996379+00:00"
+      "updated_at": "2026-06-24T03:33:48.167905+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4391,10 +4392,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 9.71,
+      "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.105890+00:00"
+      "updated_at": "2026-06-24T03:33:48.206207+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4414,7 +4415,7 @@
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.201902+00:00"
+      "updated_at": "2026-06-24T03:33:48.243323+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4434,7 +4435,7 @@
       "predicted_corners": 9.87,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.292809+00:00"
+      "updated_at": "2026-06-24T03:33:48.281438+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4451,10 +4452,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": true,
-      "predicted_corners": 9.15,
+      "predicted_corners": 9.14,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.382865+00:00"
+      "updated_at": "2026-06-24T03:33:48.321093+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4471,10 +4472,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.72,
+      "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.478425+00:00"
+      "updated_at": "2026-06-24T03:33:48.366464+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4491,10 +4492,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 10.33,
+      "predicted_corners": 10.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.582340+00:00"
+      "updated_at": "2026-06-24T03:33:48.425354+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4514,7 +4515,7 @@
       "predicted_corners": 9.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.679413+00:00"
+      "updated_at": "2026-06-24T03:33:48.465060+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4531,10 +4532,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.48,
+      "predicted_corners": 9.49,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.766527+00:00"
+      "updated_at": "2026-06-24T03:33:48.504997+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4551,10 +4552,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": true,
-      "predicted_corners": 9.41,
+      "predicted_corners": 9.42,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.848779+00:00"
+      "updated_at": "2026-06-24T03:33:48.544329+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4566,15 +4567,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-0",
-        "2-1",
+        "3-0",
         "3-1"
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 10.14,
+      "predicted_corners": 10.15,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:36.930884+00:00"
+      "updated_at": "2026-06-24T03:33:48.583841+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4591,10 +4592,10 @@
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 9.26,
+      "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.020714+00:00"
+      "updated_at": "2026-06-24T03:33:48.626812+00:00"
     },
     {
       "date": "2026-03-31",
@@ -4611,10 +4612,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": true,
-      "predicted_corners": 10.05,
+      "predicted_corners": 10.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.131040+00:00"
+      "updated_at": "2026-06-24T03:33:48.665354+00:00"
     },
     {
       "date": "2026-04-01",
@@ -4627,34 +4628,34 @@
       "predicted_scores": [
         "1-2",
         "0-2",
-        "1-3"
+        "2-3"
       ],
       "actual_score": "3-1",
       "score_hit": false,
-      "predicted_corners": 9.68,
+      "predicted_corners": 9.69,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.232380+00:00"
+      "updated_at": "2026-06-24T03:33:48.704799+00:00"
     },
     {
       "date": "2026-04-01",
       "home_team": "Canada",
       "away_team": "Tunisia",
       "prediction_id": null,
-      "predicted_outcome": "П2",
+      "predicted_outcome": "П1",
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "0-1",
-        "1-2",
-        "0-2"
+        "1-0",
+        "2-1",
+        "2-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.71,
+      "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.325943+00:00"
+      "updated_at": "2026-06-24T03:33:48.742391+00:00"
     },
     {
       "date": "2026-04-01",
@@ -4671,10 +4672,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 8.92,
+      "predicted_corners": 8.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.419575+00:00"
+      "updated_at": "2026-06-24T03:33:48.783830+00:00"
     },
     {
       "date": "2026-04-01",
@@ -4694,7 +4695,7 @@
       "predicted_corners": 9.62,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.510469+00:00"
+      "updated_at": "2026-06-24T03:33:48.828872+00:00"
     },
     {
       "date": "2026-05-23",
@@ -4711,10 +4712,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 8.92,
+      "predicted_corners": 8.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.604547+00:00"
+      "updated_at": "2026-06-24T03:33:48.873061+00:00"
     },
     {
       "date": "2026-05-26",
@@ -4731,10 +4732,10 @@
       ],
       "actual_score": "5-0",
       "score_hit": false,
-      "predicted_corners": 9.24,
+      "predicted_corners": 9.23,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.689688+00:00"
+      "updated_at": "2026-06-24T03:33:48.913999+00:00"
     },
     {
       "date": "2026-05-28",
@@ -4754,7 +4755,7 @@
       "predicted_corners": 9.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.775153+00:00"
+      "updated_at": "2026-06-24T03:33:48.959428+00:00"
     },
     {
       "date": "2026-05-28",
@@ -4774,7 +4775,7 @@
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.861946+00:00"
+      "updated_at": "2026-06-24T03:33:49.006735+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4791,10 +4792,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 8.94,
+      "predicted_corners": 8.93,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:37.951608+00:00"
+      "updated_at": "2026-06-24T03:33:49.050562+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4814,7 +4815,7 @@
       "predicted_corners": 9.6,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.041417+00:00"
+      "updated_at": "2026-06-24T03:33:49.092363+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4831,10 +4832,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 9.07,
+      "predicted_corners": 9.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.141517+00:00"
+      "updated_at": "2026-06-24T03:33:49.131666+00:00"
     },
     {
       "date": "2026-05-29",
@@ -4851,10 +4852,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.33,
+      "predicted_corners": 9.34,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.236508+00:00"
+      "updated_at": "2026-06-24T03:33:49.173479+00:00"
     },
     {
       "date": "2026-05-30",
@@ -4871,10 +4872,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.25,
+      "predicted_corners": 9.26,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.327725+00:00"
+      "updated_at": "2026-06-24T03:33:49.214960+00:00"
     },
     {
       "date": "2026-05-30",
@@ -4891,10 +4892,10 @@
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 9.63,
+      "predicted_corners": 9.64,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.426558+00:00"
+      "updated_at": "2026-06-24T03:33:49.254946+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4914,7 +4915,7 @@
       "predicted_corners": 9.66,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.519304+00:00"
+      "updated_at": "2026-06-24T03:33:49.297530+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4925,16 +4926,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
         "3-0",
+        "2-0",
         "3-1"
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 9.82,
+      "predicted_corners": 9.83,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.624430+00:00"
+      "updated_at": "2026-06-24T03:33:49.337254+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4954,7 +4955,7 @@
       "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.724716+00:00"
+      "updated_at": "2026-06-24T03:33:49.378242+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4971,10 +4972,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": true,
-      "predicted_corners": 10.05,
+      "predicted_corners": 10.06,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.821325+00:00"
+      "updated_at": "2026-06-24T03:33:49.419479+00:00"
     },
     {
       "date": "2026-05-31",
@@ -4987,14 +4988,14 @@
       "predicted_scores": [
         "2-0",
         "3-0",
-        "3-1"
+        "4-0"
       ],
       "actual_score": "1-0",
       "score_hit": false,
       "predicted_corners": 9.63,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:38.937065+00:00"
+      "updated_at": "2026-06-24T03:33:49.460413+00:00"
     },
     {
       "date": "2026-05-31",
@@ -5011,10 +5012,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 9.24,
+      "predicted_corners": 9.23,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.047921+00:00"
+      "updated_at": "2026-06-24T03:33:49.509148+00:00"
     },
     {
       "date": "2026-05-31",
@@ -5034,7 +5035,7 @@
       "predicted_corners": 9.02,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.142161+00:00"
+      "updated_at": "2026-06-24T03:33:49.551471+00:00"
     },
     {
       "date": "2026-05-31",
@@ -5045,16 +5046,16 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-1",
         "2-0",
+        "2-1",
         "3-1"
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 9.85,
+      "predicted_corners": 9.87,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.232214+00:00"
+      "updated_at": "2026-06-24T03:33:49.592371+00:00"
     },
     {
       "date": "2026-05-31",
@@ -5067,14 +5068,14 @@
       "predicted_scores": [
         "2-1",
         "1-0",
-        "2-0"
+        "3-1"
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 9.69,
+      "predicted_corners": 9.7,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.322406+00:00"
+      "updated_at": "2026-06-24T03:33:49.635859+00:00"
     },
     {
       "date": "2026-06-01",
@@ -5091,10 +5092,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.53,
+      "predicted_corners": 9.54,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.412359+00:00"
+      "updated_at": "2026-06-24T03:33:49.677576+00:00"
     },
     {
       "date": "2026-06-01",
@@ -5114,7 +5115,7 @@
       "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.506395+00:00"
+      "updated_at": "2026-06-24T03:33:49.720262+00:00"
     },
     {
       "date": "2026-06-01",
@@ -5131,10 +5132,10 @@
       ],
       "actual_score": "3-1",
       "score_hit": true,
-      "predicted_corners": 9.96,
+      "predicted_corners": 9.99,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.608106+00:00"
+      "updated_at": "2026-06-24T03:33:49.760402+00:00"
     },
     {
       "date": "2026-06-01",
@@ -5151,10 +5152,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 9.54,
+      "predicted_corners": 9.53,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.713479+00:00"
+      "updated_at": "2026-06-24T03:33:49.801797+00:00"
     },
     {
       "date": "2026-06-02",
@@ -5174,7 +5175,7 @@
       "predicted_corners": 9.59,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.797619+00:00"
+      "updated_at": "2026-06-24T03:33:49.847728+00:00"
     },
     {
       "date": "2026-06-02",
@@ -5191,10 +5192,10 @@
       ],
       "actual_score": "0-2",
       "score_hit": true,
-      "predicted_corners": 9.84,
+      "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.883698+00:00"
+      "updated_at": "2026-06-24T03:33:49.893530+00:00"
     },
     {
       "date": "2026-06-02",
@@ -5211,10 +5212,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 9.36,
+      "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:39.986612+00:00"
+      "updated_at": "2026-06-24T03:33:49.938615+00:00"
     },
     {
       "date": "2026-06-02",
@@ -5234,7 +5235,7 @@
       "predicted_corners": 9.21,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.080949+00:00"
+      "updated_at": "2026-06-24T03:33:49.983654+00:00"
     },
     {
       "date": "2026-06-03",
@@ -5254,7 +5255,7 @@
       "predicted_corners": 9.72,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.181798+00:00"
+      "updated_at": "2026-06-24T03:33:50.028458+00:00"
     },
     {
       "date": "2026-06-03",
@@ -5271,10 +5272,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 9.28,
+      "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.289931+00:00"
+      "updated_at": "2026-06-24T03:33:50.075494+00:00"
     },
     {
       "date": "2026-06-03",
@@ -5291,10 +5292,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 9.67,
+      "predicted_corners": 9.68,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.402064+00:00"
+      "updated_at": "2026-06-24T03:33:50.117550+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5311,10 +5312,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": false,
-      "predicted_corners": 9.84,
+      "predicted_corners": 9.85,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.514436+00:00"
+      "updated_at": "2026-06-24T03:33:50.158215+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5331,10 +5332,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 8.74,
+      "predicted_corners": 8.73,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.610976+00:00"
+      "updated_at": "2026-06-24T03:33:50.198958+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5351,10 +5352,10 @@
       ],
       "actual_score": "4-2",
       "score_hit": false,
-      "predicted_corners": 9.21,
+      "predicted_corners": 9.2,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.705430+00:00"
+      "updated_at": "2026-06-24T03:33:50.240018+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5374,7 +5375,7 @@
       "predicted_corners": 9.25,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.799340+00:00"
+      "updated_at": "2026-06-24T03:33:50.280377+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5394,7 +5395,7 @@
       "predicted_corners": 9.57,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:40.903638+00:00"
+      "updated_at": "2026-06-24T03:33:50.322128+00:00"
     },
     {
       "date": "2026-06-04",
@@ -5411,10 +5412,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.73,
+      "predicted_corners": 9.74,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.006438+00:00"
+      "updated_at": "2026-06-24T03:33:50.363526+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5431,10 +5432,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.57,
+      "predicted_corners": 9.56,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.095092+00:00"
+      "updated_at": "2026-06-24T03:33:50.406810+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5451,10 +5452,10 @@
       ],
       "actual_score": "3-1",
       "score_hit": false,
-      "predicted_corners": 9.88,
+      "predicted_corners": 9.89,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.200390+00:00"
+      "updated_at": "2026-06-24T03:33:50.447972+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5474,7 +5475,7 @@
       "predicted_corners": 9.59,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.298881+00:00"
+      "updated_at": "2026-06-24T03:33:50.491841+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5494,7 +5495,7 @@
       "predicted_corners": 9.05,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.409739+00:00"
+      "updated_at": "2026-06-24T03:33:50.534705+00:00"
     },
     {
       "date": "2026-06-05",
@@ -5511,10 +5512,10 @@
       ],
       "actual_score": "0-3",
       "score_hit": true,
-      "predicted_corners": 9.76,
+      "predicted_corners": 9.78,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.522649+00:00"
+      "updated_at": "2026-06-24T03:33:50.574400+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5534,7 +5535,7 @@
       "predicted_corners": 9.59,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.641740+00:00"
+      "updated_at": "2026-06-24T03:33:50.614519+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5554,7 +5555,7 @@
       "predicted_corners": 9.32,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.762319+00:00"
+      "updated_at": "2026-06-24T03:33:50.654086+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5574,7 +5575,7 @@
       "predicted_corners": 9.89,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.882105+00:00"
+      "updated_at": "2026-06-24T03:33:50.693612+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5591,10 +5592,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.88,
+      "predicted_corners": 9.9,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:41.987115+00:00"
+      "updated_at": "2026-06-24T03:33:50.736684+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5614,7 +5615,7 @@
       "predicted_corners": 9.27,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.102183+00:00"
+      "updated_at": "2026-06-24T03:33:50.776619+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5634,7 +5635,7 @@
       "predicted_corners": 8.92,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.207206+00:00"
+      "updated_at": "2026-06-24T03:33:50.819049+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5651,10 +5652,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.65,
+      "predicted_corners": 9.66,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.322160+00:00"
+      "updated_at": "2026-06-24T03:33:50.874505+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5674,7 +5675,7 @@
       "predicted_corners": 9.82,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.433529+00:00"
+      "updated_at": "2026-06-24T03:33:50.915331+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5691,10 +5692,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.11,
+      "predicted_corners": 9.12,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.537464+00:00"
+      "updated_at": "2026-06-24T03:33:50.957639+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5711,10 +5712,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.81,
+      "predicted_corners": 9.82,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.665081+00:00"
+      "updated_at": "2026-06-24T03:33:50.999105+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5731,10 +5732,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": true,
-      "predicted_corners": 10.34,
+      "predicted_corners": 10.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.765159+00:00"
+      "updated_at": "2026-06-24T03:33:51.041633+00:00"
     },
     {
       "date": "2026-06-06",
@@ -5746,15 +5747,15 @@
       "outcome_hit": true,
       "predicted_scores": [
         "0-2",
-        "0-3",
-        "0-4"
+        "0-4",
+        "0-3"
       ],
       "actual_score": "1-2",
       "score_hit": false,
       "predicted_corners": 9.93,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.879330+00:00"
+      "updated_at": "2026-06-24T03:33:51.083567+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5771,10 +5772,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": false,
-      "predicted_corners": 9.51,
+      "predicted_corners": 9.5,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:42.999816+00:00"
+      "updated_at": "2026-06-24T03:33:51.128358+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5791,10 +5792,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 9.9,
+      "predicted_corners": 9.91,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.099781+00:00"
+      "updated_at": "2026-06-24T03:33:51.173154+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5814,7 +5815,7 @@
       "predicted_corners": 9.09,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.197194+00:00"
+      "updated_at": "2026-06-24T03:33:51.215219+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5831,10 +5832,10 @@
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 9.44,
+      "predicted_corners": 9.45,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.295509+00:00"
+      "updated_at": "2026-06-24T03:33:51.257521+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5851,10 +5852,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 9.75,
+      "predicted_corners": 9.76,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.407428+00:00"
+      "updated_at": "2026-06-24T03:33:51.299795+00:00"
     },
     {
       "date": "2026-06-07",
@@ -5874,7 +5875,7 @@
       "predicted_corners": 9.8,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.512619+00:00"
+      "updated_at": "2026-06-24T03:33:51.340950+00:00"
     },
     {
       "date": "2026-06-08",
@@ -5891,10 +5892,10 @@
       ],
       "actual_score": "3-1",
       "score_hit": false,
-      "predicted_corners": 9.43,
+      "predicted_corners": 9.44,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.602760+00:00"
+      "updated_at": "2026-06-24T03:33:51.381682+00:00"
     },
     {
       "date": "2026-06-08",
@@ -5911,10 +5912,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": true,
-      "predicted_corners": 9.4,
+      "predicted_corners": 9.41,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.698033+00:00"
+      "updated_at": "2026-06-24T03:33:51.422078+00:00"
     },
     {
       "date": "2026-06-09",
@@ -5931,10 +5932,10 @@
       ],
       "actual_score": "1-2",
       "score_hit": false,
-      "predicted_corners": 9.36,
+      "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.787238+00:00"
+      "updated_at": "2026-06-24T03:33:51.463567+00:00"
     },
     {
       "date": "2026-06-09",
@@ -5954,7 +5955,7 @@
       "predicted_corners": 9.67,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.886737+00:00"
+      "updated_at": "2026-06-24T03:33:51.504958+00:00"
     },
     {
       "date": "2026-06-09",
@@ -5971,10 +5972,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.28,
+      "predicted_corners": 9.29,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:43.997276+00:00"
+      "updated_at": "2026-06-24T03:33:51.545457+00:00"
     },
     {
       "date": "2026-06-10",
@@ -5991,10 +5992,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 9.48,
+      "predicted_corners": 9.47,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:44.098945+00:00"
+      "updated_at": "2026-06-24T03:33:51.586683+00:00"
     },
     {
       "date": "2026-06-10",
@@ -6011,10 +6012,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": true,
-      "predicted_corners": 9.91,
+      "predicted_corners": 9.92,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:44.193795+00:00"
+      "updated_at": "2026-06-24T03:33:51.627202+00:00"
     },
     {
       "date": "2026-06-10",
@@ -6034,7 +6035,7 @@
       "predicted_corners": 9.12,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:44.299616+00:00"
+      "updated_at": "2026-06-24T03:33:51.669206+00:00"
     },
     {
       "date": "2026-06-10",
@@ -6051,10 +6052,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": true,
-      "predicted_corners": 9.52,
+      "predicted_corners": 9.51,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:44.401982+00:00"
+      "updated_at": "2026-06-24T03:33:51.713558+00:00"
     },
     {
       "date": "2026-06-11",
@@ -6074,7 +6075,7 @@
       "predicted_corners": 9.35,
       "actual_corners": null,
       "corner_error": null,
-      "updated_at": "2026-06-24T03:08:44.522608+00:00"
+      "updated_at": "2026-06-24T03:33:51.757905+00:00"
     },
     {
       "date": "2026-06-11",
@@ -6091,10 +6092,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 9.16,
+      "predicted_corners": 9.15,
       "actual_corners": 4.0,
-      "corner_error": -5.16,
-      "updated_at": "2026-06-24T03:08:44.623130+00:00"
+      "corner_error": -5.15,
+      "updated_at": "2026-06-24T03:33:51.802365+00:00"
     },
     {
       "date": "2026-06-12",
@@ -6106,15 +6107,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "1-0",
-        "2-1",
-        "2-0"
+        "2-0",
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.68,
+      "predicted_corners": 9.69,
       "actual_corners": 13.0,
-      "corner_error": 3.32,
-      "updated_at": "2026-06-24T03:08:44.725059+00:00"
+      "corner_error": 3.31,
+      "updated_at": "2026-06-24T03:33:51.847993+00:00"
     },
     {
       "date": "2026-06-12",
@@ -6131,10 +6132,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 9.35,
+      "predicted_corners": 9.36,
       "actual_corners": 9.0,
-      "corner_error": -0.35,
-      "updated_at": "2026-06-24T03:08:44.845734+00:00"
+      "corner_error": -0.36,
+      "updated_at": "2026-06-24T03:33:51.893750+00:00"
     },
     {
       "date": "2026-06-13",
@@ -6154,7 +6155,7 @@
       "predicted_corners": 9.77,
       "actual_corners": 8.0,
       "corner_error": -1.77,
-      "updated_at": "2026-06-24T03:08:44.946030+00:00"
+      "updated_at": "2026-06-24T03:33:51.940060+00:00"
     },
     {
       "date": "2026-06-13",
@@ -6171,10 +6172,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.51,
+      "predicted_corners": 9.52,
       "actual_corners": 13.0,
-      "corner_error": 3.49,
-      "updated_at": "2026-06-24T03:08:45.040770+00:00"
+      "corner_error": 3.48,
+      "updated_at": "2026-06-24T03:33:51.986338+00:00"
     },
     {
       "date": "2026-06-13",
@@ -6191,10 +6192,10 @@
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 9.61,
+      "predicted_corners": 9.62,
       "actual_corners": 4.0,
-      "corner_error": -5.61,
-      "updated_at": "2026-06-24T03:08:45.147654+00:00"
+      "corner_error": -5.62,
+      "updated_at": "2026-06-24T03:33:52.032641+00:00"
     },
     {
       "date": "2026-06-14",
@@ -6206,15 +6207,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "0-2",
-        "0-3",
-        "0-4"
+        "0-4",
+        "0-3"
       ],
       "actual_score": "2-0",
       "score_hit": false,
-      "predicted_corners": 9.89,
+      "predicted_corners": 9.9,
       "actual_corners": 13.0,
-      "corner_error": 3.11,
-      "updated_at": "2026-06-24T03:08:45.253094+00:00"
+      "corner_error": 3.1,
+      "updated_at": "2026-06-24T03:33:52.079296+00:00"
     },
     {
       "date": "2026-06-14",
@@ -6231,10 +6232,10 @@
       ],
       "actual_score": "7-1",
       "score_hit": false,
-      "predicted_corners": 10.25,
+      "predicted_corners": 10.27,
       "actual_corners": 9.0,
-      "corner_error": -1.25,
-      "updated_at": "2026-06-24T03:08:45.366414+00:00"
+      "corner_error": -1.27,
+      "updated_at": "2026-06-24T03:33:52.133143+00:00"
     },
     {
       "date": "2026-06-14",
@@ -6254,7 +6255,7 @@
       "predicted_corners": 9.45,
       "actual_corners": 7.0,
       "corner_error": -2.45,
-      "updated_at": "2026-06-24T03:08:45.476264+00:00"
+      "updated_at": "2026-06-24T03:33:52.187281+00:00"
     },
     {
       "date": "2026-06-14",
@@ -6274,7 +6275,7 @@
       "predicted_corners": 9.49,
       "actual_corners": 9.0,
       "corner_error": -0.49,
-      "updated_at": "2026-06-24T03:08:45.578663+00:00"
+      "updated_at": "2026-06-24T03:33:52.239915+00:00"
     },
     {
       "date": "2026-06-14",
@@ -6291,10 +6292,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.46,
+      "predicted_corners": 9.47,
       "actual_corners": 9.0,
-      "corner_error": -0.46,
-      "updated_at": "2026-06-24T03:08:45.675584+00:00"
+      "corner_error": -0.47,
+      "updated_at": "2026-06-24T03:33:52.289459+00:00"
     },
     {
       "date": "2026-06-15",
@@ -6311,10 +6312,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.75,
+      "predicted_corners": 9.76,
       "actual_corners": 9.0,
-      "corner_error": -0.75,
-      "updated_at": "2026-06-24T03:08:45.771582+00:00"
+      "corner_error": -0.76,
+      "updated_at": "2026-06-24T03:33:52.338726+00:00"
     },
     {
       "date": "2026-06-15",
@@ -6334,7 +6335,7 @@
       "predicted_corners": 9.45,
       "actual_corners": 18.0,
       "corner_error": 8.55,
-      "updated_at": "2026-06-24T03:08:45.868549+00:00"
+      "updated_at": "2026-06-24T03:33:52.388948+00:00"
     },
     {
       "date": "2026-06-15",
@@ -6351,10 +6352,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.9,
+      "predicted_corners": 9.91,
       "actual_corners": 12.0,
-      "corner_error": 2.1,
-      "updated_at": "2026-06-24T03:08:45.963044+00:00"
+      "corner_error": 2.09,
+      "updated_at": "2026-06-24T03:33:52.442282+00:00"
     },
     {
       "date": "2026-06-15",
@@ -6371,10 +6372,10 @@
       ],
       "actual_score": "5-1",
       "score_hit": false,
-      "predicted_corners": 9.54,
+      "predicted_corners": 9.56,
       "actual_corners": 6.0,
-      "corner_error": -3.54,
-      "updated_at": "2026-06-24T03:08:46.059018+00:00"
+      "corner_error": -3.56,
+      "updated_at": "2026-06-24T03:33:52.490418+00:00"
     },
     {
       "date": "2026-06-16",
@@ -6385,8 +6386,8 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-1",
         "2-0",
+        "2-1",
         "3-1"
       ],
       "actual_score": "3-1",
@@ -6394,7 +6395,7 @@
       "predicted_corners": 9.76,
       "actual_corners": 10.0,
       "corner_error": 0.24,
-      "updated_at": "2026-06-24T03:08:46.159882+00:00"
+      "updated_at": "2026-06-24T03:33:52.544155+00:00"
     },
     {
       "date": "2026-06-16",
@@ -6406,15 +6407,15 @@
       "outcome_hit": false,
       "predicted_scores": [
         "2-0",
-        "1-0",
-        "3-0"
+        "3-0",
+        "1-0"
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.28,
+      "predicted_corners": 9.29,
       "actual_corners": 5.0,
-      "corner_error": -4.28,
-      "updated_at": "2026-06-24T03:08:46.271434+00:00"
+      "corner_error": -4.29,
+      "updated_at": "2026-06-24T03:33:52.606520+00:00"
     },
     {
       "date": "2026-06-16",
@@ -6431,10 +6432,10 @@
       ],
       "actual_score": "1-4",
       "score_hit": false,
-      "predicted_corners": 9.36,
+      "predicted_corners": 9.37,
       "actual_corners": 7.0,
-      "corner_error": -2.36,
-      "updated_at": "2026-06-24T03:08:46.372746+00:00"
+      "corner_error": -2.37,
+      "updated_at": "2026-06-24T03:33:52.662144+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6451,10 +6452,10 @@
       ],
       "actual_score": "3-0",
       "score_hit": false,
-      "predicted_corners": 9.45,
+      "predicted_corners": 9.44,
       "actual_corners": 4.0,
-      "corner_error": -5.45,
-      "updated_at": "2026-06-24T03:08:46.474222+00:00"
+      "corner_error": -5.44,
+      "updated_at": "2026-06-24T03:33:52.712646+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6471,10 +6472,10 @@
       ],
       "actual_score": "3-1",
       "score_hit": false,
-      "predicted_corners": 9.55,
+      "predicted_corners": 9.56,
       "actual_corners": 7.0,
-      "corner_error": -2.55,
-      "updated_at": "2026-06-24T03:08:46.580954+00:00"
+      "corner_error": -2.56,
+      "updated_at": "2026-06-24T03:33:52.765434+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6491,10 +6492,10 @@
       ],
       "actual_score": "4-2",
       "score_hit": false,
-      "predicted_corners": 9.66,
+      "predicted_corners": 9.67,
       "actual_corners": 10.0,
-      "corner_error": 0.34,
-      "updated_at": "2026-06-24T03:08:46.695060+00:00"
+      "corner_error": 0.33,
+      "updated_at": "2026-06-24T03:33:52.816760+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6511,10 +6512,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": false,
-      "predicted_corners": 9.1,
+      "predicted_corners": 9.09,
       "actual_corners": 4.0,
-      "corner_error": -5.1,
-      "updated_at": "2026-06-24T03:08:46.790342+00:00"
+      "corner_error": -5.09,
+      "updated_at": "2026-06-24T03:33:52.869439+00:00"
     },
     {
       "date": "2026-06-17",
@@ -6531,10 +6532,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 9.26,
+      "predicted_corners": 9.25,
       "actual_corners": 9.0,
-      "corner_error": -0.26,
-      "updated_at": "2026-06-24T03:08:46.883406+00:00"
+      "corner_error": -0.25,
+      "updated_at": "2026-06-24T03:33:52.923958+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6554,7 +6555,7 @@
       "predicted_corners": 13.23,
       "actual_corners": 20.0,
       "corner_error": 6.77,
-      "updated_at": "2026-06-24T03:08:46.974796+00:00"
+      "updated_at": "2026-06-24T03:33:52.971608+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6571,10 +6572,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 6.68,
+      "predicted_corners": 6.69,
       "actual_corners": 10.0,
-      "corner_error": 3.32,
-      "updated_at": "2026-06-24T03:08:47.080569+00:00"
+      "corner_error": 3.31,
+      "updated_at": "2026-06-24T03:33:53.020953+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6591,10 +6592,10 @@
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 13.46,
+      "predicted_corners": 13.47,
       "actual_corners": 10.0,
-      "corner_error": -3.46,
-      "updated_at": "2026-06-24T03:08:47.190806+00:00"
+      "corner_error": -3.47,
+      "updated_at": "2026-06-24T03:33:53.069486+00:00"
     },
     {
       "date": "2026-06-18",
@@ -6614,7 +6615,7 @@
       "predicted_corners": 9.43,
       "actual_corners": 7.0,
       "corner_error": -2.43,
-      "updated_at": "2026-06-24T03:08:47.290857+00:00"
+      "updated_at": "2026-06-24T03:33:53.116923+00:00"
     },
     {
       "date": "2026-06-19",
@@ -6631,10 +6632,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 6.44,
+      "predicted_corners": 6.42,
       "actual_corners": 3.0,
-      "corner_error": -3.44,
-      "updated_at": "2026-06-24T03:08:47.389215+00:00"
+      "corner_error": -3.42,
+      "updated_at": "2026-06-24T03:33:53.161946+00:00"
     },
     {
       "date": "2026-06-19",
@@ -6654,7 +6655,7 @@
       "predicted_corners": 7.62,
       "actual_corners": 7.0,
       "corner_error": -0.62,
-      "updated_at": "2026-06-24T03:08:47.491069+00:00"
+      "updated_at": "2026-06-24T03:33:53.211208+00:00"
     },
     {
       "date": "2026-06-19",
@@ -6674,7 +6675,7 @@
       "predicted_corners": 8.85,
       "actual_corners": 11.0,
       "corner_error": 2.15,
-      "updated_at": "2026-06-24T03:08:47.591684+00:00"
+      "updated_at": "2026-06-24T03:33:53.263854+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6694,7 +6695,7 @@
       "predicted_corners": 7.8,
       "actual_corners": 8.0,
       "corner_error": 0.2,
-      "updated_at": "2026-06-24T03:08:47.696356+00:00"
+      "updated_at": "2026-06-24T03:33:53.320087+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6711,10 +6712,10 @@
       ],
       "actual_score": "2-1",
       "score_hit": true,
-      "predicted_corners": 9.81,
+      "predicted_corners": 9.82,
       "actual_corners": 11.0,
-      "corner_error": 1.19,
-      "updated_at": "2026-06-24T03:08:47.803113+00:00"
+      "corner_error": 1.18,
+      "updated_at": "2026-06-24T03:33:53.372434+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6731,10 +6732,10 @@
       ],
       "actual_score": "5-1",
       "score_hit": false,
-      "predicted_corners": 8.03,
+      "predicted_corners": 8.05,
       "actual_corners": 7.0,
-      "corner_error": -1.03,
-      "updated_at": "2026-06-24T03:08:47.922576+00:00"
+      "corner_error": -1.05,
+      "updated_at": "2026-06-24T03:33:53.427369+00:00"
     },
     {
       "date": "2026-06-20",
@@ -6751,10 +6752,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": false,
-      "predicted_corners": 9.13,
+      "predicted_corners": 9.15,
       "actual_corners": 12.0,
-      "corner_error": 2.87,
-      "updated_at": "2026-06-24T03:08:48.040276+00:00"
+      "corner_error": 2.85,
+      "updated_at": "2026-06-24T03:33:53.473308+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6774,7 +6775,7 @@
       "predicted_corners": 7.31,
       "actual_corners": 6.0,
       "corner_error": -1.31,
-      "updated_at": "2026-06-24T03:08:48.140523+00:00"
+      "updated_at": "2026-06-24T03:33:53.516507+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6791,10 +6792,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.51,
+      "predicted_corners": 9.52,
       "actual_corners": 9.0,
-      "corner_error": -0.51,
-      "updated_at": "2026-06-24T03:08:48.236782+00:00"
+      "corner_error": -0.52,
+      "updated_at": "2026-06-24T03:33:53.559218+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6814,7 +6815,7 @@
       "predicted_corners": 15.25,
       "actual_corners": 7.0,
       "corner_error": -8.25,
-      "updated_at": "2026-06-24T03:08:48.336164+00:00"
+      "updated_at": "2026-06-24T03:33:53.606290+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6834,7 +6835,7 @@
       "predicted_corners": 7.36,
       "actual_corners": 8.0,
       "corner_error": 0.64,
-      "updated_at": "2026-06-24T03:08:48.440333+00:00"
+      "updated_at": "2026-06-24T03:33:53.649328+00:00"
     },
     {
       "date": "2026-06-21",
@@ -6851,10 +6852,10 @@
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 15.31,
+      "predicted_corners": 15.32,
       "actual_corners": 15.0,
-      "corner_error": -0.31,
-      "updated_at": "2026-06-24T03:08:48.549481+00:00"
+      "corner_error": -0.32,
+      "updated_at": "2026-06-24T03:33:53.693066+00:00"
     },
     {
       "date": "2026-06-22",
@@ -6874,7 +6875,7 @@
       "predicted_corners": 5.64,
       "actual_corners": 4.0,
       "corner_error": -1.64,
-      "updated_at": "2026-06-24T03:08:48.647131+00:00"
+      "updated_at": "2026-06-24T03:33:53.736362+00:00"
     },
     {
       "date": "2026-06-22",
@@ -6894,7 +6895,7 @@
       "predicted_corners": 8.65,
       "actual_corners": 6.0,
       "corner_error": -2.65,
-      "updated_at": "2026-06-24T03:08:48.747720+00:00"
+      "updated_at": "2026-06-24T03:33:53.781118+00:00"
     },
     {
       "date": "2026-06-22",
@@ -6911,10 +6912,10 @@
       ],
       "actual_score": "1-3",
       "score_hit": false,
-      "predicted_corners": 6.95,
+      "predicted_corners": 6.97,
       "actual_corners": 8.0,
-      "corner_error": 1.05,
-      "updated_at": "2026-06-24T03:08:48.846474+00:00"
+      "corner_error": 1.03,
+      "updated_at": "2026-06-24T03:33:53.826521+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6931,10 +6932,10 @@
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 8.58,
+      "predicted_corners": 8.57,
       "actual_corners": 11.0,
-      "corner_error": 2.42,
-      "updated_at": "2026-06-24T03:08:48.948617+00:00"
+      "corner_error": 2.43,
+      "updated_at": "2026-06-24T03:33:53.873573+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6947,14 +6948,14 @@
       "predicted_scores": [
         "0-2",
         "0-4",
-        "0-1"
+        "0-3"
       ],
       "actual_score": "1-2",
       "score_hit": false,
-      "predicted_corners": 5.58,
+      "predicted_corners": 5.59,
       "actual_corners": 11.0,
-      "corner_error": 5.42,
-      "updated_at": "2026-06-24T03:08:49.049870+00:00"
+      "corner_error": 5.41,
+      "updated_at": "2026-06-24T03:33:53.922095+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6971,10 +6972,10 @@
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 8.87,
+      "predicted_corners": 8.88,
       "actual_corners": 9.0,
-      "corner_error": 0.13,
-      "updated_at": "2026-06-24T03:08:49.154026+00:00"
+      "corner_error": 0.12,
+      "updated_at": "2026-06-24T03:33:53.967440+00:00"
     },
     {
       "date": "2026-06-23",
@@ -6991,10 +6992,10 @@
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 7.19,
+      "predicted_corners": 7.2,
       "actual_corners": 9.0,
-      "corner_error": 1.81,
-      "updated_at": "2026-06-24T03:08:49.256724+00:00"
+      "corner_error": 1.8,
+      "updated_at": "2026-06-24T03:33:54.016049+00:00"
     },
     {
       "date": "2026-06-23",
@@ -7014,7 +7015,127 @@
       "predicted_corners": 8.13,
       "actual_corners": 5.0,
       "corner_error": -3.13,
-      "updated_at": "2026-06-24T03:08:49.374637+00:00"
+      "updated_at": "2026-06-24T03:33:54.064779+00:00"
+    },
+    {
+      "date": "2026-06-23",
+      "home_team": "Portugal",
+      "away_team": "Uzbekistan",
+      "prediction_id": "3eb6998988144991947aa3774d41db25",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "2-0",
+        "4-0"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 6.63,
+      "actual_corners": 5.0,
+      "corner_error": -1.63,
+      "updated_at": "2026-06-24T03:34:52.615098+00:00"
+    },
+    {
+      "date": "2026-06-11",
+      "home_team": "Mexico",
+      "away_team": "South Africa",
+      "prediction_id": "81c1125335d94c74845e273faa70dbd6",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0",
+        "1-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 4.98,
+      "actual_corners": 4.0,
+      "corner_error": -0.98,
+      "updated_at": "2026-06-24T03:34:53.360326+00:00"
+    },
+    {
+      "date": "2026-06-18",
+      "home_team": "Canada",
+      "away_team": "Qatar",
+      "prediction_id": "0ab09f17961647a9941a2d1f622e68fe",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0",
+        "1-0"
+      ],
+      "actual_score": "6-0",
+      "score_hit": false,
+      "predicted_corners": 16.0,
+      "actual_corners": 20.0,
+      "corner_error": 4.0,
+      "updated_at": "2026-06-24T03:34:56.073202+00:00"
+    },
+    {
+      "date": "2026-06-23",
+      "home_team": "Portugal",
+      "away_team": "Uzbekistan",
+      "prediction_id": "3eb6998988144991947aa3774d41db25",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "2-0",
+        "4-0"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 6.63,
+      "actual_corners": 5.0,
+      "corner_error": -1.63,
+      "updated_at": "2026-06-24T03:36:26.800281+00:00"
+    },
+    {
+      "date": "2026-06-11",
+      "home_team": "Mexico",
+      "away_team": "South Africa",
+      "prediction_id": "81c1125335d94c74845e273faa70dbd6",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0",
+        "1-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 4.98,
+      "actual_corners": 4.0,
+      "corner_error": -0.98,
+      "updated_at": "2026-06-24T03:36:27.854709+00:00"
+    },
+    {
+      "date": "2026-06-18",
+      "home_team": "Canada",
+      "away_team": "Qatar",
+      "prediction_id": "0ab09f17961647a9941a2d1f622e68fe",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0",
+        "1-0"
+      ],
+      "actual_score": "6-0",
+      "score_hit": false,
+      "predicted_corners": 16.0,
+      "actual_corners": 20.0,
+      "corner_error": 4.0,
+      "updated_at": "2026-06-24T03:36:33.779607+00:00"
     }
   ],
   "trained_match_keys": [

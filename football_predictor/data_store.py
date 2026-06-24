@@ -19,6 +19,7 @@ DEFAULT_MODEL_STATE = {
         "elo_to_goals": 0.22,
         "form_to_goals": 0.20,
         "class_to_goals": 0.10,
+        "chance_to_goals": 0.06,
         "motivation_to_goals": 0.18,
         "injury_to_goals": 0.16,
         "lineup_to_goals": 0.10,

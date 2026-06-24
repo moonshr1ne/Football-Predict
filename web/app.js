@@ -60,6 +60,10 @@ function renderPrediction(data) {
       ${statsTable(data.away_stats)}
     </article>
     <article class="card wide">
+      <h3>Сведения по сборным</h3>
+      ${teamReportsBlock(data.team_reports, data.home_team, data.away_team)}
+    </article>
+    <article class="card wide">
       <h3>Контекст</h3>
       ${fixtureBlock(data.fixture)}
       <p>Турнир: ${escapeHtml(data.match_context?.competition || "FIFA World Cup")}</p>
@@ -143,9 +147,35 @@ function goalTotalBlock(goalTotal) {
     <div class="metric">${Number(goalTotal.expected ?? 0).toFixed(2)}</div>
     <p class="sub">${escapeHtml(goalTotal.label || "тотал")}</p>
     <table class="compact">
-      <tr><th>ТБ 2.5</th><td>${probability(probabilities.over_2_5)}</td><th>ТБ 3.5</th><td>${probability(probabilities.over_3_5)}</td></tr>
-      <tr><th>ТБ 4.5</th><td>${probability(probabilities.over_4_5)}</td><th>Чаще всего</th><td>${likely || "нет"}</td></tr>
+      <tr><th>ТБ 2.5</th><td>${probability(probabilities.over_2_5)}</td><th>ТМ 2.5</th><td>${probability(probabilities.under_2_5)}</td></tr>
+      <tr><th>ТБ 3.5</th><td>${probability(probabilities.over_3_5)}</td><th>ТМ 3.5</th><td>${probability(probabilities.under_3_5)}</td></tr>
+      <tr><th>ТБ 4.5</th><td>${probability(probabilities.over_4_5)}</td><th>ТМ 4.5</th><td>${probability(probabilities.under_4_5)}</td></tr>
+      <tr><th>Чаще всего</th><td colspan="3">${likely || "нет"}</td></tr>
     </table>
+  `;
+}
+
+function teamReportsBlock(reports, homeTeam, awayTeam) {
+  const home = reports?.[homeTeam] || {};
+  const away = reports?.[awayTeam] || {};
+  return `
+    <table>
+      <tr><th>Сборная</th><th>Уровень</th><th>Атака</th><th>Оборона</th><th>xG</th></tr>
+      ${teamReportRow(home, homeTeam)}
+      ${teamReportRow(away, awayTeam)}
+    </table>
+  `;
+}
+
+function teamReportRow(report, fallbackTeam) {
+  return `
+    <tr>
+      <th>${escapeHtml(report.team || fallbackTeam)}</th>
+      <td>${escapeHtml(report.level || "нет")} · форма ${percent(report.form_score)}</td>
+      <td>${percent(report.attack_score)} · ${listText(report.strengths)}</td>
+      <td>${percent(report.defense_score)} · ${listText(report.risks)}</td>
+      <td>${Number(report.expected_goals ?? 0).toFixed(2)}</td>
+    </tr>
   `;
 }
 
@@ -265,8 +295,11 @@ function scoreListText(items) {
 }
 
 function tacticsBlock(tactics) {
+  const formationNote = tactics.formation_source === "manual"
+    ? "manual"
+    : `оценка ${percent(tactics.formation_confidence)}`;
   return `
-    <p><strong>${escapeHtml(tactics.formation || "unknown")}</strong> · ${escapeHtml(tactics.style || "balanced")}</p>
+    <p><strong>${escapeHtml(tactics.formation || "unknown")}</strong> · ${escapeHtml(tactics.style || "balanced")} · ${escapeHtml(formationNote)}</p>
     <p class="sub">${escapeHtml(tactics.primary_attack || "mixed attack")} · ${escapeHtml(tactics.defensive_block || "mid")} block</p>
     <table>
       <tr><th>Владение</th><td>${percent(tactics.possession_intent)}</td><th>Прессинг</th><td>${percent(tactics.pressing)}</td></tr>
@@ -285,6 +318,10 @@ function probability(value) {
     return "нет";
   }
   return `${(Number(value) * 100).toFixed(1)}%`;
+}
+
+function listText(items) {
+  return (items || []).map(escapeHtml).join(", ") || "нет";
 }
 
 function escapeHtml(value) {

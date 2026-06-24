@@ -33,6 +33,7 @@ class Prediction:
     away_stats: TeamStats
     home_context: dict[str, Any]
     away_context: dict[str, Any]
+    team_reports: dict[str, Any]
     match_context: dict[str, Any]
     home_tactics: dict[str, Any]
     away_tactics: dict[str, Any]
@@ -68,6 +69,7 @@ class Prediction:
             "away_stats": self.away_stats.as_dict(),
             "home_context": self.home_context,
             "away_context": self.away_context,
+            "team_reports": self.team_reports,
             "match_context": self.match_context,
             "home_tactics": self.home_tactics,
             "away_tactics": self.away_tactics,
@@ -135,6 +137,10 @@ class MatchPredictor:
         markets = self._markets(home_team, away_team, probabilities)
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
         goal_total = self._goal_total_forecast(home_xg, away_xg)
+        team_reports = {
+            home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg),
+            away_team: self._team_report(away_team, away_stats, away_tactics, away_context, away_xg),
+        }
         exact_score_probabilities = self._top_scores(
             home_xg,
             away_xg,
@@ -176,6 +182,7 @@ class MatchPredictor:
             away_stats=away_stats,
             home_context=home_context,
             away_context=away_context,
+            team_reports=team_reports,
             match_context=match_context,
             home_tactics=home_tactics,
             away_tactics=away_tactics,
@@ -214,6 +221,8 @@ class MatchPredictor:
         lineup_diff = self._lineup_strength(home_context, match_context) - self._lineup_strength(away_context, match_context)
         tactics_diff = tactical_edge(home_tactics, away_tactics)
         tempo = tactical_tempo(home_tactics, away_tactics)
+        home_chance_edge = self._chance_edge(home_stats, away_stats, home_tactics, away_tactics)
+        away_chance_edge = self._chance_edge(away_stats, home_stats, away_tactics, home_tactics)
         intensity = max(0.0, min(1.0, float(match_context.get("importance", 1.0))))
 
         home_advantage = 0.0 if neutral else weights["home_advantage_goals"]
@@ -228,9 +237,10 @@ class MatchPredictor:
             + home_advantage
         )
         intensity_boost = weights.get("world_cup_intensity_goals", 0.05) * intensity
+        chance_weight = weights.get("chance_to_goals", 0.06)
         goal_scale = weights.get("goal_scale", 1.0)
-        home_xg = max(0.15, (home_base + adjustment + tempo + intensity_boost) * goal_scale)
-        away_xg = max(0.15, (away_base - adjustment * 0.78 + tempo + intensity_boost) * goal_scale)
+        home_xg = max(0.15, (home_base + adjustment + tempo + intensity_boost + chance_weight * home_chance_edge) * goal_scale)
+        away_xg = max(0.15, (away_base - adjustment * 0.78 + tempo + intensity_boost + chance_weight * away_chance_edge) * goal_scale)
         return min(home_xg, 4.6), min(away_xg, 4.6)
 
     def _expected_corners(
@@ -315,6 +325,9 @@ class MatchPredictor:
         over_2_5 = sum(prob for goals, prob in total_probs.items() if goals >= 3)
         over_3_5 = sum(prob for goals, prob in total_probs.items() if goals >= 4)
         over_4_5 = sum(prob for goals, prob in total_probs.items() if goals >= 5)
+        under_2_5 = 1.0 - over_2_5
+        under_3_5 = 1.0 - over_3_5
+        under_4_5 = 1.0 - over_4_5
         buckets = {
             "0-1": sum(prob for goals, prob in total_probs.items() if goals <= 1),
             "2-3": sum(prob for goals, prob in total_probs.items() if 2 <= goals <= 3),
@@ -341,8 +354,11 @@ class MatchPredictor:
                 "under_1_5": round(buckets["0-1"], 4),
                 "over_1_5": round(over_1_5, 4),
                 "over_2_5": round(over_2_5, 4),
+                "under_2_5": round(under_2_5, 4),
                 "over_3_5": round(over_3_5, 4),
+                "under_3_5": round(under_3_5, 4),
                 "over_4_5": round(over_4_5, 4),
+                "under_4_5": round(under_4_5, 4),
             },
             "buckets": {key: round(value, 4) for key, value in buckets.items()},
         }
@@ -508,6 +524,98 @@ class MatchPredictor:
             {"code": "X2", "label": f"{away_team} не проиграет", "probability": round(away_win + draw, 3)},
         ]
 
+    def _team_report(
+        self,
+        team: str,
+        stats: TeamStats,
+        tactics: dict[str, Any],
+        context: dict[str, Any],
+        expected_goals: float,
+    ) -> dict[str, Any]:
+        attack_score = self._rating01(
+            0.28 * min(stats.avg_goals_for / 3.0, 1.0)
+            + 0.18 * (0.5 if stats.avg_shots_for is None else min(stats.avg_shots_for / 18.0, 1.0))
+            + 0.18 * (0.5 if stats.avg_shots_on_target_for is None else min(stats.avg_shots_on_target_for / 7.0, 1.0))
+            + 0.24 * float(tactics.get("chance_creation", 0.55))
+            + 0.12 * float(tactics.get("set_piece_threat", 0.50))
+        )
+        defense_score = self._rating01(
+            0.30 * max(0.0, 1.0 - stats.avg_goals_against / 3.0)
+            + 0.18 * (0.5 if stats.avg_shots_against is None else max(0.0, 1.0 - stats.avg_shots_against / 20.0))
+            + 0.26 * float(tactics.get("defensive_solidity", 0.55))
+            + 0.14 * float(tactics.get("transition_defense", 0.55))
+            + 0.12 * (stats.clean_sheets / stats.sample_size if stats.sample_size else 0.25)
+        )
+        form_score = self._rating01(
+            0.56 * min(stats.points_per_match / 3.0, 1.0)
+            + 0.24 * min(max((stats.avg_goals_for - stats.avg_goals_against + 1.5) / 3.0, 0.0), 1.0)
+            + 0.20 * (1.0 - (stats.failed_to_score / stats.sample_size if stats.sample_size else 0.25))
+        )
+        class_score = self._rating01(0.50 + self._team_class_score(stats) / 3.2)
+        strengths = self._team_strengths(stats, tactics, attack_score, defense_score, form_score)
+        risks = self._team_risks(stats, tactics, context)
+        return {
+            "team": team,
+            "level": self._level_label(class_score),
+            "class_score": round(class_score, 3),
+            "attack_score": round(attack_score, 3),
+            "defense_score": round(defense_score, 3),
+            "form_score": round(form_score, 3),
+            "expected_goals": round(expected_goals, 2),
+            "formation": tactics.get("formation"),
+            "formation_confidence": tactics.get("formation_confidence"),
+            "strengths": strengths,
+            "risks": risks,
+            "data_note": f"{stats.sample_size} матчей, rich {min(stats.corner_samples, stats.possession_samples, stats.shot_samples)}",
+        }
+
+    @staticmethod
+    def _rating01(value: float) -> float:
+        return max(0.0, min(1.0, value))
+
+    @staticmethod
+    def _level_label(value: float) -> str:
+        if value >= 0.74:
+            return "топ-уровень"
+        if value >= 0.62:
+            return "сильная сборная"
+        if value >= 0.48:
+            return "средний уровень"
+        return "зона риска"
+
+    @staticmethod
+    def _team_strengths(stats: TeamStats, tactics: dict[str, Any], attack_score: float, defense_score: float, form_score: float) -> list[str]:
+        strengths: list[str] = []
+        if attack_score >= 0.66:
+            strengths.append("создание моментов")
+        if defense_score >= 0.66:
+            strengths.append("защита")
+        if form_score >= 0.68:
+            strengths.append("форма")
+        if float(tactics.get("set_piece_threat", 0.50)) >= 0.62:
+            strengths.append("стандарты")
+        if float(tactics.get("tempo", 0.55)) >= 0.66:
+            strengths.append("темп")
+        if stats.clean_sheets >= max(2, stats.sample_size // 3):
+            strengths.append("сухие матчи")
+        return strengths[:4] or ["нет ярко выраженного преимущества"]
+
+    @staticmethod
+    def _team_risks(stats: TeamStats, tactics: dict[str, Any], context: dict[str, Any]) -> list[str]:
+        risks: list[str] = []
+        if stats.sample_size < 10:
+            risks.append("мало матчей")
+        if stats.failed_to_score >= max(2, stats.sample_size // 4):
+            risks.append("риск без гола")
+        if stats.avg_goals_against >= 1.45:
+            risks.append("пропускает")
+        if float(tactics.get("defensive_solidity", 0.55)) <= 0.38:
+            risks.append("нестабильная оборона")
+        injuries = [item for item in context.get("injuries", []) if str(item.get("status", "")).lower() not in {"fit", "available", "ok"}]
+        if injuries:
+            risks.append("травмы/риски состава")
+        return risks[:4] or ["явных рисков нет"]
+
     def _result_summary(
         self,
         market_pick: str,
@@ -630,6 +738,47 @@ class MatchPredictor:
         points = stats.points_per_match - 1.55
         score = 0.34 * goal_diff + 0.22 * attack + 0.18 * defense + 0.16 * points + 0.12 * clean_rate - 0.14 * blank_rate
         return max(-1.6, min(1.6, score))
+
+    @staticmethod
+    def _chance_edge(
+        attacking_stats: TeamStats,
+        defending_stats: TeamStats,
+        attacking_tactics: dict[str, Any],
+        defending_tactics: dict[str, Any],
+    ) -> float:
+        return max(
+            -1.6,
+            min(
+                1.6,
+                MatchPredictor._attack_signal(attacking_stats, attacking_tactics)
+                + MatchPredictor._defensive_weakness(defending_stats, defending_tactics),
+            ),
+        )
+
+    @staticmethod
+    def _attack_signal(stats: TeamStats, tactics: dict[str, Any]) -> float:
+        shot_sample = min(1.0, stats.shot_samples / 5.0)
+        shots = 0.0 if stats.avg_shots_for is None else (stats.avg_shots_for - 11.0) / 12.0
+        shots_on_target = 0.0 if stats.avg_shots_on_target_for is None else (stats.avg_shots_on_target_for - 3.8) / 5.0
+        goals = (stats.avg_goals_for - 1.25) / 2.4
+        chance_creation = float(tactics.get("chance_creation", 0.55)) - 0.55
+        tempo = float(tactics.get("tempo", 0.55)) - 0.55
+        set_pieces = float(tactics.get("set_piece_threat", 0.50)) - 0.50
+        signal = 0.38 * goals + shot_sample * (0.28 * shots + 0.30 * shots_on_target)
+        signal += 0.72 * chance_creation + 0.34 * tempo + 0.22 * set_pieces
+        return max(-1.25, min(1.25, signal))
+
+    @staticmethod
+    def _defensive_weakness(stats: TeamStats, tactics: dict[str, Any]) -> float:
+        shot_sample = min(1.0, stats.shot_samples / 5.0)
+        goals_allowed = (stats.avg_goals_against - 1.10) / 2.3
+        shots_allowed = 0.0 if stats.avg_shots_against is None else (stats.avg_shots_against - 11.0) / 14.0
+        clean_rate = stats.clean_sheets / stats.sample_size if stats.sample_size else 0.25
+        solidity = 0.55 - float(tactics.get("defensive_solidity", 0.55))
+        transition = 0.55 - float(tactics.get("transition_defense", 0.55))
+        signal = 0.42 * goals_allowed + shot_sample * 0.28 * shots_allowed + 0.62 * solidity + 0.26 * transition
+        signal -= 0.18 * clean_rate
+        return max(-1.25, min(1.25, signal))
 
     @staticmethod
     def _team_zero_factor(

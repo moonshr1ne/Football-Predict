@@ -330,7 +330,9 @@ def _details_text(data: dict) -> str:
         f"Точные счета: {score_text}",
         f"Голы: ожидание {float(goal_total.get('expected', 0)):.2f}, "
         f"ТБ2.5 {float(goal_probabilities.get('over_2_5', 0)):.1%}, "
-        f"ТБ3.5 {float(goal_probabilities.get('over_3_5', 0)):.1%}; "
+        f"ТМ2.5 {float(goal_probabilities.get('under_2_5', 0)):.1%}, "
+        f"ТБ3.5 {float(goal_probabilities.get('over_3_5', 0)):.1%}, "
+        f"ТМ3.5 {float(goal_probabilities.get('under_3_5', 0)):.1%}; "
         f"чаще всего {likely_totals or 'нет'}",
         f"xG: {data['home_team']} {data['expected_goals'][data['home_team']]}, {data['away_team']} {data['expected_goals'][data['away_team']]}",
         f"Последние 10: {data['home_team']} {data['home_stats']['wins']}-{data['home_stats']['draws']}-{data['home_stats']['losses']}, "
@@ -339,6 +341,15 @@ def _details_text(data: dict) -> str:
         f"Тактика: {data['home_team']} {data['home_tactics']['formation']} vs {data['away_team']} {data['away_tactics']['formation']}; "
         f"{data['tactical_matchup']['summary']}",
     ]
+    reports = data.get("team_reports", {})
+    if reports:
+        for team in (data["home_team"], data["away_team"]):
+            report = reports.get(team, {})
+            if report:
+                lines.append(
+                    f"{team}: {report.get('level')}, атака {float(report.get('attack_score', 0)):.0%}, "
+                    f"оборона {float(report.get('defense_score', 0)):.0%}, xG {float(report.get('expected_goals', 0)):.2f}."
+                )
     quality = data.get("data_quality", {})
     if quality:
         backtest = quality.get("backtest", {})

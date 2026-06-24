@@ -20,11 +20,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Brazil": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -44,11 +46,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "England": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "quick transitions",
@@ -68,11 +72,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "France": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -92,11 +98,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Germany": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "quick transitions",
@@ -116,11 +124,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Ghana": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -140,8 +150,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Mexico": {
     "formation": "4-3-3",
@@ -164,11 +176,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Netherlands": {
-    "formation": "3-4-2-1",
+    "formation": "4-3-3",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -188,8 +202,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Portugal": {
     "formation": "4-3-3",
@@ -212,11 +228,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "South Korea": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "central progression",
@@ -236,8 +254,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Spain": {
     "formation": "4-3-3",
@@ -260,8 +280,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "United States": {
     "formation": "4-3-3",
@@ -284,11 +306,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Uruguay": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "possession control",
     "build_up": "short build-up and positional control",
     "primary_attack": "wide attacks and corners",
@@ -308,8 +332,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "South Africa": {
     "formation": "4-2-3-1",
@@ -332,8 +358,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Canada": {
     "formation": "4-3-3",
@@ -356,8 +384,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Bosnia-Herzegovina": {
     "formation": "4-2-3-1",
@@ -380,8 +410,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Czechia": {
     "formation": "4-2-3-1",
@@ -404,11 +436,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Morocco": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -428,11 +462,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Qatar": {
-    "formation": "4-4-2",
+    "formation": "5-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -452,8 +488,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Switzerland": {
     "formation": "4-3-3",
@@ -476,11 +514,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Paraguay": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -500,11 +540,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Australia": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -524,8 +566,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Türkiye": {
     "formation": "4-3-3",
@@ -548,11 +592,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Curaçao": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -572,8 +618,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Haiti": {
     "formation": "4-2-3-1",
@@ -596,8 +644,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Scotland": {
     "formation": "4-2-3-1",
@@ -620,8 +670,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Ivory Coast": {
     "formation": "4-2-3-1",
@@ -644,8 +696,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Ecuador": {
     "formation": "4-3-3",
@@ -668,8 +722,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Japan": {
     "formation": "4-2-3-1",
@@ -692,8 +748,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Belgium": {
     "formation": "4-3-3",
@@ -716,11 +774,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Egypt": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -740,11 +800,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Saudi Arabia": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -764,11 +826,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Cape Verde": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -788,11 +852,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Sweden": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -812,11 +878,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Tunisia": {
-    "formation": "4-4-2",
+    "formation": "4-2-3-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -836,11 +904,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Senegal": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -860,8 +930,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Iran": {
     "formation": "4-2-3-1",
@@ -884,8 +956,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "New Zealand": {
     "formation": "4-2-3-1",
@@ -908,8 +982,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Iraq": {
     "formation": "4-2-3-1",
@@ -932,8 +1008,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Norway": {
     "formation": "4-2-3-1",
@@ -956,8 +1034,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Algeria": {
     "formation": "4-3-3",
@@ -980,11 +1060,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Austria": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -1004,11 +1086,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Jordan": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -1028,11 +1112,13 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Croatia": {
-    "formation": "4-2-3-1",
+    "formation": "4-3-3",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -1052,8 +1138,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Panama": {
     "formation": "4-2-3-1",
@@ -1076,8 +1164,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Congo DR": {
     "formation": "4-2-3-1",
@@ -1100,11 +1190,13 @@
     "sample_size": 1,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 1 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 1 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.44
   },
   "Uzbekistan": {
-    "formation": "4-2-3-1",
+    "formation": "5-4-1",
     "style": "balanced tournament football",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
@@ -1124,8 +1216,10 @@
     "sample_size": 2,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 2 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 2 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.56
   },
   "Colombia": {
     "formation": "4-3-3",
@@ -1148,7 +1242,9 @@
     "sample_size": 1,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Derived from 1 FIFA World Cup 2026 match(es) in ESPN data."
-    ]
+      "Estimated from 1 FIFA World Cup 2026 rich match(es) in ESPN data."
+    ],
+    "formation_source": "estimated-from-match-stats",
+    "formation_confidence": 0.44
   }
 }

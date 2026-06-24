@@ -56,6 +56,9 @@ def update_team_tactics(store: DataStore, team: str, **updates) -> dict:
         if key == "note":
             profile.setdefault("notes", []).append(value)
             continue
+        if key == "formation":
+            profile["formation_source"] = "manual"
+            profile["formation_confidence"] = 1.0
         if key in numeric_fields:
             profile[key] = max(0.0, min(1.0, float(value)))
         else:

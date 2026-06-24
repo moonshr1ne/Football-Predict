@@ -320,8 +320,26 @@ class WorldCupDataSync:
         central_progression = clamp01(0.34 + possession * 0.32 + sot / 35.0)
         line_height = clamp01(0.40 + pressing * 0.20 + possession * 0.15)
 
+        derived_formation = formation_guess(
+            possession=possession,
+            directness=directness,
+            defensive_solidity=defensive_solidity,
+            attack_width=attack_width,
+            central_progression=central_progression,
+            transition_attack=transition_attack,
+            pressing=pressing,
+            line_height=line_height,
+            shots=shots,
+            shots_against=shots_against,
+            goals_for=goals_for,
+            goals_against=goals_against,
+        )
+        manual_formation = existing.get("formation") if existing.get("formation_source") == "manual" else None
+
         return {
-            "formation": existing.get("formation", formation_guess(possession, directness, defensive_solidity)),
+            "formation": manual_formation or derived_formation,
+            "formation_source": "manual" if manual_formation else "estimated-from-match-stats",
+            "formation_confidence": round(min(0.82, 0.32 + sample_size * 0.12), 3),
             "style": style_guess(possession, directness, pressing),
             "build_up": build_up_guess(possession, directness),
             "primary_attack": primary_attack_guess(attack_width, central_progression, transition_attack),
@@ -340,18 +358,41 @@ class WorldCupDataSync:
             "tempo": round(tempo, 3),
             "sample_size": sample_size,
             "source": "espn-world-cup-derived",
-            "notes": [f"Derived from {sample_size} FIFA World Cup 2026 match(es) in ESPN data."],
+            "notes": [f"Estimated from {sample_size} FIFA World Cup 2026 rich match(es) in ESPN data."],
         }
 
 
-def formation_guess(possession: float, directness: float, defensive_solidity: float) -> str:
-    if possession >= 0.58:
-        return "4-3-3"
-    if directness >= 0.62:
-        return "4-2-3-1"
-    if defensive_solidity >= 0.66:
+def formation_guess(
+    possession: float,
+    directness: float,
+    defensive_solidity: float,
+    attack_width: float,
+    central_progression: float,
+    transition_attack: float,
+    pressing: float,
+    line_height: float,
+    shots: float,
+    shots_against: float,
+    goals_for: float,
+    goals_against: float,
+) -> str:
+    if possession <= 0.38 and shots_against >= 13.0 and goals_for <= 1.1:
+        return "5-4-1"
+    if defensive_solidity >= 0.64 and attack_width >= 0.60 and line_height <= 0.56:
         return "3-4-2-1"
-    return "4-4-2"
+    if possession >= 0.61 and central_progression >= 0.60:
+        return "4-3-3"
+    if pressing >= 0.66 and shots >= 13.0 and central_progression >= 0.56:
+        return "4-3-3"
+    if directness >= 0.62 and transition_attack >= 0.60:
+        return "4-2-3-1"
+    if possession <= 0.44 and directness >= 0.56 and attack_width >= 0.56:
+        return "4-4-2"
+    if defensive_solidity >= 0.66 or (goals_against <= 0.7 and shots_against <= 8.0):
+        return "4-3-3" if central_progression >= attack_width else "4-2-3-1"
+    if central_progression >= attack_width and possession >= 0.52:
+        return "4-3-3"
+    return "4-2-3-1"
 
 
 def style_guess(possession: float, directness: float, pressing: float) -> str:

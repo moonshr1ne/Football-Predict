@@ -11,6 +11,7 @@ from football_predictor.learning import OnlineLearner
 from football_predictor.models import TeamStats
 from football_predictor.predictor import MatchPredictor
 from football_predictor.providers import EspnWorldCupProvider
+from football_predictor.sync import formation_guess
 
 
 def make_store(tmp_dir):
@@ -40,6 +41,9 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("result_summary", prediction.to_dict())
             self.assertIn("goal_total", prediction.to_dict())
             self.assertIn("over_2_5", prediction.to_dict()["goal_total"]["probabilities"])
+            self.assertIn("under_2_5", prediction.to_dict()["goal_total"]["probabilities"])
+            self.assertIn("team_reports", prediction.to_dict())
+            self.assertIn(home, prediction.to_dict()["team_reports"])
             self.assertIn("data_quality", prediction.to_dict())
             for item in prediction.exact_score_probabilities:
                 self.assertGreaterEqual(item["probability"], 0)
@@ -116,6 +120,42 @@ class PredictorTests(unittest.TestCase):
             store = make_store(tmp_dir)
             prediction = MatchPredictor(store).predict("Argentina", "Algeria", remember=False)
             self.assertIn("2-0", prediction.exact_scores)
+
+    def test_formation_guess_has_defensive_and_possession_shapes(self):
+        self.assertEqual(
+            formation_guess(
+                possession=0.34,
+                directness=0.58,
+                defensive_solidity=0.42,
+                attack_width=0.50,
+                central_progression=0.42,
+                transition_attack=0.48,
+                pressing=0.50,
+                line_height=0.42,
+                shots=7.0,
+                shots_against=15.0,
+                goals_for=0.7,
+                goals_against=1.6,
+            ),
+            "5-4-1",
+        )
+        self.assertEqual(
+            formation_guess(
+                possession=0.66,
+                directness=0.44,
+                defensive_solidity=0.58,
+                attack_width=0.54,
+                central_progression=0.68,
+                transition_attack=0.50,
+                pressing=0.62,
+                line_height=0.64,
+                shots=13.0,
+                shots_against=8.0,
+                goals_for=1.9,
+                goals_against=0.8,
+            ),
+            "4-3-3",
+        )
 
     def test_result_summary_completed_fixture(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
