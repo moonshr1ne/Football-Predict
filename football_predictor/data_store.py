@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -105,13 +106,41 @@ class DataStore:
     def save_prediction(self, prediction: dict[str, Any]) -> None:
         predictions = self._read_json(self.predictions_path, [])
         prediction = dict(prediction)
-        prediction["created_at"] = datetime.now(timezone.utc).isoformat()
+        prediction.setdefault("prediction_id", uuid.uuid4().hex)
+        prediction.setdefault("created_at", datetime.now(timezone.utc).isoformat())
+        prediction.setdefault("status", "pending" if prediction.get("match_date") else "recorded")
         predictions.append(prediction)
         self._write_json(self.predictions_path, predictions[-500:])
 
-    def latest_prediction(self, home_team: str, away_team: str) -> dict[str, Any] | None:
-        predictions = self._read_json(self.predictions_path, [])
+    def load_predictions(self) -> list[dict[str, Any]]:
+        return self._read_json(self.predictions_path, [])
+
+    def save_predictions(self, predictions: list[dict[str, Any]]) -> None:
+        self._write_json(self.predictions_path, predictions[-500:])
+
+    def update_prediction(self, prediction_id: str, updates: dict[str, Any]) -> dict[str, Any] | None:
+        predictions = self.load_predictions()
+        updated_prediction = None
+        for prediction in predictions:
+            if prediction.get("prediction_id") == prediction_id:
+                prediction.update(updates)
+                updated_prediction = prediction
+                break
+        self.save_predictions(predictions)
+        return updated_prediction
+
+    def latest_prediction(
+        self,
+        home_team: str,
+        away_team: str,
+        match_date: str | None = None,
+        status: str | None = None,
+    ) -> dict[str, Any] | None:
+        predictions = self.load_predictions()
         for prediction in reversed(predictions):
-            if prediction.get("home_team") == home_team and prediction.get("away_team") == away_team:
+            same_teams = prediction.get("home_team") == home_team and prediction.get("away_team") == away_team
+            same_date = match_date is None or prediction.get("match_date") == match_date
+            same_status = status is None or prediction.get("status") == status
+            if same_teams and same_date and same_status:
                 return prediction
         return None

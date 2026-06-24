@@ -6,7 +6,8 @@ document.querySelector("#predict-form").addEventListener("submit", async (event)
   event.preventDefault();
   const matchup = document.querySelector("#matchup").value;
   const homeVenue = document.querySelector("#home-venue").checked;
-  const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&home_venue=${homeVenue}`);
+  const date = document.querySelector("#match-date").value;
+  const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&home_venue=${homeVenue}&date=${encodeURIComponent(date)}`);
   renderPrediction(data);
 });
 
@@ -45,7 +46,7 @@ function renderPrediction(data) {
     <article class="card">
       <h3>Исход</h3>
       <div class="metric">${data.market_pick}</div>
-      <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%</p>
+      <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%${data.match_date ? `, очередь ${data.match_date}` : ""}</p>
     </article>
     <article class="card">
       <h3>Угловые</h3>

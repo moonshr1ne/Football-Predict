@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from datetime import date
 
 from .aliases import parse_matchup
 from .context_tools import update_team_context
+from .autocheck import AutoChecker
 from .data_store import DataStore
 from .learning import OnlineLearner
 from .predictor import MatchPredictor
@@ -19,6 +21,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     predict = subparsers.add_parser("predict", help="Сделать прогноз: nfp predict \"Англия, Гана\"")
     predict.add_argument("matchup")
+    predict.add_argument("--date", help="Дата матча YYYY-MM-DD. Если указана, прогноз попадет в очередь автопроверки.")
     predict.add_argument("--home-venue", action="store_true", help="Считать, что первая команда играет дома.")
     predict.add_argument("--json", action="store_true")
 
@@ -39,6 +42,14 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--date", required=True)
     check.add_argument("--home-venue", action="store_true")
     check.add_argument("--json", action="store_true")
+
+    auto_check = subparsers.add_parser("auto-check", help="Проверить все прогнозы в очереди через API-Football.")
+    auto_check.add_argument("--limit", type=int, default=25)
+    auto_check.add_argument("--json", action="store_true")
+
+    watch = subparsers.add_parser("watch", help="Постоянно проверять очередь прогнозов и обучаться.")
+    watch.add_argument("--interval", type=int, default=3600, help="Пауза между проверками в секундах.")
+    watch.add_argument("--limit", type=int, default=25)
 
     context = subparsers.add_parser("context", help="Добавить травмы, мотивацию и заметки по сборной.")
     context.add_argument("team")
@@ -61,6 +72,7 @@ def main(argv: list[str] | None = None) -> int:
     if not args.command:
         args.command = "predict"
         args.matchup = "Англия, Гана"
+        args.date = None
         args.home_venue = False
         args.json = False
 
@@ -68,17 +80,25 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "predict":
         home_team, away_team = parse_matchup(args.matchup, store.resolver)
-        prediction = MatchPredictor(store).predict(home_team, away_team, neutral=not args.home_venue)
+        prediction = MatchPredictor(store).predict(
+            home_team,
+            away_team,
+            neutral=not args.home_venue,
+            match_date=args.date,
+        )
         if args.json:
             print(json.dumps(prediction.to_dict(), ensure_ascii=False, indent=2))
         else:
             print(prediction.short_text())
+            if args.date:
+                print(f"Добавил в очередь автопроверки на дату: {args.date}")
             print(_details_text(prediction.to_dict()))
         return 0
 
     if args.command == "result":
         home_team, away_team = parse_matchup(args.matchup, store.resolver)
         home_goals, away_goals = _parse_score(args.score)
+        baseline = store.latest_prediction(home_team, away_team, match_date=args.date, status="pending")
         review = OnlineLearner(store).record_result(
             home_team=home_team,
             away_team=away_team,
@@ -91,9 +111,37 @@ def main(argv: list[str] | None = None) -> int:
             competition=args.competition,
             stage=args.stage,
             neutral=not args.home_venue,
+            baseline_prediction=baseline,
         )
+        if baseline and baseline.get("prediction_id"):
+            store.update_prediction(
+                baseline["prediction_id"],
+                {"status": "reviewed", "review": review, "reviewed_at": review["updated_at"]},
+            )
         print(json.dumps(review, ensure_ascii=False, indent=2) if args.json else _review_text(review))
         return 0
+
+    if args.command == "auto-check":
+        try:
+            summary = AutoChecker(store).check_pending(limit=args.limit)
+        except ProviderError as exc:
+            parser.error(str(exc))
+        print(json.dumps(summary, ensure_ascii=False, indent=2) if args.json else _auto_check_text(summary))
+        return 0
+
+    if args.command == "watch":
+        try:
+            checker = AutoChecker(store)
+        except ProviderError as exc:
+            parser.error(str(exc))
+        print(f"Автопроверка запущена. Интервал: {args.interval} сек.")
+        while True:
+            try:
+                summary = checker.check_pending(limit=args.limit)
+                print(_auto_check_text(summary))
+            except ProviderError as exc:
+                print(f"Автопроверка временно недоступна: {exc}")
+            time.sleep(args.interval)
 
     if args.command == "check":
         home_team, away_team = parse_matchup(args.matchup, store.resolver)
@@ -102,6 +150,7 @@ def main(argv: list[str] | None = None) -> int:
             result = provider.get_finished_result(home_team, away_team, args.date)
         except ProviderError as exc:
             parser.error(str(exc))
+        baseline = store.latest_prediction(home_team, away_team, match_date=args.date, status="pending")
         review = OnlineLearner(store).record_result(
             home_team=home_team,
             away_team=away_team,
@@ -112,7 +161,13 @@ def main(argv: list[str] | None = None) -> int:
             away_corners=result.get("away_corners"),
             neutral=not args.home_venue,
             source=result.get("source", "api"),
+            baseline_prediction=baseline,
         )
+        if baseline and baseline.get("prediction_id"):
+            store.update_prediction(
+                baseline["prediction_id"],
+                {"status": "reviewed", "review": review, "reviewed_at": review["updated_at"]},
+            )
         print(json.dumps(review, ensure_ascii=False, indent=2) if args.json else _review_text(review))
         return 0
 
@@ -161,6 +216,13 @@ def _review_text(review: dict) -> str:
     score_hit = "да" if review["score_hit"] else "нет"
     corner = "" if review["corner_error"] is None else f", ошибка угловых {review['corner_error']:+.2f}"
     return f"Проверено: исход угадан: {hit}, точный счет: {score_hit}{corner}. Модель обновлена."
+
+
+def _auto_check_text(summary: dict) -> str:
+    return (
+        f"Очередь проверена: обработано {summary['checked']}, "
+        f"обучено {summary['learned']}, ожидают дальше {summary['pending']}, ошибок {summary['errors']}."
+    )
 
 
 if __name__ == "__main__":

@@ -13,6 +13,8 @@ from .models import TeamStats
 class Prediction:
     home_team: str
     away_team: str
+    match_date: str | None
+    neutral: bool
     market_pick: str
     confidence: float
     home_win_probability: float
@@ -32,6 +34,8 @@ class Prediction:
         return {
             "home_team": self.home_team,
             "away_team": self.away_team,
+            "match_date": self.match_date,
+            "neutral": self.neutral,
             "market_pick": self.market_pick,
             "confidence": round(self.confidence, 3),
             "probabilities": {
@@ -61,7 +65,14 @@ class MatchPredictor:
     def __init__(self, store: DataStore):
         self.store = store
 
-    def predict(self, home_team: str, away_team: str, neutral: bool = True, remember: bool = True) -> Prediction:
+    def predict(
+        self,
+        home_team: str,
+        away_team: str,
+        neutral: bool = True,
+        remember: bool = True,
+        match_date: str | None = None,
+    ) -> Prediction:
         matches = self.store.load_matches()
         home_stats = build_team_stats(matches, home_team)
         away_stats = build_team_stats(matches, away_team)
@@ -83,6 +94,8 @@ class MatchPredictor:
         prediction = Prediction(
             home_team=home_team,
             away_team=away_team,
+            match_date=match_date,
+            neutral=neutral,
             market_pick=market_pick,
             confidence=confidence,
             home_win_probability=home_win,
@@ -98,7 +111,7 @@ class MatchPredictor:
             away_context=away_context,
             warnings=warnings,
         )
-        if remember:
+        if remember and match_date:
             self.store.save_prediction(prediction.to_dict())
         return prediction
 

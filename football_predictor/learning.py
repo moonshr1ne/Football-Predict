@@ -33,8 +33,14 @@ class OnlineLearner:
         stage: str = "",
         neutral: bool = True,
         source: str = "manual_result",
+        baseline_prediction: dict | None = None,
     ) -> dict:
-        prediction = MatchPredictor(self.store).predict(home_team, away_team, neutral=neutral, remember=False)
+        prediction = baseline_prediction or MatchPredictor(self.store).predict(
+            home_team,
+            away_team,
+            neutral=neutral,
+            remember=False,
+        ).to_dict()
         state = self.store.load_model_state()
         lr = float(state.get("learning_rate", 0.08))
         weights = state["weights"]
@@ -47,9 +53,14 @@ class OnlineLearner:
         if home_corners is not None and away_corners is not None:
             actual_corners_total = float(home_corners) + float(away_corners)
 
-        home_error = home_goals - prediction.expected_home_goals
-        away_error = away_goals - prediction.expected_away_goals
-        total_error = (home_goals + away_goals) - (prediction.expected_home_goals + prediction.expected_away_goals)
+        expected_goals = prediction.get("expected_goals", {})
+        expected_home_goals = float(expected_goals.get(home_team, 1.15))
+        expected_away_goals = float(expected_goals.get(away_team, 1.15))
+        predicted_corners = float(prediction.get("predicted_corners", 9.2))
+
+        home_error = home_goals - expected_home_goals
+        away_error = away_goals - expected_away_goals
+        total_error = (home_goals + away_goals) - (expected_home_goals + expected_away_goals)
         side_error = home_error - away_error
 
         weights["goal_scale"] = self._clamp(weights.get("goal_scale", 1.0) + lr * total_error * 0.025, 0.72, 1.32)
@@ -62,7 +73,7 @@ class OnlineLearner:
 
         corner_error = None
         if actual_corners_total is not None:
-            corner_error = actual_corners_total - prediction.predicted_corners
+            corner_error = actual_corners_total - predicted_corners
             weights["corner_bias"] = self._clamp(weights.get("corner_bias", 0.0) + lr * corner_error * 0.12, -2.4, 2.4)
 
         actual_outcome = outcome_label(home_goals, away_goals)
@@ -71,13 +82,14 @@ class OnlineLearner:
             "date": date,
             "home_team": home_team,
             "away_team": away_team,
-            "predicted_outcome": prediction.market_pick,
+            "prediction_id": prediction.get("prediction_id"),
+            "predicted_outcome": prediction.get("market_pick"),
             "actual_outcome": actual_outcome,
-            "outcome_hit": prediction.market_pick == actual_outcome,
-            "predicted_scores": prediction.exact_scores,
+            "outcome_hit": prediction.get("market_pick") == actual_outcome,
+            "predicted_scores": prediction.get("exact_scores", []),
             "actual_score": score,
-            "score_hit": score in prediction.exact_scores,
-            "predicted_corners": round(prediction.predicted_corners, 2),
+            "score_hit": score in prediction.get("exact_scores", []),
+            "predicted_corners": round(predicted_corners, 2),
             "actual_corners": None if actual_corners_total is None else round(actual_corners_total, 2),
             "corner_error": None if corner_error is None else round(corner_error, 2),
             "updated_at": datetime.now(timezone.utc).isoformat(),

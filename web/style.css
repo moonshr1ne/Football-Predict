@@ -72,7 +72,7 @@ h3 {
 .row,
 .result-grid {
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) auto auto;
+  grid-template-columns: minmax(220px, 1fr) 150px auto auto;
   gap: 10px;
   align-items: center;
 }

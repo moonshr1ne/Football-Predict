@@ -23,9 +23,15 @@ class PredictorHandler(SimpleHTTPRequestHandler):
             query = parse_qs(parsed.query)
             matchup = query.get("matchup", [""])[0]
             home_venue = query.get("home_venue", ["false"])[0] == "true"
+            match_date = query.get("date", [None])[0] or None
             try:
                 home, away = parse_matchup(matchup, self.store.resolver)
-                prediction = MatchPredictor(self.store).predict(home, away, neutral=not home_venue)
+                prediction = MatchPredictor(self.store).predict(
+                    home,
+                    away,
+                    neutral=not home_venue,
+                    match_date=match_date,
+                )
                 self._json(200, prediction.to_dict())
             except Exception as exc:
                 self._json(400, {"error": str(exc)})
@@ -42,6 +48,7 @@ class PredictorHandler(SimpleHTTPRequestHandler):
             body = json.loads(self.rfile.read(size).decode("utf-8"))
             home, away = parse_matchup(body["matchup"], self.store.resolver)
             home_goals, away_goals = _parse_score(body["score"])
+            baseline = self.store.latest_prediction(home, away, match_date=body["date"], status="pending")
             review = OnlineLearner(self.store).record_result(
                 home_team=home,
                 away_team=away,
@@ -50,7 +57,13 @@ class PredictorHandler(SimpleHTTPRequestHandler):
                 away_goals=away_goals,
                 corners_total=_optional_float(body.get("corners")),
                 neutral=not bool(body.get("home_venue")),
+                baseline_prediction=baseline,
             )
+            if baseline and baseline.get("prediction_id"):
+                self.store.update_prediction(
+                    baseline["prediction_id"],
+                    {"status": "reviewed", "review": review, "reviewed_at": review["updated_at"]},
+                )
             self._json(200, review)
         except Exception as exc:
             self._json(400, {"error": str(exc)})

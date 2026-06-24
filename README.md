@@ -8,7 +8,7 @@
 
 ```powershell
 cd outputs\football-national-predictor
-python -m football_predictor.cli predict "Англия, Гана"
+python -m football_predictor.cli predict "Англия, Гана" --date 2026-06-24
 ```
 
 Пример короткого вывода:
@@ -46,6 +46,25 @@ python -m football_predictor.cli result "Англия, Гана" --date 2026-06-
 $env:API_FOOTBALL_KEY="ваш_ключ"
 python -m football_predictor.cli check "Англия, Гана" --date 2026-06-24
 ```
+
+## Автопроверка своих прогнозов
+
+Если прогноз сделан с `--date`, он сохраняется в `data/predictions.json` со статусом `pending`.
+После матча приложение может само пройтись по очереди, забрать финальные результаты через API-Football и обучиться:
+
+```powershell
+$env:API_FOOTBALL_KEY="ваш_ключ"
+python -m football_predictor.cli auto-check
+```
+
+Для постоянной проверки:
+
+```powershell
+$env:API_FOOTBALL_KEY="ваш_ключ"
+python -m football_predictor.cli watch --interval 3600
+```
+
+`watch` надо держать запущенным или повесить на планировщик Windows. Без ключа API приложение все равно обучается, но результат нужно внести вручную через `result`.
 
 ## Травмы, мотивация и заметки
 
