@@ -25,6 +25,7 @@ DEFAULT_MODEL_STATE = {
         "lineup_to_goals": 0.24,
         "tactics_to_goals": 0.24,
         "tactics_to_corners": 1.15,
+        "foul_bias": 0.0,
         "world_cup_intensity_goals": 0.05,
         "corner_bias": 0.0,
         "goal_scale": 1.0,
@@ -132,6 +133,7 @@ class DataStore:
         self.model_path = self.data_dir / "model_state.json"
         self.predictions_path = self.data_dir / "predictions.json"
         self.key_players_path = self.data_dir / "key_players.json"
+        self.referees_path = self.data_dir / "referees.json"
         self.resolver = TeamResolver(self.alias_path)
         self._ensure_files()
 
@@ -148,6 +150,7 @@ class DataStore:
             (self.model_path, DEFAULT_MODEL_STATE),
             (self.predictions_path, []),
             (self.key_players_path, DEFAULT_KEY_PLAYERS),
+            (self.referees_path, {}),
         ):
             if not path.exists():
                 path.write_text(json.dumps(default, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -286,6 +289,24 @@ class DataStore:
         for team, players in data.items():
             merged[team] = players
         return merged
+
+    def load_referee_profiles(self) -> dict[str, Any]:
+        return self._read_json(self.referees_path, {})
+
+    def save_referee_profiles(self, profiles: dict[str, Any]) -> None:
+        self._write_json(self.referees_path, profiles)
+
+    def referee_profile(self, referee_name: str | None) -> dict[str, Any]:
+        if not referee_name:
+            return {}
+        profiles = self.load_referee_profiles()
+        if referee_name in profiles:
+            return profiles[referee_name]
+        normalized = referee_name.casefold()
+        for name, profile in profiles.items():
+            if name.casefold() == normalized:
+                return profile
+        return {}
 
     def save_model_state(self, state: dict[str, Any]) -> None:
         self._write_json(self.model_path, state)

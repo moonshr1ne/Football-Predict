@@ -39,7 +39,7 @@ class PredictorHandler(SimpleHTTPRequestHandler):
                     recent = "уже свежие" if sync_info.get("skipped_full_sync") else f"{sync_info.get('recent_imported', 0)}"
                     action = "База проверена" if sync_info.get("skipped_full_sync") else "База обновлена"
                     warnings.append(
-                        f"{action}: участников {sync_info.get('participants', 0)}, last-10 матчей {recent}, матчей ЧМ {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, обучающих матчей {sync_info.get('trained', 0)}."
+                        f"{action}: участников {sync_info.get('participants', 0)}, last-10 матчей {recent}, матчей ЧМ {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, судей {sync_info.get('referees_updated', 0)}, обучающих матчей {sync_info.get('trained', 0)}."
                     )
                 if not match_date:
                     try:

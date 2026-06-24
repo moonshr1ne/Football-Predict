@@ -7,8 +7,9 @@ from pathlib import Path
 from football_predictor.aliases import has_cyrillic, parse_matchup
 from football_predictor.autocheck import AutoChecker
 from football_predictor.data_store import DataStore
+from football_predictor.features import build_team_stats
 from football_predictor.learning import OnlineLearner
-from football_predictor.models import TeamStats
+from football_predictor.models import MatchRecord, TeamStats
 from football_predictor.predictor import MatchPredictor
 from football_predictor.providers import EspnWorldCupProvider
 from football_predictor.sync import formation_guess
@@ -40,8 +41,10 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("tactical_matchup", prediction.to_dict())
             self.assertIn("result_summary", prediction.to_dict())
             self.assertIn("goal_total", prediction.to_dict())
+            self.assertIn("foul_forecast", prediction.to_dict())
             self.assertIn("over_2_5", prediction.to_dict()["goal_total"]["probabilities"])
             self.assertIn("under_2_5", prediction.to_dict()["goal_total"]["probabilities"])
+            self.assertGreater(prediction.to_dict()["foul_forecast"]["expected"], 0)
             self.assertIn("team_reports", prediction.to_dict())
             self.assertIn(home, prediction.to_dict()["team_reports"])
             self.assertIn("lineup_reports", prediction.to_dict())
@@ -102,6 +105,43 @@ class PredictorTests(unittest.TestCase):
             away_stats = TeamStats(team="Away", sample_size=10, wins=2, draws=2, losses=6, failed_to_score=4)
             scores = [item["score"] for item in MatchPredictor(store)._top_scores(1.35, 0.55, "П1", home_stats, away_stats)]
             self.assertIn("2-0", scores)
+
+    def test_team_stats_include_fouls_from_recent_matches(self):
+        matches = [
+            MatchRecord("2099-01-01", "Home", "Away", home_goals=1, away_goals=0, home_fouls=12, away_fouls=16),
+            MatchRecord("2099-01-02", "Away", "Home", home_goals=0, away_goals=2, home_fouls=11, away_fouls=13),
+        ]
+        stats = build_team_stats(matches, "Home")
+        self.assertEqual(stats.foul_samples, 2)
+        self.assertEqual(stats.avg_fouls_for, 12.5)
+        self.assertEqual(stats.avg_fouls_against, 13.5)
+        self.assertEqual(stats.avg_total_fouls, 26.0)
+
+    def test_referee_profile_lifts_foul_forecast(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            store.save_referee_profiles({"Strict Ref": {"matches": 5, "avg_fouls": 34.0, "source": "test"}})
+            predictor = MatchPredictor(store)
+            low = TeamStats(team="Low", sample_size=10, wins=5, draws=3, losses=2, foul_samples=6, fouls_for=54, fouls_against=60)
+            normal = TeamStats(team="Normal", sample_size=10, wins=4, draws=3, losses=3, foul_samples=6, fouls_for=60, fouls_against=60)
+            shared_args = (
+                low,
+                normal,
+                {"pressing": 0.50, "directness": 0.48, "tempo": 0.50, "defensive_solidity": 0.60},
+                {"pressing": 0.50, "directness": 0.48, "tempo": 0.50, "defensive_solidity": 0.60},
+            )
+            no_ref_forecast = predictor._foul_forecast(
+                *shared_args,
+                None,
+                store.load_model_state()["weights"],
+            )
+            forecast = predictor._foul_forecast(
+                *shared_args,
+                {"referee": {"name": "Strict Ref", "source": "test"}},
+                store.load_model_state()["weights"],
+            )
+            self.assertGreater(forecast["expected"], no_ref_forecast["expected"])
+            self.assertEqual(forecast["referee"]["name"], "Strict Ref")
 
     def test_high_total_matchup_gets_high_score_candidate(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -237,12 +277,16 @@ class PredictorTests(unittest.TestCase):
                 "away_goals": 1,
                 "home_corners": 5,
                 "away_corners": 4,
+                "home_fouls": 12,
+                "away_fouls": 14,
                 "completed": True,
             }
             prediction = MatchPredictor(store).predict("England", "Ghana", fixture=fixture, remember=False)
             data = prediction.to_dict()
             self.assertEqual(data["result_summary"]["status"], "completed")
             self.assertEqual(data["result_summary"]["actual"]["score"], "2-1")
+            self.assertEqual(data["result_summary"]["actual"]["fouls"], 26.0)
+            self.assertIn("fouls", data["result_summary"]["predicted"])
             self.assertIn("predicted", data["result_summary"])
 
     def test_learning_records_review(self):
@@ -274,6 +318,8 @@ class PredictorTests(unittest.TestCase):
         self.assertEqual(fixture["home_corners"], 4)
         self.assertEqual(fixture["away_corners"], 6)
         self.assertEqual(fixture["away_possession"], 58)
+        self.assertEqual(fixture["home_fouls"], 13)
+        self.assertEqual(fixture["away_fouls"], 9)
 
     def test_espn_fixture_keeps_live_score_for_running_match(self):
         event = sample_espn_event()
@@ -286,6 +332,12 @@ class PredictorTests(unittest.TestCase):
         self.assertTrue(fixture["in_progress"])
         self.assertEqual(fixture["home_goals"], 1)
         self.assertEqual(fixture["away_goals"], 2)
+
+    def test_espn_summary_extracts_referee(self):
+        provider = EspnWorldCupProvider()
+        referee = provider._referee_from_summary(sample_espn_summary())
+        self.assertEqual(referee["name"], "Drew Fischer")
+        self.assertEqual(referee["source"], "espn-summary-officials")
 
 
 class FakeProvider:
@@ -326,6 +378,7 @@ def sample_espn_event():
                             {"name": "possessionPct", "displayValue": "58"},
                             {"name": "totalShots", "displayValue": "14"},
                             {"name": "shotsOnTarget", "displayValue": "5"},
+                            {"name": "foulsCommitted", "displayValue": "9"},
                         ],
                     },
                     {
@@ -337,11 +390,27 @@ def sample_espn_event():
                             {"name": "possessionPct", "displayValue": "42"},
                             {"name": "totalShots", "displayValue": "9"},
                             {"name": "shotsOnTarget", "displayValue": "3"},
+                            {"name": "foulsCommitted", "displayValue": "13"},
                         ],
                     },
                 ],
             }
         ],
+    }
+
+
+def sample_espn_summary():
+    return {
+        "gameInfo": {
+            "officials": [
+                {
+                    "fullName": "Drew Fischer",
+                    "displayName": "Drew Fischer",
+                    "position": {"name": "Referee", "displayName": "Referee", "id": "1"},
+                    "order": 1,
+                }
+            ]
+        }
     }
 
 

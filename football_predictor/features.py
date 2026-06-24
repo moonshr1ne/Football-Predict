@@ -37,6 +37,13 @@ def build_team_stats(matches: list[MatchRecord], team: str, limit: int = 10) -> 
             stats.corners_for += float(corners_for)
             stats.corners_against += float(corners_against)
 
+        fouls_for = match.fouls_for(team)
+        fouls_against = match.fouls_against(team)
+        if fouls_for is not None and fouls_against is not None:
+            stats.foul_samples += 1
+            stats.fouls_for += float(fouls_for)
+            stats.fouls_against += float(fouls_against)
+
         possession = match.possession_for(team)
         if possession is not None:
             stats.possession_samples += 1

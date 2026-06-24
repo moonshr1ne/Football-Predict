@@ -1,0 +1,570 @@
+{
+  "Abdulrahman Al-Jassim": {
+    "name": "Abdulrahman Al-Jassim",
+    "matches": 1,
+    "avg_fouls": 19.0,
+    "recent": [
+      {
+        "date": "2026-06-17",
+        "match": "Portugal - Congo DR",
+        "fouls": 19.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Adham Mohammad": {
+    "name": "Adham Mohammad",
+    "matches": 1,
+    "avg_fouls": 11.0,
+    "recent": [
+      {
+        "date": "2026-06-15",
+        "match": "Spain - Cape Verde",
+        "fouls": 11.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Alejandro José Hernández Hernández": {
+    "name": "Alejandro José Hernández Hernández",
+    "matches": 1,
+    "avg_fouls": 27.0,
+    "recent": [
+      {
+        "date": "2026-06-20",
+        "match": "Brazil - Haiti",
+        "fouls": 27.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Alireza Faghani": {
+    "name": "Alireza Faghani",
+    "matches": 1,
+    "avg_fouls": 14.0,
+    "recent": [
+      {
+        "date": "2026-06-16",
+        "match": "France - Senegal",
+        "fouls": 14.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Amin Omar": {
+    "name": "Amin Omar",
+    "matches": 2,
+    "avg_fouls": 25.5,
+    "recent": [
+      {
+        "date": "2026-06-22",
+        "match": "Argentina - Austria",
+        "fouls": 26.0
+      },
+      {
+        "date": "2026-06-12",
+        "match": "South Korea - Czechia",
+        "fouls": 25.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Anthony Taylor": {
+    "name": "Anthony Taylor",
+    "matches": 1,
+    "avg_fouls": 25.0,
+    "recent": [
+      {
+        "date": "2026-06-18",
+        "match": "Uzbekistan - Colombia",
+        "fouls": 25.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Beida Damane": {
+    "name": "Beida Damane",
+    "matches": 1,
+    "avg_fouls": 19.0,
+    "recent": [
+      {
+        "date": "2026-06-17",
+        "match": "Austria - Jordan",
+        "fouls": 19.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Clément Turpin": {
+    "name": "Clément Turpin",
+    "matches": 1,
+    "avg_fouls": 22.0,
+    "recent": [
+      {
+        "date": "2026-06-17",
+        "match": "England - Croatia",
+        "fouls": 22.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Cristián Garay": {
+    "name": "Cristián Garay",
+    "matches": 1,
+    "avg_fouls": 19.0,
+    "recent": [
+      {
+        "date": "2026-06-18",
+        "match": "Canada - Qatar",
+        "fouls": 19.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "César Arturo Ramos Palazuelos": {
+    "name": "César Arturo Ramos Palazuelos",
+    "matches": 1,
+    "avg_fouls": 18.0,
+    "recent": [
+      {
+        "date": "2026-06-16",
+        "match": "Iran - New Zealand",
+        "fouls": 18.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Danny Makkelie": {
+    "name": "Danny Makkelie",
+    "matches": 1,
+    "avg_fouls": 30.0,
+    "recent": [
+      {
+        "date": "2026-06-13",
+        "match": "United States - Paraguay",
+        "fouls": 30.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Dario Herrera": {
+    "name": "Dario Herrera",
+    "matches": 1,
+    "avg_fouls": 16.0,
+    "recent": [
+      {
+        "date": "2026-06-21",
+        "match": "Belgium - Iran",
+        "fouls": 16.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Drew Fischer": {
+    "name": "Drew Fischer",
+    "matches": 1,
+    "avg_fouls": 12.0,
+    "recent": [
+      {
+        "date": "2026-06-22",
+        "match": "France - Iraq",
+        "fouls": 12.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Espen Eskas": {
+    "name": "Espen Eskas",
+    "matches": 1,
+    "avg_fouls": 15.0,
+    "recent": [
+      {
+        "date": "2026-06-21",
+        "match": "Uruguay - Cape Verde",
+        "fouls": 15.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Facundo Tello": {
+    "name": "Facundo Tello",
+    "matches": 1,
+    "avg_fouls": 30.0,
+    "recent": [
+      {
+        "date": "2026-06-12",
+        "match": "Canada - Bosnia-Herzegovina",
+        "fouls": 30.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Felix Zwayer": {
+    "name": "Felix Zwayer",
+    "matches": 1,
+    "avg_fouls": 28.0,
+    "recent": [
+      {
+        "date": "2026-06-19",
+        "match": "United States - Australia",
+        "fouls": 28.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Francois Letexier": {
+    "name": "Francois Letexier",
+    "matches": 1,
+    "avg_fouls": 23.0,
+    "recent": [
+      {
+        "date": "2026-06-14",
+        "match": "Ivory Coast - Ecuador",
+        "fouls": 23.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Glenn Nyberg": {
+    "name": "Glenn Nyberg",
+    "matches": 1,
+    "avg_fouls": 20.0,
+    "recent": [
+      {
+        "date": "2026-06-17",
+        "match": "Ghana - Panama",
+        "fouls": 20.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Gustavo Tejera": {
+    "name": "Gustavo Tejera",
+    "matches": 1,
+    "avg_fouls": 16.0,
+    "recent": [
+      {
+        "date": "2026-06-19",
+        "match": "Mexico - South Korea",
+        "fouls": 16.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Ilgiz Tantashev": {
+    "name": "Ilgiz Tantashev",
+    "matches": 1,
+    "avg_fouls": 19.0,
+    "recent": [
+      {
+        "date": "2026-06-19",
+        "match": "Scotland - Morocco",
+        "fouls": 19.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Ismail Elfath": {
+    "name": "Ismail Elfath",
+    "matches": 1,
+    "avg_fouls": 14.0,
+    "recent": [
+      {
+        "date": "2026-06-14",
+        "match": "Netherlands - Japan",
+        "fouls": 14.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Istvan Kovacs": {
+    "name": "Istvan Kovacs",
+    "matches": 1,
+    "avg_fouls": 23.0,
+    "recent": [
+      {
+        "date": "2026-06-21",
+        "match": "Tunisia - Japan",
+        "fouls": 23.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Iván Arcides Barton Cisneros": {
+    "name": "Iván Arcides Barton Cisneros",
+    "matches": 1,
+    "avg_fouls": 29.0,
+    "recent": [
+      {
+        "date": "2026-06-20",
+        "match": "Türkiye - Paraguay",
+        "fouls": 29.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Jalal Jayed": {
+    "name": "Jalal Jayed",
+    "matches": 2,
+    "avg_fouls": 29.0,
+    "recent": [
+      {
+        "date": "2026-06-23",
+        "match": "Portugal - Uzbekistan",
+        "fouls": 29.0
+      },
+      {
+        "date": "2026-06-14",
+        "match": "Germany - Curaçao",
+        "fouls": 29.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Jesús Valenzuela": {
+    "name": "Jesús Valenzuela",
+    "matches": 1,
+    "avg_fouls": 16.0,
+    "recent": [
+      {
+        "date": "2026-06-14",
+        "match": "Australia - Türkiye",
+        "fouls": 16.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "João Pinheiro": {
+    "name": "João Pinheiro",
+    "matches": 1,
+    "avg_fouls": 25.0,
+    "recent": [
+      {
+        "date": "2026-06-18",
+        "match": "Switzerland - Bosnia-Herzegovina",
+        "fouls": 25.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Juan Gabriel Benítez": {
+    "name": "Juan Gabriel Benítez",
+    "matches": 1,
+    "avg_fouls": 12.0,
+    "recent": [
+      {
+        "date": "2026-06-20",
+        "match": "Germany - Ivory Coast",
+        "fouls": 12.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Ma Ning": {
+    "name": "Ma Ning",
+    "matches": 1,
+    "avg_fouls": 17.0,
+    "recent": [
+      {
+        "date": "2026-06-21",
+        "match": "Ecuador - Curaçao",
+        "fouls": 17.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Martínez, Héctor": {
+    "name": "Martínez, Héctor",
+    "matches": 2,
+    "avg_fouls": 30.5,
+    "recent": [
+      {
+        "date": "2026-06-23",
+        "match": "England - Ghana",
+        "fouls": 38.0
+      },
+      {
+        "date": "2026-06-13",
+        "match": "Qatar - Switzerland",
+        "fouls": 23.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Maurizio Mariani": {
+    "name": "Maurizio Mariani",
+    "matches": 2,
+    "avg_fouls": 22.5,
+    "recent": [
+      {
+        "date": "2026-06-24",
+        "match": "Colombia - Congo DR",
+        "fouls": 28.0
+      },
+      {
+        "date": "2026-06-15",
+        "match": "Saudi Arabia - Uruguay",
+        "fouls": 17.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Michael Oliver": {
+    "name": "Michael Oliver",
+    "matches": 1,
+    "avg_fouls": 21.0,
+    "recent": [
+      {
+        "date": "2026-06-20",
+        "match": "Netherlands - Sweden",
+        "fouls": 21.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Mustapha Ghorbal": {
+    "name": "Mustapha Ghorbal",
+    "matches": 1,
+    "avg_fouls": 44.0,
+    "recent": [
+      {
+        "date": "2026-06-14",
+        "match": "Haiti - Scotland",
+        "fouls": 44.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Omar Al Ali": {
+    "name": "Omar Al Ali",
+    "matches": 1,
+    "avg_fouls": 22.0,
+    "recent": [
+      {
+        "date": "2026-06-22",
+        "match": "New Zealand - Egypt",
+        "fouls": 22.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Pierre Atcho": {
+    "name": "Pierre Atcho",
+    "matches": 2,
+    "avg_fouls": 28.0,
+    "recent": [
+      {
+        "date": "2026-06-23",
+        "match": "Panama - Croatia",
+        "fouls": 31.0
+      },
+      {
+        "date": "2026-06-16",
+        "match": "Iraq - Norway",
+        "fouls": 25.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Ramon Abatti Abel": {
+    "name": "Ramon Abatti Abel",
+    "matches": 1,
+    "avg_fouls": 30.0,
+    "recent": [
+      {
+        "date": "2026-06-15",
+        "match": "Belgium - Egypt",
+        "fouls": 30.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Raphael Claus": {
+    "name": "Raphael Claus",
+    "matches": 1,
+    "avg_fouls": 12.0,
+    "recent": [
+      {
+        "date": "2026-06-21",
+        "match": "Spain - Saudi Arabia",
+        "fouls": 12.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Slavko Vincici": {
+    "name": "Slavko Vincici",
+    "matches": 2,
+    "avg_fouls": 23.5,
+    "recent": [
+      {
+        "date": "2026-06-23",
+        "match": "Jordan - Algeria",
+        "fouls": 17.0
+      },
+      {
+        "date": "2026-06-13",
+        "match": "Brazil - Morocco",
+        "fouls": 30.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Szymon Marciniak": {
+    "name": "Szymon Marciniak",
+    "matches": 1,
+    "avg_fouls": 21.0,
+    "recent": [
+      {
+        "date": "2026-06-17",
+        "match": "Argentina - Algeria",
+        "fouls": 21.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Tori Penso": {
+    "name": "Tori Penso",
+    "matches": 1,
+    "avg_fouls": 22.0,
+    "recent": [
+      {
+        "date": "2026-06-18",
+        "match": "Czechia - South Africa",
+        "fouls": 22.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Wilton Pereira Sampaio": {
+    "name": "Wilton Pereira Sampaio",
+    "matches": 2,
+    "avg_fouls": 20.5,
+    "recent": [
+      {
+        "date": "2026-06-23",
+        "match": "Norway - Senegal",
+        "fouls": 18.0
+      },
+      {
+        "date": "2026-06-11",
+        "match": "Mexico - South Africa",
+        "fouls": 23.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
+  "Yael Falcón Pérez": {
+    "name": "Yael Falcón Pérez",
+    "matches": 1,
+    "avg_fouls": 18.0,
+    "recent": [
+      {
+        "date": "2026-06-15",
+        "match": "Sweden - Tunisia",
+        "fouls": 18.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  }
+}

@@ -25,6 +25,7 @@ class WorldCupDataSync:
                 "recent_imported": 0,
                 "imported": 0,
                 "profiles_updated": 0,
+                "referees_updated": 0,
                 "trained": 0,
                 "source": "espn-world-cup",
                 "error": "provider unavailable",
@@ -44,13 +45,14 @@ class WorldCupDataSync:
                 and existing.away_formation
                 and existing.home_lineup_confirmed
                 and existing.away_lineup_confirmed
-            ):
+            ) or not existing.referee:
                 fixture = self.provider.enrich_fixture(fixture)
             record = self._record_from_fixture(fixture)
             self.store.add_or_update_match(record)
             imported += 1
 
         profiles_updated = self._update_tactical_profiles()
+        referees_updated = self._update_referee_profiles()
         trained = self._train_model_from_imported_matches()
         self._save_backtest_summary()
         return {
@@ -58,6 +60,7 @@ class WorldCupDataSync:
             "recent_imported": 0,
             "imported": imported,
             "profiles_updated": profiles_updated,
+            "referees_updated": referees_updated,
             "trained": trained,
             "source": "espn-world-cup",
         }
@@ -91,6 +94,7 @@ class WorldCupDataSync:
                 recent_imported += 1
 
         profiles_updated = self._update_tactical_profiles()
+        referees_updated = self._update_referee_profiles()
         trained = self._train_model_from_imported_matches()
         backtest = self._save_backtest_summary()
         self.store.save_sync_state(
@@ -98,6 +102,7 @@ class WorldCupDataSync:
                 "last_full_sync_at": datetime.now(timezone.utc).isoformat(),
                 "participants": len(participants),
                 "recent_imported": recent_imported,
+                "referees_updated": referees_updated,
                 "backtest": backtest,
             }
         )
@@ -106,6 +111,7 @@ class WorldCupDataSync:
             "recent_imported": recent_imported,
             "imported": finished_summary.get("imported", 0),
             "profiles_updated": profiles_updated,
+            "referees_updated": referees_updated,
             "trained": trained,
             "backtest": backtest,
             "errors": errors[:10],
@@ -130,6 +136,7 @@ class WorldCupDataSync:
             away_shots_on_target=fixture.get("away_shots_on_target"),
             home_fouls=fixture.get("home_fouls"),
             away_fouls=fixture.get("away_fouls"),
+            referee=self._fixture_referee_name(fixture),
             competition=fixture.get("competition") or "ESPN soccer",
             stage=fixture.get("status_detail", ""),
             neutral=True,
@@ -139,6 +146,15 @@ class WorldCupDataSync:
             home_lineup_confirmed=bool(fixture.get("home_formation")),
             away_lineup_confirmed=bool(fixture.get("away_formation")),
         )
+
+    @staticmethod
+    def _fixture_referee_name(fixture: dict[str, Any]) -> str | None:
+        referee = fixture.get("referee")
+        if isinstance(referee, dict):
+            return referee.get("name")
+        if isinstance(referee, str):
+            return referee
+        return None
 
     def _update_tactical_profiles(self) -> int:
         matches = [
@@ -214,6 +230,51 @@ class WorldCupDataSync:
         self.store.save_tactical_profiles(profiles)
         return updated
 
+    def _update_referee_profiles(self) -> int:
+        aggregates: dict[str, dict[str, Any]] = {}
+        for match in sorted(self.store.load_matches(), key=lambda item: item.date, reverse=True):
+            if (
+                not match.is_finished()
+                or not match.referee
+                or match.home_fouls is None
+                or match.away_fouls is None
+            ):
+                continue
+            total_fouls = float(match.home_fouls) + float(match.away_fouls)
+            profile = aggregates.setdefault(
+                match.referee,
+                {
+                    "name": match.referee,
+                    "matches": 0,
+                    "total_fouls": 0.0,
+                    "recent": [],
+                    "source": "espn-world-cup-derived",
+                },
+            )
+            profile["matches"] += 1
+            profile["total_fouls"] += total_fouls
+            if len(profile["recent"]) < 10:
+                profile["recent"].append(
+                    {
+                        "date": match.date,
+                        "match": f"{match.home_team} - {match.away_team}",
+                        "fouls": round(total_fouls, 2),
+                    }
+                )
+
+        profiles = {}
+        for name, profile in sorted(aggregates.items()):
+            matches = int(profile["matches"])
+            profiles[name] = {
+                "name": name,
+                "matches": matches,
+                "avg_fouls": round(float(profile["total_fouls"]) / matches, 2),
+                "recent": profile["recent"],
+                "source": profile["source"],
+            }
+        self.store.save_referee_profiles(profiles)
+        return len(profiles)
+
     def _train_model_from_imported_matches(self) -> int:
         from .learning import OnlineLearner
         from .predictor import MatchPredictor
@@ -258,6 +319,7 @@ class WorldCupDataSync:
                 away_shots_on_target=match.away_shots_on_target,
                 home_fouls=match.home_fouls,
                 away_fouls=match.away_fouls,
+                referee=match.referee,
                 competition=match.competition,
                 stage=match.stage,
                 neutral=match.neutral,
@@ -285,14 +347,17 @@ class WorldCupDataSync:
         outcome_hits = sum(1 for item in history if item.get("outcome_hit"))
         score_hits = sum(1 for item in history if item.get("score_hit"))
         corner_errors = [abs(float(item["corner_error"])) for item in history if item.get("corner_error") is not None]
+        foul_errors = [abs(float(item["foul_error"])) for item in history if item.get("foul_error") is not None]
         outcome_accuracy = outcome_hits / total
         exact_score_accuracy = score_hits / total
         corner_mae = None if not corner_errors else sum(corner_errors) / len(corner_errors)
         corner_within_one_rate = None if not corner_errors else sum(1 for error in corner_errors if error <= 1.0) / len(corner_errors)
+        foul_mae = None if not foul_errors else sum(foul_errors) / len(foul_errors)
         targets = {
             "outcome_accuracy": 0.75,
             "exact_score_accuracy": 0.30,
             "corner_mae": 1.0,
+            "foul_mae": 3.0,
         }
         by_team: dict[str, dict[str, int]] = defaultdict(lambda: {"matches": 0, "outcome_hits": 0})
         for item in history:
@@ -309,11 +374,13 @@ class WorldCupDataSync:
             "exact_score_accuracy": round(exact_score_accuracy, 3),
             "corner_mae": None if corner_mae is None else round(corner_mae, 2),
             "corner_within_one_rate": None if corner_within_one_rate is None else round(corner_within_one_rate, 3),
+            "foul_mae": None if foul_mae is None else round(foul_mae, 2),
             "targets": targets,
             "target_status": {
                 "outcome_accuracy": outcome_accuracy >= targets["outcome_accuracy"],
                 "exact_score_accuracy": exact_score_accuracy >= targets["exact_score_accuracy"],
                 "corner_mae": corner_mae is not None and corner_mae <= targets["corner_mae"],
+                "foul_mae": foul_mae is not None and foul_mae <= targets["foul_mae"],
             },
             "trained_match_keys": len(state.get("trained_match_keys", [])),
             "updated_at": datetime.now(timezone.utc).isoformat(),

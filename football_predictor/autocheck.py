@@ -52,6 +52,7 @@ class AutoChecker:
                     away_shots_on_target=result.get("away_shots_on_target"),
                     home_fouls=result.get("home_fouls"),
                     away_fouls=result.get("away_fouls"),
+                    referee=(result.get("referee") or {}).get("name") if isinstance(result.get("referee"), dict) else result.get("referee"),
                     neutral=bool(prediction.get("neutral", True)),
                     source=result.get("source", "api"),
                     baseline_prediction=prediction,

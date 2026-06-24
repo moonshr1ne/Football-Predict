@@ -37,6 +37,7 @@ class OnlineLearner:
         away_shots_on_target: float | None = None,
         home_fouls: float | None = None,
         away_fouls: float | None = None,
+        referee: str | None = None,
         competition: str = "",
         stage: str = "",
         neutral: bool = True,
@@ -60,11 +61,15 @@ class OnlineLearner:
         actual_corners_total = None
         if home_corners is not None and away_corners is not None:
             actual_corners_total = float(home_corners) + float(away_corners)
+        actual_fouls_total = None
+        if home_fouls is not None and away_fouls is not None:
+            actual_fouls_total = float(home_fouls) + float(away_fouls)
 
         expected_goals = prediction.get("expected_goals", {})
         expected_home_goals = float(expected_goals.get(home_team, 1.15))
         expected_away_goals = float(expected_goals.get(away_team, 1.15))
         predicted_corners = float(prediction.get("predicted_corners", 9.2))
+        predicted_fouls = float((prediction.get("foul_forecast") or {}).get("expected", 24.0))
 
         home_error = home_goals - expected_home_goals
         away_error = away_goals - expected_away_goals
@@ -99,6 +104,11 @@ class OnlineLearner:
                     2.40,
                 )
 
+        foul_error = None
+        if actual_fouls_total is not None:
+            foul_error = actual_fouls_total - predicted_fouls
+            weights["foul_bias"] = self._clamp(weights.get("foul_bias", 0.0) + lr * foul_error * 0.10, -6.0, 6.0)
+
         actual_outcome = outcome_label(home_goals, away_goals)
         score = f"{home_goals}-{away_goals}"
         review = {
@@ -115,6 +125,9 @@ class OnlineLearner:
             "predicted_corners": round(predicted_corners, 2),
             "actual_corners": None if actual_corners_total is None else round(actual_corners_total, 2),
             "corner_error": None if corner_error is None else round(corner_error, 2),
+            "predicted_fouls": round(predicted_fouls, 2),
+            "actual_fouls": None if actual_fouls_total is None else round(actual_fouls_total, 2),
+            "foul_error": None if foul_error is None else round(foul_error, 2),
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
         state.setdefault("history", []).append(review)
@@ -138,6 +151,7 @@ class OnlineLearner:
                 away_shots_on_target=away_shots_on_target,
                 home_fouls=home_fouls,
                 away_fouls=away_fouls,
+                referee=referee,
                 competition=competition,
                 stage=stage,
                 neutral=neutral,

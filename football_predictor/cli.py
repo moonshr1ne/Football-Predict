@@ -218,6 +218,7 @@ def main(argv: list[str] | None = None) -> int:
             away_shots_on_target=result.get("away_shots_on_target"),
             home_fouls=result.get("home_fouls"),
             away_fouls=result.get("away_fouls"),
+            referee=(result.get("referee") or {}).get("name") if isinstance(result.get("referee"), dict) else result.get("referee"),
             neutral=not args.home_venue,
             source=result.get("source", "api"),
             baseline_prediction=baseline,
@@ -301,6 +302,7 @@ def _sync_prediction_warning(sync_info: dict) -> str:
         f"{action}: участников {sync_info.get('participants', 0)}, "
         f"last-10 матчей {recent}, матчей ЧМ {sync_info.get('imported', 0)}, "
         f"тактических профилей {sync_info.get('profiles_updated', 0)}, "
+        f"судей {sync_info.get('referees_updated', 0)}, "
         f"обучающих матчей {sync_info.get('trained', 0)}."
     )
 
@@ -321,6 +323,12 @@ def _details_text(data: dict) -> str:
     )
     goal_total = data.get("goal_total", {})
     goal_probabilities = goal_total.get("probabilities", {})
+    foul_forecast = data.get("foul_forecast", {})
+    foul_probabilities = foul_forecast.get("probabilities", {})
+    referee = foul_forecast.get("referee", {})
+    referee_text = referee.get("name") or "судья пока неизвестен"
+    if referee.get("avg_fouls") is not None:
+        referee_text += f", среднее {float(referee['avg_fouls']):.2f}"
     likely_totals = ", ".join(
         f"{item['goals']} ({float(item['probability']):.1%})"
         for item in goal_total.get("most_likely_totals", [])
@@ -334,6 +342,9 @@ def _details_text(data: dict) -> str:
         f"ТБ3.5 {float(goal_probabilities.get('over_3_5', 0)):.1%}, "
         f"ТМ3.5 {float(goal_probabilities.get('under_3_5', 0)):.1%}; "
         f"чаще всего {likely_totals or 'нет'}",
+        f"Фолы: ожидание {float(foul_forecast.get('expected', 0)):.2f}, "
+        f"ТБ24.5 {float(foul_probabilities.get('over_24_5', 0)):.1%}, "
+        f"ТМ24.5 {float(foul_probabilities.get('under_24_5', 0)):.1%}; {referee_text}",
         f"xG: {data['home_team']} {data['expected_goals'][data['home_team']]}, {data['away_team']} {data['expected_goals'][data['away_team']]}",
         f"Последние 10: {data['home_team']} {data['home_stats']['wins']}-{data['home_stats']['draws']}-{data['home_stats']['losses']}, "
         f"{data['away_team']} {data['away_stats']['wins']}-{data['away_stats']['draws']}-{data['away_stats']['losses']}",
@@ -367,10 +378,11 @@ def _details_text(data: dict) -> str:
         predicted = summary.get("predicted", {})
         actual = summary.get("actual")
         lines.append(
-            f"Предикт: {predicted.get('outcome_label', data['market_pick'])}; угловые {predicted.get('corners', data['predicted_corners'])}."
+            f"Предикт: {predicted.get('outcome_label', data['market_pick'])}; угловые {predicted.get('corners', data['predicted_corners'])}; фолы {predicted.get('fouls', {}).get('expected', data.get('foul_forecast', {}).get('expected'))}."
         )
         if summary.get("status") == "completed" and actual:
-            lines.append(f"Факт: {actual.get('outcome_label')} {actual.get('score')}.")
+            foul_fact = "" if actual.get("fouls") is None else f", фолы {actual.get('fouls')}"
+            lines.append(f"Факт: {actual.get('outcome_label')} {actual.get('score')}{foul_fact}.")
         elif summary.get("status") == "live":
             lines.append(f"Факт: матч идет{'; счет ' + actual.get('score') if actual and actual.get('score') else ''}.")
         elif summary.get("status") == "scheduled":
@@ -386,7 +398,8 @@ def _review_text(review: dict) -> str:
     hit = "да" if review["outcome_hit"] else "нет"
     score_hit = "да" if review["score_hit"] else "нет"
     corner = "" if review["corner_error"] is None else f", ошибка угловых {review['corner_error']:+.2f}"
-    return f"Проверено: исход угадан: {hit}, точный счет: {score_hit}{corner}. Модель обновлена."
+    fouls = "" if review.get("foul_error") is None else f", ошибка фолов {review['foul_error']:+.2f}"
+    return f"Проверено: исход угадан: {hit}, точный счет: {score_hit}{corner}{fouls}. Модель обновлена."
 
 
 def _auto_check_text(summary: dict) -> str:

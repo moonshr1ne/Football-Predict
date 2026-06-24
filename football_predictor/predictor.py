@@ -28,6 +28,7 @@ class Prediction:
     expected_away_goals: float
     goal_total: dict[str, Any]
     predicted_corners: float
+    foul_forecast: dict[str, Any]
     exact_scores: list[str]
     exact_score_probabilities: list[dict[str, Any]]
     markets: list[dict[str, Any]]
@@ -65,6 +66,7 @@ class Prediction:
             },
             "goal_total": self.goal_total,
             "predicted_corners": round(self.predicted_corners, 2),
+            "foul_forecast": self.foul_forecast,
             "exact_scores": self.exact_scores,
             "exact_score_probabilities": self.exact_score_probabilities,
             "markets": self.markets,
@@ -88,7 +90,9 @@ class Prediction:
         scores = ", ".join(
             f"{item['score']} ({item['probability']:.1%})" for item in self.exact_score_probabilities
         )
-        return f"{self.market_pick}, средние угловые: {self.predicted_corners:.2f}, точные счеты: {scores}"
+        fouls = self.foul_forecast.get("expected")
+        foul_text = "" if fouls is None else f", фолы: {float(fouls):.2f}"
+        return f"{self.market_pick}, средние угловые: {self.predicted_corners:.2f}{foul_text}, точные счеты: {scores}"
 
 
 class MatchPredictor:
@@ -144,6 +148,7 @@ class MatchPredictor:
         confidence = probabilities[market_pick]
         markets = self._markets(home_team, away_team, probabilities)
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
+        foul_forecast = self._foul_forecast(home_stats, away_stats, home_tactics, away_tactics, fixture, weights)
         goal_total = self._goal_total_forecast(home_xg, away_xg)
         team_reports = {
             home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg, lineup_reports.get(home_team, {})),
@@ -165,6 +170,7 @@ class MatchPredictor:
             exact_score_probabilities,
             corners,
             goal_total,
+            foul_forecast,
             fixture,
             home_team,
             away_team,
@@ -184,6 +190,7 @@ class MatchPredictor:
             expected_away_goals=away_xg,
             goal_total=goal_total,
             predicted_corners=corners,
+            foul_forecast=foul_forecast,
             exact_scores=exact_scores,
             exact_score_probabilities=exact_score_probabilities,
             markets=markets,
@@ -400,6 +407,114 @@ class MatchPredictor:
         tempo = max(-0.6, min(1.1, (total_xg - 2.35) * 0.42))
         tactics = corner_tactical_boost(home_tactics, away_tactics) * weights.get("tactics_to_corners", 1.15)
         return max(4.0, min(16.0, base + tempo + tactics + weights.get("corner_bias", 0.0)))
+
+    def _foul_forecast(
+        self,
+        home_stats: TeamStats,
+        away_stats: TeamStats,
+        home_tactics: dict[str, Any],
+        away_tactics: dict[str, Any],
+        fixture: dict[str, Any] | None,
+        weights: dict[str, float],
+    ) -> dict[str, Any]:
+        global_average = self._global_foul_average()
+        weighted_team_values = []
+        for stats in (home_stats, away_stats):
+            if stats.avg_total_fouls is None:
+                continue
+            weight = max(1.0, min(6.0, stats.foul_samples))
+            weighted_team_values.append((stats.avg_total_fouls, weight))
+        if weighted_team_values:
+            weighted_sum = sum(value * weight for value, weight in weighted_team_values)
+            weight_sum = sum(weight for _, weight in weighted_team_values)
+            team_average = weighted_sum / weight_sum
+        else:
+            team_average = global_average
+
+        sample_confidence = min(1.0, (home_stats.foul_samples + away_stats.foul_samples) / 12.0)
+        team_estimate = team_average * sample_confidence + global_average * (1.0 - sample_confidence)
+        pressing = (float(home_tactics.get("pressing", 0.55)) + float(away_tactics.get("pressing", 0.55))) / 2.0
+        directness = (float(home_tactics.get("directness", 0.50)) + float(away_tactics.get("directness", 0.50))) / 2.0
+        tempo = (float(home_tactics.get("tempo", 0.55)) + float(away_tactics.get("tempo", 0.55))) / 2.0
+        defensive_solidity = (
+            float(home_tactics.get("defensive_solidity", 0.55))
+            + float(away_tactics.get("defensive_solidity", 0.55))
+        ) / 2.0
+        style_adjustment = (
+            (pressing - 0.55) * 6.2
+            + (directness - 0.50) * 3.4
+            + (tempo - 0.55) * 3.0
+            - (defensive_solidity - 0.55) * 2.2
+        )
+        expected = team_estimate + style_adjustment + float(weights.get("foul_bias", 0.0))
+
+        referee = self._fixture_referee(fixture)
+        referee_profile = self.store.referee_profile(referee.get("name") if referee else None)
+        referee_average = referee_profile.get("avg_fouls")
+        referee_matches = int(referee_profile.get("matches", 0) or 0)
+        if referee_average is not None:
+            referee_weight = min(0.40, 0.16 + referee_matches * 0.035)
+            expected = expected * (1.0 - referee_weight) + float(referee_average) * referee_weight
+
+        expected = max(14.0, min(40.0, expected))
+        probabilities = {}
+        for line in (20.5, 24.5, 28.5):
+            key = str(line).replace(".", "_")
+            over = self._foul_probability_over(expected, line)
+            probabilities[f"over_{key}"] = round(over, 4)
+            probabilities[f"under_{key}"] = round(1.0 - over, 4)
+
+        return {
+            "expected": round(expected, 2),
+            "label": self._foul_label(expected),
+            "team_average": round(team_average, 2),
+            "global_average": round(global_average, 2),
+            "home_average": None if home_stats.avg_total_fouls is None else round(home_stats.avg_total_fouls, 2),
+            "away_average": None if away_stats.avg_total_fouls is None else round(away_stats.avg_total_fouls, 2),
+            "home_samples": home_stats.foul_samples,
+            "away_samples": away_stats.foul_samples,
+            "style_adjustment": round(style_adjustment, 2),
+            "sample_confidence": round(sample_confidence, 3),
+            "referee": {
+                "name": referee.get("name") if referee else None,
+                "avg_fouls": None if referee_average is None else round(float(referee_average), 2),
+                "matches": referee_matches,
+                "source": (referee or {}).get("source") or referee_profile.get("source"),
+            },
+            "probabilities": probabilities,
+        }
+
+    def _global_foul_average(self) -> float:
+        totals = [
+            float(match.home_fouls) + float(match.away_fouls)
+            for match in self.store.load_matches()
+            if match.home_fouls is not None and match.away_fouls is not None
+        ]
+        return sum(totals) / len(totals) if totals else 24.0
+
+    @staticmethod
+    def _fixture_referee(fixture: dict[str, Any] | None) -> dict[str, Any] | None:
+        referee = (fixture or {}).get("referee")
+        if isinstance(referee, dict):
+            return referee
+        if isinstance(referee, str):
+            return {"name": referee, "source": "fixture"}
+        return None
+
+    @staticmethod
+    def _foul_probability_over(expected: float, line: float) -> float:
+        probability = 1.0 / (1.0 + math.exp(-(expected - line) / 3.6))
+        return max(0.03, min(0.97, probability))
+
+    @staticmethod
+    def _foul_label(expected: float) -> str:
+        if expected >= 30.0:
+            return "жесткий матч"
+        if expected >= 26.0:
+            return "фолов выше среднего"
+        if expected <= 20.0:
+            return "аккуратный матч"
+        return "обычный уровень фолов"
 
     def _outcome_probabilities(self, home_xg: float, away_xg: float) -> tuple[float, float, float]:
         home_win = draw = away_win = 0.0
@@ -849,7 +964,7 @@ class MatchPredictor:
             "starting_key_players": lineup_report.get("starting_key_players", []),
             "strengths": strengths,
             "risks": risks,
-            "data_note": f"{stats.sample_size} матчей, rich {min(stats.corner_samples, stats.possession_samples, stats.shot_samples)}",
+            "data_note": f"{stats.sample_size} матчей, rich {min(stats.corner_samples, stats.possession_samples, stats.shot_samples, stats.foul_samples)}",
         }
 
     @staticmethod
@@ -905,6 +1020,7 @@ class MatchPredictor:
         exact_score_probabilities: list[dict[str, Any]],
         predicted_corners: float,
         goal_total: dict[str, Any],
+        foul_forecast: dict[str, Any],
         fixture: dict[str, Any] | None,
         home_team: str,
         away_team: str,
@@ -915,6 +1031,7 @@ class MatchPredictor:
             "scores": exact_score_probabilities,
             "corners": round(predicted_corners, 2),
             "goal_total": goal_total,
+            "fouls": foul_forecast,
         }
         if not fixture:
             return {
@@ -931,6 +1048,7 @@ class MatchPredictor:
             actual_score = f"{int(home_goals)}-{int(away_goals)}"
             actual_outcome = self._outcome_from_score(int(home_goals), int(away_goals))
             actual_corners = self._fixture_total_corners(fixture)
+            actual_fouls = self._fixture_total_fouls(fixture)
             return {
                 "status": "completed",
                 "predicted": predicted,
@@ -939,10 +1057,12 @@ class MatchPredictor:
                     "outcome": actual_outcome,
                     "outcome_label": self._market_label(actual_outcome, home_team, away_team),
                     "corners": actual_corners,
+                    "fouls": actual_fouls,
                 },
                 "outcome_hit": market_pick == actual_outcome,
                 "score_hit": actual_score in [item["score"] for item in exact_score_probabilities],
                 "corner_error": None if actual_corners is None else round(predicted_corners - actual_corners, 2),
+                "foul_error": None if actual_fouls is None else round(float(foul_forecast.get("expected", 0.0)) - actual_fouls, 2),
                 "message": "Матч завершен, факт уже доступен.",
             }
 
@@ -951,7 +1071,7 @@ class MatchPredictor:
             return {
                 "status": "live",
                 "predicted": predicted,
-                "actual": {"score": current_score, "outcome": None, "corners": None},
+                "actual": {"score": current_score, "outcome": None, "corners": None, "fouls": None},
                 "message": "Матч сейчас идет, финальный счет еще не известен.",
             }
 
@@ -966,6 +1086,14 @@ class MatchPredictor:
     def _fixture_total_corners(fixture: dict[str, Any]) -> float | None:
         home = fixture.get("home_corners")
         away = fixture.get("away_corners")
+        if home is None or away is None:
+            return None
+        return round(float(home) + float(away), 2)
+
+    @staticmethod
+    def _fixture_total_fouls(fixture: dict[str, Any]) -> float | None:
+        home = fixture.get("home_fouls")
+        away = fixture.get("away_fouls")
         if home is None or away is None:
             return None
         return round(float(home) + float(away), 2)
@@ -1184,8 +1312,18 @@ class MatchPredictor:
         backtest = self.store.load_backtest()
         by_team = backtest.get("by_team", {}) if isinstance(backtest, dict) else {}
 
-        home_rich_matches = min(home_stats.corner_samples, home_stats.possession_samples, home_stats.shot_samples)
-        away_rich_matches = min(away_stats.corner_samples, away_stats.possession_samples, away_stats.shot_samples)
+        home_rich_matches = min(
+            home_stats.corner_samples,
+            home_stats.possession_samples,
+            home_stats.shot_samples,
+            home_stats.foul_samples,
+        )
+        away_rich_matches = min(
+            away_stats.corner_samples,
+            away_stats.possession_samples,
+            away_stats.shot_samples,
+            away_stats.foul_samples,
+        )
         sample_score = min(1.0, (home_stats.sample_size + away_stats.sample_size) / 20.0)
         rich_score = min(1.0, (home_rich_matches + away_rich_matches) / 20.0)
         learned_score = min(1.0, float(backtest.get("matches", 0) or 0) / 100.0) if isinstance(backtest, dict) else 0.0
@@ -1206,12 +1344,15 @@ class MatchPredictor:
             "away_possession_samples": away_stats.possession_samples,
             "home_shot_samples": home_stats.shot_samples,
             "away_shot_samples": away_stats.shot_samples,
+            "home_foul_samples": home_stats.foul_samples,
+            "away_foul_samples": away_stats.foul_samples,
             "backtest": {
                 "matches": backtest.get("matches", 0) if isinstance(backtest, dict) else 0,
                 "outcome_accuracy": backtest.get("outcome_accuracy") if isinstance(backtest, dict) else None,
                 "exact_score_accuracy": backtest.get("exact_score_accuracy") if isinstance(backtest, dict) else None,
                 "corner_mae": backtest.get("corner_mae") if isinstance(backtest, dict) else None,
                 "corner_within_one_rate": backtest.get("corner_within_one_rate") if isinstance(backtest, dict) else None,
+                "foul_mae": backtest.get("foul_mae") if isinstance(backtest, dict) else None,
                 "targets": backtest.get("targets", {}) if isinstance(backtest, dict) else {},
                 "target_status": backtest.get("target_status", {}) if isinstance(backtest, dict) else {},
                 "trained_match_keys": backtest.get("trained_match_keys") if isinstance(backtest, dict) else None,

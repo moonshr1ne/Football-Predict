@@ -139,6 +139,7 @@ class EspnWorldCupProvider:
         away_lineup = self._matching_lineup(lineups, away_team) or self._empty_lineup(away_team)
 
         key_players = self._key_players_from_summary(summary)
+        referee = self._referee_from_summary(summary)
         enriched = dict(fixture)
         enriched["lineups"] = {
             home_team: home_lineup,
@@ -153,6 +154,8 @@ class EspnWorldCupProvider:
         enriched["lineup_status"] = (
             "confirmed" if home_lineup.get("confirmed") and away_lineup.get("confirmed") else "not_released"
         )
+        if referee:
+            enriched["referee"] = referee
         return enriched
 
     def get_finished_result(self, home_team: str, away_team: str, date: str | None = None) -> dict[str, Any]:
@@ -178,6 +181,7 @@ class EspnWorldCupProvider:
             "away_shots_on_target": fixture.get("away_shots_on_target"),
             "home_fouls": fixture.get("home_fouls"),
             "away_fouls": fixture.get("away_fouls"),
+            "referee": fixture.get("referee"),
             "source": fixture["source"],
             "fixture": fixture,
         }
@@ -283,6 +287,7 @@ class EspnWorldCupProvider:
             "away_shots_on_target": requested_away_stats.get("shotsOnTarget"),
             "home_fouls": requested_home_stats.get("foulsCommitted"),
             "away_fouls": requested_away_stats.get("foulsCommitted"),
+            "referee": None,
             "completed": completed,
             "in_progress": in_progress,
             "status": status_name,
@@ -503,6 +508,38 @@ class EspnWorldCupProvider:
             if query == normalized or query in normalized or normalized in query:
                 return players
         return []
+
+    def _referee_from_summary(self, summary: dict[str, Any]) -> dict[str, Any] | None:
+        officials = (summary.get("gameInfo") or {}).get("officials") or []
+        if not officials:
+            return None
+        selected = None
+        for official in officials:
+            position = official.get("position") or {}
+            role = normalize_provider_name(
+                " ".join(
+                    str(value)
+                    for value in (
+                        position.get("name"),
+                        position.get("displayName"),
+                        official.get("positionName"),
+                    )
+                    if value
+                )
+            )
+            if "referee" in role:
+                selected = official
+                break
+        selected = selected or officials[0]
+        name = selected.get("displayName") or selected.get("fullName") or selected.get("name")
+        if not name:
+            return None
+        position = selected.get("position") or {}
+        return {
+            "name": name,
+            "role": position.get("displayName") or position.get("name") or "Referee",
+            "source": "espn-summary-officials",
+        }
 
 
 class ApiFootballProvider:

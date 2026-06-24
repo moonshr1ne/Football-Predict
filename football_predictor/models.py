@@ -22,6 +22,7 @@ class MatchRecord:
     away_shots_on_target: float | None = None
     home_fouls: float | None = None
     away_fouls: float | None = None
+    referee: str | None = None
     competition: str = ""
     stage: str = ""
     neutral: bool = True
@@ -53,6 +54,7 @@ class MatchRecord:
             "away_shots_on_target": self.away_shots_on_target,
             "home_fouls": self.home_fouls,
             "away_fouls": self.away_fouls,
+            "referee": self.referee,
             "competition": self.competition,
             "stage": self.stage,
             "neutral": self.neutral,
@@ -91,6 +93,20 @@ class MatchRecord:
             return self.away_corners
         if self.away_team == team:
             return self.home_corners
+        return None
+
+    def fouls_for(self, team: str) -> float | None:
+        if self.home_team == team:
+            return self.home_fouls
+        if self.away_team == team:
+            return self.away_fouls
+        return None
+
+    def fouls_against(self, team: str) -> float | None:
+        if self.home_team == team:
+            return self.away_fouls
+        if self.away_team == team:
+            return self.home_fouls
         return None
 
     def possession_for(self, team: str) -> float | None:
@@ -148,6 +164,9 @@ class TeamStats:
     corners_for: float = 0.0
     corners_against: float = 0.0
     corner_samples: int = 0
+    fouls_for: float = 0.0
+    fouls_against: float = 0.0
+    foul_samples: int = 0
     possession: float = 0.0
     possession_samples: int = 0
     shots_for: float = 0.0
@@ -185,6 +204,20 @@ class TeamStats:
         return (self.corners_for + self.corners_against) / self.corner_samples
 
     @property
+    def avg_fouls_for(self) -> float | None:
+        return self.fouls_for / self.foul_samples if self.foul_samples else None
+
+    @property
+    def avg_fouls_against(self) -> float | None:
+        return self.fouls_against / self.foul_samples if self.foul_samples else None
+
+    @property
+    def avg_total_fouls(self) -> float | None:
+        if not self.foul_samples:
+            return None
+        return (self.fouls_for + self.fouls_against) / self.foul_samples
+
+    @property
     def avg_possession(self) -> float | None:
         return self.possession / self.possession_samples if self.possession_samples else None
 
@@ -214,6 +247,10 @@ class TeamStats:
             "avg_corners_against": None if self.avg_corners_against is None else round(self.avg_corners_against, 2),
             "avg_total_corners": None if self.avg_total_corners is None else round(self.avg_total_corners, 2),
             "corner_samples": self.corner_samples,
+            "avg_fouls_for": None if self.avg_fouls_for is None else round(self.avg_fouls_for, 2),
+            "avg_fouls_against": None if self.avg_fouls_against is None else round(self.avg_fouls_against, 2),
+            "avg_total_fouls": None if self.avg_total_fouls is None else round(self.avg_total_fouls, 2),
+            "foul_samples": self.foul_samples,
             "avg_possession": None if self.avg_possession is None else round(self.avg_possession, 1),
             "possession_samples": self.possession_samples,
             "avg_shots_for": None if self.avg_shots_for is None else round(self.avg_shots_for, 2),
