@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>National Football Predictor</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel controls">
+        <div>
+          <h1>Прогноз сборных</h1>
+          <p class="muted">Введите две команды через запятую.</p>
+        </div>
+        <form id="predict-form" class="row">
+          <input id="matchup" name="matchup" value="Англия, Гана" autocomplete="off">
+          <label class="check"><input id="home-venue" type="checkbox"> первая дома</label>
+          <button type="submit">Прогноз</button>
+        </form>
+      </section>
+
+      <section id="prediction" class="grid"></section>
+
+      <section class="panel">
+        <h2>Проверка после матча</h2>
+        <form id="result-form" class="result-grid">
+          <input id="result-matchup" value="Англия, Гана" autocomplete="off">
+          <input id="result-date" type="date">
+          <input id="score" placeholder="2-1">
+          <input id="corners" type="number" step="0.1" placeholder="угловые">
+          <button type="submit">Записать итог</button>
+        </form>
+        <p id="review" class="muted"></p>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

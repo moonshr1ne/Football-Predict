@@ -1,0 +1,10 @@
+[project]
+name = "national-football-predictor"
+version = "0.1.0"
+description = "Local predictor for national football teams with match review and online learning."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+nfp = "football_predictor.cli:main"

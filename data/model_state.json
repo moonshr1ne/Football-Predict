@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "learning_rate": 0.08,
+  "weights": {
+    "home_advantage_goals": 0.18,
+    "elo_to_goals": 0.22,
+    "form_to_goals": 0.2,
+    "motivation_to_goals": 0.18,
+    "injury_to_goals": 0.16,
+    "corner_bias": 0.0,
+    "goal_scale": 1.0
+  },
+  "history": []
+}
