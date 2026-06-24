@@ -15,7 +15,9 @@ def make_store(tmp_dir):
     root = Path(tmp_dir) / "project"
     source_data = Path(__file__).resolve().parents[1] / "data"
     shutil.copytree(source_data, root / "data")
-    return DataStore(root)
+    store = DataStore(root)
+    store.save_predictions([])
+    return store
 
 
 class PredictorTests(unittest.TestCase):
@@ -30,6 +32,14 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(prediction.match_context["competition"], "FIFA World Cup")
             self.assertIn("formation", prediction.home_tactics)
             self.assertIn("tactical_matchup", prediction.to_dict())
+            for score in prediction.exact_scores:
+                home_goals, away_goals = map(int, score.split("-"))
+                if prediction.market_pick == "П1":
+                    self.assertGreater(home_goals, away_goals)
+                elif prediction.market_pick == "П2":
+                    self.assertGreater(away_goals, home_goals)
+                else:
+                    self.assertEqual(home_goals, away_goals)
 
     def test_learning_records_review(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -56,6 +66,9 @@ class PredictorTests(unittest.TestCase):
         self.assertTrue(fixture["completed"])
         self.assertEqual(fixture["home_goals"], 1)
         self.assertEqual(fixture["away_goals"], 2)
+        self.assertEqual(fixture["home_corners"], 4)
+        self.assertEqual(fixture["away_corners"], 6)
+        self.assertEqual(fixture["away_possession"], 58)
 
 
 class FakeProvider:
@@ -91,11 +104,23 @@ def sample_espn_event():
                         "homeAway": "home",
                         "score": "2",
                         "team": {"displayName": "Spain", "shortDisplayName": "Spain", "abbreviation": "ESP"},
+                        "statistics": [
+                            {"name": "wonCorners", "displayValue": "6"},
+                            {"name": "possessionPct", "displayValue": "58"},
+                            {"name": "totalShots", "displayValue": "14"},
+                            {"name": "shotsOnTarget", "displayValue": "5"},
+                        ],
                     },
                     {
                         "homeAway": "away",
                         "score": "1",
                         "team": {"displayName": "Uruguay", "shortDisplayName": "Uruguay", "abbreviation": "URU"},
+                        "statistics": [
+                            {"name": "wonCorners", "displayValue": "4"},
+                            {"name": "possessionPct", "displayValue": "42"},
+                            {"name": "totalShots", "displayValue": "9"},
+                            {"name": "shotsOnTarget", "displayValue": "3"},
+                        ],
                     },
                 ],
             }

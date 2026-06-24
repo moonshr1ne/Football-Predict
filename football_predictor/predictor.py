@@ -118,7 +118,7 @@ class MatchPredictor:
         market_pick = max(probabilities, key=probabilities.get)
         confidence = probabilities[market_pick]
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
-        exact_scores = self._top_scores(home_xg, away_xg, limit=2)
+        exact_scores = self._top_scores(home_xg, away_xg, market_pick, limit=2)
 
         prediction = Prediction(
             home_team=home_team,
@@ -220,12 +220,20 @@ class MatchPredictor:
         total = home_win + draw + away_win
         return home_win / total, draw / total, away_win / total
 
-    def _top_scores(self, home_xg: float, away_xg: float, limit: int = 2) -> list[str]:
+    def _top_scores(self, home_xg: float, away_xg: float, market_pick: str, limit: int = 2) -> list[str]:
         grid = []
         for home_goals in range(6):
             for away_goals in range(6):
+                if market_pick == "П1" and home_goals <= away_goals:
+                    continue
+                if market_pick == "П2" and home_goals >= away_goals:
+                    continue
+                if market_pick == "X" and home_goals != away_goals:
+                    continue
                 probability = self._poisson(home_goals, home_xg) * self._poisson(away_goals, away_xg)
                 grid.append((probability, f"{home_goals}-{away_goals}"))
+        if not grid:
+            return ["1-1", "0-0"][:limit]
         return [score for _, score in sorted(grid, reverse=True)[:limit]]
 
     @staticmethod
@@ -269,7 +277,7 @@ class MatchPredictor:
     ) -> list[str]:
         warnings = []
         if home_stats.sample_size < 10 or away_stats.sample_size < 10:
-            warnings.append("В базе меньше 10 последних матчей для одной из команд.")
+            warnings.append("У одной из команд пока меньше 10 матчей в доступной базе; используются все найденные матчи ЧМ-2026 и локальная история.")
         if not home_stats.corner_samples or not away_stats.corner_samples:
             warnings.append("По угловым есть неполная статистика, часть оценки построена на среднем темпе.")
         if any(match.source == "demo_seed" for match in home_stats.recent + away_stats.recent):

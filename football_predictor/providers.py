@@ -64,6 +64,16 @@ class EspnWorldCupProvider:
             raise ProviderError(f"Не нашел матч ЧМ для пары {home_team} - {away_team}.")
         return self._best_candidate(candidates)
 
+    def fixtures(self, start_date: str | None = None, end_date: str | None = None) -> list[dict[str, Any]]:
+        start_date, end_date = self._date_window(start_date, end_date)
+        payload = self._scoreboard(start_date, end_date)
+        fixtures = []
+        for event in payload.get("events", []):
+            fixture = self._fixture_from_event_without_requested_order(event)
+            if fixture:
+                fixtures.append(fixture)
+        return fixtures
+
     def get_finished_result(self, home_team: str, away_team: str, date: str | None = None) -> dict[str, Any]:
         if date:
             fixture = self.find_fixture(home_team, away_team, start_date=date, end_date=date)
@@ -77,8 +87,16 @@ class EspnWorldCupProvider:
             "away_team": away_team,
             "home_goals": fixture["home_goals"],
             "away_goals": fixture["away_goals"],
-            "home_corners": None,
-            "away_corners": None,
+            "home_corners": fixture.get("home_corners"),
+            "away_corners": fixture.get("away_corners"),
+            "home_possession": fixture.get("home_possession"),
+            "away_possession": fixture.get("away_possession"),
+            "home_shots": fixture.get("home_shots"),
+            "away_shots": fixture.get("away_shots"),
+            "home_shots_on_target": fixture.get("home_shots_on_target"),
+            "away_shots_on_target": fixture.get("away_shots_on_target"),
+            "home_fouls": fixture.get("home_fouls"),
+            "away_fouls": fixture.get("away_fouls"),
             "source": fixture["source"],
             "fixture": fixture,
         }
@@ -118,6 +136,8 @@ class EspnWorldCupProvider:
         event_date = event.get("date") or competition.get("date") or ""
         actual_home = self._home_away_competitor(competitors, "home")
         actual_away = self._home_away_competitor(competitors, "away")
+        requested_home_stats = self._stats(requested_home)
+        requested_away_stats = self._stats(requested_away)
         return {
             "fixture_id": str(event.get("id", "")),
             "date": iso_date(event_date),
@@ -128,11 +148,32 @@ class EspnWorldCupProvider:
             "actual_away_team": self._team_name(actual_away) if actual_away else None,
             "home_goals": self._score(requested_home) if completed else None,
             "away_goals": self._score(requested_away) if completed else None,
+            "home_corners": requested_home_stats.get("wonCorners"),
+            "away_corners": requested_away_stats.get("wonCorners"),
+            "home_possession": requested_home_stats.get("possessionPct"),
+            "away_possession": requested_away_stats.get("possessionPct"),
+            "home_shots": requested_home_stats.get("totalShots"),
+            "away_shots": requested_away_stats.get("totalShots"),
+            "home_shots_on_target": requested_home_stats.get("shotsOnTarget"),
+            "away_shots_on_target": requested_away_stats.get("shotsOnTarget"),
+            "home_fouls": requested_home_stats.get("foulsCommitted"),
+            "away_fouls": requested_away_stats.get("foulsCommitted"),
             "completed": completed,
             "status": status_name,
             "status_detail": status_type.get("detail") or status_type.get("shortDetail") or "",
             "source": "espn-world-cup",
         }
+
+    def _fixture_from_event_without_requested_order(self, event: dict[str, Any]) -> dict[str, Any] | None:
+        competition = (event.get("competitions") or [{}])[0]
+        competitors = competition.get("competitors", [])
+        actual_home = self._home_away_competitor(competitors, "home")
+        actual_away = self._home_away_competitor(competitors, "away")
+        if not actual_home or not actual_away:
+            return None
+        home_team = self._team_name(actual_home)
+        away_team = self._team_name(actual_away)
+        return self._fixture_from_event(event, home_team, away_team)
 
     def _best_candidate(self, fixtures: list[dict[str, Any]]) -> dict[str, Any]:
         today = datetime.now(timezone.utc).date()
@@ -181,6 +222,18 @@ class EspnWorldCupProvider:
         if score in (None, ""):
             return None
         return int(float(score))
+
+    def _stats(self, competitor: dict[str, Any]) -> dict[str, float]:
+        stats: dict[str, float] = {}
+        for stat in competitor.get("statistics", []):
+            name = stat.get("name")
+            value = stat.get("displayValue")
+            if name and value not in (None, ""):
+                try:
+                    stats[name] = float(str(value).replace("%", ""))
+                except ValueError:
+                    continue
+        return stats
 
 
 class ApiFootballProvider:

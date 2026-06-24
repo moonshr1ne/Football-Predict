@@ -27,6 +27,7 @@ DEFAULT_MODEL_STATE = {
         "goal_scale": 1.0,
     },
     "history": [],
+    "trained_match_keys": [],
 }
 
 DEFAULT_MATCH_CONTEXT = {

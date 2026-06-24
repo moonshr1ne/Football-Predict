@@ -13,6 +13,7 @@ from .learning import OnlineLearner
 from .predictor import MatchPredictor
 from .providers import EspnWorldCupProvider, ProviderError
 from .server import run_server
+from .sync import WorldCupDataSync
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -47,6 +48,9 @@ def build_parser() -> argparse.ArgumentParser:
     auto_check = subparsers.add_parser("auto-check", help="Проверить все прогнозы в очереди через API-Football.")
     auto_check.add_argument("--limit", type=int, default=25)
     auto_check.add_argument("--json", action="store_true")
+
+    sync = subparsers.add_parser("sync-world-cup", help="Загрузить прошедшие матчи ЧМ-2026 и обновить тактические профили.")
+    sync.add_argument("--json", action="store_true")
 
     watch = subparsers.add_parser("watch", help="Постоянно проверять очередь прогнозов и обучаться.")
     watch.add_argument("--interval", type=int, default=3600, help="Пауза между проверками в секундах.")
@@ -105,8 +109,13 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "predict":
         home_team, away_team = parse_matchup(args.matchup, store.resolver)
+        sync_info = WorldCupDataSync(store).sync_finished()
         fixture = None
         lookup_warnings = []
+        if sync_info.get("imported"):
+            lookup_warnings.append(
+                f"База ЧМ обновлена: матчей {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, обучающих матчей {sync_info.get('trained', 0)}."
+            )
         match_date = args.date
         if not match_date and not args.no_auto_date:
             fixture, lookup_warnings = _find_fixture_for_prediction(home_team, away_team)
@@ -162,6 +171,11 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(summary, ensure_ascii=False, indent=2) if args.json else _auto_check_text(summary))
         return 0
 
+    if args.command == "sync-world-cup":
+        summary = WorldCupDataSync(store).sync_finished()
+        print(json.dumps(summary, ensure_ascii=False, indent=2) if args.json else _sync_text(summary))
+        return 0
+
     if args.command == "watch":
         try:
             checker = AutoChecker(store)
@@ -192,6 +206,14 @@ def main(argv: list[str] | None = None) -> int:
             away_goals=int(result["away_goals"]),
             home_corners=result.get("home_corners"),
             away_corners=result.get("away_corners"),
+            home_possession=result.get("home_possession"),
+            away_possession=result.get("away_possession"),
+            home_shots=result.get("home_shots"),
+            away_shots=result.get("away_shots"),
+            home_shots_on_target=result.get("home_shots_on_target"),
+            away_shots_on_target=result.get("away_shots_on_target"),
+            home_fouls=result.get("home_fouls"),
+            away_fouls=result.get("away_fouls"),
             neutral=not args.home_venue,
             source=result.get("source", "api"),
             baseline_prediction=baseline,
@@ -297,6 +319,16 @@ def _auto_check_text(summary: dict) -> str:
     return (
         f"Очередь проверена: обработано {summary['checked']}, "
         f"обучено {summary['learned']}, ожидают дальше {summary['pending']}, ошибок {summary['errors']}."
+    )
+
+
+def _sync_text(summary: dict) -> str:
+    if summary.get("error"):
+        return f"Синхронизация недоступна: {summary['error']}"
+    return (
+        f"База ЧМ обновлена: матчей {summary['imported']}, "
+        f"тактических профилей {summary['profiles_updated']}, "
+        f"обучающих матчей {summary.get('trained', 0)}."
     )
 
 

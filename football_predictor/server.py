@@ -13,6 +13,7 @@ from .autocheck import AutoChecker
 from .learning import OnlineLearner
 from .predictor import MatchPredictor
 from .providers import EspnWorldCupProvider, ProviderError
+from .sync import WorldCupDataSync
 
 
 class PredictorHandler(SimpleHTTPRequestHandler):
@@ -31,8 +32,13 @@ class PredictorHandler(SimpleHTTPRequestHandler):
             remember = query.get("remember", ["true"])[0] != "false"
             try:
                 home, away = parse_matchup(matchup, self.store.resolver)
+                sync_info = WorldCupDataSync(self.store).sync_finished()
                 fixture = None
                 warnings = []
+                if sync_info.get("imported"):
+                    warnings.append(
+                        f"База ЧМ обновлена: матчей {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, обучающих матчей {sync_info.get('trained', 0)}."
+                    )
                 if not match_date:
                     try:
                         fixture = EspnWorldCupProvider().find_fixture(home, away)
@@ -115,6 +121,7 @@ def _optional_float(value) -> float | None:
 
 
 def run_server(host: str = "127.0.0.1", port: int = 8765) -> None:
+    WorldCupDataSync(PredictorHandler.store).sync_finished()
     _start_auto_check_worker(PredictorHandler.store)
     server = ThreadingHTTPServer((host, port), PredictorHandler)
     print(f"Открывайте: http://{host}:{port}")
@@ -125,6 +132,7 @@ def _start_auto_check_worker(store: DataStore, interval_seconds: int = 3600) -> 
     def worker() -> None:
         while True:
             try:
+                WorldCupDataSync(store).sync_finished()
                 AutoChecker(store).check_pending()
             except Exception:
                 pass

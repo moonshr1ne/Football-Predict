@@ -91,6 +91,8 @@ function statsTable(stats) {
       <tr><th>Матчи</th><td>${stats.sample_size}</td><th>Форма</th><td>${stats.wins}-${stats.draws}-${stats.losses}</td></tr>
       <tr><th>Голы</th><td>${stats.avg_goals_for} / ${stats.avg_goals_against}</td><th>Очки</th><td>${stats.points_per_match}</td></tr>
       <tr><th>Угловые</th><td>${stats.avg_total_corners ?? "нет"}</td><th>Сухие</th><td>${stats.clean_sheets}</td></tr>
+      <tr><th>Владение</th><td>${stats.avg_possession ?? "нет"}%</td><th>Удары</th><td>${stats.avg_shots_for ?? "нет"} / ${stats.avg_shots_against ?? "нет"}</td></tr>
+      <tr><th>В створ</th><td>${stats.avg_shots_on_target_for ?? "нет"}</td><th>Источник</th><td>${stats.recent?.[0]?.source || "local"}</td></tr>
     </table>
   `;
 }

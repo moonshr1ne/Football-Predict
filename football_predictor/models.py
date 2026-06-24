@@ -13,6 +13,14 @@ class MatchRecord:
     away_goals: int | None = None
     home_corners: float | None = None
     away_corners: float | None = None
+    home_possession: float | None = None
+    away_possession: float | None = None
+    home_shots: float | None = None
+    away_shots: float | None = None
+    home_shots_on_target: float | None = None
+    away_shots_on_target: float | None = None
+    home_fouls: float | None = None
+    away_fouls: float | None = None
     competition: str = ""
     stage: str = ""
     neutral: bool = True
@@ -31,6 +39,14 @@ class MatchRecord:
             "away_goals": self.away_goals,
             "home_corners": self.home_corners,
             "away_corners": self.away_corners,
+            "home_possession": self.home_possession,
+            "away_possession": self.away_possession,
+            "home_shots": self.home_shots,
+            "away_shots": self.away_shots,
+            "home_shots_on_target": self.home_shots_on_target,
+            "away_shots_on_target": self.away_shots_on_target,
+            "home_fouls": self.home_fouls,
+            "away_fouls": self.away_fouls,
             "competition": self.competition,
             "stage": self.stage,
             "neutral": self.neutral,
@@ -67,6 +83,34 @@ class MatchRecord:
             return self.home_corners
         return None
 
+    def possession_for(self, team: str) -> float | None:
+        if self.home_team == team:
+            return self.home_possession
+        if self.away_team == team:
+            return self.away_possession
+        return None
+
+    def shots_for(self, team: str) -> float | None:
+        if self.home_team == team:
+            return self.home_shots
+        if self.away_team == team:
+            return self.away_shots
+        return None
+
+    def shots_against(self, team: str) -> float | None:
+        if self.home_team == team:
+            return self.away_shots
+        if self.away_team == team:
+            return self.home_shots
+        return None
+
+    def shots_on_target_for(self, team: str) -> float | None:
+        if self.home_team == team:
+            return self.home_shots_on_target
+        if self.away_team == team:
+            return self.away_shots_on_target
+        return None
+
 
 @dataclass
 class TeamStats:
@@ -80,6 +124,12 @@ class TeamStats:
     corners_for: float = 0.0
     corners_against: float = 0.0
     corner_samples: int = 0
+    possession: float = 0.0
+    possession_samples: int = 0
+    shots_for: float = 0.0
+    shots_against: float = 0.0
+    shots_on_target_for: float = 0.0
+    shot_samples: int = 0
     clean_sheets: int = 0
     failed_to_score: int = 0
     recent: list[MatchRecord] = field(default_factory=list)
@@ -110,6 +160,22 @@ class TeamStats:
             return None
         return (self.corners_for + self.corners_against) / self.corner_samples
 
+    @property
+    def avg_possession(self) -> float | None:
+        return self.possession / self.possession_samples if self.possession_samples else None
+
+    @property
+    def avg_shots_for(self) -> float | None:
+        return self.shots_for / self.shot_samples if self.shot_samples else None
+
+    @property
+    def avg_shots_against(self) -> float | None:
+        return self.shots_against / self.shot_samples if self.shot_samples else None
+
+    @property
+    def avg_shots_on_target_for(self) -> float | None:
+        return self.shots_on_target_for / self.shot_samples if self.shot_samples else None
+
     def as_dict(self) -> dict[str, Any]:
         return {
             "team": self.team,
@@ -123,6 +189,10 @@ class TeamStats:
             "avg_corners_for": None if self.avg_corners_for is None else round(self.avg_corners_for, 2),
             "avg_corners_against": None if self.avg_corners_against is None else round(self.avg_corners_against, 2),
             "avg_total_corners": None if self.avg_total_corners is None else round(self.avg_total_corners, 2),
+            "avg_possession": None if self.avg_possession is None else round(self.avg_possession, 1),
+            "avg_shots_for": None if self.avg_shots_for is None else round(self.avg_shots_for, 2),
+            "avg_shots_against": None if self.avg_shots_against is None else round(self.avg_shots_against, 2),
+            "avg_shots_on_target_for": None if self.avg_shots_on_target_for is None else round(self.avg_shots_on_target_for, 2),
             "clean_sheets": self.clean_sheets,
             "failed_to_score": self.failed_to_score,
             "recent": [match.to_dict() for match in self.recent],
