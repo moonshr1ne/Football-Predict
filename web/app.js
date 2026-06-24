@@ -80,6 +80,7 @@ function renderPrediction(data) {
     </article>
     <article class="card wide">
       <h3>Качество данных</h3>
+      ${dataQualityBlock(data.data_quality)}
       ${warnings || "<p class='muted'>Предупреждений нет.</p>"}
     </article>
   `;
@@ -93,6 +94,22 @@ function statsTable(stats) {
       <tr><th>Угловые</th><td>${stats.avg_total_corners ?? "нет"}</td><th>Сухие</th><td>${stats.clean_sheets}</td></tr>
       <tr><th>Владение</th><td>${stats.avg_possession ?? "нет"}%</td><th>Удары</th><td>${stats.avg_shots_for ?? "нет"} / ${stats.avg_shots_against ?? "нет"}</td></tr>
       <tr><th>В створ</th><td>${stats.avg_shots_on_target_for ?? "нет"}</td><th>Источник</th><td>${stats.recent?.[0]?.source || "local"}</td></tr>
+      <tr><th>Угл. выборка</th><td>${stats.corner_samples}</td><th>Влад/удары</th><td>${stats.possession_samples}/${stats.shot_samples}</td></tr>
+    </table>
+  `;
+}
+
+function dataQualityBlock(quality) {
+  if (!quality) {
+    return "<p class='muted'>Сводка качества пока не рассчитана.</p>";
+  }
+  const backtest = quality.backtest || {};
+  return `
+    <table>
+      <tr><th>Общая база</th><td>${percent(quality.score)}</td><th>Участники ЧМ</th><td>${quality.participants || 0}</td></tr>
+      <tr><th>Матчи команд</th><td>${quality.home_matches || 0} / ${quality.away_matches || 0}</td><th>Богатые матчи</th><td>${quality.home_rich_matches || 0} / ${quality.away_rich_matches || 0}</td></tr>
+      <tr><th>Бэктест</th><td>${backtest.matches || 0} матчей</td><th>Исходы</th><td>${backtest.outcome_accuracy == null ? "нет" : percent(backtest.outcome_accuracy)}</td></tr>
+      <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"}</td></tr>
     </table>
   `;
 }

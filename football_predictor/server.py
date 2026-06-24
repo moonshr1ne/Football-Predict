@@ -32,12 +32,14 @@ class PredictorHandler(SimpleHTTPRequestHandler):
             remember = query.get("remember", ["true"])[0] != "false"
             try:
                 home, away = parse_matchup(matchup, self.store.resolver)
-                sync_info = WorldCupDataSync(self.store).sync_finished()
+                sync_info = WorldCupDataSync(self.store).sync_all()
                 fixture = None
                 warnings = []
                 if sync_info.get("imported"):
+                    recent = "уже свежие" if sync_info.get("skipped_full_sync") else f"{sync_info.get('recent_imported', 0)}"
+                    action = "База проверена" if sync_info.get("skipped_full_sync") else "База обновлена"
                     warnings.append(
-                        f"База ЧМ обновлена: матчей {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, обучающих матчей {sync_info.get('trained', 0)}."
+                        f"{action}: участников {sync_info.get('participants', 0)}, last-10 матчей {recent}, матчей ЧМ {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, обучающих матчей {sync_info.get('trained', 0)}."
                     )
                 if not match_date:
                     try:
@@ -121,7 +123,7 @@ def _optional_float(value) -> float | None:
 
 
 def run_server(host: str = "127.0.0.1", port: int = 8765) -> None:
-    WorldCupDataSync(PredictorHandler.store).sync_finished()
+    WorldCupDataSync(PredictorHandler.store).sync_all()
     _start_auto_check_worker(PredictorHandler.store)
     server = ThreadingHTTPServer((host, port), PredictorHandler)
     print(f"Открывайте: http://{host}:{port}")
@@ -132,7 +134,7 @@ def _start_auto_check_worker(store: DataStore, interval_seconds: int = 3600) -> 
     def worker() -> None:
         while True:
             try:
-                WorldCupDataSync(store).sync_finished()
+                WorldCupDataSync(store).sync_all()
                 AutoChecker(store).check_pending()
             except Exception:
                 pass

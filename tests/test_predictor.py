@@ -32,6 +32,7 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(prediction.match_context["competition"], "FIFA World Cup")
             self.assertIn("formation", prediction.home_tactics)
             self.assertIn("tactical_matchup", prediction.to_dict())
+            self.assertIn("data_quality", prediction.to_dict())
             for score in prediction.exact_scores:
                 home_goals, away_goals = map(int, score.split("-"))
                 if prediction.market_pick == "П1":

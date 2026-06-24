@@ -75,6 +75,9 @@ class DataStore:
         self.context_path = self.data_dir / "team_context.json"
         self.match_context_path = self.data_dir / "match_context.json"
         self.tactics_path = self.data_dir / "tactical_profiles.json"
+        self.participants_path = self.data_dir / "participants.json"
+        self.backtest_path = self.data_dir / "backtest.json"
+        self.sync_state_path = self.data_dir / "sync_state.json"
         self.model_path = self.data_dir / "model_state.json"
         self.predictions_path = self.data_dir / "predictions.json"
         self.resolver = TeamResolver(self.alias_path)
@@ -87,6 +90,9 @@ class DataStore:
             (self.context_path, {}),
             (self.match_context_path, DEFAULT_MATCH_CONTEXT),
             (self.tactics_path, {}),
+            (self.participants_path, []),
+            (self.backtest_path, {}),
+            (self.sync_state_path, {}),
             (self.model_path, DEFAULT_MODEL_STATE),
             (self.predictions_path, []),
         ):
@@ -115,13 +121,32 @@ class DataStore:
         key = (record.date, record.home_team, record.away_team)
         for match in matches:
             if (match.date, match.home_team, match.away_team) == key:
-                next_matches.append(record)
+                next_matches.append(_merge_match(match, record))
                 replaced = True
             else:
                 next_matches.append(match)
         if not replaced:
             next_matches.append(record)
         self.save_matches(next_matches)
+
+    def load_participants(self) -> list[dict[str, Any]]:
+        return self._read_json(self.participants_path, [])
+
+    def save_participants(self, participants: list[dict[str, Any]]) -> None:
+        ordered = sorted(participants, key=lambda item: item.get("team", ""))
+        self._write_json(self.participants_path, ordered)
+
+    def load_backtest(self) -> dict[str, Any]:
+        return self._read_json(self.backtest_path, {})
+
+    def save_backtest(self, backtest: dict[str, Any]) -> None:
+        self._write_json(self.backtest_path, backtest)
+
+    def load_sync_state(self) -> dict[str, Any]:
+        return self._read_json(self.sync_state_path, {})
+
+    def save_sync_state(self, sync_state: dict[str, Any]) -> None:
+        self._write_json(self.sync_state_path, sync_state)
 
     def load_context(self) -> dict[str, Any]:
         return self._read_json(self.context_path, {})
@@ -223,3 +248,14 @@ class DataStore:
             if same_teams and same_date and same_status:
                 return prediction
         return None
+
+
+def _merge_match(existing: MatchRecord, incoming: MatchRecord) -> MatchRecord:
+    merged = existing.to_dict()
+    incoming_data = incoming.to_dict()
+    for key, value in incoming_data.items():
+        if value not in (None, ""):
+            merged[key] = value
+    if existing.source == "espn-world-cup":
+        merged["source"] = existing.source
+    return MatchRecord.from_dict(merged)

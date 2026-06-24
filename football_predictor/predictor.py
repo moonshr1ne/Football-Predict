@@ -6,7 +6,7 @@ from typing import Any
 
 from .data_store import DataStore
 from .features import build_team_stats
-from .models import TeamStats
+from .models import MatchRecord, TeamStats
 from .tactics import corner_tactical_boost, summarize_matchup, tactical_edge, tactical_tempo
 
 
@@ -34,6 +34,7 @@ class Prediction:
     away_tactics: dict[str, Any]
     tactical_matchup: dict[str, Any]
     fixture: dict[str, Any] | None
+    data_quality: dict[str, Any]
     warnings: list[str]
 
     def to_dict(self) -> dict[str, Any]:
@@ -64,6 +65,7 @@ class Prediction:
             "away_tactics": self.away_tactics,
             "tactical_matchup": self.tactical_matchup,
             "fixture": self.fixture,
+            "data_quality": self.data_quality,
             "warnings": self.warnings,
         }
 
@@ -85,8 +87,9 @@ class MatchPredictor:
         match_date: str | None = None,
         fixture: dict[str, Any] | None = None,
         extra_warnings: list[str] | None = None,
+        matches_override: list[MatchRecord] | None = None,
     ) -> Prediction:
-        matches = self.store.load_matches()
+        matches = matches_override if matches_override is not None else self.store.load_matches()
         home_stats = build_team_stats(matches, home_team)
         away_stats = build_team_stats(matches, away_team)
         context = self.store.load_context()
@@ -99,6 +102,7 @@ class MatchPredictor:
         state = self.store.load_model_state()
         weights = state["weights"]
         warnings = self._warnings(home_stats, away_stats, home_tactics, away_tactics)
+        data_quality = self._data_quality(home_team, away_team, home_stats, away_stats)
         if extra_warnings:
             warnings.extend(extra_warnings)
 
@@ -143,6 +147,7 @@ class MatchPredictor:
             away_tactics=away_tactics,
             tactical_matchup=tactical_matchup,
             fixture=fixture,
+            data_quality=data_quality,
             warnings=warnings,
         )
         if remember and match_date:
@@ -286,3 +291,49 @@ class MatchPredictor:
             warnings.append("Для одной из команд нет тактического профиля, используется нейтральный шаблон.")
         warnings.append("World Cup mode: мотивация и сила состава считаются высокими для обеих команд, если вы явно не внесли травмы или изменения состава.")
         return warnings
+
+    def _data_quality(
+        self,
+        home_team: str,
+        away_team: str,
+        home_stats: TeamStats,
+        away_stats: TeamStats,
+    ) -> dict[str, Any]:
+        participants = self.store.load_participants()
+        sync_state = self.store.load_sync_state()
+        backtest = self.store.load_backtest()
+        by_team = backtest.get("by_team", {}) if isinstance(backtest, dict) else {}
+
+        home_rich_matches = min(home_stats.corner_samples, home_stats.possession_samples, home_stats.shot_samples)
+        away_rich_matches = min(away_stats.corner_samples, away_stats.possession_samples, away_stats.shot_samples)
+        sample_score = min(1.0, (home_stats.sample_size + away_stats.sample_size) / 20.0)
+        rich_score = min(1.0, (home_rich_matches + away_rich_matches) / 20.0)
+        learned_score = min(1.0, float(backtest.get("matches", 0) or 0) / 100.0) if isinstance(backtest, dict) else 0.0
+
+        return {
+            "score": round(sample_score * 0.55 + rich_score * 0.30 + learned_score * 0.15, 3),
+            "match_sample_score": round(sample_score, 3),
+            "rich_stat_score": round(rich_score, 3),
+            "participants": len(participants),
+            "last_full_sync_at": sync_state.get("last_full_sync_at"),
+            "home_matches": home_stats.sample_size,
+            "away_matches": away_stats.sample_size,
+            "home_rich_matches": home_rich_matches,
+            "away_rich_matches": away_rich_matches,
+            "home_corner_samples": home_stats.corner_samples,
+            "away_corner_samples": away_stats.corner_samples,
+            "home_possession_samples": home_stats.possession_samples,
+            "away_possession_samples": away_stats.possession_samples,
+            "home_shot_samples": home_stats.shot_samples,
+            "away_shot_samples": away_stats.shot_samples,
+            "backtest": {
+                "matches": backtest.get("matches", 0) if isinstance(backtest, dict) else 0,
+                "outcome_accuracy": backtest.get("outcome_accuracy") if isinstance(backtest, dict) else None,
+                "exact_score_accuracy": backtest.get("exact_score_accuracy") if isinstance(backtest, dict) else None,
+                "corner_mae": backtest.get("corner_mae") if isinstance(backtest, dict) else None,
+                "trained_match_keys": backtest.get("trained_match_keys") if isinstance(backtest, dict) else None,
+                "updated_at": backtest.get("updated_at") if isinstance(backtest, dict) else None,
+            },
+            "home_backtest": by_team.get(home_team, {}),
+            "away_backtest": by_team.get(away_team, {}),
+        }

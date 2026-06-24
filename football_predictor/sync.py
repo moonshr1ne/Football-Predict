@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
 from .data_store import DataStore
@@ -20,7 +20,15 @@ class WorldCupDataSync:
         try:
             fixtures = self.provider.fixtures(start_date="2026-06-01", end_date=end_date)
         except ProviderError:
-            return {"imported": 0, "profiles_updated": 0, "source": "espn-world-cup", "error": "provider unavailable"}
+            return {
+                "participants": len(self.store.load_participants()),
+                "recent_imported": 0,
+                "imported": 0,
+                "profiles_updated": 0,
+                "trained": 0,
+                "source": "espn-world-cup",
+                "error": "provider unavailable",
+            }
 
         imported = 0
         for fixture in fixtures:
@@ -32,7 +40,65 @@ class WorldCupDataSync:
 
         profiles_updated = self._update_tactical_profiles()
         trained = self._train_model_from_imported_matches()
-        return {"imported": imported, "profiles_updated": profiles_updated, "trained": trained, "source": "espn-world-cup"}
+        self._save_backtest_summary()
+        return {
+            "participants": len(self.store.load_participants()),
+            "recent_imported": 0,
+            "imported": imported,
+            "profiles_updated": profiles_updated,
+            "trained": trained,
+            "source": "espn-world-cup",
+        }
+
+    def sync_all(self, force: bool = False, max_age_hours: int = 6) -> dict[str, Any]:
+        finished_summary = self.sync_finished()
+        if not force and not self._full_sync_due(max_age_hours):
+            finished_summary["skipped_full_sync"] = True
+            return finished_summary
+
+        errors: list[str] = []
+        try:
+            participants = self.provider.participants()
+        except ProviderError as exc:
+            participants = self.store.load_participants()
+            errors.append(f"participants: {exc}")
+        self.store.save_participants(participants)
+
+        recent_imported = 0
+        for participant in participants:
+            team_id = participant.get("team_id")
+            if not team_id:
+                continue
+            try:
+                fixtures = self.provider.team_recent_fixtures(str(team_id), limit=10)
+            except Exception as exc:
+                errors.append(f"{participant.get('team')}: {exc}")
+                continue
+            for fixture in fixtures:
+                self.store.add_or_update_match(self._record_from_fixture(fixture))
+                recent_imported += 1
+
+        profiles_updated = self._update_tactical_profiles()
+        trained = self._train_model_from_imported_matches()
+        backtest = self._save_backtest_summary()
+        self.store.save_sync_state(
+            {
+                "last_full_sync_at": datetime.now(timezone.utc).isoformat(),
+                "participants": len(participants),
+                "recent_imported": recent_imported,
+                "backtest": backtest,
+            }
+        )
+        return {
+            "participants": len(participants),
+            "recent_imported": recent_imported,
+            "imported": finished_summary.get("imported", 0),
+            "profiles_updated": profiles_updated,
+            "trained": trained,
+            "backtest": backtest,
+            "errors": errors[:10],
+            "source": "espn-world-cup+espn-team-schedule",
+        }
 
     def _record_from_fixture(self, fixture: dict[str, Any]) -> MatchRecord:
         return MatchRecord(
@@ -51,14 +117,22 @@ class WorldCupDataSync:
             away_shots_on_target=fixture.get("away_shots_on_target"),
             home_fouls=fixture.get("home_fouls"),
             away_fouls=fixture.get("away_fouls"),
-            competition="FIFA World Cup 2026",
+            competition=fixture.get("competition") or "ESPN soccer",
             stage=fixture.get("status_detail", ""),
             neutral=True,
-            source="espn-world-cup",
+            source=fixture.get("source", "espn-world-cup"),
         )
 
     def _update_tactical_profiles(self) -> int:
-        matches = [match for match in self.store.load_matches() if match.source == "espn-world-cup" and match.is_finished()]
+        matches = [
+            match
+            for match in self.store.load_matches()
+            if match.is_finished()
+            and match.home_possession is not None
+            and match.away_possession is not None
+            and match.home_shots is not None
+            and match.away_shots is not None
+        ]
         aggregates: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
         counts: dict[str, int] = defaultdict(int)
 
@@ -104,19 +178,26 @@ class WorldCupDataSync:
         state = self.store.load_model_state()
         trained_keys = set(state.get("trained_match_keys", []))
         matches = sorted(
-            [match for match in self.store.load_matches() if match.source == "espn-world-cup" and match.is_finished()],
+            [
+                match
+                for match in self.store.load_matches()
+                if match.source.startswith("espn") and match.is_finished()
+            ],
             key=lambda item: (item.date, item.home_team, item.away_team),
         )
         trained = 0
+        past_matches: list[MatchRecord] = []
         for match in matches:
             key = f"{match.date}|{match.home_team}|{match.away_team}"
             if key in trained_keys:
+                past_matches.append(match)
                 continue
             baseline = MatchPredictor(self.store).predict(
                 match.home_team,
                 match.away_team,
                 neutral=match.neutral,
                 remember=False,
+                matches_override=past_matches,
             ).to_dict()
             OnlineLearner(self.store).record_result(
                 home_team=match.home_team,
@@ -146,7 +227,60 @@ class WorldCupDataSync:
             state["trained_match_keys"] = sorted(trained_keys)
             self.store.save_model_state(state)
             trained += 1
+            past_matches.append(match)
         return trained
+
+    def _save_backtest_summary(self) -> dict[str, Any]:
+        state = self.store.load_model_state()
+        history = state.get("history", [])
+        total = len(history)
+        if not total:
+            backtest = {"matches": 0}
+            self.store.save_backtest(backtest)
+            return backtest
+
+        outcome_hits = sum(1 for item in history if item.get("outcome_hit"))
+        score_hits = sum(1 for item in history if item.get("score_hit"))
+        corner_errors = [abs(float(item["corner_error"])) for item in history if item.get("corner_error") is not None]
+        by_team: dict[str, dict[str, int]] = defaultdict(lambda: {"matches": 0, "outcome_hits": 0})
+        for item in history:
+            for team in (item.get("home_team"), item.get("away_team")):
+                if not team:
+                    continue
+                by_team[team]["matches"] += 1
+                if item.get("outcome_hit"):
+                    by_team[team]["outcome_hits"] += 1
+
+        backtest = {
+            "matches": total,
+            "outcome_accuracy": round(outcome_hits / total, 3),
+            "exact_score_accuracy": round(score_hits / total, 3),
+            "corner_mae": None if not corner_errors else round(sum(corner_errors) / len(corner_errors), 2),
+            "trained_match_keys": len(state.get("trained_match_keys", [])),
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+            "by_team": {
+                team: {
+                    "matches": values["matches"],
+                    "outcome_accuracy": round(values["outcome_hits"] / values["matches"], 3),
+                }
+                for team, values in sorted(by_team.items())
+            },
+        }
+        self.store.save_backtest(backtest)
+        return backtest
+
+    def _full_sync_due(self, max_age_hours: int) -> bool:
+        sync_state = self.store.load_sync_state()
+        last_sync = sync_state.get("last_full_sync_at")
+        if not last_sync:
+            return True
+        try:
+            last = datetime.fromisoformat(last_sync)
+        except ValueError:
+            return True
+        if last.tzinfo is None:
+            last = last.replace(tzinfo=timezone.utc)
+        return datetime.now(timezone.utc) - last > timedelta(hours=max_age_hours)
 
     def _profile_from_averages(self, existing: dict[str, Any], avg: dict[str, float], sample_size: int) -> dict[str, Any]:
         possession = avg.get("possession", 50.0) / 100.0

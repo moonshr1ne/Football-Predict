@@ -4,17 +4,5774 @@
   "weights": {
     "home_advantage_goals": 0.18,
     "elo_to_goals": 0.22,
-    "form_to_goals": 0.20825600000000008,
+    "form_to_goals": 0.3236559999999999,
     "motivation_to_goals": 0.18,
     "injury_to_goals": 0.16,
     "lineup_to_goals": 0.1,
-    "tactics_to_goals": 0.23816944399999998,
-    "tactics_to_corners": 1.14736344,
+    "tactics_to_goals": 0.3027802840000006,
+    "tactics_to_corners": 1.16191002,
     "world_cup_intensity_goals": 0.05,
-    "corner_bias": -0.20102400000000004,
-    "goal_scale": 0.97016
+    "corner_bias": -0.2601600000000001,
+    "goal_scale": 0.9417000000000005
   },
   "history": [
+    {
+      "date": "2025-06-10",
+      "home_team": "Uzbekistan",
+      "away_team": "Qatar",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.25,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:10.745589+00:00"
+    },
+    {
+      "date": "2025-08-24",
+      "home_team": "Qatar",
+      "away_team": "Lebanon",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 9.34,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:10.800144+00:00"
+    },
+    {
+      "date": "2025-09-03",
+      "home_team": "Qatar",
+      "away_team": "Bahrain",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.14,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:10.874505+00:00"
+    },
+    {
+      "date": "2025-09-04",
+      "home_team": "Uruguay",
+      "away_team": "Peru",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.85,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:10.936456+00:00"
+    },
+    {
+      "date": "2025-09-07",
+      "home_team": "Qatar",
+      "away_team": "Russia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-4",
+      "score_hit": false,
+      "predicted_corners": 9.3,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.008657+00:00"
+    },
+    {
+      "date": "2025-09-08",
+      "home_team": "Croatia",
+      "away_team": "Montenegro",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.26,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.066421+00:00"
+    },
+    {
+      "date": "2025-09-08",
+      "home_team": "Ghana",
+      "away_team": "Mali",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.24,
+      "actual_corners": 9.0,
+      "corner_error": -0.24,
+      "updated_at": "2026-06-24T01:34:11.129635+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Bosnia-Herzegovina",
+      "away_team": "Austria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-2",
+      "score_hit": true,
+      "predicted_corners": 9.33,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.197983+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Cape Verde",
+      "away_team": "Cameroon",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.34,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.265196+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Chile",
+      "away_team": "Uruguay",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 10.02,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.335475+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Ecuador",
+      "away_team": "Argentina",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.55,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.402448+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Hungary",
+      "away_team": "Portugal",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "2-3",
+      "score_hit": false,
+      "predicted_corners": 9.37,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.468290+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Peru",
+      "away_team": "Paraguay",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 9.32,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.529318+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Serbia",
+      "away_team": "England",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-5",
+      "score_hit": false,
+      "predicted_corners": 9.64,
+      "actual_corners": 9.0,
+      "corner_error": -0.64,
+      "updated_at": "2026-06-24T01:34:11.594097+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "United States",
+      "away_team": "Japan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.54,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.657230+00:00"
+    },
+    {
+      "date": "2025-09-09",
+      "home_team": "Venezuela",
+      "away_team": "Colombia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "3-6",
+      "score_hit": false,
+      "predicted_corners": 9.42,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.721261+00:00"
+    },
+    {
+      "date": "2025-10-08",
+      "home_team": "Central African Republic",
+      "away_team": "Ghana",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-5",
+      "score_hit": false,
+      "predicted_corners": 8.75,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.789288+00:00"
+    },
+    {
+      "date": "2025-10-08",
+      "home_team": "Libya",
+      "away_team": "Cape Verde",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "3-3",
+      "score_hit": false,
+      "predicted_corners": 9.06,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.865611+00:00"
+    },
+    {
+      "date": "2025-10-08",
+      "home_team": "Oman",
+      "away_team": "Qatar",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.49,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:11.949184+00:00"
+    },
+    {
+      "date": "2025-10-09",
+      "home_team": "Austria",
+      "away_team": "San Marino",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "10-0",
+      "score_hit": false,
+      "predicted_corners": 9.52,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.023587+00:00"
+    },
+    {
+      "date": "2025-10-09",
+      "home_team": "Cyprus",
+      "away_team": "Bosnia-Herzegovina",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.5,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.093304+00:00"
+    },
+    {
+      "date": "2025-10-09",
+      "home_team": "Czechia",
+      "away_team": "Croatia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-3",
+        "0-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.84,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.167559+00:00"
+    },
+    {
+      "date": "2025-10-09",
+      "home_team": "England",
+      "away_team": "Wales",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "4-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": true,
+      "predicted_corners": 10.18,
+      "actual_corners": 9.0,
+      "corner_error": -1.18,
+      "updated_at": "2026-06-24T01:34:12.234543+00:00"
+    },
+    {
+      "date": "2025-10-09",
+      "home_team": "Malta",
+      "away_team": "Netherlands",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-4",
+      "score_hit": false,
+      "predicted_corners": 9.39,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.295672+00:00"
+    },
+    {
+      "date": "2025-10-09",
+      "home_team": "Poland",
+      "away_team": "New Zealand",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.36,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.356329+00:00"
+    },
+    {
+      "date": "2025-10-09",
+      "home_team": "Scotland",
+      "away_team": "Greece",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.27,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.418765+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Belgium",
+      "away_team": "North Macedonia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.4,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.482096+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Canada",
+      "away_team": "Australia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 10.03,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.549914+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "France",
+      "away_team": "Azerbaijan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.48,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.609661+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Germany",
+      "away_team": "Luxembourg",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.71,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.673813+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Japan",
+      "away_team": "Paraguay",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.06,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.732223+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Jordan",
+      "away_team": "Bolivia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 9.3,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.795697+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Nicaragua",
+      "away_team": "Haiti",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "0-3",
+      "score_hit": false,
+      "predicted_corners": 9.35,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.854965+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Russia",
+      "away_team": "Iran",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-1",
+        "3-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 10.04,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.921781+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "South Korea",
+      "away_team": "Brazil",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-5",
+      "score_hit": false,
+      "predicted_corners": 9.42,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:12.990619+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Sweden",
+      "away_team": "Switzerland",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.82,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.058558+00:00"
+    },
+    {
+      "date": "2025-10-10",
+      "home_team": "Uruguay",
+      "away_team": "Dominican Republic",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.72,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.142322+00:00"
+    },
+    {
+      "date": "2025-10-11",
+      "home_team": "Argentina",
+      "away_team": "Venezuela",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-2",
+        "2-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 10.3,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.217291+00:00"
+    },
+    {
+      "date": "2025-10-11",
+      "home_team": "Bulgaria",
+      "away_team": "Türkiye",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-6",
+      "score_hit": false,
+      "predicted_corners": 9.79,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.282063+00:00"
+    },
+    {
+      "date": "2025-10-11",
+      "home_team": "Iraq",
+      "away_team": "Indonesia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.25,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.348833+00:00"
+    },
+    {
+      "date": "2025-10-11",
+      "home_team": "Norway",
+      "away_team": "Israel",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 9.48,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.421596+00:00"
+    },
+    {
+      "date": "2025-10-11",
+      "home_team": "Portugal",
+      "away_team": "Republic of Ireland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 10.01,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.491229+00:00"
+    },
+    {
+      "date": "2025-10-11",
+      "home_team": "Spain",
+      "away_team": "Georgia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.7,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.573523+00:00"
+    },
+    {
+      "date": "2025-10-11",
+      "home_team": "United States",
+      "away_team": "Ecuador",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.43,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.659426+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Croatia",
+      "away_team": "Gibraltar",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.24,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.726707+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Faroe Islands",
+      "away_team": "Czechia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 8.95,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.792514+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Ghana",
+      "away_team": "Comoros",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.26,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.859346+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Malta",
+      "away_team": "Bosnia-Herzegovina",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "1-4",
+      "score_hit": false,
+      "predicted_corners": 9.85,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.933669+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Mexico",
+      "away_team": "Colombia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-4",
+        "2-4"
+      ],
+      "actual_score": "0-4",
+      "score_hit": false,
+      "predicted_corners": 10.4,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:13.999769+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Netherlands",
+      "away_team": "Finland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "2-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.83,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.076247+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Romania",
+      "away_team": "Austria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-4",
+        "0-3"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 10.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.143452+00:00"
+    },
+    {
+      "date": "2025-10-12",
+      "home_team": "Scotland",
+      "away_team": "Belarus",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "2-1"
+      ],
+      "actual_score": "2-1",
+      "score_hit": true,
+      "predicted_corners": 9.67,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.214801+00:00"
+    },
+    {
+      "date": "2025-10-13",
+      "home_team": "Cape Verde",
+      "away_team": "Eswatini",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.6,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.278531+00:00"
+    },
+    {
+      "date": "2025-10-13",
+      "home_team": "Iceland",
+      "away_team": "France",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.63,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.355175+00:00"
+    },
+    {
+      "date": "2025-10-13",
+      "home_team": "Northern Ireland",
+      "away_team": "Germany",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-3",
+        "0-2"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 10.09,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.433334+00:00"
+    },
+    {
+      "date": "2025-10-13",
+      "home_team": "Slovenia",
+      "away_team": "Switzerland",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.58,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.511865+00:00"
+    },
+    {
+      "date": "2025-10-13",
+      "home_team": "Sweden",
+      "away_team": "Kosovo",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 9.32,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.595211+00:00"
+    },
+    {
+      "date": "2025-10-13",
+      "home_team": "Uzbekistan",
+      "away_team": "Uruguay",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.83,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.661011+00:00"
+    },
+    {
+      "date": "2025-10-13",
+      "home_team": "Wales",
+      "away_team": "Belgium",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-4",
+      "score_hit": false,
+      "predicted_corners": 8.86,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.744185+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Albania",
+      "away_team": "Jordan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "4-2",
+      "score_hit": false,
+      "predicted_corners": 9.02,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.819099+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Honduras",
+      "away_team": "Haiti",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.51,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.891129+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Iran",
+      "away_team": "Tanzania",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.47,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:14.964524+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Japan",
+      "away_team": "Brazil",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-3",
+        "0-4"
+      ],
+      "actual_score": "3-2",
+      "score_hit": false,
+      "predicted_corners": 10.28,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.033764+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Latvia",
+      "away_team": "England",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-3",
+        "0-2"
+      ],
+      "actual_score": "0-5",
+      "score_hit": false,
+      "predicted_corners": 9.85,
+      "actual_corners": 10.0,
+      "corner_error": 0.15,
+      "updated_at": "2026-06-24T01:34:15.110723+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Norway",
+      "away_team": "New Zealand",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "3-0",
+        "4-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 10.01,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.178143+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Portugal",
+      "away_team": "Hungary",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 10.12,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.250033+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Qatar",
+      "away_team": "United Arab Emirates",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.28,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.323401+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Saudi Arabia",
+      "away_team": "Iraq",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 8.94,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.391854+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "South Korea",
+      "away_team": "Paraguay",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-3",
+        "0-4"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.77,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.495574+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Spain",
+      "away_team": "Bulgaria",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "4-0",
+        "3-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": true,
+      "predicted_corners": 10.59,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.607643+00:00"
+    },
+    {
+      "date": "2025-10-14",
+      "home_team": "Türkiye",
+      "away_team": "Georgia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "4-0",
+        "5-0"
+      ],
+      "actual_score": "4-1",
+      "score_hit": false,
+      "predicted_corners": 10.72,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.689235+00:00"
+    },
+    {
+      "date": "2025-10-15",
+      "home_team": "Colombia",
+      "away_team": "Canada",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "3-0",
+        "4-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 10.72,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.775385+00:00"
+    },
+    {
+      "date": "2025-10-15",
+      "home_team": "Mexico",
+      "away_team": "Ecuador",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.65,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.852525+00:00"
+    },
+    {
+      "date": "2025-10-15",
+      "home_team": "Puerto Rico",
+      "away_team": "Argentina",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-6",
+      "score_hit": false,
+      "predicted_corners": 8.97,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:15.932586+00:00"
+    },
+    {
+      "date": "2025-10-15",
+      "home_team": "United States",
+      "away_team": "Australia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.2,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.012813+00:00"
+    },
+    {
+      "date": "2025-11-13",
+      "home_team": "Czechia",
+      "away_team": "San Marino",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "4-0",
+        "5-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 10.43,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.087092+00:00"
+    },
+    {
+      "date": "2025-11-13",
+      "home_team": "England",
+      "away_team": "Serbia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "4-0",
+        "5-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 10.51,
+      "actual_corners": 10.0,
+      "corner_error": -0.51,
+      "updated_at": "2026-06-24T01:34:16.159472+00:00"
+    },
+    {
+      "date": "2025-11-13",
+      "home_team": "France",
+      "away_team": "Ukraine",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.73,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.237545+00:00"
+    },
+    {
+      "date": "2025-11-13",
+      "home_team": "Iran",
+      "away_team": "Cape Verde",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.65,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.314619+00:00"
+    },
+    {
+      "date": "2025-11-13",
+      "home_team": "Norway",
+      "away_team": "Estonia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "4-1",
+      "score_hit": false,
+      "predicted_corners": 9.75,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.377736+00:00"
+    },
+    {
+      "date": "2025-11-13",
+      "home_team": "Republic of Ireland",
+      "away_team": "Portugal",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.25,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.464620+00:00"
+    },
+    {
+      "date": "2025-11-13",
+      "home_team": "United Arab Emirates",
+      "away_team": "Iraq",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 8.96,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.538094+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Angola",
+      "away_team": "Argentina",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-2",
+      "score_hit": true,
+      "predicted_corners": 9.33,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.613008+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Canada",
+      "away_team": "Ecuador",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.65,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.699461+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Croatia",
+      "away_team": "Faroe Islands",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.41,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.774243+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Egypt",
+      "away_team": "Uzbekistan",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "0-1"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.63,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.846586+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Guatemala",
+      "away_team": "Panama",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "2-3",
+      "score_hit": false,
+      "predicted_corners": 9.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.916259+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Haiti",
+      "away_team": "Costa Rica",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.45,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:16.987545+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Japan",
+      "away_team": "Ghana",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.4,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.069634+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Luxembourg",
+      "away_team": "Germany",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-3",
+        "0-4"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 10.13,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.155140+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Poland",
+      "away_team": "Netherlands",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.5,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.223619+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Saudi Arabia",
+      "away_team": "Ivory Coast",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 8.8,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.303463+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "South Korea",
+      "away_team": "Bolivia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.21,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.367497+00:00"
+    },
+    {
+      "date": "2025-11-14",
+      "home_team": "Tunisia",
+      "away_team": "Jordan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "3-2",
+      "score_hit": false,
+      "predicted_corners": 9.41,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.431384+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Bosnia-Herzegovina",
+      "away_team": "Romania",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.35,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.496138+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Brazil",
+      "away_team": "Senegal",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 10.04,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.560194+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Cyprus",
+      "away_team": "Austria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-3",
+        "1-2"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 10.15,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.641988+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Georgia",
+      "away_team": "Spain",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-3",
+        "0-2"
+      ],
+      "actual_score": "0-4",
+      "score_hit": false,
+      "predicted_corners": 10.04,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.726331+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Greece",
+      "away_team": "Scotland",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "3-2",
+      "score_hit": false,
+      "predicted_corners": 9.78,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.801570+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Kazakhstan",
+      "away_team": "Belgium",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.49,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.886199+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Switzerland",
+      "away_team": "Sweden",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "4-1",
+      "score_hit": false,
+      "predicted_corners": 9.45,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:17.953455+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Türkiye",
+      "away_team": "Bulgaria",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "4-0",
+        "5-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 10.72,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.024904+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "United States",
+      "away_team": "Paraguay",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.39,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.096363+00:00"
+    },
+    {
+      "date": "2025-11-15",
+      "home_team": "Venezuela",
+      "away_team": "Australia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.78,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.170192+00:00"
+    },
+    {
+      "date": "2025-11-16",
+      "home_team": "Albania",
+      "away_team": "England",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-3",
+        "1-3"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 10.93,
+      "actual_corners": 8.0,
+      "corner_error": -2.93,
+      "updated_at": "2026-06-24T01:34:18.263160+00:00"
+    },
+    {
+      "date": "2025-11-16",
+      "home_team": "Azerbaijan",
+      "away_team": "France",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-3",
+        "0-2"
+      ],
+      "actual_score": "1-3",
+      "score_hit": false,
+      "predicted_corners": 9.79,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.328595+00:00"
+    },
+    {
+      "date": "2025-11-16",
+      "home_team": "Colombia",
+      "away_team": "New Zealand",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.7,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.409485+00:00"
+    },
+    {
+      "date": "2025-11-16",
+      "home_team": "Italy",
+      "away_team": "Norway",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "1-4",
+      "score_hit": false,
+      "predicted_corners": 9.76,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.476643+00:00"
+    },
+    {
+      "date": "2025-11-16",
+      "home_team": "Mexico",
+      "away_team": "Uruguay",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.74,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.544100+00:00"
+    },
+    {
+      "date": "2025-11-16",
+      "home_team": "Portugal",
+      "away_team": "Armenia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "9-1",
+      "score_hit": false,
+      "predicted_corners": 9.44,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.611496+00:00"
+    },
+    {
+      "date": "2025-11-17",
+      "home_team": "Czechia",
+      "away_team": "Gibraltar",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "6-0",
+      "score_hit": false,
+      "predicted_corners": 9.28,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.681762+00:00"
+    },
+    {
+      "date": "2025-11-17",
+      "home_team": "Egypt",
+      "away_team": "Cape Verde",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.43,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.747403+00:00"
+    },
+    {
+      "date": "2025-11-17",
+      "home_team": "Germany",
+      "away_team": "Slovakia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "6-0",
+      "score_hit": false,
+      "predicted_corners": 9.71,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.833667+00:00"
+    },
+    {
+      "date": "2025-11-17",
+      "home_team": "Montenegro",
+      "away_team": "Croatia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-3",
+        "0-4"
+      ],
+      "actual_score": "2-3",
+      "score_hit": false,
+      "predicted_corners": 9.69,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.899976+00:00"
+    },
+    {
+      "date": "2025-11-17",
+      "home_team": "Netherlands",
+      "away_team": "Lithuania",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.61,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:18.963822+00:00"
+    },
+    {
+      "date": "2025-11-17",
+      "home_team": "Qatar",
+      "away_team": "Zimbabwe",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.26,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.030462+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Austria",
+      "away_team": "Bosnia-Herzegovina",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 10.07,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.110177+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Belgium",
+      "away_team": "Liechtenstein",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "7-0",
+      "score_hit": false,
+      "predicted_corners": 9.42,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.190600+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Brazil",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 10.23,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.261909+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Iraq",
+      "away_team": "United Arab Emirates",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 8.99,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.335871+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Japan",
+      "away_team": "Bolivia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.39,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.401266+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Jordan",
+      "away_team": "Mali",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.08,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.466533+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Kosovo",
+      "away_team": "Switzerland",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.39,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.534711+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Saudi Arabia",
+      "away_team": "Algeria",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.01,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.601526+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Scotland",
+      "away_team": "Denmark",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "4-2",
+      "score_hit": false,
+      "predicted_corners": 9.59,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.674033+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "South Korea",
+      "away_team": "Ghana",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.14,
+      "actual_corners": 9.0,
+      "corner_error": -0.14,
+      "updated_at": "2026-06-24T01:34:19.750091+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Spain",
+      "away_team": "Türkiye",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-2"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 10.96,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.819261+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Sweden",
+      "away_team": "Slovenia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 8.99,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.902655+00:00"
+    },
+    {
+      "date": "2025-11-18",
+      "home_team": "Uzbekistan",
+      "away_team": "Iran",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.28,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:19.990570+00:00"
+    },
+    {
+      "date": "2025-11-19",
+      "home_team": "Colombia",
+      "away_team": "Australia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": true,
+      "predicted_corners": 9.73,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.062007+00:00"
+    },
+    {
+      "date": "2025-11-19",
+      "home_team": "Ecuador",
+      "away_team": "New Zealand",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 9.31,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.136863+00:00"
+    },
+    {
+      "date": "2025-11-19",
+      "home_team": "Haiti",
+      "away_team": "Nicaragua",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 9.41,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.204475+00:00"
+    },
+    {
+      "date": "2025-11-19",
+      "home_team": "Mexico",
+      "away_team": "Paraguay",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.11,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.271734+00:00"
+    },
+    {
+      "date": "2025-11-19",
+      "home_team": "Panama",
+      "away_team": "El Salvador",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.87,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.346751+00:00"
+    },
+    {
+      "date": "2025-11-19",
+      "home_team": "United States",
+      "away_team": "Uruguay",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "5-1",
+      "score_hit": false,
+      "predicted_corners": 9.81,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.433896+00:00"
+    },
+    {
+      "date": "2025-11-19",
+      "home_team": "Venezuela",
+      "away_team": "Canada",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.72,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.529847+00:00"
+    },
+    {
+      "date": "2025-12-16",
+      "home_team": "Zambia",
+      "away_team": "Congo DR",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.602683+00:00"
+    },
+    {
+      "date": "2025-12-22",
+      "home_team": "South Africa",
+      "away_team": "Angola",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.18,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.670290+00:00"
+    },
+    {
+      "date": "2025-12-23",
+      "home_team": "Congo DR",
+      "away_team": "Benin",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.742557+00:00"
+    },
+    {
+      "date": "2025-12-23",
+      "home_team": "Tunisia",
+      "away_team": "Uganda",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.43,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.832538+00:00"
+    },
+    {
+      "date": "2025-12-24",
+      "home_team": "Ivory Coast",
+      "away_team": "Mozambique",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 8.97,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.906340+00:00"
+    },
+    {
+      "date": "2025-12-26",
+      "home_team": "Egypt",
+      "away_team": "South Africa",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.52,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:20.978373+00:00"
+    },
+    {
+      "date": "2025-12-27",
+      "home_team": "Nigeria",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-2"
+      ],
+      "actual_score": "3-2",
+      "score_hit": false,
+      "predicted_corners": 9.43,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.062191+00:00"
+    },
+    {
+      "date": "2025-12-27",
+      "home_team": "Senegal",
+      "away_team": "Congo DR",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.25,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.146133+00:00"
+    },
+    {
+      "date": "2025-12-28",
+      "home_team": "Algeria",
+      "away_team": "Burkina Faso",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.38,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.242163+00:00"
+    },
+    {
+      "date": "2025-12-28",
+      "home_team": "Ivory Coast",
+      "away_team": "Cameroon",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 8.78,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.330499+00:00"
+    },
+    {
+      "date": "2025-12-29",
+      "home_team": "Zimbabwe",
+      "away_team": "South Africa",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-3",
+      "score_hit": false,
+      "predicted_corners": 9.38,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.413054+00:00"
+    },
+    {
+      "date": "2025-12-30",
+      "home_team": "Botswana",
+      "away_team": "Congo DR",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-3",
+      "score_hit": false,
+      "predicted_corners": 9.15,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.481950+00:00"
+    },
+    {
+      "date": "2025-12-30",
+      "home_team": "Tanzania",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.4,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.561371+00:00"
+    },
+    {
+      "date": "2025-12-31",
+      "home_team": "Equatorial Guinea",
+      "away_team": "Algeria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-3",
+      "score_hit": false,
+      "predicted_corners": 9.21,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.633994+00:00"
+    },
+    {
+      "date": "2025-12-31",
+      "home_team": "Gabon",
+      "away_team": "Ivory Coast",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-3",
+      "score_hit": false,
+      "predicted_corners": 9.09,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.711049+00:00"
+    },
+    {
+      "date": "2026-01-03",
+      "home_team": "Mali",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 8.84,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.786020+00:00"
+    },
+    {
+      "date": "2026-01-03",
+      "home_team": "Senegal",
+      "away_team": "Sudan",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.22,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.850521+00:00"
+    },
+    {
+      "date": "2026-01-04",
+      "home_team": "South Africa",
+      "away_team": "Cameroon",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.27,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.925948+00:00"
+    },
+    {
+      "date": "2026-01-05",
+      "home_team": "Egypt",
+      "away_team": "Benin",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.07,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:21.998537+00:00"
+    },
+    {
+      "date": "2026-01-06",
+      "home_team": "Algeria",
+      "away_team": "Congo DR",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.47,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.072823+00:00"
+    },
+    {
+      "date": "2026-01-06",
+      "home_team": "Ivory Coast",
+      "away_team": "Burkina Faso",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.04,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.144537+00:00"
+    },
+    {
+      "date": "2026-01-09",
+      "home_team": "Cameroon",
+      "away_team": "Morocco",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.25,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.229500+00:00"
+    },
+    {
+      "date": "2026-01-09",
+      "home_team": "Mali",
+      "away_team": "Senegal",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 8.91,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.312278+00:00"
+    },
+    {
+      "date": "2026-01-10",
+      "home_team": "Algeria",
+      "away_team": "Nigeria",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.95,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.392816+00:00"
+    },
+    {
+      "date": "2026-01-10",
+      "home_team": "Egypt",
+      "away_team": "Ivory Coast",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "3-2",
+      "score_hit": false,
+      "predicted_corners": 9.55,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.477340+00:00"
+    },
+    {
+      "date": "2026-01-14",
+      "home_team": "Nigeria",
+      "away_team": "Morocco",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-1"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.56,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.562802+00:00"
+    },
+    {
+      "date": "2026-01-14",
+      "home_team": "Senegal",
+      "away_team": "Egypt",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.64,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.633856+00:00"
+    },
+    {
+      "date": "2026-01-17",
+      "home_team": "Egypt",
+      "away_team": "Nigeria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.52,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.699786+00:00"
+    },
+    {
+      "date": "2026-01-18",
+      "home_team": "Bolivia",
+      "away_team": "Panama",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.55,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.765298+00:00"
+    },
+    {
+      "date": "2026-01-18",
+      "home_team": "Canada",
+      "away_team": "Guatemala",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 10.13,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.833518+00:00"
+    },
+    {
+      "date": "2026-01-18",
+      "home_team": "Senegal",
+      "away_team": "Morocco",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-3",
+      "score_hit": false,
+      "predicted_corners": 9.05,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.910935+00:00"
+    },
+    {
+      "date": "2026-01-23",
+      "home_team": "Panama",
+      "away_team": "Mexico",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 9.49,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:22.990070+00:00"
+    },
+    {
+      "date": "2026-01-25",
+      "home_team": "Bolivia",
+      "away_team": "Mexico",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 9.06,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.057786+00:00"
+    },
+    {
+      "date": "2026-01-26",
+      "home_team": "Uzbekistan",
+      "away_team": "China",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.17,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.134101+00:00"
+    },
+    {
+      "date": "2026-02-26",
+      "home_team": "Mexico",
+      "away_team": "Iceland",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-1"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.47,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.208315+00:00"
+    },
+    {
+      "date": "2026-03-25",
+      "home_team": "Congo DR",
+      "away_team": "Bermuda",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 9.22,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.285173+00:00"
+    },
+    {
+      "date": "2026-03-26",
+      "home_team": "Brazil",
+      "away_team": "France",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "1-3"
+      ],
+      "actual_score": "1-2",
+      "score_hit": true,
+      "predicted_corners": 10.11,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.360079+00:00"
+    },
+    {
+      "date": "2026-03-26",
+      "home_team": "Colombia",
+      "away_team": "Croatia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.89,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.434864+00:00"
+    },
+    {
+      "date": "2026-03-26",
+      "home_team": "Czechia",
+      "away_team": "Republic of Ireland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.28,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.524637+00:00"
+    },
+    {
+      "date": "2026-03-26",
+      "home_team": "Türkiye",
+      "away_team": "Romania",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "2-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 10.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.593640+00:00"
+    },
+    {
+      "date": "2026-03-26",
+      "home_team": "Ukraine",
+      "away_team": "Sweden",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "1-2"
+      ],
+      "actual_score": "1-3",
+      "score_hit": false,
+      "predicted_corners": 9.68,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.670571+00:00"
+    },
+    {
+      "date": "2026-03-26",
+      "home_team": "Wales",
+      "away_team": "Bosnia-Herzegovina",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-3",
+        "0-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.71,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.747159+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Algeria",
+      "away_team": "Guatemala",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "7-0",
+      "score_hit": false,
+      "predicted_corners": 9.47,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.828978+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Argentina",
+      "away_team": "Mauritania",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.31,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.898778+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Australia",
+      "away_team": "Cameroon",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.16,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:23.980732+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Austria",
+      "away_team": "Ghana",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "5-1",
+      "score_hit": false,
+      "predicted_corners": 9.25,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.055099+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Chile",
+      "away_team": "Cape Verde",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "4-2",
+      "score_hit": false,
+      "predicted_corners": 8.81,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.148378+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "China",
+      "away_team": "Curaçao",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-1"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.55,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.224488+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "England",
+      "away_team": "Uruguay",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 10.44,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.294113+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Greece",
+      "away_team": "Paraguay",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 9.7,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.370540+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Iran",
+      "away_team": "Nigeria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 8.97,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.439003+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Jordan",
+      "away_team": "Costa Rica",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.08,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.506672+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Morocco",
+      "away_team": "Ecuador",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.31,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.586864+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Netherlands",
+      "away_team": "Norway",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-2"
+      ],
+      "actual_score": "2-1",
+      "score_hit": true,
+      "predicted_corners": 10.26,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.673834+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "New Zealand",
+      "away_team": "Finland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.5,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.762219+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Saudi Arabia",
+      "away_team": "Egypt",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-4",
+      "score_hit": false,
+      "predicted_corners": 9.12,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.845807+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "South Africa",
+      "away_team": "Panama",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.53,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:24.921565+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Spain",
+      "away_team": "Serbia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "4-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": true,
+      "predicted_corners": 10.48,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.010048+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Switzerland",
+      "away_team": "Germany",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "1-2"
+      ],
+      "actual_score": "3-4",
+      "score_hit": false,
+      "predicted_corners": 10.23,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.102567+00:00"
+    },
+    {
+      "date": "2026-03-27",
+      "home_team": "Uzbekistan",
+      "away_team": "Gabon",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "3-1",
+      "score_hit": true,
+      "predicted_corners": 9.84,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.181466+00:00"
+    },
+    {
+      "date": "2026-03-28",
+      "home_team": "Canada",
+      "away_team": "Iceland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.92,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.265545+00:00"
+    },
+    {
+      "date": "2026-03-28",
+      "home_team": "Scotland",
+      "away_team": "Japan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 10.0,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.352212+00:00"
+    },
+    {
+      "date": "2026-03-28",
+      "home_team": "Senegal",
+      "away_team": "Peru",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 9.22,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.425917+00:00"
+    },
+    {
+      "date": "2026-03-28",
+      "home_team": "South Korea",
+      "away_team": "Ivory Coast",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "0-4",
+      "score_hit": false,
+      "predicted_corners": 9.28,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.503570+00:00"
+    },
+    {
+      "date": "2026-03-28",
+      "home_team": "United States",
+      "away_team": "Belgium",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "1-3"
+      ],
+      "actual_score": "2-5",
+      "score_hit": false,
+      "predicted_corners": 10.05,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.572340+00:00"
+    },
+    {
+      "date": "2026-03-29",
+      "home_team": "Colombia",
+      "away_team": "France",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "1-3"
+      ],
+      "actual_score": "1-3",
+      "score_hit": true,
+      "predicted_corners": 10.16,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.646473+00:00"
+    },
+    {
+      "date": "2026-03-29",
+      "home_team": "Haiti",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 9.45,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.728415+00:00"
+    },
+    {
+      "date": "2026-03-29",
+      "home_team": "Mexico",
+      "away_team": "Portugal",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.73,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.807198+00:00"
+    },
+    {
+      "date": "2026-03-30",
+      "home_team": "Cape Verde",
+      "away_team": "Finland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.55,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.884935+00:00"
+    },
+    {
+      "date": "2026-03-30",
+      "home_team": "Germany",
+      "away_team": "Ghana",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.88,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:25.970248+00:00"
+    },
+    {
+      "date": "2026-03-30",
+      "home_team": "New Zealand",
+      "away_team": "Chile",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "4-1",
+      "score_hit": false,
+      "predicted_corners": 9.33,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.054353+00:00"
+    },
+    {
+      "date": "2026-03-30",
+      "home_team": "Uzbekistan",
+      "away_team": "Venezuela",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.51,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.140931+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Algeria",
+      "away_team": "Uruguay",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 10.04,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.223430+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Argentina",
+      "away_team": "Zambia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 9.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.305003+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Australia",
+      "away_team": "Curaçao",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "5-1",
+      "score_hit": false,
+      "predicted_corners": 9.09,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.381044+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Austria",
+      "away_team": "South Korea",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.56,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.472528+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Bosnia-Herzegovina",
+      "away_team": "Italy",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "3-0",
+        "3-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 10.01,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.548222+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Congo DR",
+      "away_team": "Jamaica",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.23,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.629721+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Czechia",
+      "away_team": "Denmark",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "3-1",
+        "2-1"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 10.24,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.709475+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "England",
+      "away_team": "Japan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 10.05,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.802965+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Haiti",
+      "away_team": "Iceland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "2-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.56,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.881418+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Iran",
+      "away_team": "Costa Rica",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 9.19,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:26.953459+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Ivory Coast",
+      "away_team": "Scotland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.72,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.030848+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Jordan",
+      "away_team": "Nigeria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.3,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.102381+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Kosovo",
+      "away_team": "Türkiye",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 9.88,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.180002+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Morocco",
+      "away_team": "Paraguay",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.14,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.263597+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Netherlands",
+      "away_team": "Ecuador",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.71,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.351517+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Norway",
+      "away_team": "Switzerland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "3-1"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 10.33,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.434460+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Senegal",
+      "away_team": "Gambia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.26,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.507249+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Serbia",
+      "away_team": "Saudi Arabia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.49,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.576071+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "South Africa",
+      "away_team": "Panama",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "1-2",
+      "score_hit": true,
+      "predicted_corners": 9.42,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.646308+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Spain",
+      "away_team": "Egypt",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "2-1"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 10.13,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.723094+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "Sweden",
+      "away_team": "Poland",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "3-2",
+      "score_hit": false,
+      "predicted_corners": 9.27,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.802451+00:00"
+    },
+    {
+      "date": "2026-03-31",
+      "home_team": "United States",
+      "away_team": "Portugal",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "1-3"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 10.06,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.888243+00:00"
+    },
+    {
+      "date": "2026-04-01",
+      "home_team": "Brazil",
+      "away_team": "Croatia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-2"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.69,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:27.969142+00:00"
+    },
+    {
+      "date": "2026-04-01",
+      "home_team": "Canada",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.72,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.045218+00:00"
+    },
+    {
+      "date": "2026-04-01",
+      "home_team": "Iraq",
+      "away_team": "Bolivia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 8.91,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.123867+00:00"
+    },
+    {
+      "date": "2026-04-01",
+      "home_team": "Mexico",
+      "away_team": "Belgium",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "1-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.64,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.198960+00:00"
+    },
+    {
+      "date": "2026-05-23",
+      "home_team": "Mexico",
+      "away_team": "Ghana",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 8.93,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.278364+00:00"
+    },
+    {
+      "date": "2026-05-26",
+      "home_team": "Morocco",
+      "away_team": "Burundi",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 9.24,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.365402+00:00"
+    },
+    {
+      "date": "2026-05-28",
+      "home_team": "Egypt",
+      "away_team": "Russia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "1-2"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.74,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.445618+00:00"
+    },
+    {
+      "date": "2026-05-28",
+      "home_team": "Republic of Ireland",
+      "away_team": "Qatar",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.27,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.523982+00:00"
+    },
+    {
+      "date": "2026-05-29",
+      "home_team": "Bosnia-Herzegovina",
+      "away_team": "North Macedonia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 8.94,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.614045+00:00"
+    },
+    {
+      "date": "2026-05-29",
+      "home_team": "Iran",
+      "away_team": "Gambia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.58,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.720105+00:00"
+    },
+    {
+      "date": "2026-05-29",
+      "home_team": "Iraq",
+      "away_team": "Andorra",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.07,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.799446+00:00"
+    },
+    {
+      "date": "2026-05-29",
+      "home_team": "South Africa",
+      "away_team": "Nicaragua",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.32,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.880944+00:00"
+    },
+    {
+      "date": "2026-05-30",
+      "home_team": "Ecuador",
+      "away_team": "Saudi Arabia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.25,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:28.957359+00:00"
+    },
+    {
+      "date": "2026-05-30",
+      "home_team": "Scotland",
+      "away_team": "Curaçao",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "4-1",
+      "score_hit": false,
+      "predicted_corners": 9.62,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.038668+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "Brazil",
+      "away_team": "Panama",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "6-2",
+      "score_hit": false,
+      "predicted_corners": 9.66,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.120473+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "Cape Verde",
+      "away_team": "Serbia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 9.81,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.202490+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "Czechia",
+      "away_team": "Kosovo",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.285984+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "Germany",
+      "away_team": "Finland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 10.04,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.360342+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "Japan",
+      "away_team": "Iceland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.63,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.427765+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "Mexico",
+      "away_team": "Australia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": true,
+      "predicted_corners": 9.24,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.504714+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "South Korea",
+      "away_team": "Trinidad and Tobago",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "1-2"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 9.03,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.593389+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "Switzerland",
+      "away_team": "Jordan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "4-1",
+      "score_hit": false,
+      "predicted_corners": 9.85,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.672876+00:00"
+    },
+    {
+      "date": "2026-05-31",
+      "home_team": "United States",
+      "away_team": "Senegal",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "3-2",
+      "score_hit": false,
+      "predicted_corners": 9.7,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.764339+00:00"
+    },
+    {
+      "date": "2026-06-01",
+      "home_team": "Austria",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "2-1"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.53,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.852507+00:00"
+    },
+    {
+      "date": "2026-06-01",
+      "home_team": "Colombia",
+      "away_team": "Costa Rica",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.83,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:29.933890+00:00"
+    },
+    {
+      "date": "2026-06-01",
+      "home_team": "Norway",
+      "away_team": "Sweden",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.95,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.011009+00:00"
+    },
+    {
+      "date": "2026-06-01",
+      "home_team": "Türkiye",
+      "away_team": "North Macedonia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.5,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.102324+00:00"
+    },
+    {
+      "date": "2026-06-02",
+      "home_team": "Canada",
+      "away_team": "Uzbekistan",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.6,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.179421+00:00"
+    },
+    {
+      "date": "2026-06-02",
+      "home_team": "Croatia",
+      "away_team": "Belgium",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "1-3"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.85,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.259980+00:00"
+    },
+    {
+      "date": "2026-06-02",
+      "home_team": "Morocco",
+      "away_team": "Madagascar",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.35,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.337788+00:00"
+    },
+    {
+      "date": "2026-06-02",
+      "home_team": "Wales",
+      "away_team": "Ghana",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-2"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.22,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.406946+00:00"
+    },
+    {
+      "date": "2026-06-03",
+      "home_team": "Congo DR",
+      "away_team": "Denmark",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "2-1"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.71,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.479590+00:00"
+    },
+    {
+      "date": "2026-06-03",
+      "home_team": "Haiti",
+      "away_team": "New Zealand",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.28,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.552704+00:00"
+    },
+    {
+      "date": "2026-06-03",
+      "home_team": "Netherlands",
+      "away_team": "Algeria",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "0-1",
+      "score_hit": false,
+      "predicted_corners": 9.68,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.636043+00:00"
+    },
+    {
+      "date": "2026-06-04",
+      "home_team": "France",
+      "away_team": "Ivory Coast",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.84,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.744569+00:00"
+    },
+    {
+      "date": "2026-06-04",
+      "home_team": "Iran",
+      "away_team": "Mali",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 8.73,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.820730+00:00"
+    },
+    {
+      "date": "2026-06-04",
+      "home_team": "Panama",
+      "away_team": "Dominican Republic",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "4-2",
+      "score_hit": false,
+      "predicted_corners": 9.21,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.896011+00:00"
+    },
+    {
+      "date": "2026-06-04",
+      "home_team": "South Korea",
+      "away_team": "El Salvador",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.24,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:30.968333+00:00"
+    },
+    {
+      "date": "2026-06-04",
+      "home_team": "Spain",
+      "away_team": "Iraq",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.57,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.044495+00:00"
+    },
+    {
+      "date": "2026-06-04",
+      "home_team": "Sweden",
+      "away_team": "Greece",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "2-2",
+      "score_hit": false,
+      "predicted_corners": 9.74,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.118594+00:00"
+    },
+    {
+      "date": "2026-06-05",
+      "home_team": "Canada",
+      "away_team": "Republic of Ireland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.57,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.198417+00:00"
+    },
+    {
+      "date": "2026-06-05",
+      "home_team": "Czechia",
+      "away_team": "Guatemala",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "3-0",
+        "2-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.87,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.273293+00:00"
+    },
+    {
+      "date": "2026-06-05",
+      "home_team": "Mexico",
+      "away_team": "Serbia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "5-1",
+      "score_hit": false,
+      "predicted_corners": 9.53,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.363820+00:00"
+    },
+    {
+      "date": "2026-06-05",
+      "home_team": "Paraguay",
+      "away_team": "Nicaragua",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.04,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.448697+00:00"
+    },
+    {
+      "date": "2026-06-05",
+      "home_team": "Puerto Rico",
+      "away_team": "Saudi Arabia",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-3",
+        "0-2"
+      ],
+      "actual_score": "0-3",
+      "score_hit": true,
+      "predicted_corners": 9.78,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.535618+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Belgium",
+      "away_team": "Tunisia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 9.58,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.624190+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Bolivia",
+      "away_team": "Scotland",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "0-4",
+      "score_hit": false,
+      "predicted_corners": 9.34,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.701272+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Brazil",
+      "away_team": "Egypt",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": true,
+      "predicted_corners": 9.89,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.800118+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "England",
+      "away_team": "New Zealand",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "1-0",
+      "score_hit": false,
+      "predicted_corners": 9.87,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.886161+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Haiti",
+      "away_team": "Peru",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.19,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:31.980958+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Jamaica",
+      "away_team": "South Africa",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-1",
+      "score_hit": true,
+      "predicted_corners": 8.93,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.074068+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Panama",
+      "away_team": "Bosnia-Herzegovina",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.66,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.167726+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Portugal",
+      "away_team": "Chile",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": true,
+      "predicted_corners": 9.82,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.265986+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Qatar",
+      "away_team": "El Salvador",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.11,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.349127+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Switzerland",
+      "away_team": "Australia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-1"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.81,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.429923+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "United States",
+      "away_team": "Germany",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "1-3"
+      ],
+      "actual_score": "1-2",
+      "score_hit": true,
+      "predicted_corners": 10.36,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.537961+00:00"
+    },
+    {
+      "date": "2026-06-06",
+      "home_team": "Venezuela",
+      "away_team": "Türkiye",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.95,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.620669+00:00"
+    },
+    {
+      "date": "2026-06-07",
+      "home_team": "Argentina",
+      "away_team": "Honduras",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-1"
+      ],
+      "actual_score": "2-0",
+      "score_hit": false,
+      "predicted_corners": 9.52,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.703052+00:00"
+    },
+    {
+      "date": "2026-06-07",
+      "home_team": "Colombia",
+      "away_team": "Jordan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0"
+      ],
+      "actual_score": "2-0",
+      "score_hit": true,
+      "predicted_corners": 9.89,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.782807+00:00"
+    },
+    {
+      "date": "2026-06-07",
+      "home_team": "Croatia",
+      "away_team": "Slovenia",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.09,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.872400+00:00"
+    },
+    {
+      "date": "2026-06-07",
+      "home_team": "Curaçao",
+      "away_team": "Aruba",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-2",
+        "0-3"
+      ],
+      "actual_score": "4-0",
+      "score_hit": false,
+      "predicted_corners": 9.46,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:32.969267+00:00"
+    },
+    {
+      "date": "2026-06-07",
+      "home_team": "Ecuador",
+      "away_team": "Guatemala",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": true,
+      "predicted_corners": 9.74,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.073939+00:00"
+    },
+    {
+      "date": "2026-06-07",
+      "home_team": "Morocco",
+      "away_team": "Norway",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "1-1",
+      "score_hit": false,
+      "predicted_corners": 9.8,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.157825+00:00"
+    },
+    {
+      "date": "2026-06-08",
+      "home_team": "France",
+      "away_team": "Northern Ireland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "1-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 9.4,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.237890+00:00"
+    },
+    {
+      "date": "2026-06-08",
+      "home_team": "Netherlands",
+      "away_team": "Uzbekistan",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 9.4,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.324825+00:00"
+    },
+    {
+      "date": "2026-06-09",
+      "home_team": "Congo DR",
+      "away_team": "Chile",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 9.36,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.406463+00:00"
+    },
+    {
+      "date": "2026-06-09",
+      "home_team": "Peru",
+      "away_team": "Spain",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "1-3",
+      "score_hit": false,
+      "predicted_corners": 9.62,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.484238+00:00"
+    },
+    {
+      "date": "2026-06-09",
+      "home_team": "Saudi Arabia",
+      "away_team": "Senegal",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "X",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "0-1",
+        "0-2"
+      ],
+      "actual_score": "0-0",
+      "score_hit": false,
+      "predicted_corners": 9.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.556652+00:00"
+    },
+    {
+      "date": "2026-06-10",
+      "home_team": "Argentina",
+      "away_team": "Iceland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": true,
+      "predicted_corners": 9.47,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.631185+00:00"
+    },
+    {
+      "date": "2026-06-10",
+      "home_team": "England",
+      "away_team": "Costa Rica",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "3-0",
+      "score_hit": true,
+      "predicted_corners": 9.88,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.707112+00:00"
+    },
+    {
+      "date": "2026-06-10",
+      "home_team": "Iraq",
+      "away_team": "Venezuela",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "0-2",
+      "score_hit": false,
+      "predicted_corners": 9.12,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.796284+00:00"
+    },
+    {
+      "date": "2026-06-10",
+      "home_team": "Portugal",
+      "away_team": "Nigeria",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "1-0"
+      ],
+      "actual_score": "2-1",
+      "score_hit": true,
+      "predicted_corners": 9.52,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.876515+00:00"
+    },
+    {
+      "date": "2026-06-11",
+      "home_team": "Bolivia",
+      "away_team": "Algeria",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "0-2",
+        "0-1"
+      ],
+      "actual_score": "0-4",
+      "score_hit": false,
+      "predicted_corners": 9.29,
+      "actual_corners": null,
+      "corner_error": null,
+      "updated_at": "2026-06-24T01:34:33.966762+00:00"
+    },
     {
       "date": "2026-06-11",
       "home_team": "Mexico",
@@ -29,10 +5786,10 @@
       ],
       "actual_score": "2-0",
       "score_hit": true,
-      "predicted_corners": 5.15,
+      "predicted_corners": 9.16,
       "actual_corners": 4.0,
-      "corner_error": -1.15,
-      "updated_at": "2026-06-24T01:17:01.982878+00:00"
+      "corner_error": -5.16,
+      "updated_at": "2026-06-24T01:34:34.049734+00:00"
     },
     {
       "date": "2026-06-12",
@@ -43,53 +5800,53 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "3-0",
-        "4-0"
+        "1-0",
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 15.4,
+      "predicted_corners": 9.69,
       "actual_corners": 13.0,
-      "corner_error": -2.4,
-      "updated_at": "2026-06-24T01:17:02.042133+00:00"
+      "corner_error": 3.31,
+      "updated_at": "2026-06-24T01:34:34.155113+00:00"
     },
     {
       "date": "2026-06-12",
       "home_team": "South Korea",
       "away_team": "Czechia",
       "prediction_id": null,
-      "predicted_outcome": "П1",
+      "predicted_outcome": "П2",
       "actual_outcome": "П1",
-      "outcome_hit": true,
+      "outcome_hit": false,
       "predicted_scores": [
-        "1-0",
-        "2-0"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "2-1",
       "score_hit": false,
-      "predicted_corners": 8.44,
+      "predicted_corners": 9.36,
       "actual_corners": 9.0,
-      "corner_error": 0.56,
-      "updated_at": "2026-06-24T01:17:02.091675+00:00"
+      "corner_error": -0.36,
+      "updated_at": "2026-06-24T01:34:34.244779+00:00"
     },
     {
       "date": "2026-06-13",
       "home_team": "Brazil",
       "away_team": "Morocco",
       "prediction_id": null,
-      "predicted_outcome": "П1",
+      "predicted_outcome": "П2",
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "1-0",
-        "2-0"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 7.89,
+      "predicted_corners": 9.78,
       "actual_corners": 8.0,
-      "corner_error": 0.11,
-      "updated_at": "2026-06-24T01:17:02.179086+00:00"
+      "corner_error": -1.78,
+      "updated_at": "2026-06-24T01:34:34.331643+00:00"
     },
     {
       "date": "2026-06-13",
@@ -100,15 +5857,15 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "0-3",
-        "0-2"
+        "0-2",
+        "0-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 14.94,
+      "predicted_corners": 9.53,
       "actual_corners": 13.0,
-      "corner_error": -1.94,
-      "updated_at": "2026-06-24T01:17:02.229035+00:00"
+      "corner_error": 3.47,
+      "updated_at": "2026-06-24T01:34:34.420460+00:00"
     },
     {
       "date": "2026-06-13",
@@ -119,34 +5876,34 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
-        "3-0"
+        "2-1",
+        "1-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 8.33,
+      "predicted_corners": 9.62,
       "actual_corners": 4.0,
-      "corner_error": -4.33,
-      "updated_at": "2026-06-24T01:17:02.286748+00:00"
+      "corner_error": -5.62,
+      "updated_at": "2026-06-24T01:34:34.515808+00:00"
     },
     {
       "date": "2026-06-14",
       "home_team": "Australia",
       "away_team": "Türkiye",
       "prediction_id": null,
-      "predicted_outcome": "П1",
+      "predicted_outcome": "П2",
       "actual_outcome": "П1",
-      "outcome_hit": true,
+      "outcome_hit": false,
       "predicted_scores": [
-        "1-0",
-        "2-0"
+        "0-2",
+        "0-3"
       ],
       "actual_score": "2-0",
-      "score_hit": true,
-      "predicted_corners": 12.6,
+      "score_hit": false,
+      "predicted_corners": 9.91,
       "actual_corners": 13.0,
-      "corner_error": 0.4,
-      "updated_at": "2026-06-24T01:17:02.343901+00:00"
+      "corner_error": 3.09,
+      "updated_at": "2026-06-24T01:34:34.604432+00:00"
     },
     {
       "date": "2026-06-14",
@@ -157,15 +5914,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "4-0",
-        "5-0"
+        "3-0",
+        "3-1"
       ],
       "actual_score": "7-1",
       "score_hit": false,
-      "predicted_corners": 10.79,
+      "predicted_corners": 10.24,
       "actual_corners": 9.0,
-      "corner_error": -1.79,
-      "updated_at": "2026-06-24T01:17:02.397861+00:00"
+      "corner_error": -1.24,
+      "updated_at": "2026-06-24T01:34:34.709295+00:00"
     },
     {
       "date": "2026-06-14",
@@ -176,15 +5933,15 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "0-1",
-        "0-2"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 6.88,
+      "predicted_corners": 9.46,
       "actual_corners": 7.0,
-      "corner_error": 0.12,
-      "updated_at": "2026-06-24T01:17:02.450697+00:00"
+      "corner_error": -2.46,
+      "updated_at": "2026-06-24T01:34:34.805297+00:00"
     },
     {
       "date": "2026-06-14",
@@ -196,52 +5953,52 @@
       "outcome_hit": true,
       "predicted_scores": [
         "1-0",
-        "2-0"
+        "2-1"
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 9.4,
+      "predicted_corners": 9.5,
       "actual_corners": 9.0,
-      "corner_error": -0.4,
-      "updated_at": "2026-06-24T01:17:02.510857+00:00"
+      "corner_error": -0.5,
+      "updated_at": "2026-06-24T01:34:34.894867+00:00"
     },
     {
       "date": "2026-06-14",
       "home_team": "Netherlands",
       "away_team": "Japan",
       "prediction_id": null,
-      "predicted_outcome": "П2",
+      "predicted_outcome": "П1",
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "1-2",
-        "2-3"
+        "1-0",
+        "2-1"
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 9.35,
+      "predicted_corners": 9.46,
       "actual_corners": 9.0,
-      "corner_error": -0.35,
-      "updated_at": "2026-06-24T01:17:02.561114+00:00"
+      "corner_error": -0.46,
+      "updated_at": "2026-06-24T01:34:34.978595+00:00"
     },
     {
       "date": "2026-06-15",
       "home_team": "Belgium",
       "away_team": "Egypt",
       "prediction_id": null,
-      "predicted_outcome": "П2",
+      "predicted_outcome": "П1",
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "0-1",
-        "0-2"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 8.17,
+      "predicted_corners": 9.75,
       "actual_corners": 9.0,
-      "corner_error": 0.83,
-      "updated_at": "2026-06-24T01:17:02.612271+00:00"
+      "corner_error": -0.75,
+      "updated_at": "2026-06-24T01:34:35.070793+00:00"
     },
     {
       "date": "2026-06-15",
@@ -252,15 +6009,15 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "0-2",
-        "1-2"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 15.26,
+      "predicted_corners": 9.45,
       "actual_corners": 18.0,
-      "corner_error": 2.74,
-      "updated_at": "2026-06-24T01:17:02.662445+00:00"
+      "corner_error": 8.55,
+      "updated_at": "2026-06-24T01:34:35.163028+00:00"
     },
     {
       "date": "2026-06-15",
@@ -271,34 +6028,34 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "2-0",
-        "1-0"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 11.88,
+      "predicted_corners": 9.9,
       "actual_corners": 12.0,
-      "corner_error": 0.12,
-      "updated_at": "2026-06-24T01:17:02.714308+00:00"
+      "corner_error": 2.1,
+      "updated_at": "2026-06-24T01:34:35.257432+00:00"
     },
     {
       "date": "2026-06-15",
       "home_team": "Sweden",
       "away_team": "Tunisia",
       "prediction_id": null,
-      "predicted_outcome": "П1",
+      "predicted_outcome": "П2",
       "actual_outcome": "П1",
-      "outcome_hit": true,
+      "outcome_hit": false,
       "predicted_scores": [
-        "4-1",
-        "3-1"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "5-1",
       "score_hit": false,
-      "predicted_corners": 7.89,
+      "predicted_corners": 9.55,
       "actual_corners": 6.0,
-      "corner_error": -1.89,
-      "updated_at": "2026-06-24T01:17:02.768791+00:00"
+      "corner_error": -3.55,
+      "updated_at": "2026-06-24T01:34:35.348227+00:00"
     },
     {
       "date": "2026-06-16",
@@ -309,15 +6066,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "3-1",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "3-1",
-      "score_hit": true,
-      "predicted_corners": 9.64,
+      "score_hit": false,
+      "predicted_corners": 9.75,
       "actual_corners": 10.0,
-      "corner_error": 0.36,
-      "updated_at": "2026-06-24T01:17:02.820097+00:00"
+      "corner_error": 0.25,
+      "updated_at": "2026-06-24T01:34:35.442888+00:00"
     },
     {
       "date": "2026-06-16",
@@ -328,15 +6085,15 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "2-1",
-        "1-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 6.4,
+      "predicted_corners": 9.27,
       "actual_corners": 5.0,
-      "corner_error": -1.4,
-      "updated_at": "2026-06-24T01:17:02.872948+00:00"
+      "corner_error": -4.27,
+      "updated_at": "2026-06-24T01:34:35.536220+00:00"
     },
     {
       "date": "2026-06-16",
@@ -347,15 +6104,15 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "0-3",
-        "0-4"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "1-4",
       "score_hit": false,
-      "predicted_corners": 8.24,
+      "predicted_corners": 9.37,
       "actual_corners": 7.0,
-      "corner_error": -1.24,
-      "updated_at": "2026-06-24T01:17:02.923241+00:00"
+      "corner_error": -2.37,
+      "updated_at": "2026-06-24T01:34:35.614952+00:00"
     },
     {
       "date": "2026-06-17",
@@ -366,15 +6123,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
-        "3-0"
+        "2-1",
+        "1-0"
       ],
       "actual_score": "3-0",
-      "score_hit": true,
-      "predicted_corners": 6.08,
+      "score_hit": false,
+      "predicted_corners": 9.45,
       "actual_corners": 4.0,
-      "corner_error": -2.08,
-      "updated_at": "2026-06-24T01:17:02.983937+00:00"
+      "corner_error": -5.45,
+      "updated_at": "2026-06-24T01:34:35.694890+00:00"
     },
     {
       "date": "2026-06-17",
@@ -385,15 +6142,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-1",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "3-1",
       "score_hit": false,
-      "predicted_corners": 7.61,
+      "predicted_corners": 9.54,
       "actual_corners": 7.0,
-      "corner_error": -0.61,
-      "updated_at": "2026-06-24T01:17:03.046316+00:00"
+      "corner_error": -2.54,
+      "updated_at": "2026-06-24T01:34:35.776344+00:00"
     },
     {
       "date": "2026-06-17",
@@ -404,34 +6161,34 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "4-2",
       "score_hit": false,
-      "predicted_corners": 10.04,
+      "predicted_corners": 9.66,
       "actual_corners": 10.0,
-      "corner_error": -0.04,
-      "updated_at": "2026-06-24T01:17:03.108950+00:00"
+      "corner_error": 0.34,
+      "updated_at": "2026-06-24T01:34:35.860525+00:00"
     },
     {
       "date": "2026-06-17",
       "home_team": "Ghana",
       "away_team": "Panama",
       "prediction_id": null,
-      "predicted_outcome": "П1",
+      "predicted_outcome": "П2",
       "actual_outcome": "П1",
-      "outcome_hit": true,
+      "outcome_hit": false,
       "predicted_scores": [
-        "1-0",
-        "2-0"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "1-0",
-      "score_hit": true,
-      "predicted_corners": 7.18,
+      "score_hit": false,
+      "predicted_corners": 9.1,
       "actual_corners": 4.0,
-      "corner_error": -3.18,
-      "updated_at": "2026-06-24T01:17:03.176360+00:00"
+      "corner_error": -5.1,
+      "updated_at": "2026-06-24T01:34:35.944119+00:00"
     },
     {
       "date": "2026-06-17",
@@ -442,15 +6199,15 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "2-0",
-        "1-0"
+        "1-0",
+        "2-1"
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 8.31,
+      "predicted_corners": 9.26,
       "actual_corners": 9.0,
-      "corner_error": 0.69,
-      "updated_at": "2026-06-24T01:17:03.254084+00:00"
+      "corner_error": -0.26,
+      "updated_at": "2026-06-24T01:34:36.021645+00:00"
     },
     {
       "date": "2026-06-18",
@@ -461,15 +6218,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "4-0",
-        "3-0"
+        "1-0",
+        "2-0"
       ],
       "actual_score": "6-0",
       "score_hit": false,
-      "predicted_corners": 16.0,
+      "predicted_corners": 13.22,
       "actual_corners": 20.0,
-      "corner_error": 4.0,
-      "updated_at": "2026-06-24T01:17:03.311037+00:00"
+      "corner_error": 6.78,
+      "updated_at": "2026-06-24T01:34:36.099192+00:00"
     },
     {
       "date": "2026-06-18",
@@ -485,10 +6242,10 @@
       ],
       "actual_score": "1-1",
       "score_hit": false,
-      "predicted_corners": 8.32,
+      "predicted_corners": 6.68,
       "actual_corners": 10.0,
-      "corner_error": 1.68,
-      "updated_at": "2026-06-24T01:17:03.362798+00:00"
+      "corner_error": 3.32,
+      "updated_at": "2026-06-24T01:34:36.195992+00:00"
     },
     {
       "date": "2026-06-18",
@@ -499,15 +6256,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
-        "3-0"
+        "2-1",
+        "1-0"
       ],
       "actual_score": "4-1",
       "score_hit": false,
-      "predicted_corners": 12.38,
+      "predicted_corners": 13.46,
       "actual_corners": 10.0,
-      "corner_error": -2.38,
-      "updated_at": "2026-06-24T01:17:03.418856+00:00"
+      "corner_error": -3.46,
+      "updated_at": "2026-06-24T01:34:36.282216+00:00"
     },
     {
       "date": "2026-06-18",
@@ -518,15 +6275,15 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "0-3",
-        "0-4"
+        "1-2",
+        "0-2"
       ],
       "actual_score": "1-3",
       "score_hit": false,
-      "predicted_corners": 7.34,
+      "predicted_corners": 9.44,
       "actual_corners": 7.0,
-      "corner_error": -0.34,
-      "updated_at": "2026-06-24T01:17:03.468337+00:00"
+      "corner_error": -2.44,
+      "updated_at": "2026-06-24T01:34:36.374591+00:00"
     },
     {
       "date": "2026-06-19",
@@ -542,10 +6299,10 @@
       ],
       "actual_score": "1-0",
       "score_hit": true,
-      "predicted_corners": 5.03,
+      "predicted_corners": 6.43,
       "actual_corners": 3.0,
-      "corner_error": -2.03,
-      "updated_at": "2026-06-24T01:17:03.526410+00:00"
+      "corner_error": -3.43,
+      "updated_at": "2026-06-24T01:34:36.468446+00:00"
     },
     {
       "date": "2026-06-19",
@@ -556,15 +6313,15 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "0-1",
-        "0-2"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 6.77,
+      "predicted_corners": 7.63,
       "actual_corners": 7.0,
-      "corner_error": 0.23,
-      "updated_at": "2026-06-24T01:17:03.585611+00:00"
+      "corner_error": -0.63,
+      "updated_at": "2026-06-24T01:34:36.552477+00:00"
     },
     {
       "date": "2026-06-19",
@@ -575,15 +6332,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
-        "3-0"
+        "2-1",
+        "1-0"
       ],
       "actual_score": "2-0",
-      "score_hit": true,
-      "predicted_corners": 10.18,
+      "score_hit": false,
+      "predicted_corners": 8.85,
       "actual_corners": 11.0,
-      "corner_error": 0.82,
-      "updated_at": "2026-06-24T01:17:03.645645+00:00"
+      "corner_error": 2.15,
+      "updated_at": "2026-06-24T01:34:36.635713+00:00"
     },
     {
       "date": "2026-06-20",
@@ -594,15 +6351,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
+        "2-1",
         "1-0"
       ],
       "actual_score": "3-0",
       "score_hit": false,
-      "predicted_corners": 7.85,
+      "predicted_corners": 7.8,
       "actual_corners": 8.0,
-      "corner_error": 0.15,
-      "updated_at": "2026-06-24T01:17:03.708669+00:00"
+      "corner_error": 0.2,
+      "updated_at": "2026-06-24T01:34:36.715912+00:00"
     },
     {
       "date": "2026-06-20",
@@ -613,15 +6370,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "3-0",
+        "2-1",
         "3-1"
       ],
       "actual_score": "2-1",
-      "score_hit": false,
-      "predicted_corners": 11.09,
+      "score_hit": true,
+      "predicted_corners": 9.81,
       "actual_corners": 11.0,
-      "corner_error": -0.09,
-      "updated_at": "2026-06-24T01:17:03.764776+00:00"
+      "corner_error": 1.19,
+      "updated_at": "2026-06-24T01:34:36.786446+00:00"
     },
     {
       "date": "2026-06-20",
@@ -632,34 +6389,34 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "3-2",
-        "4-2"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "5-1",
       "score_hit": false,
-      "predicted_corners": 8.45,
+      "predicted_corners": 8.03,
       "actual_corners": 7.0,
-      "corner_error": -1.45,
-      "updated_at": "2026-06-24T01:17:03.822631+00:00"
+      "corner_error": -1.03,
+      "updated_at": "2026-06-24T01:34:36.881753+00:00"
     },
     {
       "date": "2026-06-20",
       "home_team": "Türkiye",
       "away_team": "Paraguay",
       "prediction_id": null,
-      "predicted_outcome": "П2",
+      "predicted_outcome": "П1",
       "actual_outcome": "П2",
-      "outcome_hit": true,
+      "outcome_hit": false,
       "predicted_scores": [
-        "0-1",
-        "1-2"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "0-1",
-      "score_hit": true,
-      "predicted_corners": 10.54,
+      "score_hit": false,
+      "predicted_corners": 9.13,
       "actual_corners": 12.0,
-      "corner_error": 1.46,
-      "updated_at": "2026-06-24T01:17:03.896797+00:00"
+      "corner_error": 2.87,
+      "updated_at": "2026-06-24T01:34:36.978807+00:00"
     },
     {
       "date": "2026-06-21",
@@ -670,15 +6427,15 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "1-0",
+        "2-1",
         "2-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 6.27,
+      "predicted_corners": 7.31,
       "actual_corners": 6.0,
-      "corner_error": -0.27,
-      "updated_at": "2026-06-24T01:17:03.950086+00:00"
+      "corner_error": -1.31,
+      "updated_at": "2026-06-24T01:34:37.053236+00:00"
     },
     {
       "date": "2026-06-21",
@@ -689,15 +6446,15 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.09,
+      "predicted_corners": 9.51,
       "actual_corners": 9.0,
-      "corner_error": -0.09,
-      "updated_at": "2026-06-24T01:17:04.003646+00:00"
+      "corner_error": -0.51,
+      "updated_at": "2026-06-24T01:34:37.133507+00:00"
     },
     {
       "date": "2026-06-21",
@@ -709,14 +6466,14 @@
       "outcome_hit": true,
       "predicted_scores": [
         "2-0",
-        "3-0"
+        "1-0"
       ],
       "actual_score": "4-0",
       "score_hit": false,
-      "predicted_corners": 11.41,
+      "predicted_corners": 15.24,
       "actual_corners": 7.0,
-      "corner_error": -4.41,
-      "updated_at": "2026-06-24T01:17:04.054721+00:00"
+      "corner_error": -8.24,
+      "updated_at": "2026-06-24T01:34:37.214901+00:00"
     },
     {
       "date": "2026-06-21",
@@ -727,34 +6484,34 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "0-3",
-        "0-4"
+        "0-2",
+        "0-1"
       ],
       "actual_score": "0-4",
-      "score_hit": true,
-      "predicted_corners": 8.45,
+      "score_hit": false,
+      "predicted_corners": 7.37,
       "actual_corners": 8.0,
-      "corner_error": -0.45,
-      "updated_at": "2026-06-24T01:17:04.107456+00:00"
+      "corner_error": 0.63,
+      "updated_at": "2026-06-24T01:34:37.291574+00:00"
     },
     {
       "date": "2026-06-21",
       "home_team": "Uruguay",
       "away_team": "Cape Verde",
       "prediction_id": null,
-      "predicted_outcome": "П1",
+      "predicted_outcome": "П2",
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "2-1",
-        "1-0"
+        "0-1",
+        "1-2"
       ],
       "actual_score": "2-2",
       "score_hit": false,
-      "predicted_corners": 15.55,
+      "predicted_corners": 15.32,
       "actual_corners": 15.0,
-      "corner_error": -0.55,
-      "updated_at": "2026-06-24T01:17:04.166689+00:00"
+      "corner_error": -0.32,
+      "updated_at": "2026-06-24T01:34:37.389473+00:00"
     },
     {
       "date": "2026-06-22",
@@ -765,15 +6522,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "2-0",
+        "2-1",
         "1-0"
       ],
       "actual_score": "2-0",
-      "score_hit": true,
-      "predicted_corners": 4.88,
+      "score_hit": false,
+      "predicted_corners": 5.65,
       "actual_corners": 4.0,
-      "corner_error": -0.88,
-      "updated_at": "2026-06-24T01:17:04.226877+00:00"
+      "corner_error": -1.65,
+      "updated_at": "2026-06-24T01:34:37.479834+00:00"
     },
     {
       "date": "2026-06-22",
@@ -784,15 +6541,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "3-0",
-        "4-0"
+        "2-0",
+        "1-0"
       ],
       "actual_score": "3-0",
-      "score_hit": true,
-      "predicted_corners": 7.86,
+      "score_hit": false,
+      "predicted_corners": 8.64,
       "actual_corners": 6.0,
-      "corner_error": -1.86,
-      "updated_at": "2026-06-24T01:17:04.285698+00:00"
+      "corner_error": -2.64,
+      "updated_at": "2026-06-24T01:34:37.552643+00:00"
     },
     {
       "date": "2026-06-22",
@@ -803,15 +6560,15 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "1-2",
-        "1-3"
+        "0-1",
+        "0-2"
       ],
       "actual_score": "1-3",
-      "score_hit": true,
-      "predicted_corners": 8.08,
+      "score_hit": false,
+      "predicted_corners": 6.96,
       "actual_corners": 8.0,
-      "corner_error": -0.08,
-      "updated_at": "2026-06-24T01:17:04.350109+00:00"
+      "corner_error": 1.04,
+      "updated_at": "2026-06-24T01:34:37.640457+00:00"
     },
     {
       "date": "2026-06-23",
@@ -822,15 +6579,15 @@
       "actual_outcome": "X",
       "outcome_hit": false,
       "predicted_scores": [
-        "1-0",
-        "2-0"
+        "2-0",
+        "3-0"
       ],
       "actual_score": "0-0",
       "score_hit": false,
-      "predicted_corners": 9.19,
+      "predicted_corners": 8.57,
       "actual_corners": 11.0,
-      "corner_error": 1.81,
-      "updated_at": "2026-06-24T01:17:04.425645+00:00"
+      "corner_error": 2.43,
+      "updated_at": "2026-06-24T01:34:37.750043+00:00"
     },
     {
       "date": "2026-06-23",
@@ -841,15 +6598,15 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "1-2",
+        "0-2",
         "0-1"
       ],
       "actual_score": "1-2",
-      "score_hit": true,
-      "predicted_corners": 8.57,
+      "score_hit": false,
+      "predicted_corners": 5.6,
       "actual_corners": 11.0,
-      "corner_error": 2.43,
-      "updated_at": "2026-06-24T01:17:04.495743+00:00"
+      "corner_error": 5.4,
+      "updated_at": "2026-06-24T01:34:37.836529+00:00"
     },
     {
       "date": "2026-06-23",
@@ -860,15 +6617,15 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "3-1",
-        "2-1"
+        "2-1",
+        "2-0"
       ],
       "actual_score": "3-2",
       "score_hit": false,
-      "predicted_corners": 9.82,
+      "predicted_corners": 8.87,
       "actual_corners": 9.0,
-      "corner_error": -0.82,
-      "updated_at": "2026-06-24T01:17:04.564425+00:00"
+      "corner_error": 0.13,
+      "updated_at": "2026-06-24T01:34:37.920599+00:00"
     },
     {
       "date": "2026-06-23",
@@ -879,15 +6636,15 @@
       "actual_outcome": "П2",
       "outcome_hit": true,
       "predicted_scores": [
-        "0-1",
-        "0-2"
+        "1-2",
+        "0-1"
       ],
       "actual_score": "0-1",
       "score_hit": true,
-      "predicted_corners": 7.8,
+      "predicted_corners": 7.2,
       "actual_corners": 9.0,
-      "corner_error": 1.2,
-      "updated_at": "2026-06-24T01:17:04.631169+00:00"
+      "corner_error": 1.8,
+      "updated_at": "2026-06-24T01:34:38.001743+00:00"
     },
     {
       "date": "2026-06-23",
@@ -898,18 +6655,321 @@
       "actual_outcome": "П1",
       "outcome_hit": true,
       "predicted_scores": [
-        "3-0",
-        "4-0"
+        "2-0",
+        "1-0"
       ],
       "actual_score": "5-0",
       "score_hit": false,
-      "predicted_corners": 7.15,
+      "predicted_corners": 8.13,
       "actual_corners": 5.0,
-      "corner_error": -2.15,
-      "updated_at": "2026-06-24T01:17:04.709790+00:00"
+      "corner_error": -3.13,
+      "updated_at": "2026-06-24T01:34:38.078472+00:00"
     }
   ],
   "trained_match_keys": [
+    "2025-06-10|Uzbekistan|Qatar",
+    "2025-08-24|Qatar|Lebanon",
+    "2025-09-03|Qatar|Bahrain",
+    "2025-09-04|Uruguay|Peru",
+    "2025-09-07|Qatar|Russia",
+    "2025-09-08|Croatia|Montenegro",
+    "2025-09-08|Ghana|Mali",
+    "2025-09-09|Bosnia-Herzegovina|Austria",
+    "2025-09-09|Cape Verde|Cameroon",
+    "2025-09-09|Chile|Uruguay",
+    "2025-09-09|Ecuador|Argentina",
+    "2025-09-09|Hungary|Portugal",
+    "2025-09-09|Peru|Paraguay",
+    "2025-09-09|Serbia|England",
+    "2025-09-09|United States|Japan",
+    "2025-09-09|Venezuela|Colombia",
+    "2025-10-08|Central African Republic|Ghana",
+    "2025-10-08|Libya|Cape Verde",
+    "2025-10-08|Oman|Qatar",
+    "2025-10-09|Austria|San Marino",
+    "2025-10-09|Cyprus|Bosnia-Herzegovina",
+    "2025-10-09|Czechia|Croatia",
+    "2025-10-09|England|Wales",
+    "2025-10-09|Malta|Netherlands",
+    "2025-10-09|Poland|New Zealand",
+    "2025-10-09|Scotland|Greece",
+    "2025-10-10|Belgium|North Macedonia",
+    "2025-10-10|Canada|Australia",
+    "2025-10-10|France|Azerbaijan",
+    "2025-10-10|Germany|Luxembourg",
+    "2025-10-10|Japan|Paraguay",
+    "2025-10-10|Jordan|Bolivia",
+    "2025-10-10|Nicaragua|Haiti",
+    "2025-10-10|Russia|Iran",
+    "2025-10-10|South Korea|Brazil",
+    "2025-10-10|Sweden|Switzerland",
+    "2025-10-10|Uruguay|Dominican Republic",
+    "2025-10-11|Argentina|Venezuela",
+    "2025-10-11|Bulgaria|Türkiye",
+    "2025-10-11|Iraq|Indonesia",
+    "2025-10-11|Norway|Israel",
+    "2025-10-11|Portugal|Republic of Ireland",
+    "2025-10-11|Spain|Georgia",
+    "2025-10-11|United States|Ecuador",
+    "2025-10-12|Croatia|Gibraltar",
+    "2025-10-12|Faroe Islands|Czechia",
+    "2025-10-12|Ghana|Comoros",
+    "2025-10-12|Malta|Bosnia-Herzegovina",
+    "2025-10-12|Mexico|Colombia",
+    "2025-10-12|Netherlands|Finland",
+    "2025-10-12|Romania|Austria",
+    "2025-10-12|Scotland|Belarus",
+    "2025-10-13|Cape Verde|Eswatini",
+    "2025-10-13|Iceland|France",
+    "2025-10-13|Northern Ireland|Germany",
+    "2025-10-13|Slovenia|Switzerland",
+    "2025-10-13|Sweden|Kosovo",
+    "2025-10-13|Uzbekistan|Uruguay",
+    "2025-10-13|Wales|Belgium",
+    "2025-10-14|Albania|Jordan",
+    "2025-10-14|Honduras|Haiti",
+    "2025-10-14|Iran|Tanzania",
+    "2025-10-14|Japan|Brazil",
+    "2025-10-14|Latvia|England",
+    "2025-10-14|Norway|New Zealand",
+    "2025-10-14|Portugal|Hungary",
+    "2025-10-14|Qatar|United Arab Emirates",
+    "2025-10-14|Saudi Arabia|Iraq",
+    "2025-10-14|South Korea|Paraguay",
+    "2025-10-14|Spain|Bulgaria",
+    "2025-10-14|Türkiye|Georgia",
+    "2025-10-15|Colombia|Canada",
+    "2025-10-15|Mexico|Ecuador",
+    "2025-10-15|Puerto Rico|Argentina",
+    "2025-10-15|United States|Australia",
+    "2025-11-13|Czechia|San Marino",
+    "2025-11-13|England|Serbia",
+    "2025-11-13|France|Ukraine",
+    "2025-11-13|Iran|Cape Verde",
+    "2025-11-13|Norway|Estonia",
+    "2025-11-13|Republic of Ireland|Portugal",
+    "2025-11-13|United Arab Emirates|Iraq",
+    "2025-11-14|Angola|Argentina",
+    "2025-11-14|Canada|Ecuador",
+    "2025-11-14|Croatia|Faroe Islands",
+    "2025-11-14|Egypt|Uzbekistan",
+    "2025-11-14|Guatemala|Panama",
+    "2025-11-14|Haiti|Costa Rica",
+    "2025-11-14|Japan|Ghana",
+    "2025-11-14|Luxembourg|Germany",
+    "2025-11-14|Poland|Netherlands",
+    "2025-11-14|Saudi Arabia|Ivory Coast",
+    "2025-11-14|South Korea|Bolivia",
+    "2025-11-14|Tunisia|Jordan",
+    "2025-11-15|Bosnia-Herzegovina|Romania",
+    "2025-11-15|Brazil|Senegal",
+    "2025-11-15|Cyprus|Austria",
+    "2025-11-15|Georgia|Spain",
+    "2025-11-15|Greece|Scotland",
+    "2025-11-15|Kazakhstan|Belgium",
+    "2025-11-15|Switzerland|Sweden",
+    "2025-11-15|Türkiye|Bulgaria",
+    "2025-11-15|United States|Paraguay",
+    "2025-11-15|Venezuela|Australia",
+    "2025-11-16|Albania|England",
+    "2025-11-16|Azerbaijan|France",
+    "2025-11-16|Colombia|New Zealand",
+    "2025-11-16|Italy|Norway",
+    "2025-11-16|Mexico|Uruguay",
+    "2025-11-16|Portugal|Armenia",
+    "2025-11-17|Czechia|Gibraltar",
+    "2025-11-17|Egypt|Cape Verde",
+    "2025-11-17|Germany|Slovakia",
+    "2025-11-17|Montenegro|Croatia",
+    "2025-11-17|Netherlands|Lithuania",
+    "2025-11-17|Qatar|Zimbabwe",
+    "2025-11-18|Austria|Bosnia-Herzegovina",
+    "2025-11-18|Belgium|Liechtenstein",
+    "2025-11-18|Brazil|Tunisia",
+    "2025-11-18|Iraq|United Arab Emirates",
+    "2025-11-18|Japan|Bolivia",
+    "2025-11-18|Jordan|Mali",
+    "2025-11-18|Kosovo|Switzerland",
+    "2025-11-18|Saudi Arabia|Algeria",
+    "2025-11-18|Scotland|Denmark",
+    "2025-11-18|South Korea|Ghana",
+    "2025-11-18|Spain|Türkiye",
+    "2025-11-18|Sweden|Slovenia",
+    "2025-11-18|Uzbekistan|Iran",
+    "2025-11-19|Colombia|Australia",
+    "2025-11-19|Ecuador|New Zealand",
+    "2025-11-19|Haiti|Nicaragua",
+    "2025-11-19|Mexico|Paraguay",
+    "2025-11-19|Panama|El Salvador",
+    "2025-11-19|United States|Uruguay",
+    "2025-11-19|Venezuela|Canada",
+    "2025-12-16|Zambia|Congo DR",
+    "2025-12-22|South Africa|Angola",
+    "2025-12-23|Congo DR|Benin",
+    "2025-12-23|Tunisia|Uganda",
+    "2025-12-24|Ivory Coast|Mozambique",
+    "2025-12-26|Egypt|South Africa",
+    "2025-12-27|Nigeria|Tunisia",
+    "2025-12-27|Senegal|Congo DR",
+    "2025-12-28|Algeria|Burkina Faso",
+    "2025-12-28|Ivory Coast|Cameroon",
+    "2025-12-29|Zimbabwe|South Africa",
+    "2025-12-30|Botswana|Congo DR",
+    "2025-12-30|Tanzania|Tunisia",
+    "2025-12-31|Equatorial Guinea|Algeria",
+    "2025-12-31|Gabon|Ivory Coast",
+    "2026-01-03|Mali|Tunisia",
+    "2026-01-03|Senegal|Sudan",
+    "2026-01-04|South Africa|Cameroon",
+    "2026-01-05|Egypt|Benin",
+    "2026-01-06|Algeria|Congo DR",
+    "2026-01-06|Ivory Coast|Burkina Faso",
+    "2026-01-09|Cameroon|Morocco",
+    "2026-01-09|Mali|Senegal",
+    "2026-01-10|Algeria|Nigeria",
+    "2026-01-10|Egypt|Ivory Coast",
+    "2026-01-14|Nigeria|Morocco",
+    "2026-01-14|Senegal|Egypt",
+    "2026-01-17|Egypt|Nigeria",
+    "2026-01-18|Bolivia|Panama",
+    "2026-01-18|Canada|Guatemala",
+    "2026-01-18|Senegal|Morocco",
+    "2026-01-23|Panama|Mexico",
+    "2026-01-25|Bolivia|Mexico",
+    "2026-01-26|Uzbekistan|China",
+    "2026-02-26|Mexico|Iceland",
+    "2026-03-25|Congo DR|Bermuda",
+    "2026-03-26|Brazil|France",
+    "2026-03-26|Colombia|Croatia",
+    "2026-03-26|Czechia|Republic of Ireland",
+    "2026-03-26|Türkiye|Romania",
+    "2026-03-26|Ukraine|Sweden",
+    "2026-03-26|Wales|Bosnia-Herzegovina",
+    "2026-03-27|Algeria|Guatemala",
+    "2026-03-27|Argentina|Mauritania",
+    "2026-03-27|Australia|Cameroon",
+    "2026-03-27|Austria|Ghana",
+    "2026-03-27|Chile|Cape Verde",
+    "2026-03-27|China|Curaçao",
+    "2026-03-27|England|Uruguay",
+    "2026-03-27|Greece|Paraguay",
+    "2026-03-27|Iran|Nigeria",
+    "2026-03-27|Jordan|Costa Rica",
+    "2026-03-27|Morocco|Ecuador",
+    "2026-03-27|Netherlands|Norway",
+    "2026-03-27|New Zealand|Finland",
+    "2026-03-27|Saudi Arabia|Egypt",
+    "2026-03-27|South Africa|Panama",
+    "2026-03-27|Spain|Serbia",
+    "2026-03-27|Switzerland|Germany",
+    "2026-03-27|Uzbekistan|Gabon",
+    "2026-03-28|Canada|Iceland",
+    "2026-03-28|Scotland|Japan",
+    "2026-03-28|Senegal|Peru",
+    "2026-03-28|South Korea|Ivory Coast",
+    "2026-03-28|United States|Belgium",
+    "2026-03-29|Colombia|France",
+    "2026-03-29|Haiti|Tunisia",
+    "2026-03-29|Mexico|Portugal",
+    "2026-03-30|Cape Verde|Finland",
+    "2026-03-30|Germany|Ghana",
+    "2026-03-30|New Zealand|Chile",
+    "2026-03-30|Uzbekistan|Venezuela",
+    "2026-03-31|Algeria|Uruguay",
+    "2026-03-31|Argentina|Zambia",
+    "2026-03-31|Australia|Curaçao",
+    "2026-03-31|Austria|South Korea",
+    "2026-03-31|Bosnia-Herzegovina|Italy",
+    "2026-03-31|Congo DR|Jamaica",
+    "2026-03-31|Czechia|Denmark",
+    "2026-03-31|England|Japan",
+    "2026-03-31|Haiti|Iceland",
+    "2026-03-31|Iran|Costa Rica",
+    "2026-03-31|Ivory Coast|Scotland",
+    "2026-03-31|Jordan|Nigeria",
+    "2026-03-31|Kosovo|Türkiye",
+    "2026-03-31|Morocco|Paraguay",
+    "2026-03-31|Netherlands|Ecuador",
+    "2026-03-31|Norway|Switzerland",
+    "2026-03-31|Senegal|Gambia",
+    "2026-03-31|Serbia|Saudi Arabia",
+    "2026-03-31|South Africa|Panama",
+    "2026-03-31|Spain|Egypt",
+    "2026-03-31|Sweden|Poland",
+    "2026-03-31|United States|Portugal",
+    "2026-04-01|Brazil|Croatia",
+    "2026-04-01|Canada|Tunisia",
+    "2026-04-01|Iraq|Bolivia",
+    "2026-04-01|Mexico|Belgium",
+    "2026-05-23|Mexico|Ghana",
+    "2026-05-26|Morocco|Burundi",
+    "2026-05-28|Egypt|Russia",
+    "2026-05-28|Republic of Ireland|Qatar",
+    "2026-05-29|Bosnia-Herzegovina|North Macedonia",
+    "2026-05-29|Iran|Gambia",
+    "2026-05-29|Iraq|Andorra",
+    "2026-05-29|South Africa|Nicaragua",
+    "2026-05-30|Ecuador|Saudi Arabia",
+    "2026-05-30|Scotland|Curaçao",
+    "2026-05-31|Brazil|Panama",
+    "2026-05-31|Cape Verde|Serbia",
+    "2026-05-31|Czechia|Kosovo",
+    "2026-05-31|Germany|Finland",
+    "2026-05-31|Japan|Iceland",
+    "2026-05-31|Mexico|Australia",
+    "2026-05-31|South Korea|Trinidad and Tobago",
+    "2026-05-31|Switzerland|Jordan",
+    "2026-05-31|United States|Senegal",
+    "2026-06-01|Austria|Tunisia",
+    "2026-06-01|Colombia|Costa Rica",
+    "2026-06-01|Norway|Sweden",
+    "2026-06-01|Türkiye|North Macedonia",
+    "2026-06-02|Canada|Uzbekistan",
+    "2026-06-02|Croatia|Belgium",
+    "2026-06-02|Morocco|Madagascar",
+    "2026-06-02|Wales|Ghana",
+    "2026-06-03|Congo DR|Denmark",
+    "2026-06-03|Haiti|New Zealand",
+    "2026-06-03|Netherlands|Algeria",
+    "2026-06-04|France|Ivory Coast",
+    "2026-06-04|Iran|Mali",
+    "2026-06-04|Panama|Dominican Republic",
+    "2026-06-04|South Korea|El Salvador",
+    "2026-06-04|Spain|Iraq",
+    "2026-06-04|Sweden|Greece",
+    "2026-06-05|Canada|Republic of Ireland",
+    "2026-06-05|Czechia|Guatemala",
+    "2026-06-05|Mexico|Serbia",
+    "2026-06-05|Paraguay|Nicaragua",
+    "2026-06-05|Puerto Rico|Saudi Arabia",
+    "2026-06-06|Belgium|Tunisia",
+    "2026-06-06|Bolivia|Scotland",
+    "2026-06-06|Brazil|Egypt",
+    "2026-06-06|England|New Zealand",
+    "2026-06-06|Haiti|Peru",
+    "2026-06-06|Jamaica|South Africa",
+    "2026-06-06|Panama|Bosnia-Herzegovina",
+    "2026-06-06|Portugal|Chile",
+    "2026-06-06|Qatar|El Salvador",
+    "2026-06-06|Switzerland|Australia",
+    "2026-06-06|United States|Germany",
+    "2026-06-06|Venezuela|Türkiye",
+    "2026-06-07|Argentina|Honduras",
+    "2026-06-07|Colombia|Jordan",
+    "2026-06-07|Croatia|Slovenia",
+    "2026-06-07|Curaçao|Aruba",
+    "2026-06-07|Ecuador|Guatemala",
+    "2026-06-07|Morocco|Norway",
+    "2026-06-08|France|Northern Ireland",
+    "2026-06-08|Netherlands|Uzbekistan",
+    "2026-06-09|Congo DR|Chile",
+    "2026-06-09|Peru|Spain",
+    "2026-06-09|Saudi Arabia|Senegal",
+    "2026-06-10|Argentina|Iceland",
+    "2026-06-10|England|Costa Rica",
+    "2026-06-10|Iraq|Venezuela",
+    "2026-06-10|Portugal|Nigeria",
+    "2026-06-11|Bolivia|Algeria",
     "2026-06-11|Mexico|South Africa",
     "2026-06-12|Canada|Bosnia-Herzegovina",
     "2026-06-12|South Korea|Czechia",

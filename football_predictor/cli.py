@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from datetime import date
 
@@ -14,6 +15,10 @@ from .predictor import MatchPredictor
 from .providers import EspnWorldCupProvider, ProviderError
 from .server import run_server
 from .sync import WorldCupDataSync
+
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -109,16 +114,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "predict":
         home_team, away_team = parse_matchup(args.matchup, store.resolver)
-        sync_info = WorldCupDataSync(store).sync_finished()
+        sync_info = WorldCupDataSync(store).sync_all()
         fixture = None
         lookup_warnings = []
         if sync_info.get("imported"):
-            lookup_warnings.append(
-                f"База ЧМ обновлена: матчей {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, обучающих матчей {sync_info.get('trained', 0)}."
-            )
+            lookup_warnings.append(_sync_prediction_warning(sync_info))
         match_date = args.date
         if not match_date and not args.no_auto_date:
-            fixture, lookup_warnings = _find_fixture_for_prediction(home_team, away_team)
+            fixture, fixture_warnings = _find_fixture_for_prediction(home_team, away_team)
+            lookup_warnings.extend(fixture_warnings)
             match_date = fixture.get("date") if fixture else None
         prediction = MatchPredictor(store).predict(
             home_team,
@@ -172,7 +176,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "sync-world-cup":
-        summary = WorldCupDataSync(store).sync_finished()
+        summary = WorldCupDataSync(store).sync_all(force=True)
         print(json.dumps(summary, ensure_ascii=False, indent=2) if args.json else _sync_text(summary))
         return 0
 
@@ -290,6 +294,17 @@ def _find_fixture_for_prediction(home_team: str, away_team: str) -> tuple[dict |
         return None, [f"Автодата: {exc} Можно указать дату вручную, если матч есть вне найденного окна."]
 
 
+def _sync_prediction_warning(sync_info: dict) -> str:
+    recent = "уже свежие" if sync_info.get("skipped_full_sync") else f"{sync_info.get('recent_imported', 0)}"
+    action = "База проверена" if sync_info.get("skipped_full_sync") else "База обновлена"
+    return (
+        f"{action}: участников {sync_info.get('participants', 0)}, "
+        f"last-10 матчей {recent}, матчей ЧМ {sync_info.get('imported', 0)}, "
+        f"тактических профилей {sync_info.get('profiles_updated', 0)}, "
+        f"обучающих матчей {sync_info.get('trained', 0)}."
+    )
+
+
 def _details_text(data: dict) -> str:
     lines = [
         f"Вероятности: П1 {data['probabilities']['П1']:.1%}, X {data['probabilities']['X']:.1%}, П2 {data['probabilities']['П2']:.1%}",
@@ -300,6 +315,15 @@ def _details_text(data: dict) -> str:
         f"Тактика: {data['home_team']} {data['home_tactics']['formation']} vs {data['away_team']} {data['away_tactics']['formation']}; "
         f"{data['tactical_matchup']['summary']}",
     ]
+    quality = data.get("data_quality", {})
+    if quality:
+        backtest = quality.get("backtest", {})
+        lines.append(
+            f"Качество данных: участники {quality.get('participants', 0)}, "
+            f"last-10 {quality.get('home_matches', 0)}/{quality.get('away_matches', 0)}, "
+            f"богатые матчи {quality.get('home_rich_matches', 0)}/{quality.get('away_rich_matches', 0)}, "
+            f"бэктест {backtest.get('matches', 0)} матчей."
+        )
     if data.get("fixture"):
         fixture = data["fixture"]
         lines.insert(0, f"Матч найден: {fixture['date']} ({fixture.get('status_detail') or fixture.get('status') or 'scheduled'})")
@@ -326,7 +350,9 @@ def _sync_text(summary: dict) -> str:
     if summary.get("error"):
         return f"Синхронизация недоступна: {summary['error']}"
     return (
-        f"База ЧМ обновлена: матчей {summary['imported']}, "
+        f"База обновлена: участников {summary.get('participants', 0)}, "
+        f"last-10 матчей {summary.get('recent_imported', 0)}, "
+        f"матчей ЧМ {summary['imported']}, "
         f"тактических профилей {summary['profiles_updated']}, "
         f"обучающих матчей {summary.get('trained', 0)}."
     )

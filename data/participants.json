@@ -1,0 +1,338 @@
+[
+  {
+    "team": "Algeria",
+    "team_id": "624",
+    "abbreviation": "ALG",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/alg.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Argentina",
+    "team_id": "202",
+    "abbreviation": "ARG",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/arg.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Australia",
+    "team_id": "628",
+    "abbreviation": "AUS",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aus.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Austria",
+    "team_id": "474",
+    "abbreviation": "AUT",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Belgium",
+    "team_id": "459",
+    "abbreviation": "BEL",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Bosnia-Herzegovina",
+    "team_id": "452",
+    "abbreviation": "BIH",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bih.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Brazil",
+    "team_id": "205",
+    "abbreviation": "BRA",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bra.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Canada",
+    "team_id": "206",
+    "abbreviation": "CAN",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/can.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Cape Verde",
+    "team_id": "2597",
+    "abbreviation": "CPV",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cpv.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Colombia",
+    "team_id": "208",
+    "abbreviation": "COL",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/col.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Congo DR",
+    "team_id": "2850",
+    "abbreviation": "COD",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rdc.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Croatia",
+    "team_id": "477",
+    "abbreviation": "CRO",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cro.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Curaçao",
+    "team_id": "11678",
+    "abbreviation": "CUW",
+    "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11678.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Czechia",
+    "team_id": "450",
+    "abbreviation": "CZE",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Ecuador",
+    "team_id": "209",
+    "abbreviation": "ECU",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ecu.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Egypt",
+    "team_id": "2620",
+    "abbreviation": "EGY",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/egy.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "England",
+    "team_id": "448",
+    "abbreviation": "ENG",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/eng.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "France",
+    "team_id": "478",
+    "abbreviation": "FRA",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Germany",
+    "team_id": "481",
+    "abbreviation": "GER",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Ghana",
+    "team_id": "4469",
+    "abbreviation": "GHA",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/gha.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Haiti",
+    "team_id": "2654",
+    "abbreviation": "HAI",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/hai.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Iran",
+    "team_id": "469",
+    "abbreviation": "IRN",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/irn.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Iraq",
+    "team_id": "4375",
+    "abbreviation": "IRQ",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/irq.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Ivory Coast",
+    "team_id": "4789",
+    "abbreviation": "CIV",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/civ.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Japan",
+    "team_id": "627",
+    "abbreviation": "JPN",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/jpn.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Jordan",
+    "team_id": "2917",
+    "abbreviation": "JOR",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/jor.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Mexico",
+    "team_id": "203",
+    "abbreviation": "MEX",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Morocco",
+    "team_id": "2869",
+    "abbreviation": "MAR",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mar.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Netherlands",
+    "team_id": "449",
+    "abbreviation": "NED",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "New Zealand",
+    "team_id": "2666",
+    "abbreviation": "NZL",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/nzl.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Norway",
+    "team_id": "464",
+    "abbreviation": "NOR",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/nor.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Panama",
+    "team_id": "2659",
+    "abbreviation": "PAN",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/pan.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Paraguay",
+    "team_id": "210",
+    "abbreviation": "PAR",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/par.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Portugal",
+    "team_id": "482",
+    "abbreviation": "POR",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/por.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Qatar",
+    "team_id": "4398",
+    "abbreviation": "QAT",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/qat.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Saudi Arabia",
+    "team_id": "655",
+    "abbreviation": "KSA",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ksa.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Scotland",
+    "team_id": "580",
+    "abbreviation": "SCO",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sco.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Senegal",
+    "team_id": "654",
+    "abbreviation": "SEN",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sen.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "South Africa",
+    "team_id": "467",
+    "abbreviation": "RSA",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rsa.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "South Korea",
+    "team_id": "451",
+    "abbreviation": "KOR",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/kors.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Spain",
+    "team_id": "164",
+    "abbreviation": "ESP",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Sweden",
+    "team_id": "466",
+    "abbreviation": "SWE",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/swe.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Switzerland",
+    "team_id": "475",
+    "abbreviation": "SUI",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Tunisia",
+    "team_id": "659",
+    "abbreviation": "TUN",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tun.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Türkiye",
+    "team_id": "465",
+    "abbreviation": "TUR",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "United States",
+    "team_id": "660",
+    "abbreviation": "USA",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Uruguay",
+    "team_id": "212",
+    "abbreviation": "URU",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/uru.png",
+    "source": "espn-world-cup"
+  },
+  {
+    "team": "Uzbekistan",
+    "team_id": "2570",
+    "abbreviation": "UZB",
+    "logo": "https://a.espncdn.com/i/teamlogos/countries/500/uzb.png",
+    "source": "espn-world-cup"
+  }
+]
