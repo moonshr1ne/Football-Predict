@@ -4,15 +4,15 @@
   "weights": {
     "home_advantage_goals": 0.18,
     "elo_to_goals": 0.22,
-    "form_to_goals": 0.3236559999999999,
+    "form_to_goals": 0.3261439999999999,
     "motivation_to_goals": 0.18,
     "injury_to_goals": 0.16,
     "lineup_to_goals": 0.1,
-    "tactics_to_goals": 0.3027802840000006,
-    "tactics_to_corners": 1.16191002,
+    "tactics_to_goals": 0.30505307200000065,
+    "tactics_to_corners": 1.16167902,
     "world_cup_intensity_goals": 0.05,
-    "corner_bias": -0.2601600000000001,
-    "goal_scale": 0.9417000000000005
+    "corner_bias": -0.27600000000000013,
+    "goal_scale": 0.9454400000000005
   },
   "history": [
     {
@@ -6664,6 +6664,25 @@
       "actual_corners": 5.0,
       "corner_error": -3.13,
       "updated_at": "2026-06-24T01:34:38.078472+00:00"
+    },
+    {
+      "date": "2026-06-23",
+      "home_team": "Portugal",
+      "away_team": "Uzbekistan",
+      "prediction_id": "02b4b1a61ea64063ba485afc091bdd7b",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "5-0",
+      "score_hit": false,
+      "predicted_corners": 6.65,
+      "actual_corners": 5.0,
+      "corner_error": -1.65,
+      "updated_at": "2026-06-24T01:54:52.306769+00:00"
     }
   ],
   "trained_match_keys": [

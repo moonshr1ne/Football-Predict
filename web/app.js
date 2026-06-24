@@ -1,4 +1,5 @@
 const prediction = document.querySelector("#prediction");
+let activePredictionRequest = 0;
 
 document.querySelector("#predict-form").addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -157,10 +158,30 @@ function escapeHtml(value) {
 }
 
 async function runPrediction(remember) {
+  const requestId = ++activePredictionRequest;
   const matchup = document.querySelector("#matchup").value;
   const homeVenue = document.querySelector("#home-venue").checked;
-  const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&home_venue=${homeVenue}&remember=${remember}`);
-  renderPrediction(data);
+  prediction.innerHTML = `
+    <article class="card">
+      <h3>Обновляю прогноз</h3>
+      <p class="muted">Собираю матчи, тактику и дату.</p>
+    </article>
+  `;
+  try {
+    const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&home_venue=${homeVenue}&remember=${remember}`);
+    if (requestId === activePredictionRequest) {
+      renderPrediction(data);
+    }
+  } catch (error) {
+    if (requestId === activePredictionRequest) {
+      prediction.innerHTML = `
+        <article class="card">
+          <h3>Не смог построить прогноз</h3>
+          <p class="warn">${escapeHtml(error.message)}</p>
+        </article>
+      `;
+    }
+  }
 }
 
 runPrediction(false);

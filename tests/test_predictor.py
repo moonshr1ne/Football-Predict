@@ -42,6 +42,22 @@ class PredictorTests(unittest.TestCase):
                 else:
                     self.assertEqual(home_goals, away_goals)
 
+    def test_world_cup_russian_aliases_use_real_profiles(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            home, away = parse_matchup("Колумбия, ДР Конго", store.resolver)
+            self.assertEqual(home, "Colombia")
+            self.assertEqual(away, "Congo DR")
+
+            prediction = MatchPredictor(store).predict(home, away, remember=False)
+            data = prediction.to_dict()
+            self.assertEqual(data["home_stats"]["sample_size"], 10)
+            self.assertEqual(data["away_stats"]["sample_size"], 10)
+            self.assertFalse(data["home_tactics"]["is_fallback"])
+            self.assertFalse(data["away_tactics"]["is_fallback"])
+            self.assertNotEqual(data["home_tactics"]["possession_intent"], 0.55)
+            self.assertNotEqual(data["away_tactics"]["possession_intent"], 0.55)
+
     def test_learning_records_review(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)
