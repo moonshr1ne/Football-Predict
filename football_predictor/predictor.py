@@ -32,6 +32,7 @@ class Prediction:
     exact_scores: list[str]
     exact_score_probabilities: list[dict[str, Any]]
     markets: list[dict[str, Any]]
+    recommended_bets: dict[str, Any]
     home_stats: TeamStats
     away_stats: TeamStats
     home_context: dict[str, Any]
@@ -70,6 +71,7 @@ class Prediction:
             "exact_scores": self.exact_scores,
             "exact_score_probabilities": self.exact_score_probabilities,
             "markets": self.markets,
+            "recommended_bets": self.recommended_bets,
             "home_stats": self.home_stats.as_dict(),
             "away_stats": self.away_stats.as_dict(),
             "home_context": self.home_context,
@@ -110,26 +112,31 @@ class MatchPredictor:
         extra_warnings: list[str] | None = None,
         matches_override: list[MatchRecord] | None = None,
     ) -> Prediction:
-        matches = matches_override if matches_override is not None else self.store.load_matches()
+        all_matches = matches_override if matches_override is not None else self.store.load_matches()
+        target_date = match_date or (fixture or {}).get("date")
+        matches = self._pre_match_history(all_matches, home_team, away_team, target_date, fixture)
+        prediction_fixture = self._fixture_without_result(fixture)
         home_stats = build_team_stats(matches, home_team)
         away_stats = build_team_stats(matches, away_team)
         context = self.store.load_context()
         raw_home_context = context.get(home_team, {})
         raw_away_context = context.get(away_team, {})
         match_context = self.store.load_match_context()
-        lineup_reports = self._lineup_reports(home_team, away_team, fixture, match_context)
+        lineup_reports = self._lineup_reports(home_team, away_team, prediction_fixture, match_context)
         home_context = self._context_with_lineup_report(raw_home_context, lineup_reports.get(home_team, {}))
         away_context = self._context_with_lineup_report(raw_away_context, lineup_reports.get(away_team, {}))
-        home_tactics = self._apply_lineup_tactics(home_team, self.store.team_tactics(home_team), lineup_reports.get(home_team, {}), fixture)
-        away_tactics = self._apply_lineup_tactics(away_team, self.store.team_tactics(away_team), lineup_reports.get(away_team, {}), fixture)
+        home_tactics = self._apply_lineup_tactics(home_team, self.store.team_tactics(home_team), lineup_reports.get(home_team, {}), prediction_fixture)
+        away_tactics = self._apply_lineup_tactics(away_team, self.store.team_tactics(away_team), lineup_reports.get(away_team, {}), prediction_fixture)
         tactical_matchup = summarize_matchup(home_team, away_team, home_tactics, away_tactics)
-        state = self.store.load_model_state()
+        state = self._state_for_prediction(self.store.load_model_state(), matches, all_matches, target_date)
         weights = state["weights"]
         warnings = self._warnings(home_stats, away_stats, home_tactics, away_tactics)
         warnings.extend(self._lineup_warnings(home_team, away_team, lineup_reports))
         data_quality = self._data_quality(home_team, away_team, home_stats, away_stats)
         if extra_warnings:
             warnings.extend(extra_warnings)
+        if self._fixture_has_result_data(fixture):
+            warnings.append("Счет и статистика этого матча исключены из входа модели; факт используется только для проверки после прогноза.")
 
         home_xg, away_xg = self._expected_goals(
             home_stats,
@@ -164,7 +171,7 @@ class MatchPredictor:
         confidence = probabilities[market_pick]
         markets = self._markets(home_team, away_team, probabilities)
         corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights, state)
-        foul_forecast = self._foul_forecast(home_stats, away_stats, home_tactics, away_tactics, fixture, weights, state)
+        foul_forecast = self._foul_forecast(home_stats, away_stats, home_tactics, away_tactics, prediction_fixture, weights, state)
         goal_total = self._goal_total_forecast(home_xg, away_xg)
         team_reports = {
             home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg, lineup_reports.get(home_team, {})),
@@ -179,8 +186,18 @@ class MatchPredictor:
             goal_total,
             probabilities,
             limit=1,
+            state=state,
         )
         exact_scores = [item["score"] for item in exact_score_probabilities]
+        recommended_bets = self._recommended_bets(
+            home_team,
+            away_team,
+            market_pick,
+            probabilities,
+            goal_total,
+            corners,
+            foul_forecast,
+        )
         result_summary = self._result_summary(
             market_pick,
             exact_score_probabilities,
@@ -210,6 +227,7 @@ class MatchPredictor:
             exact_scores=exact_scores,
             exact_score_probabilities=exact_score_probabilities,
             markets=markets,
+            recommended_bets=recommended_bets,
             home_stats=home_stats,
             away_stats=away_stats,
             home_context=home_context,
@@ -228,6 +246,188 @@ class MatchPredictor:
         if remember and match_date:
             self.store.save_prediction(prediction.to_dict())
         return prediction
+
+    @classmethod
+    def _pre_match_history(
+        cls,
+        matches: list[MatchRecord],
+        home_team: str,
+        away_team: str,
+        target_date: str | None,
+        fixture: dict[str, Any] | None,
+    ) -> list[MatchRecord]:
+        fixture_id = str((fixture or {}).get("fixture_id") or "")
+        filtered: list[MatchRecord] = []
+        for match in matches:
+            if fixture_id and match.fixture_id and str(match.fixture_id) == fixture_id:
+                continue
+            if cls._same_pair(match, home_team, away_team) and target_date and match.date == target_date:
+                continue
+            if target_date and match.date >= target_date:
+                continue
+            filtered.append(match)
+        return filtered
+
+    @staticmethod
+    def _same_pair(match: MatchRecord, home_team: str, away_team: str) -> bool:
+        return (
+            (match.home_team == home_team and match.away_team == away_team)
+            or (match.home_team == away_team and match.away_team == home_team)
+        )
+
+    @classmethod
+    def _fixture_without_result(cls, fixture: dict[str, Any] | None) -> dict[str, Any] | None:
+        if not fixture:
+            return None
+        clean = copy.deepcopy(fixture)
+        for key in (
+            "home_goals",
+            "away_goals",
+            "home_corners",
+            "away_corners",
+            "home_fouls",
+            "away_fouls",
+            "home_possession",
+            "away_possession",
+            "home_shots",
+            "away_shots",
+            "home_shots_on_target",
+            "away_shots_on_target",
+        ):
+            clean.pop(key, None)
+        clean["completed"] = False
+        clean["in_progress"] = False
+        clean["prediction_input_sanitized"] = cls._fixture_has_result_data(fixture)
+        return clean
+
+    @staticmethod
+    def _fixture_has_result_data(fixture: dict[str, Any] | None) -> bool:
+        if not fixture:
+            return False
+        return any(
+            fixture.get(key) is not None
+            for key in (
+                "home_goals",
+                "away_goals",
+                "home_corners",
+                "away_corners",
+                "home_fouls",
+                "away_fouls",
+                "home_possession",
+                "away_possession",
+                "home_shots",
+                "away_shots",
+            )
+        )
+
+    def _state_for_prediction(
+        self,
+        state: dict[str, Any],
+        pre_match_history: list[MatchRecord],
+        all_matches: list[MatchRecord],
+        target_date: str | None,
+    ) -> dict[str, Any]:
+        if not target_date:
+            return state
+        finished_dates = [match.date for match in all_matches if match.is_finished()]
+        if finished_dates and max(finished_dates) < target_date:
+            return state
+
+        clean = copy.deepcopy(state)
+        clean["outcome_model"] = {}
+        clean["stat_profiles"] = self._stat_profiles_from_matches(pre_match_history)
+        clean["score_profiles"] = self._score_profiles_from_matches(pre_match_history)
+        clean["history"] = self._history_from_matches(pre_match_history)
+        training = clean.setdefault("training", {})
+        training["prediction_cutoff"] = target_date
+        training["leak_guard"] = "pre_match_history_only"
+        return clean
+
+    @classmethod
+    def _stat_profiles_from_matches(cls, matches: list[MatchRecord]) -> dict[str, Any]:
+        corner_totals: list[float] = []
+        corner_teams: dict[str, list[float]] = {}
+        foul_totals: list[float] = []
+        foul_teams: dict[str, list[float]] = {}
+        foul_referees: dict[str, list[float]] = {}
+
+        for match in matches:
+            if match.home_corners is not None and match.away_corners is not None:
+                total_corners = float(match.home_corners) + float(match.away_corners)
+                corner_totals.append(total_corners)
+                corner_teams.setdefault(match.home_team, []).append(total_corners)
+                corner_teams.setdefault(match.away_team, []).append(total_corners)
+            if match.home_fouls is not None and match.away_fouls is not None:
+                total_fouls = float(match.home_fouls) + float(match.away_fouls)
+                foul_totals.append(total_fouls)
+                foul_teams.setdefault(match.home_team, []).append(total_fouls)
+                foul_teams.setdefault(match.away_team, []).append(total_fouls)
+                if match.referee:
+                    foul_referees.setdefault(match.referee, []).append(total_fouls)
+
+        return {
+            "corners": {
+                "global": cls._mean_profile(corner_totals),
+                "teams": {
+                    team: {"matches": len(values), "avg_total": cls._mean_profile(values)}
+                    for team, values in sorted(corner_teams.items())
+                },
+            },
+            "fouls": {
+                "global": cls._mean_profile(foul_totals),
+                "teams": {
+                    team: {"matches": len(values), "avg_total": cls._mean_profile(values)}
+                    for team, values in sorted(foul_teams.items())
+                },
+                "referees": {
+                    referee: {"matches": len(values), "avg_fouls": cls._mean_profile(values), "source": "pre-match-history"}
+                    for referee, values in sorted(foul_referees.items())
+                },
+            },
+        }
+
+    @classmethod
+    def _score_profiles_from_matches(cls, matches: list[MatchRecord]) -> dict[str, Any]:
+        by_outcome: dict[str, Counter[str]] = {}
+        for match in matches:
+            if match.home_goals is None or match.away_goals is None:
+                continue
+            outcome = cls._outcome_from_score(int(match.home_goals), int(match.away_goals))
+            score = f"{int(match.home_goals)}-{int(match.away_goals)}"
+            by_outcome.setdefault(outcome, Counter())[score] += 1
+        return {
+            "mode": "pre_match_outcome_top1",
+            "by_outcome": {
+                outcome: cls._profile_items_from_counter(counter)
+                for outcome, counter in sorted(by_outcome.items())
+            },
+            "by_outcome_bucket": {},
+        }
+
+    @classmethod
+    def _history_from_matches(cls, matches: list[MatchRecord]) -> list[dict[str, Any]]:
+        history = []
+        for match in matches:
+            if match.home_goals is None or match.away_goals is None:
+                continue
+            actual_outcome = cls._outcome_from_score(int(match.home_goals), int(match.away_goals))
+            actual_score = f"{int(match.home_goals)}-{int(match.away_goals)}"
+            history.append({"actual_outcome": actual_outcome, "actual_score": actual_score})
+        return history[-5000:]
+
+    @staticmethod
+    def _mean_profile(values: list[float]) -> float | None:
+        if not values:
+            return None
+        return round(sum(values) / len(values), 2)
+
+    @staticmethod
+    def _profile_items_from_counter(counter: Counter[str]) -> list[dict[str, Any]]:
+        total = sum(counter.values()) or 1
+        return [
+            {"score": score, "count": count, "probability": round(count / total, 4)}
+            for score, count in counter.most_common()
+        ]
 
     def _lineup_reports(
         self,
@@ -635,6 +835,110 @@ class MatchPredictor:
             return "аккуратный матч"
         return "обычный уровень фолов"
 
+    def _recommended_bets(
+        self,
+        home_team: str,
+        away_team: str,
+        market_pick: str,
+        outcome_probabilities: dict[str, float],
+        goal_total: dict[str, Any],
+        predicted_corners: float,
+        foul_forecast: dict[str, Any],
+    ) -> dict[str, Any]:
+        winner = {
+            "type": "winner",
+            "label": "Победитель",
+            "pick": self._market_label(market_pick, home_team, away_team),
+            "code": market_pick,
+            "probability": round(float(outcome_probabilities.get(market_pick, 0.0)), 4),
+        }
+        goals = self._goal_total_bet(goal_total)
+        corners = self._corner_total_bet(predicted_corners)
+        fouls = self._foul_total_bet(foul_forecast)
+        items = [winner, goals, corners, fouls]
+        return {
+            "summary": " + ".join(item["pick"] for item in items if item.get("pick")),
+            "items": items,
+        }
+
+    @staticmethod
+    def _goal_total_bet(goal_total: dict[str, Any]) -> dict[str, Any]:
+        probabilities = goal_total.get("probabilities", {}) if goal_total else {}
+        candidates = [
+            ("ТБ 2.5 голов", 2.5, "over", probabilities.get("over_2_5")),
+            ("ТМ 2.5 голов", 2.5, "under", probabilities.get("under_2_5")),
+            ("ТБ 3.5 голов", 3.5, "over", probabilities.get("over_3_5")),
+            ("ТМ 3.5 голов", 3.5, "under", probabilities.get("under_3_5")),
+        ]
+        pick, line, side, probability = max(
+            candidates,
+            key=lambda item: float(item[3] if item[3] is not None else 0.0),
+        )
+        return {
+            "type": "goals_total",
+            "label": "Тотал голов",
+            "pick": pick,
+            "line": line,
+            "side": side,
+            "probability": round(float(probability or 0.0), 4),
+            "expected": goal_total.get("expected") if goal_total else None,
+        }
+
+    @staticmethod
+    def _corner_total_bet(expected_corners: float) -> dict[str, Any]:
+        line = max(5.5, min(13.5, math.floor(float(expected_corners)) + 0.5))
+        over = MatchPredictor._total_probability_over(float(expected_corners), line, spread=2.05)
+        if over >= 0.5:
+            pick = f"ТБ {line:.1f} угловых"
+            side = "over"
+            probability = over
+        else:
+            pick = f"ТМ {line:.1f} угловых"
+            side = "under"
+            probability = 1.0 - over
+        return {
+            "type": "corners_total",
+            "label": "Тотал угловых",
+            "pick": pick,
+            "line": line,
+            "side": side,
+            "probability": round(probability, 4),
+            "expected": round(float(expected_corners), 2),
+        }
+
+    @staticmethod
+    def _foul_total_bet(foul_forecast: dict[str, Any]) -> dict[str, Any]:
+        expected = float((foul_forecast or {}).get("expected") or 24.0)
+        probabilities = (foul_forecast or {}).get("probabilities", {})
+        line = min((20.5, 24.5, 28.5), key=lambda value: abs(expected - value))
+        key = str(line).replace(".", "_")
+        over = probabilities.get(f"over_{key}")
+        if over is None:
+            over = MatchPredictor._total_probability_over(expected, line, spread=3.6)
+        over = float(over)
+        if over >= 0.5:
+            pick = f"ТБ {line:.1f} фолов"
+            side = "over"
+            probability = over
+        else:
+            pick = f"ТМ {line:.1f} фолов"
+            side = "under"
+            probability = 1.0 - over
+        return {
+            "type": "fouls_total",
+            "label": "Тотал фолов",
+            "pick": pick,
+            "line": line,
+            "side": side,
+            "probability": round(probability, 4),
+            "expected": round(expected, 2),
+        }
+
+    @staticmethod
+    def _total_probability_over(expected: float, line: float, spread: float) -> float:
+        probability = 1.0 / (1.0 + math.exp(-(expected - line) / spread))
+        return max(0.03, min(0.97, probability))
+
     def _outcome_probabilities(self, home_xg: float, away_xg: float) -> tuple[float, float, float]:
         home_win = draw = away_win = 0.0
         for home_goals in range(8):
@@ -659,16 +963,17 @@ class MatchPredictor:
         goal_total: dict[str, Any] | None = None,
         outcome_probabilities: dict[str, float] | None = None,
         limit: int = 3,
+        state: dict[str, Any] | None = None,
     ) -> list[dict[str, Any]]:
         score_counts_by_outcome = {
-            outcome: self._historical_score_counts(outcome) for outcome in ("П1", "X", "П2")
+            outcome: self._historical_score_counts(outcome, state) for outcome in ("П1", "X", "П2")
         }
         candidate_counts = {outcome: len(self._candidate_scores(outcome)) for outcome in ("П1", "X", "П2")}
         goal_total = goal_total or self._goal_total_forecast(home_xg, away_xg)
         if outcome_probabilities is None:
             home_win, draw, away_win = self._outcome_probabilities(home_xg, away_xg)
             outcome_probabilities = {"П1": home_win, "X": draw, "П2": away_win}
-        profile_candidate = self._profile_score_candidate(market_pick, home_xg, away_xg)
+        profile_candidate = self._profile_score_candidate(market_pick, home_xg, away_xg, state)
         if limit <= 1 and profile_candidate:
             profile_candidate["probability"] = self._calibrated_exact_score_probability(
                 profile_candidate["probability"],
@@ -731,8 +1036,14 @@ class MatchPredictor:
             probability = min(probability, outcome_probability)
         return round(probability, 4)
 
-    def _profile_score_candidate(self, market_pick: str, home_xg: float, away_xg: float) -> dict[str, Any] | None:
-        profiles = (self.store.load_model_state().get("score_profiles") or {})
+    def _profile_score_candidate(
+        self,
+        market_pick: str,
+        home_xg: float,
+        away_xg: float,
+        state: dict[str, Any] | None = None,
+    ) -> dict[str, Any] | None:
+        profiles = ((state or self.store.load_model_state()).get("score_profiles") or {})
         bucket = self._score_profile_bucket(market_pick, home_xg, away_xg)
         by_bucket = profiles.get("by_outcome_bucket") or {}
         by_outcome = profiles.get("by_outcome") or {}
@@ -1341,8 +1652,8 @@ class MatchPredictor:
                     scores.append((home_goals, away_goals))
         return scores
 
-    def _historical_score_counts(self, market_pick: str) -> Counter[str]:
-        history = self.store.load_model_state().get("history", [])
+    def _historical_score_counts(self, market_pick: str, state: dict[str, Any] | None = None) -> Counter[str]:
+        history = (state or self.store.load_model_state()).get("history", [])
         return Counter(
             item.get("actual_score")
             for item in history

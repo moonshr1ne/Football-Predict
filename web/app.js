@@ -118,6 +118,10 @@ function renderPrediction(data) {
       <h3>Прогноз и факт</h3>
       ${resultSummaryBlock(data)}
     </article>
+    <article class="card wide">
+      <h3>Рекомендуемые ставки</h3>
+      ${recommendedBetsBlock(data.recommended_bets)}
+    </article>
   `;
 }
 
@@ -371,6 +375,30 @@ function resultSummaryBlock(data) {
   return `
     ${predictedLine}
     <p><strong>Факт:</strong> матч не найден в расписании, настоящий счет пока неизвестен.</p>
+  `;
+}
+
+function recommendedBetsBlock(recommended) {
+  const items = recommended?.items || [];
+  if (!items.length) {
+    return "<p class='muted'>нет расчета</p>";
+  }
+  return `
+    <p><strong>${escapeHtml(recommended.summary || "")}</strong></p>
+    <table class="compact">
+      ${items
+        .map(
+          (item) => `
+            <tr>
+              <th>${escapeHtml(item.label || "")}</th>
+              <td>${escapeHtml(item.pick || "")}</td>
+              <td>${probability(item.probability)}</td>
+              <td>${item.expected == null ? "" : `ожидание ${Number(item.expected).toFixed(2)}`}</td>
+            </tr>
+          `
+        )
+        .join("")}
+    </table>
   `;
 }
 

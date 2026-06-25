@@ -42,9 +42,11 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("result_summary", prediction.to_dict())
             self.assertIn("goal_total", prediction.to_dict())
             self.assertIn("foul_forecast", prediction.to_dict())
+            self.assertIn("recommended_bets", prediction.to_dict())
             self.assertIn("over_2_5", prediction.to_dict()["goal_total"]["probabilities"])
             self.assertIn("under_2_5", prediction.to_dict()["goal_total"]["probabilities"])
             self.assertGreater(prediction.to_dict()["foul_forecast"]["expected"], 0)
+            self.assertEqual(len(prediction.to_dict()["recommended_bets"]["items"]), 4)
             self.assertIn("team_reports", prediction.to_dict())
             self.assertIn(home, prediction.to_dict()["team_reports"])
             self.assertIn("lineup_reports", prediction.to_dict())
@@ -289,6 +291,51 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(data["result_summary"]["actual"]["fouls"], 26.0)
             self.assertIn("fouls", data["result_summary"]["predicted"])
             self.assertIn("predicted", data["result_summary"])
+
+    def test_completed_fixture_result_is_not_prediction_input(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = DataStore(Path(tmp_dir) / "project")
+            store.save_matches(
+                [
+                    MatchRecord("2098-12-01", "Spain", "Italy", home_goals=3, away_goals=0, home_corners=7, away_corners=2),
+                    MatchRecord("2098-12-02", "Cabo Verde", "Ghana", home_goals=1, away_goals=2, home_corners=3, away_corners=4),
+                    MatchRecord(
+                        "2099-01-01",
+                        "Spain",
+                        "Cabo Verde",
+                        fixture_id="target",
+                        home_goals=0,
+                        away_goals=0,
+                        home_corners=1,
+                        away_corners=1,
+                    ),
+                ]
+            )
+            fixture = {
+                "date": "2099-01-01",
+                "fixture_id": "target",
+                "home_goals": 0,
+                "away_goals": 0,
+                "home_corners": 1,
+                "away_corners": 1,
+                "completed": True,
+            }
+
+            prediction = MatchPredictor(store).predict(
+                "Spain",
+                "Cabo Verde",
+                match_date="2099-01-01",
+                fixture=fixture,
+                remember=False,
+            )
+            data = prediction.to_dict()
+
+            self.assertEqual(data["home_stats"]["sample_size"], 1)
+            self.assertEqual(data["home_stats"]["avg_goals_for"], 3.0)
+            self.assertEqual(data["away_stats"]["sample_size"], 1)
+            self.assertEqual(data["away_stats"]["avg_goals_for"], 1.0)
+            self.assertEqual(data["result_summary"]["actual"]["score"], "0-0")
+            self.assertTrue(any("исключены" in warning for warning in data["warnings"]))
 
     def test_learning_records_review(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
