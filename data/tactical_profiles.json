@@ -29,13 +29,13 @@
         "date": "2026-06-22",
         "opponent": "Austria",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Algeria",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -70,19 +70,19 @@
         "date": "2026-06-24",
         "opponent": "Scotland",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-20",
         "opponent": "Haiti",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-13",
         "opponent": "Morocco",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -117,13 +117,13 @@
         "date": "2026-06-23",
         "opponent": "Ghana",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Croatia",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -158,13 +158,13 @@
         "date": "2026-06-22",
         "opponent": "Iraq",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-16",
         "opponent": "Senegal",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -199,19 +199,19 @@
         "date": "2026-06-25",
         "opponent": "Ecuador",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-20",
         "opponent": "Ivory Coast",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Curaçao",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -246,13 +246,13 @@
         "date": "2026-06-23",
         "opponent": "England",
         "formation": "4-1-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Panama",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -287,13 +287,13 @@
         "date": "2026-06-25",
         "opponent": "Czechia",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-19",
         "opponent": "South Korea",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-11",
@@ -334,13 +334,13 @@
         "date": "2026-06-20",
         "opponent": "Sweden",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Japan",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -375,13 +375,13 @@
         "date": "2026-06-23",
         "opponent": "Uzbekistan",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Congo DR",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -416,13 +416,13 @@
         "date": "2026-06-25",
         "opponent": "South Africa",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-19",
         "opponent": "Mexico",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-12",
@@ -463,13 +463,13 @@
         "date": "2026-06-21",
         "opponent": "Saudi Arabia",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Cape Verde",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -504,7 +504,7 @@
         "date": "2026-06-19",
         "opponent": "Australia",
         "formation": "3-5-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-13",
@@ -545,13 +545,13 @@
         "date": "2026-06-21",
         "opponent": "Cape Verde",
         "formation": "4-1-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Saudi Arabia",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -586,13 +586,13 @@
         "date": "2026-06-25",
         "opponent": "South Korea",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-18",
         "opponent": "Czechia",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-11",
@@ -633,13 +633,13 @@
         "date": "2026-06-24",
         "opponent": "Switzerland",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-18",
         "opponent": "Qatar",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-12",
@@ -680,13 +680,13 @@
         "date": "2026-06-24",
         "opponent": "Qatar",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-18",
         "opponent": "Switzerland",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-12",
@@ -727,13 +727,13 @@
         "date": "2026-06-25",
         "opponent": "Mexico",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-18",
         "opponent": "South Africa",
         "formation": "3-5-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-12",
@@ -774,19 +774,19 @@
         "date": "2026-06-24",
         "opponent": "Haiti",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-19",
         "opponent": "Scotland",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-13",
         "opponent": "Brazil",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -821,19 +821,19 @@
         "date": "2026-06-24",
         "opponent": "Bosnia-Herzegovina",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-18",
         "opponent": "Canada",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-13",
         "opponent": "Switzerland",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -868,19 +868,19 @@
         "date": "2026-06-24",
         "opponent": "Canada",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-18",
         "opponent": "Bosnia-Herzegovina",
         "formation": "4-5-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-13",
         "opponent": "Qatar",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -915,7 +915,7 @@
         "date": "2026-06-20",
         "opponent": "Türkiye",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-13",
@@ -956,13 +956,13 @@
         "date": "2026-06-19",
         "opponent": "United States",
         "formation": "5-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Türkiye",
         "formation": "5-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -997,13 +997,13 @@
         "date": "2026-06-20",
         "opponent": "Paraguay",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Australia",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1038,19 +1038,19 @@
         "date": "2026-06-25",
         "opponent": "Ivory Coast",
         "formation": "5-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-21",
         "opponent": "Ecuador",
         "formation": "5-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Germany",
         "formation": "4-5-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -1085,19 +1085,19 @@
         "date": "2026-06-24",
         "opponent": "Morocco",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-20",
         "opponent": "Brazil",
         "formation": "5-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Scotland",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1132,19 +1132,19 @@
         "date": "2026-06-24",
         "opponent": "Brazil",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-19",
         "opponent": "Morocco",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Haiti",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1179,19 +1179,19 @@
         "date": "2026-06-25",
         "opponent": "Curaçao",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-20",
         "opponent": "Germany",
         "formation": "4-1-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Ecuador",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1226,19 +1226,19 @@
         "date": "2026-06-25",
         "opponent": "Germany",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-21",
         "opponent": "Curaçao",
         "formation": "3-5-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Ivory Coast",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1273,13 +1273,13 @@
         "date": "2026-06-21",
         "opponent": "Tunisia",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-14",
         "opponent": "Netherlands",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1314,13 +1314,13 @@
         "date": "2026-06-21",
         "opponent": "Iran",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Egypt",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1355,13 +1355,13 @@
         "date": "2026-06-22",
         "opponent": "New Zealand",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Belgium",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1396,13 +1396,13 @@
         "date": "2026-06-21",
         "opponent": "Spain",
         "formation": "5-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Uruguay",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -1437,13 +1437,13 @@
         "date": "2026-06-21",
         "opponent": "Uruguay",
         "formation": "4-1-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Spain",
         "formation": "4-1-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -1478,13 +1478,13 @@
         "date": "2026-06-20",
         "opponent": "Netherlands",
         "formation": "3-5-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Tunisia",
         "formation": "3-5-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1519,13 +1519,13 @@
         "date": "2026-06-21",
         "opponent": "Japan",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-15",
         "opponent": "Sweden",
         "formation": "5-3-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1560,13 +1560,13 @@
         "date": "2026-06-23",
         "opponent": "Norway",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-16",
         "opponent": "France",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1601,13 +1601,13 @@
         "date": "2026-06-21",
         "opponent": "Belgium",
         "formation": "5-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-16",
         "opponent": "New Zealand",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1642,13 +1642,13 @@
         "date": "2026-06-22",
         "opponent": "Egypt",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-16",
         "opponent": "Iran",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1683,13 +1683,13 @@
         "date": "2026-06-22",
         "opponent": "France",
         "formation": "4-1-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-16",
         "opponent": "Norway",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1724,13 +1724,13 @@
         "date": "2026-06-23",
         "opponent": "Senegal",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-16",
         "opponent": "Iraq",
         "formation": "4-4-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1765,13 +1765,13 @@
         "date": "2026-06-23",
         "opponent": "Jordan",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Argentina",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1806,13 +1806,13 @@
         "date": "2026-06-22",
         "opponent": "Argentina",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Jordan",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1847,13 +1847,13 @@
         "date": "2026-06-23",
         "opponent": "Algeria",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Austria",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -1894,7 +1894,7 @@
         "date": "2026-06-17",
         "opponent": "England",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1935,7 +1935,7 @@
         "date": "2026-06-17",
         "opponent": "Ghana",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1970,13 +1970,13 @@
         "date": "2026-06-24",
         "opponent": "Colombia",
         "formation": "5-3-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-17",
         "opponent": "Portugal",
         "formation": "5-3-2",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -2011,13 +2011,13 @@
         "date": "2026-06-23",
         "opponent": "Portugal",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-18",
         "opponent": "Colombia",
         "formation": "3-4-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -2052,13 +2052,13 @@
         "date": "2026-06-24",
         "opponent": "Congo DR",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       },
       {
         "date": "2026-06-18",
         "opponent": "Uzbekistan",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"

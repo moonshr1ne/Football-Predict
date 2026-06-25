@@ -2367,7 +2367,7 @@
     "prediction_id": "688594e5c11842bbb67efe46527b3444",
     "created_at": "2026-06-24T03:18:07.534570+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:49.504588+00:00",
+    "last_checked_at": "2026-06-25T22:57:48.071118+00:00",
     "check_error": "Не нашел матч ЧМ для пары Haiti - Scotland."
   },
   {
@@ -3150,7 +3150,7 @@
     "prediction_id": "6069020fa7d7436d9287610cd86d8eaa",
     "created_at": "2026-06-24T03:19:01.809854+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:50.036045+00:00",
+    "last_checked_at": "2026-06-25T22:57:48.585688+00:00",
     "check_error": "Не нашел матч ЧМ для пары Colombia - Congo DR.",
     "team_reports": {
       "Colombia": {
@@ -5562,7 +5562,7 @@
     "prediction_id": "554cb782726e423dbd1b5e10777a1426",
     "created_at": "2026-06-24T03:26:50.948752+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:51.229947+00:00",
+    "last_checked_at": "2026-06-25T22:57:49.189765+00:00",
     "check_error": "Не нашел матч ЧМ для пары Türkiye - Paraguay."
   },
   {
@@ -6339,7 +6339,7 @@
     "prediction_id": "f3457878370741e5a07f48343236749f",
     "created_at": "2026-06-24T03:27:47.439222+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:52.467254+00:00",
+    "last_checked_at": "2026-06-25T22:57:49.953345+00:00",
     "check_error": "Не нашел матч ЧМ для пары Brazil - Haiti."
   },
   {
@@ -21543,7 +21543,7 @@
     "prediction_id": "b4778fccd5df424bbab9f0b42b35c10c",
     "created_at": "2026-06-24T23:29:08.183724+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:53.395152+00:00",
+    "last_checked_at": "2026-06-25T22:57:50.385610+00:00",
     "check_error": "Не нашел матч ЧМ для пары South Africa - South Korea."
   },
   {
@@ -22968,7 +22968,7 @@
     "prediction_id": "ba5aed3a6dd74503b34b8e10619e5cec",
     "created_at": "2026-06-24T23:31:59.145329+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:54.172371+00:00",
+    "last_checked_at": "2026-06-25T22:57:51.022981+00:00",
     "check_error": "Не нашел матч ЧМ для пары Czechia - Mexico."
   },
   {
@@ -27662,7 +27662,7 @@
     "prediction_id": "105ec48aea79428284e4ce2daa1325e0",
     "created_at": "2026-06-25T03:13:22.106211+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:54.900191+00:00",
+    "last_checked_at": "2026-06-25T22:57:51.505362+00:00",
     "check_error": "Матч найден, но еще не завершен."
   },
   {
@@ -29089,7 +29089,7 @@
     "prediction_id": "543ecd082202442f97625107f1f0c03f",
     "created_at": "2026-06-25T03:15:08.876969+00:00",
     "status": "pending",
-    "last_checked_at": "2026-06-25T22:50:56.230543+00:00",
+    "last_checked_at": "2026-06-25T22:57:52.748637+00:00",
     "check_error": "Матч найден, но еще не завершен."
   },
   {
