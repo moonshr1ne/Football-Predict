@@ -4,17 +4,18 @@
   "weights": {
     "home_advantage_goals": 0.18,
     "elo_to_goals": 0.22,
-    "form_to_goals": 0.32813600000000004,
+    "form_to_goals": 0.33152,
     "class_to_goals": 0.1,
     "chance_to_goals": 0.06,
     "motivation_to_goals": 0.18,
     "injury_to_goals": 0.16,
     "lineup_to_goals": 0.24,
-    "tactics_to_goals": 0.3061814160000002,
-    "tactics_to_corners": 1.1679930599999997,
+    "tactics_to_goals": 0.31036486800000024,
+    "tactics_to_corners": 1.1669427399999996,
+    "foul_bias": -0.014239999999999954,
     "world_cup_intensity_goals": 0.05,
-    "corner_bias": -0.2615040000000001,
-    "goal_scale": 0.9426599999999994
+    "corner_bias": -0.16425600000000015,
+    "goal_scale": 0.9548399999999994
   },
   "history": [
     {
@@ -7196,6 +7197,190 @@
       "actual_corners": 13.0,
       "corner_error": -1.29,
       "updated_at": "2026-06-24T04:16:51.086589+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Bosnia-Herzegovina",
+      "away_team": "Qatar",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "2-0",
+        "3-0"
+      ],
+      "actual_score": "3-1",
+      "score_hit": false,
+      "predicted_corners": 14.03,
+      "actual_corners": 10.0,
+      "corner_error": -4.03,
+      "predicted_fouls": 24.83,
+      "actual_fouls": 23.0,
+      "foul_error": -1.83,
+      "updated_at": "2026-06-25T00:07:04.508524+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Canada",
+      "away_team": "Switzerland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П2",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "2-1",
+        "1-0",
+        "2-0"
+      ],
+      "actual_score": "1-2",
+      "score_hit": false,
+      "predicted_corners": 14.41,
+      "actual_corners": 9.0,
+      "corner_error": -5.41,
+      "predicted_fouls": 24.58,
+      "actual_fouls": 32.0,
+      "foul_error": 7.42,
+      "updated_at": "2026-06-25T00:07:04.639011+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Morocco",
+      "away_team": "Haiti",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0",
+        "2-1"
+      ],
+      "actual_score": "4-2",
+      "score_hit": false,
+      "predicted_corners": 7.51,
+      "actual_corners": 10.0,
+      "corner_error": 2.49,
+      "predicted_fouls": 27.04,
+      "actual_fouls": 28.0,
+      "foul_error": 0.96,
+      "updated_at": "2026-06-25T00:07:04.754177+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Scotland",
+      "away_team": "Brazil",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П2",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "1-2",
+        "1-3",
+        "2-3"
+      ],
+      "actual_score": "0-3",
+      "score_hit": false,
+      "predicted_corners": 7.96,
+      "actual_corners": 14.0,
+      "corner_error": 6.04,
+      "predicted_fouls": 26.73,
+      "actual_fouls": 21.0,
+      "foul_error": -5.73,
+      "updated_at": "2026-06-25T00:07:04.873511+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Switzerland",
+      "away_team": "Canada",
+      "prediction_id": null,
+      "predicted_outcome": "П2",
+      "actual_outcome": "П1",
+      "outcome_hit": false,
+      "predicted_scores": [
+        "1-2",
+        "0-2",
+        "1-3"
+      ],
+      "actual_score": "2-1",
+      "score_hit": false,
+      "predicted_corners": 12.85,
+      "actual_corners": 9.0,
+      "corner_error": -3.85,
+      "predicted_fouls": 26.15,
+      "actual_fouls": 32.0,
+      "foul_error": 5.85,
+      "updated_at": "2026-06-25T00:07:05.006447+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Brazil",
+      "away_team": "Scotland",
+      "prediction_id": "549fbfc194d244b9a305954ca22371a2",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-1",
+        "3-2"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 7.69,
+      "actual_corners": 14.0,
+      "corner_error": 6.31,
+      "predicted_fouls": 24.2,
+      "actual_fouls": 21.0,
+      "foul_error": -3.2,
+      "updated_at": "2026-06-25T00:10:28.784842+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Morocco",
+      "away_team": "Haiti",
+      "prediction_id": "496a9ea3c768492d90e7102d97a8a745",
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-0",
+        "3-0",
+        "1-0"
+      ],
+      "actual_score": "4-2",
+      "score_hit": false,
+      "predicted_corners": 7.21,
+      "actual_corners": 10.0,
+      "corner_error": 2.79,
+      "predicted_fouls": 27.17,
+      "actual_fouls": 28.0,
+      "foul_error": 0.83,
+      "updated_at": "2026-06-25T00:10:30.064667+00:00"
+    },
+    {
+      "date": "2026-06-24",
+      "home_team": "Brazil",
+      "away_team": "Scotland",
+      "prediction_id": null,
+      "predicted_outcome": "П1",
+      "actual_outcome": "П1",
+      "outcome_hit": true,
+      "predicted_scores": [
+        "2-1",
+        "3-1",
+        "3-2"
+      ],
+      "actual_score": "3-0",
+      "score_hit": false,
+      "predicted_corners": 8.21,
+      "actual_corners": 14.0,
+      "corner_error": 5.79,
+      "predicted_fouls": 27.08,
+      "actual_fouls": 21.0,
+      "foul_error": -6.08,
+      "updated_at": "2026-06-25T00:11:04.584305+00:00"
     }
   ],
   "trained_match_keys": [
@@ -7549,6 +7734,23 @@
     "2026-06-23|Norway|Senegal",
     "2026-06-23|Panama|Croatia",
     "2026-06-23|Portugal|Uzbekistan",
-    "2026-06-24|Colombia|Congo DR"
-  ]
+    "2026-06-24|Bosnia-Herzegovina|Qatar",
+    "2026-06-24|Brazil|Scotland",
+    "2026-06-24|Canada|Switzerland",
+    "2026-06-24|Colombia|Congo DR",
+    "2026-06-24|Morocco|Haiti",
+    "2026-06-24|Scotland|Brazil",
+    "2026-06-24|Switzerland|Canada"
+  ],
+  "training": {
+    "last_attempt": {
+      "mode": "full_history_replay",
+      "status": "discarded_candidate",
+      "requested_epochs": 2,
+      "candidate_epochs": 2,
+      "candidate_score": 1.7449,
+      "previous_score": 1.8798,
+      "completed_at": "2026-06-25T00:08:48.775775+00:00"
+    }
+  }
 }

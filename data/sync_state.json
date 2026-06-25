@@ -1,14 +1,15 @@
 {
-  "last_full_sync_at": "2026-06-24T12:50:11.357052+00:00",
+  "last_full_sync_at": "2026-06-25T00:08:02.962389+00:00",
   "participants": 48,
   "recent_imported": 476,
+  "referees_updated": 41,
   "backtest": {
-    "matches": 359,
+    "matches": 364,
     "outcome_accuracy": 0.571,
-    "exact_score_accuracy": 0.245,
-    "corner_mae": 2.28,
-    "corner_within_one_rate": 0.323,
-    "foul_mae": null,
+    "exact_score_accuracy": 0.242,
+    "corner_mae": 2.44,
+    "corner_within_one_rate": 0.299,
+    "foul_mae": 4.36,
     "targets": {
       "outcome_accuracy": 0.75,
       "exact_score_accuracy": 0.3,
@@ -21,8 +22,9 @@
       "corner_mae": false,
       "foul_mae": false
     },
-    "trained_match_keys": 351,
-    "updated_at": "2026-06-24T14:22:31.357088+00:00",
+    "trained_match_keys": 356,
+    "training": {},
+    "updated_at": "2026-06-25T00:08:02.959393+00:00",
     "by_team": {
       "Albania": {
         "matches": 2,
@@ -89,16 +91,16 @@
         "outcome_accuracy": 0.75
       },
       "Bosnia-Herzegovina": {
-        "matches": 11,
-        "outcome_accuracy": 0.273
+        "matches": 12,
+        "outcome_accuracy": 0.333
       },
       "Botswana": {
         "matches": 1,
         "outcome_accuracy": 1.0
       },
       "Brazil": {
-        "matches": 10,
-        "outcome_accuracy": 0.6
+        "matches": 11,
+        "outcome_accuracy": 0.636
       },
       "Bulgaria": {
         "matches": 3,
@@ -117,8 +119,8 @@
         "outcome_accuracy": 0.2
       },
       "Canada": {
-        "matches": 13,
-        "outcome_accuracy": 0.385
+        "matches": 15,
+        "outcome_accuracy": 0.333
       },
       "Cape Verde": {
         "matches": 10,
@@ -249,8 +251,8 @@
         "outcome_accuracy": 0.8
       },
       "Haiti": {
-        "matches": 10,
-        "outcome_accuracy": 0.5
+        "matches": 11,
+        "outcome_accuracy": 0.545
       },
       "Honduras": {
         "matches": 2,
@@ -357,8 +359,8 @@
         "outcome_accuracy": 0.5
       },
       "Morocco": {
-        "matches": 10,
-        "outcome_accuracy": 0.6
+        "matches": 11,
+        "outcome_accuracy": 0.636
       },
       "Mozambique": {
         "matches": 1,
@@ -421,8 +423,8 @@
         "outcome_accuracy": 1.0
       },
       "Qatar": {
-        "matches": 14,
-        "outcome_accuracy": 0.571
+        "matches": 15,
+        "outcome_accuracy": 0.6
       },
       "Republic of Ireland": {
         "matches": 5,
@@ -445,8 +447,8 @@
         "outcome_accuracy": 0.4
       },
       "Scotland": {
-        "matches": 10,
-        "outcome_accuracy": 0.7
+        "matches": 11,
+        "outcome_accuracy": 0.727
       },
       "Senegal": {
         "matches": 12,
@@ -485,8 +487,8 @@
         "outcome_accuracy": 0.6
       },
       "Switzerland": {
-        "matches": 11,
-        "outcome_accuracy": 0.455
+        "matches": 13,
+        "outcome_accuracy": 0.385
       },
       "Tanzania": {
         "matches": 2,
@@ -546,14 +548,558 @@
       }
     }
   },
-  "last_finished_sync_at": "2026-06-24T14:22:31.361079+00:00",
-  "last_finished_summary": {
-    "participants": 48,
-    "recent_imported": 0,
-    "imported": 48,
-    "profiles_updated": 48,
-    "referees_updated": 41,
-    "trained": 0,
-    "source": "espn-world-cup"
+  "last_retrain_at": "2026-06-25T00:08:48.713472+00:00",
+  "last_retrain": {
+    "trained": 712,
+    "unique_matches": 356,
+    "epochs": 2,
+    "requested_epochs": 2,
+    "kept_previous": true,
+    "backtest": {
+      "matches": 364,
+      "outcome_accuracy": 0.571,
+      "exact_score_accuracy": 0.242,
+      "corner_mae": 2.44,
+      "corner_within_one_rate": 0.299,
+      "foul_mae": 4.36,
+      "targets": {
+        "outcome_accuracy": 0.75,
+        "exact_score_accuracy": 0.3,
+        "corner_mae": 1.0,
+        "foul_mae": 3.0
+      },
+      "target_status": {
+        "outcome_accuracy": false,
+        "exact_score_accuracy": false,
+        "corner_mae": false,
+        "foul_mae": false
+      },
+      "trained_match_keys": 356,
+      "training": {},
+      "updated_at": "2026-06-25T00:08:02.959393+00:00",
+      "by_team": {
+        "Albania": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Algeria": {
+          "matches": 11,
+          "outcome_accuracy": 0.636
+        },
+        "Andorra": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Angola": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Argentina": {
+          "matches": 10,
+          "outcome_accuracy": 0.8
+        },
+        "Armenia": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Aruba": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Australia": {
+          "matches": 10,
+          "outcome_accuracy": 0.4
+        },
+        "Austria": {
+          "matches": 10,
+          "outcome_accuracy": 0.8
+        },
+        "Azerbaijan": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Bahrain": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Belarus": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Belgium": {
+          "matches": 10,
+          "outcome_accuracy": 0.5
+        },
+        "Benin": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Bermuda": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Bolivia": {
+          "matches": 8,
+          "outcome_accuracy": 0.75
+        },
+        "Bosnia-Herzegovina": {
+          "matches": 12,
+          "outcome_accuracy": 0.333
+        },
+        "Botswana": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Brazil": {
+          "matches": 11,
+          "outcome_accuracy": 0.636
+        },
+        "Bulgaria": {
+          "matches": 3,
+          "outcome_accuracy": 1.0
+        },
+        "Burkina Faso": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Burundi": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Cameroon": {
+          "matches": 5,
+          "outcome_accuracy": 0.2
+        },
+        "Canada": {
+          "matches": 15,
+          "outcome_accuracy": 0.333
+        },
+        "Cape Verde": {
+          "matches": 10,
+          "outcome_accuracy": 0.2
+        },
+        "Central African Republic": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Chile": {
+          "matches": 5,
+          "outcome_accuracy": 0.2
+        },
+        "China": {
+          "matches": 2,
+          "outcome_accuracy": 0.0
+        },
+        "Colombia": {
+          "matches": 11,
+          "outcome_accuracy": 0.818
+        },
+        "Comoros": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Congo DR": {
+          "matches": 11,
+          "outcome_accuracy": 0.545
+        },
+        "Costa Rica": {
+          "matches": 5,
+          "outcome_accuracy": 0.8
+        },
+        "Croatia": {
+          "matches": 11,
+          "outcome_accuracy": 0.636
+        },
+        "Curaçao": {
+          "matches": 6,
+          "outcome_accuracy": 0.5
+        },
+        "Cyprus": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        },
+        "Czechia": {
+          "matches": 10,
+          "outcome_accuracy": 0.5
+        },
+        "Denmark": {
+          "matches": 3,
+          "outcome_accuracy": 0.333
+        },
+        "Dominican Republic": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Ecuador": {
+          "matches": 11,
+          "outcome_accuracy": 0.364
+        },
+        "Egypt": {
+          "matches": 13,
+          "outcome_accuracy": 0.385
+        },
+        "El Salvador": {
+          "matches": 3,
+          "outcome_accuracy": 0.667
+        },
+        "England": {
+          "matches": 11,
+          "outcome_accuracy": 0.727
+        },
+        "Equatorial Guinea": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Estonia": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Eswatini": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Faroe Islands": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Finland": {
+          "matches": 4,
+          "outcome_accuracy": 0.5
+        },
+        "France": {
+          "matches": 11,
+          "outcome_accuracy": 0.818
+        },
+        "Gabon": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        },
+        "Gambia": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        },
+        "Georgia": {
+          "matches": 3,
+          "outcome_accuracy": 1.0
+        },
+        "Germany": {
+          "matches": 10,
+          "outcome_accuracy": 1.0
+        },
+        "Ghana": {
+          "matches": 11,
+          "outcome_accuracy": 0.455
+        },
+        "Gibraltar": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Greece": {
+          "matches": 4,
+          "outcome_accuracy": 0.0
+        },
+        "Guatemala": {
+          "matches": 5,
+          "outcome_accuracy": 0.8
+        },
+        "Haiti": {
+          "matches": 11,
+          "outcome_accuracy": 0.545
+        },
+        "Honduras": {
+          "matches": 2,
+          "outcome_accuracy": 0.0
+        },
+        "Hungary": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        },
+        "Iceland": {
+          "matches": 6,
+          "outcome_accuracy": 0.333
+        },
+        "Indonesia": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Iran": {
+          "matches": 10,
+          "outcome_accuracy": 0.4
+        },
+        "Iraq": {
+          "matches": 11,
+          "outcome_accuracy": 0.545
+        },
+        "Israel": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Italy": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        },
+        "Ivory Coast": {
+          "matches": 11,
+          "outcome_accuracy": 0.364
+        },
+        "Jamaica": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Japan": {
+          "matches": 10,
+          "outcome_accuracy": 0.4
+        },
+        "Jordan": {
+          "matches": 10,
+          "outcome_accuracy": 0.7
+        },
+        "Kazakhstan": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Kosovo": {
+          "matches": 4,
+          "outcome_accuracy": 0.75
+        },
+        "Latvia": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Lebanon": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Libya": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Liechtenstein": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Lithuania": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Luxembourg": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Madagascar": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Mali": {
+          "matches": 5,
+          "outcome_accuracy": 0.4
+        },
+        "Malta": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Mauritania": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Mexico": {
+          "matches": 16,
+          "outcome_accuracy": 0.625
+        },
+        "Montenegro": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        },
+        "Morocco": {
+          "matches": 11,
+          "outcome_accuracy": 0.636
+        },
+        "Mozambique": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Netherlands": {
+          "matches": 10,
+          "outcome_accuracy": 0.6
+        },
+        "New Zealand": {
+          "matches": 10,
+          "outcome_accuracy": 0.6
+        },
+        "Nicaragua": {
+          "matches": 4,
+          "outcome_accuracy": 0.5
+        },
+        "Nigeria": {
+          "matches": 7,
+          "outcome_accuracy": 0.286
+        },
+        "North Macedonia": {
+          "matches": 3,
+          "outcome_accuracy": 0.333
+        },
+        "Northern Ireland": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Norway": {
+          "matches": 10,
+          "outcome_accuracy": 0.7
+        },
+        "Oman": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Panama": {
+          "matches": 11,
+          "outcome_accuracy": 0.455
+        },
+        "Paraguay": {
+          "matches": 10,
+          "outcome_accuracy": 0.6
+        },
+        "Peru": {
+          "matches": 5,
+          "outcome_accuracy": 0.8
+        },
+        "Poland": {
+          "matches": 3,
+          "outcome_accuracy": 0.333
+        },
+        "Portugal": {
+          "matches": 13,
+          "outcome_accuracy": 0.692
+        },
+        "Puerto Rico": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Qatar": {
+          "matches": 15,
+          "outcome_accuracy": 0.6
+        },
+        "Republic of Ireland": {
+          "matches": 5,
+          "outcome_accuracy": 0.4
+        },
+        "Romania": {
+          "matches": 3,
+          "outcome_accuracy": 0.333
+        },
+        "Russia": {
+          "matches": 3,
+          "outcome_accuracy": 0.667
+        },
+        "San Marino": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "Saudi Arabia": {
+          "matches": 10,
+          "outcome_accuracy": 0.4
+        },
+        "Scotland": {
+          "matches": 11,
+          "outcome_accuracy": 0.727
+        },
+        "Senegal": {
+          "matches": 12,
+          "outcome_accuracy": 0.667
+        },
+        "Serbia": {
+          "matches": 6,
+          "outcome_accuracy": 0.833
+        },
+        "Slovakia": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Slovenia": {
+          "matches": 3,
+          "outcome_accuracy": 0.333
+        },
+        "South Africa": {
+          "matches": 12,
+          "outcome_accuracy": 0.5
+        },
+        "South Korea": {
+          "matches": 10,
+          "outcome_accuracy": 0.4
+        },
+        "Spain": {
+          "matches": 10,
+          "outcome_accuracy": 0.6
+        },
+        "Sudan": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Sweden": {
+          "matches": 10,
+          "outcome_accuracy": 0.6
+        },
+        "Switzerland": {
+          "matches": 13,
+          "outcome_accuracy": 0.385
+        },
+        "Tanzania": {
+          "matches": 2,
+          "outcome_accuracy": 0.0
+        },
+        "Trinidad and Tobago": {
+          "matches": 1,
+          "outcome_accuracy": 0.0
+        },
+        "Tunisia": {
+          "matches": 12,
+          "outcome_accuracy": 0.417
+        },
+        "Türkiye": {
+          "matches": 10,
+          "outcome_accuracy": 0.7
+        },
+        "Uganda": {
+          "matches": 1,
+          "outcome_accuracy": 1.0
+        },
+        "Ukraine": {
+          "matches": 2,
+          "outcome_accuracy": 1.0
+        },
+        "United Arab Emirates": {
+          "matches": 3,
+          "outcome_accuracy": 0.333
+        },
+        "United States": {
+          "matches": 11,
+          "outcome_accuracy": 0.818
+        },
+        "Uruguay": {
+          "matches": 10,
+          "outcome_accuracy": 0.3
+        },
+        "Uzbekistan": {
+          "matches": 13,
+          "outcome_accuracy": 0.615
+        },
+        "Venezuela": {
+          "matches": 7,
+          "outcome_accuracy": 0.571
+        },
+        "Wales": {
+          "matches": 4,
+          "outcome_accuracy": 0.5
+        },
+        "Zambia": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        },
+        "Zimbabwe": {
+          "matches": 2,
+          "outcome_accuracy": 0.5
+        }
+      }
+    },
+    "source": "full-history-replay"
   }
 }

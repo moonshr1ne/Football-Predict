@@ -123,9 +123,19 @@
   },
   "César Arturo Ramos Palazuelos": {
     "name": "César Arturo Ramos Palazuelos",
-    "matches": 1,
-    "avg_fouls": 18.0,
+    "matches": 3,
+    "avg_fouls": 20.0,
     "recent": [
+      {
+        "date": "2026-06-24",
+        "match": "Brazil - Scotland",
+        "fouls": 21.0
+      },
+      {
+        "date": "2026-06-24",
+        "match": "Scotland - Brazil",
+        "fouls": 21.0
+      },
       {
         "date": "2026-06-16",
         "match": "Iran - New Zealand",
@@ -136,9 +146,14 @@
   },
   "Danny Makkelie": {
     "name": "Danny Makkelie",
-    "matches": 1,
-    "avg_fouls": 30.0,
+    "matches": 2,
+    "avg_fouls": 29.0,
     "recent": [
+      {
+        "date": "2026-06-24",
+        "match": "Morocco - Haiti",
+        "fouls": 28.0
+      },
       {
         "date": "2026-06-13",
         "match": "United States - Paraguay",
@@ -323,9 +338,14 @@
   },
   "Jesús Valenzuela": {
     "name": "Jesús Valenzuela",
-    "matches": 1,
-    "avg_fouls": 16.0,
+    "matches": 2,
+    "avg_fouls": 19.5,
     "recent": [
+      {
+        "date": "2026-06-24",
+        "match": "Bosnia-Herzegovina - Qatar",
+        "fouls": 23.0
+      },
       {
         "date": "2026-06-14",
         "match": "Australia - Türkiye",
@@ -468,9 +488,19 @@
   },
   "Ramon Abatti Abel": {
     "name": "Ramon Abatti Abel",
-    "matches": 1,
-    "avg_fouls": 30.0,
+    "matches": 3,
+    "avg_fouls": 31.33,
     "recent": [
+      {
+        "date": "2026-06-24",
+        "match": "Canada - Switzerland",
+        "fouls": 32.0
+      },
+      {
+        "date": "2026-06-24",
+        "match": "Switzerland - Canada",
+        "fouls": 32.0
+      },
       {
         "date": "2026-06-15",
         "match": "Belgium - Egypt",

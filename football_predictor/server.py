@@ -71,6 +71,18 @@ class PredictorHandler(SimpleHTTPRequestHandler):
             except Exception as exc:
                 self._json(400, {"error": str(exc)})
             return
+        if parsed.path == "/api/train":
+            try:
+                query = parse_qs(parsed.query)
+                epochs = int(query.get("epochs", ["2"])[0] or 2)
+                syncer = WorldCupDataSync(self.store)
+                sync_summary = syncer.sync_all(force=True)
+                summary = syncer.retrain_model_from_history(epochs=epochs)
+                summary["sync"] = sync_summary
+                self._json(200, summary)
+            except Exception as exc:
+                self._json(400, {"error": str(exc)})
+            return
         if parsed.path != "/api/result":
             self._json(404, {"error": "Not found"})
             return

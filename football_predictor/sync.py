@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import copy
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
-from .data_store import DataStore
+from .data_store import DEFAULT_MODEL_STATE, DataStore
 from .models import MatchRecord
 from .providers import EspnWorldCupProvider, ProviderError
 from .tactics import clamp01
@@ -281,18 +282,11 @@ class WorldCupDataSync:
 
         state = self.store.load_model_state()
         trained_keys = set(state.get("trained_match_keys", []))
-        matches = sorted(
-            [
-                match
-                for match in self.store.load_matches()
-                if match.source.startswith("espn") and match.is_finished()
-            ],
-            key=lambda item: (item.date, item.home_team, item.away_team),
-        )
+        matches = self._training_matches(espn_only=True)
         trained = 0
         past_matches: list[MatchRecord] = []
         for match in matches:
-            key = f"{match.date}|{match.home_team}|{match.away_team}"
+            key = self._match_key(match)
             if key in trained_keys:
                 past_matches.append(match)
                 continue
@@ -334,6 +328,176 @@ class WorldCupDataSync:
             trained += 1
             past_matches.append(match)
         return trained
+
+    def retrain_model_from_history(self, epochs: int = 2) -> dict[str, Any]:
+        from .learning import OnlineLearner
+        from .predictor import MatchPredictor
+
+        epochs = max(1, min(int(epochs or 1), 5))
+        matches = self._training_matches(espn_only=False)
+        started_at = datetime.now(timezone.utc).isoformat()
+        previous_state = self.store.load_model_state()
+        previous_backtest = self.store.load_backtest()
+        previous_score = self._training_score(previous_backtest) if previous_backtest else float("-inf")
+        state = copy.deepcopy(previous_state or DEFAULT_MODEL_STATE)
+        defaults = copy.deepcopy(DEFAULT_MODEL_STATE)
+        weights = defaults["weights"]
+        weights.update(state.get("weights", {}))
+        state["weights"] = weights
+        state["history"] = []
+        state["trained_match_keys"] = []
+        state["learning_rate"] = state.get("learning_rate", defaults.get("learning_rate", 0.08))
+        state["training"] = {
+            "mode": "full_history_replay",
+            "status": "running",
+            "epochs": epochs,
+            "unique_matches": len(matches),
+            "started_at": started_at,
+        }
+        self.store.save_model_state(state)
+
+        learner = OnlineLearner(self.store)
+        trained = 0
+        unique_keys = [self._match_key(match) for match in matches]
+        best_epoch = 0
+        best_score = float("-inf")
+        best_state: dict[str, Any] | None = None
+        best_backtest: dict[str, Any] | None = None
+        for epoch in range(1, epochs + 1):
+            past_matches: list[MatchRecord] = []
+            for match in matches:
+                baseline = MatchPredictor(self.store).predict(
+                    match.home_team,
+                    match.away_team,
+                    neutral=match.neutral,
+                    remember=False,
+                    matches_override=past_matches,
+                ).to_dict()
+                learner.record_result(
+                    home_team=match.home_team,
+                    away_team=match.away_team,
+                    date=match.date,
+                    home_goals=int(match.home_goals or 0),
+                    away_goals=int(match.away_goals or 0),
+                    home_corners=match.home_corners,
+                    away_corners=match.away_corners,
+                    home_possession=match.home_possession,
+                    away_possession=match.away_possession,
+                    home_shots=match.home_shots,
+                    away_shots=match.away_shots,
+                    home_shots_on_target=match.home_shots_on_target,
+                    away_shots_on_target=match.away_shots_on_target,
+                    home_fouls=match.home_fouls,
+                    away_fouls=match.away_fouls,
+                    referee=match.referee,
+                    competition=match.competition,
+                    stage=match.stage,
+                    neutral=match.neutral,
+                    source=match.source,
+                    baseline_prediction=baseline,
+                    store_match=False,
+                    training_mode="full_history_replay",
+                    training_epoch=epoch,
+                    training_key=self._match_key(match),
+                )
+                trained += 1
+                past_matches.append(match)
+
+            epoch_state = self.store.load_model_state()
+            epoch_state["trained_match_keys"] = sorted(set(unique_keys))
+            epoch_state["training"] = {
+                "mode": "full_history_replay",
+                "status": "epoch_complete",
+                "epochs": epoch,
+                "requested_epochs": epochs,
+                "unique_matches": len(matches),
+                "training_reviews": epoch * len(matches),
+                "started_at": started_at,
+                "completed_at": datetime.now(timezone.utc).isoformat(),
+            }
+            self.store.save_model_state(epoch_state)
+            epoch_backtest = self._save_backtest_summary()
+            epoch_score = self._training_score(epoch_backtest)
+            if epoch_score > best_score:
+                best_epoch = epoch
+                best_score = epoch_score
+                best_state = copy.deepcopy(epoch_state)
+                best_backtest = copy.deepcopy(epoch_backtest)
+
+        if best_state is not None:
+            self.store.save_model_state(best_state)
+        state = self.store.load_model_state()
+        state["trained_match_keys"] = sorted(set(unique_keys))
+        state["training"] = {
+            "mode": "full_history_replay",
+            "status": "complete",
+            "epochs": best_epoch or epochs,
+            "requested_epochs": epochs,
+            "unique_matches": len(matches),
+            "training_reviews": (best_epoch or epochs) * len(matches),
+            "attempted_training_reviews": trained,
+            "started_at": started_at,
+            "completed_at": datetime.now(timezone.utc).isoformat(),
+        }
+        self.store.save_model_state(state)
+        backtest = self._save_backtest_summary()
+        if best_backtest is not None:
+            backtest = self.store.load_backtest()
+        kept_previous = False
+        candidate_score = self._training_score(backtest)
+        if previous_state and previous_backtest and previous_score > candidate_score:
+            kept_previous = True
+            previous_state = copy.deepcopy(previous_state)
+            previous_training = previous_state.setdefault("training", {})
+            previous_training["last_attempt"] = {
+                "mode": "full_history_replay",
+                "status": "discarded_candidate",
+                "requested_epochs": epochs,
+                "candidate_epochs": best_epoch or epochs,
+                "candidate_score": round(candidate_score, 4),
+                "previous_score": round(previous_score, 4),
+                "completed_at": datetime.now(timezone.utc).isoformat(),
+            }
+            self.store.save_model_state(previous_state)
+            self.store.save_backtest(previous_backtest)
+            backtest = previous_backtest
+        summary = {
+            "trained": trained,
+            "unique_matches": len(matches),
+            "epochs": best_epoch or epochs,
+            "requested_epochs": epochs,
+            "kept_previous": kept_previous,
+            "backtest": backtest,
+            "source": "full-history-replay",
+        }
+        sync_state = self.store.load_sync_state()
+        sync_state["last_retrain_at"] = state["training"]["completed_at"]
+        sync_state["last_retrain"] = summary
+        sync_state["backtest"] = backtest
+        self.store.save_sync_state(sync_state)
+        return summary
+
+    def _training_matches(self, espn_only: bool = False) -> list[MatchRecord]:
+        matches = []
+        for match in self.store.load_matches():
+            if not match.is_finished() or match.source == "demo_seed":
+                continue
+            if espn_only and not match.source.startswith("espn"):
+                continue
+            matches.append(match)
+        return sorted(matches, key=lambda item: (item.date, item.home_team, item.away_team))
+
+    @staticmethod
+    def _match_key(match: MatchRecord) -> str:
+        return f"{match.date}|{match.home_team}|{match.away_team}"
+
+    @staticmethod
+    def _training_score(backtest: dict[str, Any]) -> float:
+        outcome = float(backtest.get("outcome_accuracy") or 0.0)
+        exact = float(backtest.get("exact_score_accuracy") or 0.0)
+        corner = float(backtest.get("corner_mae") or 9.0)
+        foul = float(backtest.get("foul_mae") or 12.0)
+        return outcome * 2.2 + exact * 3.2 - corner * 0.035 - foul * 0.015
 
     def _save_backtest_summary(self) -> dict[str, Any]:
         state = self.store.load_model_state()
@@ -383,6 +547,7 @@ class WorldCupDataSync:
                 "foul_mae": foul_mae is not None and foul_mae <= targets["foul_mae"],
             },
             "trained_match_keys": len(state.get("trained_match_keys", [])),
+            "training": state.get("training", {}),
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "by_team": {
                 team: {

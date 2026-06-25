@@ -57,6 +57,10 @@ def build_parser() -> argparse.ArgumentParser:
     sync = subparsers.add_parser("sync-world-cup", help="Загрузить прошедшие матчи ЧМ-2026 и обновить тактические профили.")
     sync.add_argument("--json", action="store_true")
 
+    train = subparsers.add_parser("train", help="Переобучить модель на всей накопленной истории матчей.")
+    train.add_argument("--epochs", type=int, default=2, help="Сколько раз прогнать историю, по умолчанию 2.")
+    train.add_argument("--json", action="store_true")
+
     watch = subparsers.add_parser("watch", help="Постоянно проверять очередь прогнозов и обучаться.")
     watch.add_argument("--interval", type=int, default=3600, help="Пауза между проверками в секундах.")
     watch.add_argument("--limit", type=int, default=25)
@@ -178,6 +182,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "sync-world-cup":
         summary = WorldCupDataSync(store).sync_all(force=True)
         print(json.dumps(summary, ensure_ascii=False, indent=2) if args.json else _sync_text(summary))
+        return 0
+
+    if args.command == "train":
+        syncer = WorldCupDataSync(store)
+        sync_summary = syncer.sync_all(force=True)
+        summary = syncer.retrain_model_from_history(epochs=args.epochs)
+        summary["sync"] = sync_summary
+        print(json.dumps(summary, ensure_ascii=False, indent=2) if args.json else _train_text(summary))
         return 0
 
     if args.command == "watch":
@@ -418,6 +430,18 @@ def _sync_text(summary: dict) -> str:
         f"матчей ЧМ {summary['imported']}, "
         f"тактических профилей {summary['profiles_updated']}, "
         f"обучающих матчей {summary.get('trained', 0)}."
+    )
+
+
+def _train_text(summary: dict) -> str:
+    backtest = summary.get("backtest", {})
+    kept = " Сохранена предыдущая версия: новая попытка была слабее." if summary.get("kept_previous") else ""
+    return (
+        f"Модель дообучена: {summary.get('unique_matches', 0)} матчей, "
+        f"{summary.get('epochs', 1)} эпохи, {summary.get('trained', 0)} тренировочных прогонов. "
+        f"Бэктест: исходы {float(backtest.get('outcome_accuracy', 0)):.1%}, "
+        f"точные счета {float(backtest.get('exact_score_accuracy', 0)):.1%}, "
+        f"ошибка угловых {backtest.get('corner_mae', 'нет')}.{kept}"
     )
 
 

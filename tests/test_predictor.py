@@ -12,7 +12,7 @@ from football_predictor.learning import OnlineLearner
 from football_predictor.models import MatchRecord, TeamStats
 from football_predictor.predictor import MatchPredictor
 from football_predictor.providers import EspnWorldCupProvider
-from football_predictor.sync import formation_guess
+from football_predictor.sync import WorldCupDataSync, formation_guess
 
 
 def make_store(tmp_dir):
@@ -295,6 +295,23 @@ class PredictorTests(unittest.TestCase):
             review = OnlineLearner(store).record_result("England", "Ghana", "2099-01-01", 2, 1, corners_total=10)
             self.assertEqual(review["actual_score"], "2-1")
             self.assertIn("outcome_hit", review)
+
+    def test_full_history_retrain_replays_matches(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = DataStore(Path(tmp_dir) / "project")
+            store.save_matches(
+                [
+                    MatchRecord("2099-01-01", "A", "B", home_goals=2, away_goals=0, home_corners=5, away_corners=3, source="espn-world-cup"),
+                    MatchRecord("2099-01-02", "C", "D", home_goals=1, away_goals=1, home_corners=4, away_corners=4, source="espn-world-cup"),
+                ]
+            )
+            summary = WorldCupDataSync(store).retrain_model_from_history(epochs=2)
+            state = store.load_model_state()
+            self.assertEqual(summary["unique_matches"], 2)
+            self.assertEqual(summary["trained"], 4)
+            self.assertEqual(len(state["trained_match_keys"]), 2)
+            self.assertEqual(state["training"]["epochs"], 2)
+            self.assertEqual(store.load_backtest()["matches"], 4)
 
     def test_auto_checker_reviews_pending_prediction(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

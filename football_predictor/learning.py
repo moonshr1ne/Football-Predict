@@ -43,6 +43,10 @@ class OnlineLearner:
         neutral: bool = True,
         source: str = "manual_result",
         baseline_prediction: dict | None = None,
+        store_match: bool = True,
+        training_mode: str | None = None,
+        training_epoch: int | None = None,
+        training_key: str | None = None,
     ) -> dict:
         prediction = baseline_prediction or MatchPredictor(self.store).predict(
             home_team,
@@ -130,34 +134,41 @@ class OnlineLearner:
             "foul_error": None if foul_error is None else round(foul_error, 2),
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
+        if training_mode:
+            review["training_mode"] = training_mode
+        if training_epoch is not None:
+            review["training_epoch"] = training_epoch
+        if training_key:
+            review["training_key"] = training_key
         state.setdefault("history", []).append(review)
-        state["history"] = state["history"][-1000:]
+        state["history"] = state["history"][-5000:]
         self.store.save_model_state(state)
 
-        self.store.add_or_update_match(
-            MatchRecord(
-                date=date,
-                home_team=home_team,
-                away_team=away_team,
-                home_goals=home_goals,
-                away_goals=away_goals,
-                home_corners=home_corners,
-                away_corners=away_corners,
-                home_possession=home_possession,
-                away_possession=away_possession,
-                home_shots=home_shots,
-                away_shots=away_shots,
-                home_shots_on_target=home_shots_on_target,
-                away_shots_on_target=away_shots_on_target,
-                home_fouls=home_fouls,
-                away_fouls=away_fouls,
-                referee=referee,
-                competition=competition,
-                stage=stage,
-                neutral=neutral,
-                source=source,
+        if store_match:
+            self.store.add_or_update_match(
+                MatchRecord(
+                    date=date,
+                    home_team=home_team,
+                    away_team=away_team,
+                    home_goals=home_goals,
+                    away_goals=away_goals,
+                    home_corners=home_corners,
+                    away_corners=away_corners,
+                    home_possession=home_possession,
+                    away_possession=away_possession,
+                    home_shots=home_shots,
+                    away_shots=away_shots,
+                    home_shots_on_target=home_shots_on_target,
+                    away_shots_on_target=away_shots_on_target,
+                    home_fouls=home_fouls,
+                    away_fouls=away_fouls,
+                    referee=referee,
+                    competition=competition,
+                    stage=stage,
+                    neutral=neutral,
+                    source=source,
+                )
             )
-        )
         return review
 
     @staticmethod

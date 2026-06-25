@@ -29,7 +29,7 @@
         "date": "2026-06-22",
         "opponent": "Austria",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -42,35 +42,41 @@
   },
   "Brazil": {
     "formation": "4-3-3",
-    "style": "balanced tournament football",
+    "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
-    "defensive_block": "mid",
+    "defensive_block": "high",
     "possession_intent": 0.541,
-    "pressing": 0.617,
-    "line_height": 0.605,
-    "defensive_solidity": 0.448,
-    "attack_width": 0.599,
-    "central_progression": 0.656,
-    "directness": 0.402,
-    "chance_creation": 0.726,
-    "transition_attack": 0.735,
-    "transition_defense": 0.731,
-    "set_piece_threat": 0.647,
-    "tempo": 0.634,
-    "sample_size": 2,
+    "pressing": 0.702,
+    "line_height": 0.622,
+    "defensive_solidity": 0.449,
+    "attack_width": 0.642,
+    "central_progression": 0.718,
+    "directness": 0.488,
+    "chance_creation": 0.887,
+    "transition_attack": 0.822,
+    "transition_defense": 0.699,
+    "set_piece_threat": 0.71,
+    "tempo": 0.733,
+    "sample_size": 4,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 4 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.86,
+    "formation_confidence": 0.92,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Scotland",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-20",
         "opponent": "Haiti",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-13",
@@ -111,7 +117,7 @@
         "date": "2026-06-23",
         "opponent": "Ghana",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -152,13 +158,13 @@
         "date": "2026-06-22",
         "opponent": "Iraq",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-16",
         "opponent": "Senegal",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -193,7 +199,7 @@
         "date": "2026-06-20",
         "opponent": "Ivory Coast",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
@@ -234,7 +240,7 @@
         "date": "2026-06-23",
         "opponent": "England",
         "formation": "4-1-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -275,7 +281,7 @@
         "date": "2026-06-19",
         "opponent": "South Korea",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-11",
@@ -316,7 +322,7 @@
         "date": "2026-06-20",
         "opponent": "Sweden",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
@@ -357,7 +363,7 @@
         "date": "2026-06-23",
         "opponent": "Uzbekistan",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -398,7 +404,7 @@
         "date": "2026-06-19",
         "opponent": "Mexico",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-12",
@@ -439,13 +445,13 @@
         "date": "2026-06-21",
         "opponent": "Saudi Arabia",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Cape Verde",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -480,7 +486,7 @@
         "date": "2026-06-19",
         "opponent": "Australia",
         "formation": "3-5-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-13",
@@ -521,13 +527,13 @@
         "date": "2026-06-21",
         "opponent": "Cape Verde",
         "formation": "4-1-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Saudi Arabia",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -562,7 +568,7 @@
         "date": "2026-06-18",
         "opponent": "Czechia",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-11",
@@ -575,35 +581,41 @@
   },
   "Canada": {
     "formation": "4-4-2",
-    "style": "possession control",
-    "build_up": "short build-up and positional control",
+    "style": "pressing and territory",
+    "build_up": "mixed build-up",
     "primary_attack": "wide attacks and corners",
     "defensive_block": "high",
-    "possession_intent": 0.704,
-    "pressing": 0.782,
-    "line_height": 0.662,
-    "defensive_solidity": 0.609,
-    "attack_width": 0.967,
-    "central_progression": 0.768,
-    "directness": 0.53,
-    "chance_creation": 1.0,
-    "transition_attack": 0.961,
-    "transition_defense": 0.828,
-    "set_piece_threat": 1.0,
-    "tempo": 0.727,
-    "sample_size": 2,
+    "possession_intent": 0.566,
+    "pressing": 0.723,
+    "line_height": 0.629,
+    "defensive_solidity": 0.41,
+    "attack_width": 0.813,
+    "central_progression": 0.723,
+    "directness": 0.503,
+    "chance_creation": 0.884,
+    "transition_attack": 0.781,
+    "transition_defense": 0.723,
+    "set_piece_threat": 0.834,
+    "tempo": 0.668,
+    "sample_size": 4,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 4 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.86,
+    "formation_confidence": 0.92,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Switzerland",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-18",
         "opponent": "Qatar",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-12",
@@ -620,31 +632,37 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.383,
-    "pressing": 0.586,
-    "line_height": 0.575,
-    "defensive_solidity": 0.0,
-    "attack_width": 0.539,
-    "central_progression": 0.548,
-    "directness": 0.408,
-    "chance_creation": 0.568,
-    "transition_attack": 0.607,
-    "transition_defense": 0.411,
-    "set_piece_threat": 0.546,
-    "tempo": 0.623,
-    "sample_size": 2,
+    "possession_intent": 0.441,
+    "pressing": 0.618,
+    "line_height": 0.59,
+    "defensive_solidity": 0.075,
+    "attack_width": 0.561,
+    "central_progression": 0.587,
+    "directness": 0.427,
+    "chance_creation": 0.665,
+    "transition_attack": 0.701,
+    "transition_defense": 0.468,
+    "set_piece_threat": 0.6,
+    "tempo": 0.639,
+    "sample_size": 3,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 3 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.86,
+    "formation_confidence": 0.89,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Qatar",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-18",
         "opponent": "Switzerland",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-12",
@@ -685,7 +703,7 @@
         "date": "2026-06-18",
         "opponent": "South Africa",
         "formation": "3-5-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-12",
@@ -701,32 +719,38 @@
     "style": "pressing and territory",
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
-    "defensive_block": "mid",
-    "possession_intent": 0.539,
-    "pressing": 0.66,
-    "line_height": 0.613,
-    "defensive_solidity": 0.491,
-    "attack_width": 0.542,
-    "central_progression": 0.584,
-    "directness": 0.446,
-    "chance_creation": 0.637,
-    "transition_attack": 0.617,
-    "transition_defense": 0.741,
-    "set_piece_threat": 0.548,
-    "tempo": 0.653,
-    "sample_size": 2,
+    "defensive_block": "high",
+    "possession_intent": 0.593,
+    "pressing": 0.7,
+    "line_height": 0.629,
+    "defensive_solidity": 0.37,
+    "attack_width": 0.62,
+    "central_progression": 0.688,
+    "directness": 0.474,
+    "chance_creation": 0.821,
+    "transition_attack": 0.758,
+    "transition_defense": 0.69,
+    "set_piece_threat": 0.667,
+    "tempo": 0.694,
+    "sample_size": 3,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 3 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.86,
+    "formation_confidence": 0.89,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Haiti",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-19",
         "opponent": "Scotland",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-13",
@@ -743,31 +767,37 @@
     "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.263,
-    "pressing": 0.565,
-    "line_height": 0.552,
+    "possession_intent": 0.332,
+    "pressing": 0.582,
+    "line_height": 0.566,
     "defensive_solidity": 0.0,
-    "attack_width": 0.479,
-    "central_progression": 0.465,
-    "directness": 0.414,
-    "chance_creation": 0.465,
-    "transition_attack": 0.544,
-    "transition_defense": 0.31,
-    "set_piece_threat": 0.47,
-    "tempo": 0.793,
-    "sample_size": 2,
+    "attack_width": 0.522,
+    "central_progression": 0.503,
+    "directness": 0.416,
+    "chance_creation": 0.513,
+    "transition_attack": 0.567,
+    "transition_defense": 0.362,
+    "set_piece_threat": 0.515,
+    "tempo": 0.748,
+    "sample_size": 3,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 3 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.86,
+    "formation_confidence": 0.89,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Bosnia-Herzegovina",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-18",
         "opponent": "Canada",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-13",
@@ -779,36 +809,42 @@
     "estimated_formation": "5-4-1"
   },
   "Switzerland": {
-    "formation": "4-5-1",
-    "style": "possession control",
-    "build_up": "short build-up and positional control",
+    "formation": "4-3-3",
+    "style": "pressing and territory",
+    "build_up": "mixed build-up",
     "primary_attack": "quick transitions",
-    "defensive_block": "high",
-    "possession_intent": 0.65,
-    "pressing": 0.737,
-    "line_height": 0.645,
-    "defensive_solidity": 0.477,
-    "attack_width": 0.738,
-    "central_progression": 0.748,
-    "directness": 0.498,
-    "chance_creation": 0.925,
-    "transition_attack": 0.824,
-    "transition_defense": 0.747,
-    "set_piece_threat": 0.789,
-    "tempo": 0.689,
-    "sample_size": 2,
+    "defensive_block": "mid",
+    "possession_intent": 0.598,
+    "pressing": 0.641,
+    "line_height": 0.618,
+    "defensive_solidity": 0.357,
+    "attack_width": 0.599,
+    "central_progression": 0.685,
+    "directness": 0.414,
+    "chance_creation": 0.777,
+    "transition_attack": 0.766,
+    "transition_defense": 0.649,
+    "set_piece_threat": 0.659,
+    "tempo": 0.65,
+    "sample_size": 4,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 4 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.715,
+    "formation_confidence": 0.82,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Canada",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-18",
         "opponent": "Bosnia-Herzegovina",
         "formation": "4-5-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-13",
@@ -849,7 +885,7 @@
         "date": "2026-06-20",
         "opponent": "Türkiye",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-13",
@@ -890,13 +926,13 @@
         "date": "2026-06-19",
         "opponent": "United States",
         "formation": "5-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
         "opponent": "Türkiye",
         "formation": "5-4-1",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -931,13 +967,13 @@
         "date": "2026-06-20",
         "opponent": "Paraguay",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
         "opponent": "Australia",
         "formation": "4-3-3",
-        "source": "match-record"
+        "source": "confirmed-lineup"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -972,7 +1008,7 @@
         "date": "2026-06-21",
         "opponent": "Ecuador",
         "formation": "5-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
@@ -984,36 +1020,42 @@
     "estimated_formation": "5-4-1"
   },
   "Haiti": {
-    "formation": "5-4-1",
+    "formation": "4-4-2",
     "style": "pressing and territory",
     "build_up": "mixed build-up",
-    "primary_attack": "central progression",
+    "primary_attack": "quick transitions",
     "defensive_block": "mid",
-    "possession_intent": 0.483,
-    "pressing": 0.637,
-    "line_height": 0.6,
-    "defensive_solidity": 0.158,
-    "attack_width": 0.56,
-    "central_progression": 0.567,
-    "directness": 0.436,
-    "chance_creation": 0.549,
-    "transition_attack": 0.489,
-    "transition_defense": 0.564,
+    "possession_intent": 0.421,
+    "pressing": 0.635,
+    "line_height": 0.59,
+    "defensive_solidity": 0.0,
+    "attack_width": 0.517,
+    "central_progression": 0.541,
+    "directness": 0.448,
+    "chance_creation": 0.58,
+    "transition_attack": 0.582,
+    "transition_defense": 0.448,
     "set_piece_threat": 0.513,
-    "tempo": 0.622,
-    "sample_size": 2,
+    "tempo": 0.674,
+    "sample_size": 3,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 3 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.715,
+    "formation_confidence": 0.79,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Morocco",
+        "formation": "4-4-2",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-20",
         "opponent": "Brazil",
         "formation": "5-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
@@ -1026,35 +1068,41 @@
   },
   "Scotland": {
     "formation": "4-4-2",
-    "style": "balanced tournament football",
+    "style": "pressing and territory",
     "build_up": "mixed build-up",
-    "primary_attack": "quick transitions",
+    "primary_attack": "wide attacks and corners",
     "defensive_block": "mid",
-    "possession_intent": 0.436,
-    "pressing": 0.594,
-    "line_height": 0.584,
-    "defensive_solidity": 0.349,
-    "attack_width": 0.499,
-    "central_progression": 0.507,
-    "directness": 0.404,
-    "chance_creation": 0.497,
-    "transition_attack": 0.541,
-    "transition_defense": 0.654,
-    "set_piece_threat": 0.487,
-    "tempo": 0.641,
-    "sample_size": 2,
+    "possession_intent": 0.449,
+    "pressing": 0.643,
+    "line_height": 0.596,
+    "defensive_solidity": 0.0,
+    "attack_width": 0.597,
+    "central_progression": 0.573,
+    "directness": 0.45,
+    "chance_creation": 0.579,
+    "transition_attack": 0.52,
+    "transition_defense": 0.442,
+    "set_piece_threat": 0.555,
+    "tempo": 0.736,
+    "sample_size": 4,
     "source": "espn-world-cup-derived",
     "notes": [
-      "Estimated from 2 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
+      "Estimated from 4 recent rich match(es); lineup formations override stat estimates when ESPN rosters are available."
     ],
     "formation_source": "confirmed-lineups-last-matches",
-    "formation_confidence": 0.86,
+    "formation_confidence": 0.812,
     "formation_history": [
+      {
+        "date": "2026-06-24",
+        "opponent": "Brazil",
+        "formation": "4-3-3",
+        "source": "match-record"
+      },
       {
         "date": "2026-06-19",
         "opponent": "Morocco",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
@@ -1095,13 +1143,13 @@
         "date": "2026-06-20",
         "opponent": "Germany",
         "formation": "4-1-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
         "opponent": "Ecuador",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1136,13 +1184,13 @@
         "date": "2026-06-21",
         "opponent": "Curaçao",
         "formation": "3-5-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
         "opponent": "Ivory Coast",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1177,7 +1225,7 @@
         "date": "2026-06-21",
         "opponent": "Tunisia",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-14",
@@ -1218,13 +1266,13 @@
         "date": "2026-06-21",
         "opponent": "Iran",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Egypt",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1259,13 +1307,13 @@
         "date": "2026-06-22",
         "opponent": "New Zealand",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Belgium",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1300,13 +1348,13 @@
         "date": "2026-06-21",
         "opponent": "Spain",
         "formation": "5-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Uruguay",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -1341,13 +1389,13 @@
         "date": "2026-06-21",
         "opponent": "Uruguay",
         "formation": "4-1-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Spain",
         "formation": "4-1-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -1382,13 +1430,13 @@
         "date": "2026-06-20",
         "opponent": "Netherlands",
         "formation": "3-5-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Tunisia",
         "formation": "3-5-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1423,13 +1471,13 @@
         "date": "2026-06-21",
         "opponent": "Japan",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-15",
         "opponent": "Sweden",
         "formation": "5-3-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1464,13 +1512,13 @@
         "date": "2026-06-23",
         "opponent": "Norway",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-16",
         "opponent": "France",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"
@@ -1505,13 +1553,13 @@
         "date": "2026-06-21",
         "opponent": "Belgium",
         "formation": "5-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-16",
         "opponent": "New Zealand",
         "formation": "4-4-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1546,13 +1594,13 @@
         "date": "2026-06-22",
         "opponent": "Egypt",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-16",
         "opponent": "Iran",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-2-3-1"
@@ -1587,7 +1635,7 @@
         "date": "2026-06-22",
         "opponent": "France",
         "formation": "4-1-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-16",
@@ -1628,7 +1676,7 @@
         "date": "2026-06-23",
         "opponent": "Senegal",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-16",
@@ -1669,7 +1717,7 @@
         "date": "2026-06-23",
         "opponent": "Jordan",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -1710,7 +1758,7 @@
         "date": "2026-06-22",
         "opponent": "Argentina",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -1751,7 +1799,7 @@
         "date": "2026-06-23",
         "opponent": "Algeria",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -1792,7 +1840,7 @@
         "date": "2026-06-23",
         "opponent": "Panama",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -1833,7 +1881,7 @@
         "date": "2026-06-23",
         "opponent": "Croatia",
         "formation": "5-4-1",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -1874,7 +1922,7 @@
         "date": "2026-06-24",
         "opponent": "Colombia",
         "formation": "5-3-2",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-17",
@@ -1915,13 +1963,13 @@
         "date": "2026-06-23",
         "opponent": "Portugal",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-18",
         "opponent": "Colombia",
         "formation": "3-4-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "5-4-1"
@@ -1956,13 +2004,13 @@
         "date": "2026-06-24",
         "opponent": "Congo DR",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       },
       {
         "date": "2026-06-18",
         "opponent": "Uzbekistan",
         "formation": "4-3-3",
-        "source": "confirmed-lineup"
+        "source": "match-record"
       }
     ],
     "estimated_formation": "4-3-3"

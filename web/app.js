@@ -19,6 +19,32 @@ document.querySelector("#auto-check").addEventListener("click", async () => {
     `Проверено: ${data.checked}, обучено: ${data.learned}, ожидают: ${data.pending}, ошибок: ${data.errors}.`;
 });
 
+document.querySelector("#train-model")?.addEventListener("click", async () => {
+  const button = document.querySelector("#train-model");
+  const status = document.querySelector("#train-status");
+  button.disabled = true;
+  status.textContent = "Обучаю модель на прошлых матчах...";
+  try {
+    const response = await fetch("/api/train?epochs=2", {
+      method: "POST",
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      status.textContent = data.error || "Ошибка обучения";
+      return;
+    }
+    const backtest = data.backtest || {};
+    const kept = data.kept_previous ? " Предыдущая версия оставлена, новая попытка была слабее." : "";
+    status.textContent =
+      `Готово: ${data.unique_matches} матчей, ${data.epochs} эпохи, исходы ${probability(backtest.outcome_accuracy)}, точные счета ${probability(backtest.exact_score_accuracy)}.${kept}`;
+    await runPrediction(false);
+  } catch (error) {
+    status.textContent = error.message || "Ошибка обучения";
+  } finally {
+    button.disabled = false;
+  }
+});
+
 async function getJson(url) {
   const response = await fetch(url);
   const data = await response.json();
@@ -257,6 +283,7 @@ function dataQualityBlock(quality) {
   const backtest = quality.backtest || {};
   const targets = backtest.targets || {};
   const targetStatus = backtest.target_status || {};
+  const training = backtest.training || {};
   return `
     <table>
       <tr><th>Общая база</th><td>${percent(quality.score)}</td><th>Участники ЧМ</th><td>${quality.participants || 0}</td></tr>
@@ -264,6 +291,7 @@ function dataQualityBlock(quality) {
       <tr><th>Бэктест</th><td>${backtest.matches || 0} матчей</td><th>Исходы</th><td>${backtest.outcome_accuracy == null ? "нет" : percent(backtest.outcome_accuracy)}</td></tr>
       <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"}</td></tr>
       <tr><th>Фолы выборка</th><td>${quality.home_foul_samples || 0} / ${quality.away_foul_samples || 0}</td><th>Ошибка фолов</th><td>${backtest.foul_mae ?? "нет"}</td></tr>
+      <tr><th>Обучение</th><td>${training.unique_matches || backtest.trained_match_keys || 0} матчей</td><th>Эпохи</th><td>${training.epochs || 1}</td></tr>
       <tr><th>Цель исходов</th><td>${targetCell(backtest.outcome_accuracy, targets.outcome_accuracy, targetStatus.outcome_accuracy, "higher")}</td><th>Цель счетов</th><td>${targetCell(backtest.exact_score_accuracy, targets.exact_score_accuracy, targetStatus.exact_score_accuracy, "higher")}</td></tr>
       <tr><th>Цель угловых</th><td>${targetCell(backtest.corner_mae, targets.corner_mae, targetStatus.corner_mae, "lower", false)}</td><th>Угл. ±1</th><td>${backtest.corner_within_one_rate == null ? "нет" : probability(backtest.corner_within_one_rate)}</td></tr>
     </table>

@@ -134,12 +134,13 @@ class DataStore:
         self.predictions_path = self.data_dir / "predictions.json"
         self.key_players_path = self.data_dir / "key_players.json"
         self.referees_path = self.data_dir / "referees.json"
-        self.resolver = TeamResolver(self.alias_path)
         self._ensure_files()
+        self.resolver = TeamResolver(self.alias_path)
 
     def _ensure_files(self) -> None:
         self.data_dir.mkdir(parents=True, exist_ok=True)
         for path, default in (
+            (self.alias_path, {}),
             (self.matches_path, []),
             (self.context_path, {}),
             (self.match_context_path, DEFAULT_MATCH_CONTEXT),
