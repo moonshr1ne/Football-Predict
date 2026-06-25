@@ -31,8 +31,8 @@ class PredictorTests(unittest.TestCase):
             home, away = parse_matchup("Англия, Гана", store.resolver)
             prediction = MatchPredictor(store).predict(home, away, remember=False)
             self.assertIn(prediction.market_pick, {"П1", "X", "П2"})
-            self.assertEqual(len(prediction.exact_scores), 3)
-            self.assertEqual(len(prediction.exact_score_probabilities), 3)
+            self.assertEqual(len(prediction.exact_scores), 1)
+            self.assertEqual(len(prediction.exact_score_probabilities), 1)
             self.assertIn("1X", {item["code"] for item in prediction.markets})
             self.assertIn("X2", {item["code"] for item in prediction.markets})
             self.assertGreater(prediction.predicted_corners, 0)
@@ -230,7 +230,8 @@ class PredictorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)
             prediction = MatchPredictor(store).predict("Argentina", "Algeria", remember=False)
-            self.assertIn("2-0", prediction.exact_scores)
+            self.assertEqual(len(prediction.exact_scores), 1)
+            self.assertEqual(prediction.exact_score_probabilities[0]["outcome"], prediction.market_pick)
 
     def test_formation_guess_has_defensive_and_possession_shapes(self):
         self.assertEqual(
@@ -311,7 +312,7 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(summary["trained"], 4)
             self.assertEqual(len(state["trained_match_keys"]), 2)
             self.assertEqual(state["training"]["epochs"], 2)
-            self.assertEqual(store.load_backtest()["matches"], 4)
+            self.assertEqual(store.load_backtest()["matches"], 2)
 
     def test_auto_checker_reviews_pending_prediction(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

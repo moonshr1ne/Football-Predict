@@ -203,9 +203,14 @@
   },
   "Facundo Tello": {
     "name": "Facundo Tello",
-    "matches": 1,
-    "avg_fouls": 30.0,
+    "matches": 2,
+    "avg_fouls": 23.0,
     "recent": [
+      {
+        "date": "2026-06-25",
+        "match": "South Africa - South Korea",
+        "fouls": 16.0
+      },
       {
         "date": "2026-06-12",
         "match": "Canada - Bosnia-Herzegovina",
@@ -242,9 +247,19 @@
   },
   "Glenn Nyberg": {
     "name": "Glenn Nyberg",
-    "matches": 1,
-    "avg_fouls": 20.0,
+    "matches": 3,
+    "avg_fouls": 18.0,
     "recent": [
+      {
+        "date": "2026-06-25",
+        "match": "Curaçao - Ivory Coast",
+        "fouls": 17.0
+      },
+      {
+        "date": "2026-06-25",
+        "match": "Ivory Coast - Curaçao",
+        "fouls": 17.0
+      },
       {
         "date": "2026-06-17",
         "match": "Ghana - Panama",
@@ -555,9 +570,14 @@
   },
   "Tori Penso": {
     "name": "Tori Penso",
-    "matches": 1,
-    "avg_fouls": 22.0,
+    "matches": 2,
+    "avg_fouls": 23.5,
     "recent": [
+      {
+        "date": "2026-06-25",
+        "match": "Ecuador - Germany",
+        "fouls": 25.0
+      },
       {
         "date": "2026-06-18",
         "match": "Czechia - South Africa",
@@ -586,9 +606,14 @@
   },
   "Yael Falcón Pérez": {
     "name": "Yael Falcón Pérez",
-    "matches": 1,
-    "avg_fouls": 18.0,
+    "matches": 2,
+    "avg_fouls": 20.0,
     "recent": [
+      {
+        "date": "2026-06-25",
+        "match": "Czechia - Mexico",
+        "fouls": 22.0
+      },
       {
         "date": "2026-06-15",
         "match": "Sweden - Tunisia",

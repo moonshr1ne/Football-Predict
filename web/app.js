@@ -25,7 +25,7 @@ document.querySelector("#train-model")?.addEventListener("click", async () => {
   button.disabled = true;
   status.textContent = "Обучаю модель на прошлых матчах...";
   try {
-    const response = await fetch("/api/train?epochs=2", {
+    const response = await fetch("/api/train?epochs=80", {
       method: "POST",
     });
     const data = await response.json();
@@ -74,7 +74,7 @@ function renderPrediction(data) {
       ${goalTotalBlock(data.goal_total)}
     </article>
     <article class="card">
-      <h3>Точные счета</h3>
+      <h3>Точный счет</h3>
       <div class="pill-row">${scorePills(data)}</div>
     </article>
     <article class="card">
@@ -339,7 +339,7 @@ function resultSummaryBlock(data) {
   const predictedFouls = predicted.fouls?.expected ?? data.foul_forecast?.expected;
   const predictedLine = `<p><strong>Предикт:</strong> ${escapeHtml(
     predicted.outcome_label || data.market_pick
-  )}; счета ${predictedScores}; голы ${Number(predicted.goal_total?.expected ?? data.goal_total?.expected ?? 0).toFixed(2)}; угловые ${Number(predicted.corners ?? data.predicted_corners).toFixed(2)}; фолы ${predictedFouls == null ? "нет" : Number(predictedFouls).toFixed(2)}</p>`;
+  )}; счет ${predictedScores}; голы ${Number(predicted.goal_total?.expected ?? data.goal_total?.expected ?? 0).toFixed(2)}; угловые ${Number(predicted.corners ?? data.predicted_corners).toFixed(2)}; фолы ${predictedFouls == null ? "нет" : Number(predictedFouls).toFixed(2)}</p>`;
 
   if (summary.status === "completed" && summary.actual) {
     const cornerText = summary.actual.corners == null ? "угловые: нет данных" : `угловые ${summary.actual.corners}`;

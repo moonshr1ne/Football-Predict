@@ -30,6 +30,9 @@ DEFAULT_MODEL_STATE = {
         "corner_bias": 0.0,
         "goal_scale": 1.0,
     },
+    "outcome_model": {},
+    "score_profiles": {},
+    "stat_profiles": {},
     "history": [],
     "trained_match_keys": [],
 }

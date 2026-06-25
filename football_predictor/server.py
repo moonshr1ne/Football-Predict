@@ -74,7 +74,7 @@ class PredictorHandler(SimpleHTTPRequestHandler):
         if parsed.path == "/api/train":
             try:
                 query = parse_qs(parsed.query)
-                epochs = int(query.get("epochs", ["2"])[0] or 2)
+                epochs = int(query.get("epochs", ["80"])[0] or 80)
                 syncer = WorldCupDataSync(self.store)
                 sync_summary = syncer.sync_all(force=True)
                 summary = syncer.retrain_model_from_history(epochs=epochs)

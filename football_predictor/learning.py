@@ -115,6 +115,7 @@ class OnlineLearner:
 
         actual_outcome = outcome_label(home_goals, away_goals)
         score = f"{home_goals}-{away_goals}"
+        predicted_scores = prediction.get("exact_scores", [])
         review = {
             "date": date,
             "home_team": home_team,
@@ -123,9 +124,9 @@ class OnlineLearner:
             "predicted_outcome": prediction.get("market_pick"),
             "actual_outcome": actual_outcome,
             "outcome_hit": prediction.get("market_pick") == actual_outcome,
-            "predicted_scores": prediction.get("exact_scores", []),
+            "predicted_scores": predicted_scores,
             "actual_score": score,
-            "score_hit": score in prediction.get("exact_scores", []),
+            "score_hit": bool(predicted_scores and score == predicted_scores[0]),
             "predicted_corners": round(predicted_corners, 2),
             "actual_corners": None if actual_corners_total is None else round(actual_corners_total, 2),
             "corner_error": None if corner_error is None else round(corner_error, 2),

@@ -58,7 +58,7 @@ def build_parser() -> argparse.ArgumentParser:
     sync.add_argument("--json", action="store_true")
 
     train = subparsers.add_parser("train", help="Переобучить модель на всей накопленной истории матчей.")
-    train.add_argument("--epochs", type=int, default=2, help="Сколько раз прогнать историю, по умолчанию 2.")
+    train.add_argument("--epochs", type=int, default=80, help="Сколько раз прогнать историю, по умолчанию 80.")
     train.add_argument("--json", action="store_true")
 
     watch = subparsers.add_parser("watch", help="Постоянно проверять очередь прогнозов и обучаться.")
@@ -347,7 +347,7 @@ def _details_text(data: dict) -> str:
     )
     lines = [
         f"Вероятности: {market_text}",
-        f"Точные счета: {score_text}",
+        f"Точный счет: {score_text}",
         f"Голы: ожидание {float(goal_total.get('expected', 0)):.2f}, "
         f"ТБ2.5 {float(goal_probabilities.get('over_2_5', 0)):.1%}, "
         f"ТМ2.5 {float(goal_probabilities.get('under_2_5', 0)):.1%}, "

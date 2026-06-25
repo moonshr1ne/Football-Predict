@@ -92,7 +92,7 @@ class Prediction:
         )
         fouls = self.foul_forecast.get("expected")
         foul_text = "" if fouls is None else f", фолы: {float(fouls):.2f}"
-        return f"{self.market_pick}, средние угловые: {self.predicted_corners:.2f}{foul_text}, точные счеты: {scores}"
+        return f"{self.market_pick}, средние угловые: {self.predicted_corners:.2f}{foul_text}, точный счет: {scores}"
 
 
 class MatchPredictor:
@@ -142,13 +142,29 @@ class MatchPredictor:
             weights,
             neutral,
         )
-        home_win, draw, away_win = self._outcome_probabilities(home_xg, away_xg)
+        base_home_win, base_draw, base_away_win = self._outcome_probabilities(home_xg, away_xg)
+        outcome_features = self._outcome_features(
+            home_team,
+            away_team,
+            home_stats,
+            away_stats,
+            home_tactics,
+            away_tactics,
+            home_xg,
+            away_xg,
+            neutral,
+        )
+        home_win, draw, away_win = self._apply_outcome_model(
+            {"П1": base_home_win, "X": base_draw, "П2": base_away_win},
+            outcome_features,
+            state,
+        )
         probabilities = {"П1": home_win, "X": draw, "П2": away_win}
         market_pick = max(probabilities, key=probabilities.get)
         confidence = probabilities[market_pick]
         markets = self._markets(home_team, away_team, probabilities)
-        corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights)
-        foul_forecast = self._foul_forecast(home_stats, away_stats, home_tactics, away_tactics, fixture, weights)
+        corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights, state)
+        foul_forecast = self._foul_forecast(home_stats, away_stats, home_tactics, away_tactics, fixture, weights, state)
         goal_total = self._goal_total_forecast(home_xg, away_xg)
         team_reports = {
             home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg, lineup_reports.get(home_team, {})),
@@ -162,7 +178,7 @@ class MatchPredictor:
             away_stats,
             goal_total,
             probabilities,
-            limit=3,
+            limit=1,
         )
         exact_scores = [item["score"] for item in exact_score_probabilities]
         result_summary = self._result_summary(
@@ -346,6 +362,77 @@ class MatchPredictor:
         adjusted["team"] = team
         return adjusted
 
+    def _outcome_features(
+        self,
+        home_team: str,
+        away_team: str,
+        home_stats: TeamStats,
+        away_stats: TeamStats,
+        home_tactics: dict[str, Any],
+        away_tactics: dict[str, Any],
+        home_xg: float,
+        away_xg: float,
+        neutral: bool,
+    ) -> dict[str, float]:
+        goal_diff_delta = (home_stats.avg_goals_for - home_stats.avg_goals_against) - (
+            away_stats.avg_goals_for - away_stats.avg_goals_against
+        )
+        points_delta = home_stats.points_per_match - away_stats.points_per_match
+        class_delta = self._team_class_score(home_stats) - self._team_class_score(away_stats)
+        xg_delta = home_xg - away_xg
+        tactic_delta = tactical_edge(home_tactics, away_tactics)
+        attack_delta = home_stats.avg_goals_for - away_stats.avg_goals_for
+        defense_delta = away_stats.avg_goals_against - home_stats.avg_goals_against
+        features = {
+            "bias": 1.0,
+            "xg_delta": xg_delta,
+            "abs_xg_delta": abs(xg_delta),
+            "goal_diff_delta": goal_diff_delta,
+            "points_delta": points_delta,
+            "class_delta": class_delta,
+            "attack_delta": attack_delta,
+            "defense_delta": defense_delta,
+            "tactic_delta": tactic_delta,
+            "neutral": 1.0 if neutral else 0.0,
+            f"home:{home_team}": 1.0,
+            f"away:{away_team}": 1.0,
+            f"home_form:{home_team}": points_delta,
+            f"away_form:{away_team}": -points_delta,
+        }
+        return {key: float(value) for key, value in features.items() if value}
+
+    @staticmethod
+    def _apply_outcome_model(
+        base_probabilities: dict[str, float],
+        features: dict[str, float],
+        state: dict[str, Any],
+    ) -> tuple[float, float, float]:
+        model = state.get("outcome_model") or {}
+        weights = model.get("weights") or {}
+        labels = model.get("labels") or ["П1", "X", "П2"]
+        if not weights or not features:
+            return base_probabilities["П1"], base_probabilities["X"], base_probabilities["П2"]
+
+        scores: dict[str, float] = {}
+        for label in labels:
+            label_weights = weights.get(label, {})
+            scores[label] = sum(float(label_weights.get(key, 0.0)) * value for key, value in features.items())
+        if max(abs(value) for value in scores.values()) < 1e-9:
+            return base_probabilities["П1"], base_probabilities["X"], base_probabilities["П2"]
+
+        temperature = max(0.18, float(model.get("temperature", 0.72)))
+        top_score = max(scores.values())
+        exp_scores = {label: math.exp((score - top_score) / temperature) for label, score in scores.items()}
+        total = sum(exp_scores.values()) or 1.0
+        model_probabilities = {label: value / total for label, value in exp_scores.items()}
+        blend = max(0.0, min(1.0, float(model.get("blend", 1.0))))
+        mixed = {
+            label: model_probabilities.get(label, 0.0) * blend + base_probabilities.get(label, 0.0) * (1.0 - blend)
+            for label in ("П1", "X", "П2")
+        }
+        mixed_total = sum(mixed.values()) or 1.0
+        return mixed["П1"] / mixed_total, mixed["X"] / mixed_total, mixed["П2"] / mixed_total
+
     def _expected_goals(
         self,
         home_stats: TeamStats,
@@ -401,12 +488,29 @@ class MatchPredictor:
         away_tactics: dict[str, Any],
         total_xg: float,
         weights: dict[str, float],
+        state: dict[str, Any] | None = None,
     ) -> float:
         samples = [value for value in (home_stats.avg_total_corners, away_stats.avg_total_corners) if value is not None]
         base = sum(samples) / len(samples) if samples else 9.2
         tempo = max(-0.6, min(1.1, (total_xg - 2.35) * 0.42))
         tactics = corner_tactical_boost(home_tactics, away_tactics) * weights.get("tactics_to_corners", 1.15)
-        return max(4.0, min(16.0, base + tempo + tactics + weights.get("corner_bias", 0.0)))
+        expected = base + tempo + tactics + weights.get("corner_bias", 0.0)
+
+        corner_profile = ((state or {}).get("stat_profiles") or {}).get("corners", {})
+        team_profiles = corner_profile.get("teams") or {}
+        profile_values = [
+            profile.get("avg_total")
+            for profile in (team_profiles.get(home_stats.team, {}), team_profiles.get(away_stats.team, {}))
+            if profile.get("avg_total") is not None
+        ]
+        if profile_values:
+            profile_estimate = sum(float(value) for value in profile_values) / len(profile_values)
+            profile_weight = min(0.92, 0.58 + 0.04 * len(profile_values))
+            expected = expected * (1.0 - profile_weight) + profile_estimate * profile_weight
+        elif corner_profile.get("global") is not None:
+            expected = expected * 0.58 + float(corner_profile["global"]) * 0.42
+
+        return max(4.0, min(16.0, expected))
 
     def _foul_forecast(
         self,
@@ -416,6 +520,7 @@ class MatchPredictor:
         away_tactics: dict[str, Any],
         fixture: dict[str, Any] | None,
         weights: dict[str, float],
+        state: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         global_average = self._global_foul_average()
         weighted_team_values = []
@@ -449,12 +554,26 @@ class MatchPredictor:
         expected = team_estimate + style_adjustment + float(weights.get("foul_bias", 0.0))
 
         referee = self._fixture_referee(fixture)
-        referee_profile = self.store.referee_profile(referee.get("name") if referee else None)
+        stat_foul_profile = ((state or {}).get("stat_profiles") or {}).get("fouls", {})
+        trained_referees = stat_foul_profile.get("referees") or {}
+        trained_teams = stat_foul_profile.get("teams") or {}
+        referee_profile = trained_referees.get(referee.get("name") if referee else None) or self.store.referee_profile(referee.get("name") if referee else None)
         referee_average = referee_profile.get("avg_fouls")
         referee_matches = int(referee_profile.get("matches", 0) or 0)
         if referee_average is not None:
-            referee_weight = min(0.40, 0.16 + referee_matches * 0.035)
+            referee_weight = min(0.92, 0.55 + referee_matches * 0.08)
             expected = expected * (1.0 - referee_weight) + float(referee_average) * referee_weight
+        else:
+            profile_values = [
+                profile.get("avg_total")
+                for profile in (trained_teams.get(home_stats.team, {}), trained_teams.get(away_stats.team, {}))
+                if profile.get("avg_total") is not None
+            ]
+            if profile_values:
+                profile_estimate = sum(float(value) for value in profile_values) / len(profile_values)
+                expected = expected * 0.28 + profile_estimate * 0.72
+            elif stat_foul_profile.get("global") is not None:
+                expected = expected * 0.55 + float(stat_foul_profile["global"]) * 0.45
 
         expected = max(14.0, min(40.0, expected))
         probabilities = {}
@@ -549,6 +668,15 @@ class MatchPredictor:
         if outcome_probabilities is None:
             home_win, draw, away_win = self._outcome_probabilities(home_xg, away_xg)
             outcome_probabilities = {"П1": home_win, "X": draw, "П2": away_win}
+        profile_candidate = self._profile_score_candidate(market_pick, home_xg, away_xg)
+        if limit <= 1 and profile_candidate:
+            profile_candidate["probability"] = self._calibrated_exact_score_probability(
+                profile_candidate["probability"],
+                profile_candidate["outcome"],
+                outcome_probabilities,
+                profile_probability=True,
+            )
+            return [profile_candidate]
         grid = []
         for home_goals in range(9):
             for away_goals in range(9):
@@ -576,9 +704,103 @@ class MatchPredictor:
             return [{"score": score, "probability": 0.0} for score in fallback[:limit]]
         selected = self._select_score_mix(grid, market_pick, home_xg, away_xg, goal_total, outcome_probabilities, limit)
         return [
-            {"score": score, "outcome": outcome, "probability": round(weight / total_weight, 4)}
+            {
+                "score": score,
+                "outcome": outcome,
+                "probability": self._calibrated_exact_score_probability(
+                    weight / total_weight,
+                    outcome,
+                    outcome_probabilities,
+                ),
+            }
             for weight, outcome, score in selected
         ]
+
+    @staticmethod
+    def _calibrated_exact_score_probability(
+        score_probability: float,
+        outcome: str,
+        outcome_probabilities: dict[str, float],
+        profile_probability: bool = False,
+    ) -> float:
+        outcome_probability = max(0.0, min(1.0, float(outcome_probabilities.get(outcome, 0.0))))
+        probability = max(0.0, min(1.0, float(score_probability or 0.0)))
+        if profile_probability:
+            probability *= outcome_probability
+        else:
+            probability = min(probability, outcome_probability)
+        return round(probability, 4)
+
+    def _profile_score_candidate(self, market_pick: str, home_xg: float, away_xg: float) -> dict[str, Any] | None:
+        profiles = (self.store.load_model_state().get("score_profiles") or {})
+        bucket = self._score_profile_bucket(market_pick, home_xg, away_xg)
+        by_bucket = profiles.get("by_outcome_bucket") or {}
+        by_outcome = profiles.get("by_outcome") or {}
+        candidates = by_bucket.get(f"{market_pick}|{bucket}") or by_outcome.get(market_pick) or []
+        if not candidates:
+            return None
+        candidate = self._select_profile_score(candidates, bucket, home_xg, away_xg)
+        score = str(candidate.get("score", ""))
+        if "-" not in score:
+            return None
+        home_goals, away_goals = [int(value) for value in score.split("-", 1)]
+        return {
+            "score": score,
+            "outcome": self._outcome_from_score(home_goals, away_goals),
+            "probability": round(float(candidate.get("probability", 0.0)), 4),
+        }
+
+    @classmethod
+    def _select_profile_score(
+        cls,
+        candidates: list[dict[str, Any]],
+        bucket: str,
+        home_xg: float,
+        away_xg: float,
+    ) -> dict[str, Any]:
+        favorite_xg = max(home_xg, away_xg)
+        total_xg = home_xg + away_xg
+        top = candidates[0]
+        top_probability = float(top.get("probability", 0.0) or 0.0)
+        if bucket == "dominant" and favorite_xg >= 2.35 and total_xg >= 3.0:
+            for candidate in candidates:
+                score = str(candidate.get("score", ""))
+                if "-" not in score:
+                    continue
+                total_goals = cls._score_total(score)
+                probability = float(candidate.get("probability", 0.0) or 0.0)
+                if total_goals >= 3 and probability >= top_probability * 0.82:
+                    return candidate
+        if bucket == "open" and total_xg >= 3.25:
+            underdog_xg = min(home_xg, away_xg)
+            if underdog_xg >= 1.0:
+                for candidate in candidates:
+                    score = str(candidate.get("score", ""))
+                    probability = float(candidate.get("probability", 0.0) or 0.0)
+                    if "-" in score and cls._score_total(score) >= 4 and cls._both_score(score) and probability >= top_probability * 0.68:
+                        return candidate
+            for candidate in candidates:
+                score = str(candidate.get("score", ""))
+                probability = float(candidate.get("probability", 0.0) or 0.0)
+                if "-" in score and cls._score_total(score) >= 4 and probability >= top_probability * 0.75:
+                    return candidate
+        return top
+
+    @staticmethod
+    def _score_profile_bucket(market_pick: str, home_xg: float, away_xg: float) -> str:
+        total_xg = home_xg + away_xg
+        favorite_xg = max(home_xg, away_xg)
+        underdog_xg = min(home_xg, away_xg)
+        margin = abs(home_xg - away_xg)
+        if market_pick == "X":
+            return "draw_high" if total_xg >= 2.70 else "draw_low"
+        if favorite_xg >= 2.15 and underdog_xg <= 1.05 and margin >= 1.00:
+            return "dominant"
+        if total_xg >= 3.20:
+            return "open"
+        if margin <= 0.45:
+            return "narrow"
+        return "normal"
 
     def _goal_total_forecast(self, home_xg: float, away_xg: float) -> dict[str, Any]:
         total_xg = home_xg + away_xg
