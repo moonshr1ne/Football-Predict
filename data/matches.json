@@ -9176,8 +9176,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-4-2",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-18",
@@ -9203,8 +9203,8 @@
     "source": "espn-world-cup",
     "home_formation": "3-5-2",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-18",
@@ -9230,8 +9230,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-5-1",
     "away_formation": "4-4-2",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-18",
@@ -9257,8 +9257,8 @@
     "source": "espn-world-cup",
     "home_formation": "3-4-3",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-19",
@@ -9284,8 +9284,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "3-4-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-19",
@@ -9311,8 +9311,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-4-2",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-19",
@@ -9338,8 +9338,8 @@
     "source": "espn-world-cup",
     "home_formation": "3-5-2",
     "away_formation": "5-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-20",
@@ -9365,8 +9365,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "5-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-20",
@@ -9392,8 +9392,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-1-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-20",
@@ -9419,8 +9419,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "3-5-2",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-20",
@@ -9446,8 +9446,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-4-2",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-21",
@@ -9473,8 +9473,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "5-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-21",
@@ -9500,8 +9500,8 @@
     "source": "espn-world-cup",
     "home_formation": "3-5-2",
     "away_formation": "5-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-21",
@@ -9527,8 +9527,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "5-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-21",
@@ -9554,8 +9554,8 @@
     "source": "espn-world-cup",
     "home_formation": "3-4-3",
     "away_formation": "3-4-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-21",
@@ -9581,8 +9581,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-1-4-1",
     "away_formation": "4-1-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-22",
@@ -9608,8 +9608,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-4-2",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-22",
@@ -9635,8 +9635,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-1-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-22",
@@ -9662,8 +9662,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-23",
@@ -9689,8 +9689,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-1-4-1",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-23",
@@ -9716,8 +9716,8 @@
     "source": "espn-world-cup",
     "home_formation": "3-4-3",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-23",
@@ -9743,8 +9743,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-23",
@@ -9770,8 +9770,8 @@
     "source": "espn-world-cup",
     "home_formation": "5-4-1",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": true,
-    "away_lineup_confirmed": true
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-23",
@@ -9797,8 +9797,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "3-4-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-24",
@@ -9824,8 +9824,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-4-2",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-24",
@@ -9905,8 +9905,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "5-3-2",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-24",
@@ -9932,8 +9932,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-4-2",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-24",
@@ -9959,8 +9959,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-24",
@@ -9986,8 +9986,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "4-4-2",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-25",
@@ -10013,8 +10013,8 @@
     "source": "espn-world-cup",
     "home_formation": "5-4-1",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": true,
-    "away_lineup_confirmed": true
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-25",
@@ -10040,8 +10040,8 @@
     "source": "espn-world-cup",
     "home_formation": "3-4-3",
     "away_formation": "4-3-3",
-    "home_lineup_confirmed": false,
-    "away_lineup_confirmed": false
+    "home_lineup_confirmed": true,
+    "away_lineup_confirmed": true
   },
   {
     "date": "2026-06-25",
@@ -10067,8 +10067,8 @@
     "source": "espn-world-cup",
     "home_formation": "4-4-2",
     "away_formation": "3-4-3",
-    "home_lineup_confirmed": true,
-    "away_lineup_confirmed": true
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   },
   {
     "date": "2026-06-25",
@@ -10121,7 +10121,7 @@
     "source": "espn-world-cup",
     "home_formation": "4-3-3",
     "away_formation": "3-4-3",
-    "home_lineup_confirmed": true,
-    "away_lineup_confirmed": true
+    "home_lineup_confirmed": false,
+    "away_lineup_confirmed": false
   }
 ]
