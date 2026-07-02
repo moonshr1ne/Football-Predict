@@ -122,7 +122,6 @@ def _optional_float(value) -> float | None:
 
 
 def run_server(host: str = "127.0.0.1", port: int = 8765) -> None:
-    WorldCupDataSync(PredictorHandler.store).sync_all()
     _start_auto_check_worker(PredictorHandler.store)
     server = ThreadingHTTPServer((host, port), PredictorHandler)
     print(f"Открывайте: http://{host}:{port}")
