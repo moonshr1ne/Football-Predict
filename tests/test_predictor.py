@@ -119,6 +119,39 @@ class PredictorTests(unittest.TestCase):
         self.assertEqual(stats.avg_fouls_against, 13.5)
         self.assertEqual(stats.avg_total_fouls, 26.0)
 
+    def test_schedule_refresh_does_not_erase_confirmed_lineup(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = DataStore(Path(tmp_dir) / "project")
+            store.add_or_update_match(
+                MatchRecord(
+                    "2099-01-01",
+                    "A",
+                    "B",
+                    home_goals=1,
+                    away_goals=0,
+                    home_formation="4-3-3",
+                    away_formation="4-4-2",
+                    home_lineup_confirmed=True,
+                    away_lineup_confirmed=True,
+                    source="espn-world-cup",
+                )
+            )
+            store.add_or_update_match(
+                MatchRecord(
+                    "2099-01-01",
+                    "A",
+                    "B",
+                    home_goals=1,
+                    away_goals=0,
+                    home_lineup_confirmed=False,
+                    away_lineup_confirmed=False,
+                    source="espn-team-schedule",
+                )
+            )
+            match = store.load_matches()[0]
+            self.assertTrue(match.home_lineup_confirmed)
+            self.assertTrue(match.away_lineup_confirmed)
+
     def test_referee_profile_lifts_foul_forecast(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)

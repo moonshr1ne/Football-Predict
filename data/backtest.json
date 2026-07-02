@@ -32,10 +32,10 @@
     "evaluation_mode": "walk_forward_strict_date",
     "same_day_policy": "all matches on a date are predicted before any result from that date is learned",
     "result_leakage_guard": true,
-    "started_at": "2026-07-02T04:00:50.188036+00:00",
-    "completed_at": "2026-07-02T04:01:02.251810+00:00"
+    "started_at": "2026-07-02T04:03:29.118484+00:00",
+    "completed_at": "2026-07-02T04:03:40.482082+00:00"
   },
-  "updated_at": "2026-07-02T04:01:02.299940+00:00",
+  "updated_at": "2026-07-02T04:03:43.876068+00:00",
   "by_team": {
     "Algeria": {
       "matches": 3,

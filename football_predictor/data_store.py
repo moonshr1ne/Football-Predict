@@ -380,6 +380,8 @@ def _merge_match(existing: MatchRecord, incoming: MatchRecord) -> MatchRecord:
     for key, value in incoming_data.items():
         if value not in (None, ""):
             merged[key] = value
+    for key in ("home_lineup_confirmed", "away_lineup_confirmed"):
+        merged[key] = bool(getattr(existing, key) or getattr(incoming, key))
     if existing.source == "espn-world-cup":
         merged["source"] = existing.source
     return MatchRecord.from_dict(merged)
