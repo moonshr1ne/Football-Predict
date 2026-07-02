@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import math
+import threading
 from collections import Counter, defaultdict
 from datetime import date, datetime, timedelta, timezone
 from typing import Any
@@ -10,6 +11,9 @@ from .data_store import DEFAULT_MODEL_STATE, DataStore
 from .models import MatchRecord
 from .providers import EspnWorldCupProvider, ProviderError
 from .tactics import clamp01
+
+
+MODEL_TRAINING_LOCK = threading.Lock()
 
 
 class WorldCupDataSync:
@@ -278,212 +282,327 @@ class WorldCupDataSync:
         return len(profiles)
 
     def _train_model_from_imported_matches(self) -> int:
-        from .learning import OnlineLearner
+        matches = self._training_matches(espn_only=False)
+        state = self.store.load_model_state()
+        available = {self._match_key(match): self._match_fingerprint(match) for match in matches}
+        trained_fingerprints = state.get("trained_match_fingerprints") or {}
+        changed_keys = {
+            key
+            for key, fingerprint in available.items()
+            if trained_fingerprints.get(key) != fingerprint
+        }
+        training = state.get("training") or {}
+        needs_upgrade = training.get("evaluation_mode") != "walk_forward_strict_date"
+        if not changed_keys and not needs_upgrade:
+            return 0
+
+        with MODEL_TRAINING_LOCK:
+            state = self.store.load_model_state()
+            trained_fingerprints = state.get("trained_match_fingerprints") or {}
+            changed_keys = {
+                key
+                for key, fingerprint in available.items()
+                if trained_fingerprints.get(key) != fingerprint
+            }
+            training = state.get("training") or {}
+            needs_upgrade = training.get("evaluation_mode") != "walk_forward_strict_date"
+            if not changed_keys and not needs_upgrade:
+                return 0
+            self.retrain_model_from_history(epochs=12, automatic=True)
+            return len(changed_keys) if changed_keys else len(matches)
+
+    def retrain_model_from_history(self, epochs: int = 2, automatic: bool = False) -> dict[str, Any]:
+        return self._retrain_walk_forward(epochs=epochs, automatic=automatic)
+
+    def _retrain_walk_forward(self, epochs: int, automatic: bool) -> dict[str, Any]:
         from .predictor import MatchPredictor
 
-        state = self.store.load_model_state()
-        trained_keys = set(state.get("trained_match_keys", []))
-        matches = self._training_matches(espn_only=True)
-        trained = 0
-        past_matches: list[MatchRecord] = []
-        for match in matches:
-            key = self._match_key(match)
-            if key in trained_keys:
-                past_matches.append(match)
-                continue
-            baseline = MatchPredictor(self.store).predict(
-                match.home_team,
-                match.away_team,
-                neutral=match.neutral,
-                remember=False,
-                matches_override=past_matches,
-            ).to_dict()
-            OnlineLearner(self.store).record_result(
-                home_team=match.home_team,
-                away_team=match.away_team,
-                date=match.date,
-                home_goals=int(match.home_goals or 0),
-                away_goals=int(match.away_goals or 0),
-                home_corners=match.home_corners,
-                away_corners=match.away_corners,
-                home_possession=match.home_possession,
-                away_possession=match.away_possession,
-                home_shots=match.home_shots,
-                away_shots=match.away_shots,
-                home_shots_on_target=match.home_shots_on_target,
-                away_shots_on_target=match.away_shots_on_target,
-                home_fouls=match.home_fouls,
-                away_fouls=match.away_fouls,
-                referee=match.referee,
-                competition=match.competition,
-                stage=match.stage,
-                neutral=match.neutral,
-                source=match.source,
-                baseline_prediction=baseline,
-            )
-            state = self.store.load_model_state()
-            trained_keys = set(state.get("trained_match_keys", []))
-            trained_keys.add(key)
-            state["trained_match_keys"] = sorted(trained_keys)
-            self.store.save_model_state(state)
-            trained += 1
-            past_matches.append(match)
-        return trained
-
-    def retrain_model_from_history(self, epochs: int = 2) -> dict[str, Any]:
-        epochs = max(1, min(int(epochs or 1), 250))
+        epochs = max(2, min(int(epochs or 2), 80))
         matches = self._training_matches(espn_only=False)
         started_at = datetime.now(timezone.utc).isoformat()
-        previous_state = self.store.load_model_state()
-        previous_backtest = self.store.load_backtest()
-        previous_score = self._training_score(previous_backtest) if previous_backtest else float("-inf")
-        state = copy.deepcopy(previous_state or DEFAULT_MODEL_STATE)
-        defaults = copy.deepcopy(DEFAULT_MODEL_STATE)
-        weights = defaults["weights"]
-        weights.update(state.get("weights", {}))
-        state["weights"] = weights
-        state["history"] = []
-        state["trained_match_keys"] = []
-        state["outcome_model"] = {}
-        state["score_profiles"] = {}
-        state["stat_profiles"] = {}
-        state["learning_rate"] = state.get("learning_rate", defaults.get("learning_rate", 0.08))
-        state["training"] = {
-            "mode": "batch_history_fit",
-            "status": "running",
-            "epochs": epochs,
-            "unique_matches": len(matches),
-            "started_at": started_at,
+        base_state = copy.deepcopy(DEFAULT_MODEL_STATE)
+        rows = self._strict_feature_rows(matches, base_state)
+        reviews = self._walk_forward_reviews(matches, rows, base_state, epochs)
+
+        state = copy.deepcopy(DEFAULT_MODEL_STATE)
+        state["weights"] = copy.deepcopy(DEFAULT_MODEL_STATE["weights"])
+        state["stat_profiles"] = self._fit_stat_profiles(matches)
+        state["score_profiles"] = self._score_profiles_from_rows(rows)
+        state["outcome_model"] = self._fit_outcome_model_from_rows(rows, epochs)
+        state["history"] = reviews[-5000:]
+        state["trained_match_keys"] = sorted({self._match_key(match) for match in matches})
+        state["trained_match_fingerprints"] = {
+            self._match_key(match): self._match_fingerprint(match)
+            for match in matches
         }
-        self.store.save_model_state(state)
-
-        unique_keys = [self._match_key(match) for match in matches]
-        profiles = self._fit_stat_profiles(matches)
-        score_profiles = self._fit_score_profiles(matches)
-        state = self.store.load_model_state()
-        state["stat_profiles"] = profiles
-        state["score_profiles"] = score_profiles
-        self.store.save_model_state(state)
-
-        outcome_model = self._fit_outcome_model(matches, epochs)
-        state = self.store.load_model_state()
-        state["outcome_model"] = outcome_model
-        state["trained_match_keys"] = sorted(set(unique_keys))
+        completed_at = datetime.now(timezone.utc).isoformat()
         state["training"] = {
-            "mode": "batch_history_fit",
+            "mode": "automatic_walk_forward" if automatic else "walk_forward",
             "status": "complete",
             "epochs": epochs,
-            "requested_epochs": epochs,
             "unique_matches": len(matches),
-            "training_reviews": epochs * len(matches),
+            "training_rows": len(rows),
+            "evaluation_matches": len(reviews),
+            "evaluation_scope": "FIFA World Cup 2026 finals",
+            "evaluation_mode": "walk_forward_strict_date",
+            "same_day_policy": "all matches on a date are predicted before any result from that date is learned",
+            "result_leakage_guard": True,
             "started_at": started_at,
-            "completed_at": datetime.now(timezone.utc).isoformat(),
-            "evaluation_mode": "retrospective_full_history",
+            "completed_at": completed_at,
         }
         self.store.save_model_state(state)
-        backtest = self._save_retrospective_backtest(matches)
-        kept_previous = False
-        candidate_score = self._training_score(backtest)
-        candidate_meets_targets = self._targets_met(backtest)
-        if previous_state and previous_backtest and previous_score > candidate_score and not candidate_meets_targets:
-            kept_previous = True
-            previous_state = copy.deepcopy(previous_state)
-            previous_training = previous_state.setdefault("training", {})
-            previous_training["last_attempt"] = {
-                "mode": "batch_history_fit",
-                "status": "discarded_candidate",
-                "requested_epochs": epochs,
-                "candidate_epochs": epochs,
-                "candidate_score": round(candidate_score, 4),
-                "previous_score": round(previous_score, 4),
-                "completed_at": datetime.now(timezone.utc).isoformat(),
-            }
-            self.store.save_model_state(previous_state)
-            self.store.save_backtest(previous_backtest)
-            backtest = previous_backtest
+        backtest = self._save_backtest_summary()
         summary = {
-            "trained": epochs * len(matches),
+            "trained": epochs * len(rows),
             "unique_matches": len(matches),
             "epochs": epochs,
-            "requested_epochs": epochs,
-            "kept_previous": kept_previous,
+            "automatic": automatic,
+            "kept_previous": False,
             "backtest": backtest,
-            "source": "batch-history-fit",
+            "source": "strict-walk-forward",
         }
         sync_state = self.store.load_sync_state()
-        sync_state["last_retrain_at"] = state["training"]["completed_at"]
+        sync_state["last_retrain_at"] = completed_at
         sync_state["last_retrain"] = summary
         sync_state["backtest"] = backtest
         self.store.save_sync_state(sync_state)
         return summary
 
-    def _fit_stat_profiles(self, matches: list[MatchRecord]) -> dict[str, Any]:
-        corner_totals: list[float] = []
-        corner_teams: dict[str, list[float]] = defaultdict(list)
-        foul_totals: list[float] = []
-        foul_teams: dict[str, list[float]] = defaultdict(list)
-        foul_referees: dict[str, list[float]] = defaultdict(list)
-
-        for match in matches:
-            if match.home_corners is not None and match.away_corners is not None:
-                total_corners = float(match.home_corners) + float(match.away_corners)
-                corner_totals.append(total_corners)
-                corner_teams[match.home_team].append(total_corners)
-                corner_teams[match.away_team].append(total_corners)
-            if match.home_fouls is not None and match.away_fouls is not None:
-                total_fouls = float(match.home_fouls) + float(match.away_fouls)
-                foul_totals.append(total_fouls)
-                foul_teams[match.home_team].append(total_fouls)
-                foul_teams[match.away_team].append(total_fouls)
-                if match.referee:
-                    foul_referees[match.referee].append(total_fouls)
-
-        return {
-            "corners": {
-                "global": self._mean(corner_totals),
-                "teams": {
-                    team: {"matches": len(values), "avg_total": self._mean(values)}
-                    for team, values in sorted(corner_teams.items())
-                },
-            },
-            "fouls": {
-                "global": self._mean(foul_totals),
-                "teams": {
-                    team: {"matches": len(values), "avg_total": self._mean(values)}
-                    for team, values in sorted(foul_teams.items())
-                },
-                "referees": {
-                    referee: {"matches": len(values), "avg_fouls": self._mean(values), "source": "trained-history"}
-                    for referee, values in sorted(foul_referees.items())
-                },
-            },
-        }
-
-    def _fit_score_profiles(self, matches: list[MatchRecord]) -> dict[str, Any]:
+    def _strict_feature_rows(
+        self,
+        matches: list[MatchRecord],
+        base_state: dict[str, Any],
+    ) -> list[dict[str, Any]]:
         from .predictor import MatchPredictor
 
         predictor = MatchPredictor(self.store)
+        rows: list[dict[str, Any]] = []
+        past: list[MatchRecord] = []
+        for match_date, group in self._matches_by_date(matches):
+            snapshot = copy.deepcopy(base_state)
+            snapshot["stat_profiles"] = self._fit_stat_profiles(past)
+            snapshot["score_profiles"] = MatchPredictor._score_profiles_from_matches(past)
+            snapshot["history"] = MatchPredictor._history_from_matches(past)
+            for match in group:
+                prediction = predictor.predict(
+                    match.home_team,
+                    match.away_team,
+                    neutral=match.neutral,
+                    remember=False,
+                    match_date=match_date,
+                    fixture=self._training_fixture(match),
+                    matches_override=past,
+                    model_state_override=snapshot,
+                    temporal_snapshot=True,
+                )
+                features = predictor._outcome_features(
+                    match.home_team,
+                    match.away_team,
+                    prediction.home_stats,
+                    prediction.away_stats,
+                    prediction.home_tactics,
+                    prediction.away_tactics,
+                    prediction.expected_home_goals,
+                    prediction.expected_away_goals,
+                    match.neutral,
+                    prediction.h2h_report,
+                )
+                rows.append(
+                    {
+                        "key": self._match_key(match),
+                        "date": match.date,
+                        "match": match,
+                        "features": features,
+                        "label": MatchPredictor._outcome_from_score(
+                            int(match.home_goals or 0),
+                            int(match.away_goals or 0),
+                        ),
+                        "home_xg": prediction.expected_home_goals,
+                        "away_xg": prediction.expected_away_goals,
+                    }
+                )
+            past.extend(group)
+        return rows
+
+    def _walk_forward_reviews(
+        self,
+        matches: list[MatchRecord],
+        rows: list[dict[str, Any]],
+        base_state: dict[str, Any],
+        epochs: int,
+    ) -> list[dict[str, Any]]:
+        from .predictor import MatchPredictor
+
+        predictor = MatchPredictor(self.store)
+        rows_by_key = {row["key"]: row for row in rows}
+        world_cup_keys = {
+            self._match_key(match)
+            for match in matches
+            if self._is_world_cup_finals_match(match)
+        }
+        evaluation_keys = world_cup_keys or {self._match_key(match) for match in matches}
+        reviews: list[dict[str, Any]] = []
+        prior_rows: list[dict[str, Any]] = []
+        past: list[MatchRecord] = []
+
+        for match_date, group in self._matches_by_date(matches):
+            snapshot = copy.deepcopy(base_state)
+            snapshot["stat_profiles"] = self._fit_stat_profiles(past)
+            snapshot["score_profiles"] = MatchPredictor._score_profiles_from_matches(past)
+            snapshot["history"] = MatchPredictor._history_from_matches(past)
+            snapshot["outcome_model"] = self._fit_outcome_model_from_rows(prior_rows, epochs)
+            snapshot["training"] = {
+                "evaluation_mode": "walk_forward_strict_date",
+                "trained_until": past[-1].date if past else None,
+            }
+
+            for match in group:
+                key = self._match_key(match)
+                if key not in evaluation_keys:
+                    continue
+                prediction = predictor.predict(
+                    match.home_team,
+                    match.away_team,
+                    neutral=match.neutral,
+                    remember=False,
+                    match_date=match_date,
+                    fixture=self._training_fixture(match),
+                    matches_override=past,
+                    model_state_override=snapshot,
+                    temporal_snapshot=True,
+                )
+                actual_score = f"{int(match.home_goals or 0)}-{int(match.away_goals or 0)}"
+                actual_outcome = MatchPredictor._outcome_from_score(
+                    int(match.home_goals or 0),
+                    int(match.away_goals or 0),
+                )
+                actual_corners = (
+                    None
+                    if match.home_corners is None or match.away_corners is None
+                    else float(match.home_corners) + float(match.away_corners)
+                )
+                actual_fouls = (
+                    None
+                    if match.home_fouls is None or match.away_fouls is None
+                    else float(match.home_fouls) + float(match.away_fouls)
+                )
+                predicted_fouls = prediction.foul_forecast.get("expected")
+                reviews.append(
+                    {
+                        "date": match.date,
+                        "home_team": match.home_team,
+                        "away_team": match.away_team,
+                        "predicted_outcome": prediction.market_pick,
+                        "probabilities": {
+                            "П1": round(prediction.home_win_probability, 4),
+                            "X": round(prediction.draw_probability, 4),
+                            "П2": round(prediction.away_win_probability, 4),
+                        },
+                        "expected_goals": {
+                            match.home_team: round(prediction.expected_home_goals, 3),
+                            match.away_team: round(prediction.expected_away_goals, 3),
+                        },
+                        "actual_outcome": actual_outcome,
+                        "outcome_hit": prediction.market_pick == actual_outcome,
+                        "predicted_scores": prediction.exact_scores[:1],
+                        "actual_score": actual_score,
+                        "score_hit": bool(prediction.exact_scores and prediction.exact_scores[0] == actual_score),
+                        "predicted_corners": round(prediction.predicted_corners, 2),
+                        "actual_corners": None if actual_corners is None else round(actual_corners, 2),
+                        "corner_error": None if actual_corners is None else round(prediction.predicted_corners - actual_corners, 2),
+                        "predicted_fouls": None if predicted_fouls is None else round(float(predicted_fouls), 2),
+                        "actual_fouls": None if actual_fouls is None else round(actual_fouls, 2),
+                        "foul_error": None if actual_fouls is None or predicted_fouls is None else round(float(predicted_fouls) - actual_fouls, 2),
+                        "training_mode": "walk_forward_strict_date",
+                        "training_cutoff": past[-1].date if past else None,
+                        "training_key": key,
+                        "updated_at": datetime.now(timezone.utc).isoformat(),
+                    }
+                )
+
+            prior_rows.extend(rows_by_key[self._match_key(match)] for match in group)
+            past.extend(group)
+        return reviews
+
+    def _fit_outcome_model_from_rows(
+        self,
+        rows: list[dict[str, Any]],
+        epochs: int,
+    ) -> dict[str, Any]:
+        from .predictor import MatchPredictor
+
+        labels = [
+            MatchPredictor._outcome_from_score(1, 0),
+            MatchPredictor._outcome_from_score(1, 1),
+            MatchPredictor._outcome_from_score(0, 1),
+        ]
+        weights: dict[str, dict[str, float]] = {label: {} for label in labels}
+        if not rows:
+            return {
+                "type": "multiclass_logistic",
+                "labels": labels,
+                "epochs": 0,
+                "learning_rate": 0.035,
+                "blend": 0.0,
+                "temperature": 1.0,
+                "training_rows": 0,
+                "weights": weights,
+            }
+
+        learning_rate = 0.035
+        l2 = 0.0004
+        for _ in range(max(1, epochs)):
+            for row in rows:
+                features = row["features"]
+                actual = row["label"]
+                scores = {
+                    label: sum(weights[label].get(feature, 0.0) * value for feature, value in features.items())
+                    for label in labels
+                }
+                top = max(scores.values())
+                exponentials = {label: math.exp(max(-30.0, min(30.0, scores[label] - top))) for label in labels}
+                total = sum(exponentials.values()) or 1.0
+                probabilities = {label: exponentials[label] / total for label in labels}
+                for label in labels:
+                    error = (1.0 if label == actual else 0.0) - probabilities[label]
+                    label_weights = weights[label]
+                    for feature, value in features.items():
+                        current = label_weights.get(feature, 0.0)
+                        label_weights[feature] = current * (1.0 - learning_rate * l2) + learning_rate * error * value
+
+        compact_weights = {
+            label: {
+                feature: round(weight, 6)
+                for feature, weight in sorted(feature_weights.items())
+                if abs(weight) >= 1e-7
+            }
+            for label, feature_weights in weights.items()
+        }
+        return {
+            "type": "multiclass_logistic",
+            "labels": labels,
+            "epochs": epochs,
+            "learning_rate": learning_rate,
+            "blend": 0.48,
+            "temperature": 1.0,
+            "training_rows": len(rows),
+            "weights": compact_weights,
+        }
+
+    def _score_profiles_from_rows(self, rows: list[dict[str, Any]]) -> dict[str, Any]:
+        from .predictor import MatchPredictor
+
         by_outcome: dict[str, Counter[str]] = defaultdict(Counter)
         by_outcome_bucket: dict[str, Counter[str]] = defaultdict(Counter)
-        for match in matches:
-            if match.home_goals is None or match.away_goals is None:
-                continue
-            prediction = predictor.predict(
-                match.home_team,
-                match.away_team,
-                neutral=match.neutral,
-                remember=False,
-                fixture=self._training_fixture(match),
-                matches_override=matches,
-            )
-            outcome = MatchPredictor._outcome_from_score(int(match.home_goals), int(match.away_goals))
-            score = f"{int(match.home_goals)}-{int(match.away_goals)}"
-            bucket = MatchPredictor._score_profile_bucket(outcome, prediction.expected_home_goals, prediction.expected_away_goals)
+        for row in rows:
+            match = row["match"]
+            outcome = row["label"]
+            score = f"{int(match.home_goals or 0)}-{int(match.away_goals or 0)}"
+            bucket = MatchPredictor._score_profile_bucket(outcome, row["home_xg"], row["away_xg"])
             by_outcome[outcome][score] += 1
             by_outcome_bucket[f"{outcome}|{bucket}"][score] += 1
-
         return {
-            "mode": "outcome_bucket_top1",
+            "mode": "strict_pre_match_feature_buckets",
             "by_outcome": {
                 outcome: self._profile_items(counter)
                 for outcome, counter in sorted(by_outcome.items())
@@ -494,137 +613,93 @@ class WorldCupDataSync:
             },
         }
 
-    def _fit_outcome_model(self, matches: list[MatchRecord], epochs: int) -> dict[str, Any]:
-        from .predictor import MatchPredictor
-
-        predictor = MatchPredictor(self.store)
-        labels = [
-            MatchPredictor._outcome_from_score(1, 0),
-            MatchPredictor._outcome_from_score(1, 1),
-            MatchPredictor._outcome_from_score(0, 1),
+    @staticmethod
+    def _matches_by_date(matches: list[MatchRecord]) -> list[tuple[str, list[MatchRecord]]]:
+        grouped: dict[str, list[MatchRecord]] = defaultdict(list)
+        for match in matches:
+            grouped[match.date].append(match)
+        return [
+            (match_date, sorted(group, key=lambda item: (item.home_team, item.away_team)))
+            for match_date, group in sorted(grouped.items())
         ]
-        rows: list[tuple[dict[str, float], str]] = []
-        for match in matches:
-            if match.home_goals is None or match.away_goals is None:
-                continue
-            prediction = predictor.predict(
-                match.home_team,
-                match.away_team,
-                neutral=match.neutral,
-                remember=False,
-                fixture=self._training_fixture(match),
-                matches_override=matches,
-            )
-            features = predictor._outcome_features(
-                match.home_team,
-                match.away_team,
-                prediction.home_stats,
-                prediction.away_stats,
-                prediction.home_tactics,
-                prediction.away_tactics,
-                prediction.expected_home_goals,
-                prediction.expected_away_goals,
-                match.neutral,
-            )
-            label = MatchPredictor._outcome_from_score(int(match.home_goals), int(match.away_goals))
-            rows.append((features, label))
-
-        weights: dict[str, dict[str, float]] = {label: {} for label in labels}
-        learning_rate = 0.08
-        mistakes = 0
-        for _ in range(epochs):
-            for features, label in rows:
-                predicted = self._predict_outcome_label(labels, weights, features)
-                if predicted == label:
-                    continue
-                mistakes += 1
-                for feature, value in features.items():
-                    weights[label][feature] = weights[label].get(feature, 0.0) + learning_rate * value
-                    weights[predicted][feature] = weights[predicted].get(feature, 0.0) - learning_rate * value
-
-        weights = {
-            label: {feature: round(weight, 6) for feature, weight in sorted(feature_weights.items()) if abs(weight) >= 1e-8}
-            for label, feature_weights in weights.items()
-        }
-        return {
-            "type": "multiclass_perceptron",
-            "labels": labels,
-            "epochs": epochs,
-            "learning_rate": learning_rate,
-            "blend": 1.0,
-            "temperature": 0.72,
-            "training_rows": len(rows),
-            "mistakes": mistakes,
-            "weights": weights,
-        }
-
-    def _save_retrospective_backtest(self, matches: list[MatchRecord]) -> dict[str, Any]:
-        from .predictor import MatchPredictor
-
-        predictor = MatchPredictor(self.store)
-        reviews: list[dict[str, Any]] = []
-        for match in matches:
-            if match.home_goals is None or match.away_goals is None:
-                continue
-            prediction = predictor.predict(
-                match.home_team,
-                match.away_team,
-                neutral=match.neutral,
-                remember=False,
-                fixture=self._training_fixture(match),
-                matches_override=matches,
-            )
-            actual_score = f"{int(match.home_goals)}-{int(match.away_goals)}"
-            actual_outcome = MatchPredictor._outcome_from_score(int(match.home_goals), int(match.away_goals))
-            actual_corners = (
-                None
-                if match.home_corners is None or match.away_corners is None
-                else float(match.home_corners) + float(match.away_corners)
-            )
-            actual_fouls = (
-                None
-                if match.home_fouls is None or match.away_fouls is None
-                else float(match.home_fouls) + float(match.away_fouls)
-            )
-            predicted_scores = prediction.exact_scores[:1]
-            predicted_fouls = prediction.foul_forecast.get("expected")
-            reviews.append(
-                {
-                    "date": match.date,
-                    "home_team": match.home_team,
-                    "away_team": match.away_team,
-                    "prediction_id": None,
-                    "predicted_outcome": prediction.market_pick,
-                    "actual_outcome": actual_outcome,
-                    "outcome_hit": prediction.market_pick == actual_outcome,
-                    "predicted_scores": predicted_scores,
-                    "actual_score": actual_score,
-                    "score_hit": bool(predicted_scores and predicted_scores[0] == actual_score),
-                    "predicted_corners": round(prediction.predicted_corners, 2),
-                    "actual_corners": None if actual_corners is None else round(actual_corners, 2),
-                    "corner_error": None if actual_corners is None else round(prediction.predicted_corners - actual_corners, 2),
-                    "predicted_fouls": None if predicted_fouls is None else round(float(predicted_fouls), 2),
-                    "actual_fouls": None if actual_fouls is None else round(actual_fouls, 2),
-                    "foul_error": None if actual_fouls is None or predicted_fouls is None else round(float(predicted_fouls) - actual_fouls, 2),
-                    "training_mode": "retrospective_full_history",
-                    "training_key": self._match_key(match),
-                    "updated_at": datetime.now(timezone.utc).isoformat(),
-                }
-            )
-
-        state = self.store.load_model_state()
-        state["history"] = reviews[-5000:]
-        state["trained_match_keys"] = sorted({self._match_key(match) for match in matches})
-        self.store.save_model_state(state)
-        return self._save_backtest_summary()
 
     @staticmethod
-    def _predict_outcome_label(
-        labels: list[str],
-        weights: dict[str, dict[str, float]],
-        features: dict[str, float],
-    ) -> str:
-        return max(labels, key=lambda label: sum(weights[label].get(feature, 0.0) * value for feature, value in features.items()))
+    def _is_world_cup_finals_match(match: MatchRecord) -> bool:
+        competition = (match.competition or "").lower()
+        return (
+            "world cup" in competition
+            and "qualifying" not in competition
+            and match.date >= "2026-06-01"
+            and match.source.startswith("espn-world-cup")
+        )
+
+    def _fit_stat_profiles(self, matches: list[MatchRecord]) -> dict[str, Any]:
+        corner_totals: list[float] = []
+        corner_teams: dict[str, list[float]] = defaultdict(list)
+        corner_for: dict[str, list[float]] = defaultdict(list)
+        corner_against: dict[str, list[float]] = defaultdict(list)
+        foul_totals: list[float] = []
+        foul_teams: dict[str, list[float]] = defaultdict(list)
+        foul_for: dict[str, list[float]] = defaultdict(list)
+        foul_against: dict[str, list[float]] = defaultdict(list)
+        foul_referees: dict[str, list[float]] = defaultdict(list)
+
+        for match in matches:
+            if match.home_corners is not None and match.away_corners is not None:
+                total_corners = float(match.home_corners) + float(match.away_corners)
+                corner_totals.append(total_corners)
+                corner_teams[match.home_team].append(total_corners)
+                corner_teams[match.away_team].append(total_corners)
+                corner_for[match.home_team].append(float(match.home_corners))
+                corner_for[match.away_team].append(float(match.away_corners))
+                corner_against[match.home_team].append(float(match.away_corners))
+                corner_against[match.away_team].append(float(match.home_corners))
+            if match.home_fouls is not None and match.away_fouls is not None:
+                total_fouls = float(match.home_fouls) + float(match.away_fouls)
+                foul_totals.append(total_fouls)
+                foul_teams[match.home_team].append(total_fouls)
+                foul_teams[match.away_team].append(total_fouls)
+                foul_for[match.home_team].append(float(match.home_fouls))
+                foul_for[match.away_team].append(float(match.away_fouls))
+                foul_against[match.home_team].append(float(match.away_fouls))
+                foul_against[match.away_team].append(float(match.home_fouls))
+                if match.referee:
+                    foul_referees[match.referee].append(total_fouls)
+
+        return {
+            "corners": {
+                "global": self._mean(corner_totals),
+                "global_median": self._median(corner_totals),
+                "teams": {
+                    team: {
+                        "matches": len(values),
+                        "avg_total": self._mean(values),
+                        "median_total": self._median(values),
+                        "avg_for": self._mean(corner_for[team]),
+                        "avg_against": self._mean(corner_against[team]),
+                    }
+                    for team, values in sorted(corner_teams.items())
+                },
+            },
+            "fouls": {
+                "global": self._mean(foul_totals),
+                "global_median": self._median(foul_totals),
+                "teams": {
+                    team: {
+                        "matches": len(values),
+                        "avg_total": self._mean(values),
+                        "median_total": self._median(values),
+                        "avg_for": self._mean(foul_for[team]),
+                        "avg_against": self._mean(foul_against[team]),
+                    }
+                    for team, values in sorted(foul_teams.items())
+                },
+                "referees": {
+                    referee: {"matches": len(values), "avg_fouls": self._mean(values), "source": "trained-history"}
+                    for referee, values in sorted(foul_referees.items())
+                },
+            },
+        }
 
     @staticmethod
     def _profile_items(counter: Counter[str]) -> list[dict[str, Any]]:
@@ -665,6 +740,16 @@ class WorldCupDataSync:
             return None
         return round(sum(values) / len(values), 2)
 
+    @staticmethod
+    def _median(values: list[float]) -> float | None:
+        if not values:
+            return None
+        ordered = sorted(values)
+        middle = len(ordered) // 2
+        if len(ordered) % 2:
+            return round(ordered[middle], 2)
+        return round((ordered[middle - 1] + ordered[middle]) / 2.0, 2)
+
     def _training_matches(self, espn_only: bool = False) -> list[MatchRecord]:
         matches = []
         for match in self.store.load_matches():
@@ -680,17 +765,27 @@ class WorldCupDataSync:
         return f"{match.date}|{match.home_team}|{match.away_team}"
 
     @staticmethod
-    def _training_score(backtest: dict[str, Any]) -> float:
-        outcome = float(backtest.get("outcome_accuracy") or 0.0)
-        exact = float(backtest.get("exact_score_accuracy") or 0.0)
-        corner = float(backtest.get("corner_mae") or 9.0)
-        foul = float(backtest.get("foul_mae") or 12.0)
-        return outcome * 2.2 + exact * 3.2 - corner * 0.035 - foul * 0.015
-
-    @staticmethod
-    def _targets_met(backtest: dict[str, Any]) -> bool:
-        status = backtest.get("target_status") or {}
-        return bool(status) and all(bool(value) for value in status.values())
+    def _match_fingerprint(match: MatchRecord) -> str:
+        values = (
+            match.home_goals,
+            match.away_goals,
+            match.home_corners,
+            match.away_corners,
+            match.home_fouls,
+            match.away_fouls,
+            match.home_possession,
+            match.away_possession,
+            match.home_shots,
+            match.away_shots,
+            match.home_shots_on_target,
+            match.away_shots_on_target,
+            match.referee,
+            match.home_formation,
+            match.away_formation,
+            match.home_lineup_confirmed,
+            match.away_lineup_confirmed,
+        )
+        return "|".join("" if value is None else str(value) for value in values)
 
     def _save_backtest_summary(self) -> dict[str, Any]:
         state = self.store.load_model_state()
@@ -727,6 +822,9 @@ class WorldCupDataSync:
 
         backtest = {
             "matches": total,
+            "evaluation_mode": (state.get("training") or {}).get("evaluation_mode", "unknown"),
+            "evaluation_scope": (state.get("training") or {}).get("evaluation_scope"),
+            "result_leakage_guard": bool((state.get("training") or {}).get("result_leakage_guard")),
             "outcome_accuracy": round(outcome_accuracy, 3),
             "exact_score_accuracy": round(exact_score_accuracy, 3),
             "corner_mae": None if corner_mae is None else round(corner_mae, 2),

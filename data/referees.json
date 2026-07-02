@@ -1,9 +1,14 @@
 {
   "Abdulrahman Al-Jassim": {
     "name": "Abdulrahman Al-Jassim",
-    "matches": 1,
-    "avg_fouls": 19.0,
+    "matches": 2,
+    "avg_fouls": 24.0,
     "recent": [
+      {
+        "date": "2026-06-27",
+        "match": "Panama - England",
+        "fouls": 29.0
+      },
       {
         "date": "2026-06-17",
         "match": "Portugal - Congo DR",
@@ -14,9 +19,19 @@
   },
   "Adham Mohammad": {
     "name": "Adham Mohammad",
-    "matches": 1,
-    "avg_fouls": 11.0,
+    "matches": 3,
+    "avg_fouls": 16.67,
     "recent": [
+      {
+        "date": "2026-07-01",
+        "match": "England - Congo DR",
+        "fouls": 22.0
+      },
+      {
+        "date": "2026-06-27",
+        "match": "New Zealand - Belgium",
+        "fouls": 17.0
+      },
       {
         "date": "2026-06-15",
         "match": "Spain - Cape Verde",
@@ -40,9 +55,14 @@
   },
   "Alireza Faghani": {
     "name": "Alireza Faghani",
-    "matches": 1,
-    "avg_fouls": 14.0,
+    "matches": 2,
+    "avg_fouls": 16.0,
     "recent": [
+      {
+        "date": "2026-06-27",
+        "match": "Colombia - Portugal",
+        "fouls": 18.0
+      },
       {
         "date": "2026-06-16",
         "match": "France - Senegal",
@@ -71,9 +91,14 @@
   },
   "Anthony Taylor": {
     "name": "Anthony Taylor",
-    "matches": 1,
-    "avg_fouls": 25.0,
+    "matches": 2,
+    "avg_fouls": 23.0,
     "recent": [
+      {
+        "date": "2026-06-26",
+        "match": "Senegal - Iraq",
+        "fouls": 21.0
+      },
       {
         "date": "2026-06-18",
         "match": "Uzbekistan - Colombia",
@@ -97,9 +122,14 @@
   },
   "Clément Turpin": {
     "name": "Clément Turpin",
-    "matches": 1,
-    "avg_fouls": 22.0,
+    "matches": 2,
+    "avg_fouls": 18.5,
     "recent": [
+      {
+        "date": "2026-06-26",
+        "match": "Paraguay - Australia",
+        "fouls": 15.0
+      },
       {
         "date": "2026-06-17",
         "match": "England - Croatia",
@@ -146,9 +176,14 @@
   },
   "Danny Makkelie": {
     "name": "Danny Makkelie",
-    "matches": 2,
-    "avg_fouls": 29.0,
+    "matches": 3,
+    "avg_fouls": 27.33,
     "recent": [
+      {
+        "date": "2026-06-30",
+        "match": "France - Sweden",
+        "fouls": 24.0
+      },
       {
         "date": "2026-06-24",
         "match": "Morocco - Haiti",
@@ -177,9 +212,14 @@
   },
   "Drew Fischer": {
     "name": "Drew Fischer",
-    "matches": 1,
-    "avg_fouls": 12.0,
+    "matches": 2,
+    "avg_fouls": 17.0,
     "recent": [
+      {
+        "date": "2026-06-27",
+        "match": "Croatia - Ghana",
+        "fouls": 22.0
+      },
       {
         "date": "2026-06-22",
         "match": "France - Iraq",
@@ -221,9 +261,14 @@
   },
   "Felix Zwayer": {
     "name": "Felix Zwayer",
-    "matches": 1,
-    "avg_fouls": 28.0,
+    "matches": 2,
+    "avg_fouls": 25.0,
     "recent": [
+      {
+        "date": "2026-06-27",
+        "match": "Congo DR - Uzbekistan",
+        "fouls": 22.0
+      },
       {
         "date": "2026-06-19",
         "match": "United States - Australia",
@@ -234,9 +279,14 @@
   },
   "Francois Letexier": {
     "name": "Francois Letexier",
-    "matches": 1,
-    "avg_fouls": 23.0,
+    "matches": 2,
+    "avg_fouls": 24.5,
     "recent": [
+      {
+        "date": "2026-06-27",
+        "match": "Cape Verde - Saudi Arabia",
+        "fouls": 26.0
+      },
       {
         "date": "2026-06-14",
         "match": "Ivory Coast - Ecuador",
@@ -283,9 +333,14 @@
   },
   "Ilgiz Tantashev": {
     "name": "Ilgiz Tantashev",
-    "matches": 1,
-    "avg_fouls": 19.0,
+    "matches": 2,
+    "avg_fouls": 14.5,
     "recent": [
+      {
+        "date": "2026-06-28",
+        "match": "Algeria - Austria",
+        "fouls": 10.0
+      },
       {
         "date": "2026-06-19",
         "match": "Scotland - Morocco",
@@ -296,9 +351,14 @@
   },
   "Ismail Elfath": {
     "name": "Ismail Elfath",
-    "matches": 1,
-    "avg_fouls": 14.0,
+    "matches": 2,
+    "avg_fouls": 21.0,
     "recent": [
+      {
+        "date": "2026-06-27",
+        "match": "Uruguay - Spain",
+        "fouls": 28.0
+      },
       {
         "date": "2026-06-14",
         "match": "Netherlands - Japan",
@@ -309,9 +369,14 @@
   },
   "Istvan Kovacs": {
     "name": "Istvan Kovacs",
-    "matches": 1,
-    "avg_fouls": 23.0,
+    "matches": 2,
+    "avg_fouls": 21.5,
     "recent": [
+      {
+        "date": "2026-06-28",
+        "match": "Jordan - Argentina",
+        "fouls": 20.0
+      },
       {
         "date": "2026-06-21",
         "match": "Tunisia - Japan",
@@ -322,9 +387,14 @@
   },
   "Iván Arcides Barton Cisneros": {
     "name": "Iván Arcides Barton Cisneros",
-    "matches": 1,
-    "avg_fouls": 29.0,
+    "matches": 2,
+    "avg_fouls": 30.0,
     "recent": [
+      {
+        "date": "2026-06-25",
+        "match": "Japan - Sweden",
+        "fouls": 31.0
+      },
       {
         "date": "2026-06-20",
         "match": "Türkiye - Paraguay",
@@ -335,9 +405,14 @@
   },
   "Jalal Jayed": {
     "name": "Jalal Jayed",
-    "matches": 2,
-    "avg_fouls": 29.0,
+    "matches": 3,
+    "avg_fouls": 29.33,
     "recent": [
+      {
+        "date": "2026-06-29",
+        "match": "Germany - Paraguay",
+        "fouls": 30.0
+      },
       {
         "date": "2026-06-23",
         "match": "Portugal - Uzbekistan",
@@ -353,9 +428,14 @@
   },
   "Jesús Valenzuela": {
     "name": "Jesús Valenzuela",
-    "matches": 2,
-    "avg_fouls": 19.5,
+    "matches": 3,
+    "avg_fouls": 17.33,
     "recent": [
+      {
+        "date": "2026-06-30",
+        "match": "Ivory Coast - Norway",
+        "fouls": 13.0
+      },
       {
         "date": "2026-06-24",
         "match": "Bosnia-Herzegovina - Qatar",
@@ -371,9 +451,14 @@
   },
   "João Pinheiro": {
     "name": "João Pinheiro",
-    "matches": 1,
-    "avg_fouls": 25.0,
+    "matches": 2,
+    "avg_fouls": 25.5,
     "recent": [
+      {
+        "date": "2026-06-28",
+        "match": "South Africa - Canada",
+        "fouls": 26.0
+      },
       {
         "date": "2026-06-18",
         "match": "Switzerland - Bosnia-Herzegovina",
@@ -395,6 +480,24 @@
     ],
     "source": "espn-world-cup-derived"
   },
+  "Katia Itzel García": {
+    "name": "Katia Itzel García",
+    "matches": 2,
+    "avg_fouls": 21.0,
+    "recent": [
+      {
+        "date": "2026-06-25",
+        "match": "Netherlands - Tunisia",
+        "fouls": 21.0
+      },
+      {
+        "date": "2026-06-25",
+        "match": "Tunisia - Netherlands",
+        "fouls": 21.0
+      }
+    ],
+    "source": "espn-world-cup-derived"
+  },
   "Ma Ning": {
     "name": "Ma Ning",
     "matches": 1,
@@ -410,9 +513,14 @@
   },
   "Martínez, Héctor": {
     "name": "Martínez, Héctor",
-    "matches": 2,
-    "avg_fouls": 30.5,
+    "matches": 3,
+    "avg_fouls": 31.67,
     "recent": [
+      {
+        "date": "2026-07-01",
+        "match": "Belgium - Senegal",
+        "fouls": 34.0
+      },
       {
         "date": "2026-06-23",
         "match": "England - Ghana",
@@ -428,9 +536,14 @@
   },
   "Maurizio Mariani": {
     "name": "Maurizio Mariani",
-    "matches": 2,
-    "avg_fouls": 22.5,
+    "matches": 3,
+    "avg_fouls": 20.67,
     "recent": [
+      {
+        "date": "2026-06-29",
+        "match": "Brazil - Japan",
+        "fouls": 17.0
+      },
       {
         "date": "2026-06-24",
         "match": "Colombia - Congo DR",
@@ -446,9 +559,19 @@
   },
   "Michael Oliver": {
     "name": "Michael Oliver",
-    "matches": 1,
-    "avg_fouls": 21.0,
+    "matches": 3,
+    "avg_fouls": 20.33,
     "recent": [
+      {
+        "date": "2026-06-26",
+        "match": "France - Norway",
+        "fouls": 20.0
+      },
+      {
+        "date": "2026-06-26",
+        "match": "Norway - France",
+        "fouls": 20.0
+      },
       {
         "date": "2026-06-20",
         "match": "Netherlands - Sweden",
@@ -459,9 +582,14 @@
   },
   "Mustapha Ghorbal": {
     "name": "Mustapha Ghorbal",
-    "matches": 1,
-    "avg_fouls": 44.0,
+    "matches": 2,
+    "avg_fouls": 35.0,
     "recent": [
+      {
+        "date": "2026-06-26",
+        "match": "Türkiye - United States",
+        "fouls": 26.0
+      },
       {
         "date": "2026-06-14",
         "match": "Haiti - Scotland",
@@ -526,9 +654,14 @@
   },
   "Raphael Claus": {
     "name": "Raphael Claus",
-    "matches": 1,
-    "avg_fouls": 12.0,
+    "matches": 2,
+    "avg_fouls": 16.0,
     "recent": [
+      {
+        "date": "2026-07-02",
+        "match": "United States - Bosnia-Herzegovina",
+        "fouls": 20.0
+      },
       {
         "date": "2026-06-21",
         "match": "Spain - Saudi Arabia",
@@ -539,9 +672,14 @@
   },
   "Slavko Vincici": {
     "name": "Slavko Vincici",
-    "matches": 2,
-    "avg_fouls": 23.5,
+    "matches": 3,
+    "avg_fouls": 23.67,
     "recent": [
+      {
+        "date": "2026-07-01",
+        "match": "Mexico - Ecuador",
+        "fouls": 24.0
+      },
       {
         "date": "2026-06-23",
         "match": "Jordan - Algeria",
@@ -557,9 +695,14 @@
   },
   "Szymon Marciniak": {
     "name": "Szymon Marciniak",
-    "matches": 1,
-    "avg_fouls": 21.0,
+    "matches": 2,
+    "avg_fouls": 24.0,
     "recent": [
+      {
+        "date": "2026-06-27",
+        "match": "Egypt - Iran",
+        "fouls": 27.0
+      },
       {
         "date": "2026-06-17",
         "match": "Argentina - Algeria",
@@ -588,9 +731,14 @@
   },
   "Wilton Pereira Sampaio": {
     "name": "Wilton Pereira Sampaio",
-    "matches": 2,
-    "avg_fouls": 20.5,
+    "matches": 3,
+    "avg_fouls": 24.67,
     "recent": [
+      {
+        "date": "2026-06-30",
+        "match": "Netherlands - Morocco",
+        "fouls": 33.0
+      },
       {
         "date": "2026-06-23",
         "match": "Norway - Senegal",

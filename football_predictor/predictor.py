@@ -4,9 +4,10 @@ import math
 import copy
 from collections import Counter
 from dataclasses import dataclass
+from datetime import date
 from typing import Any
 
-from .data_store import DataStore
+from .data_store import DEFAULT_MODEL_STATE, DEFAULT_TACTICAL_PROFILE, DataStore
 from .features import build_team_stats
 from .models import MatchRecord, TeamStats
 from .providers import normalize_provider_name
@@ -43,6 +44,7 @@ class Prediction:
     home_tactics: dict[str, Any]
     away_tactics: dict[str, Any]
     tactical_matchup: dict[str, Any]
+    h2h_report: dict[str, Any]
     fixture: dict[str, Any] | None
     result_summary: dict[str, Any]
     data_quality: dict[str, Any]
@@ -82,6 +84,7 @@ class Prediction:
             "home_tactics": self.home_tactics,
             "away_tactics": self.away_tactics,
             "tactical_matchup": self.tactical_matchup,
+            "h2h_report": self.h2h_report,
             "fixture": self.fixture,
             "result_summary": self.result_summary,
             "data_quality": self.data_quality,
@@ -111,6 +114,8 @@ class MatchPredictor:
         fixture: dict[str, Any] | None = None,
         extra_warnings: list[str] | None = None,
         matches_override: list[MatchRecord] | None = None,
+        model_state_override: dict[str, Any] | None = None,
+        temporal_snapshot: bool = False,
     ) -> Prediction:
         all_matches = matches_override if matches_override is not None else self.store.load_matches()
         target_date = match_date or (fixture or {}).get("date")
@@ -119,16 +124,29 @@ class MatchPredictor:
         home_stats = build_team_stats(matches, home_team)
         away_stats = build_team_stats(matches, away_team)
         context = self.store.load_context()
-        raw_home_context = context.get(home_team, {})
-        raw_away_context = context.get(away_team, {})
+        historical_cutoff = temporal_snapshot or bool(
+            target_date and any(match.is_finished() and match.date >= target_date for match in all_matches)
+        )
+        raw_home_context = {} if historical_cutoff else context.get(home_team, {})
+        raw_away_context = {} if historical_cutoff else context.get(away_team, {})
         match_context = self.store.load_match_context()
         lineup_reports = self._lineup_reports(home_team, away_team, prediction_fixture, match_context)
         home_context = self._context_with_lineup_report(raw_home_context, lineup_reports.get(home_team, {}))
         away_context = self._context_with_lineup_report(raw_away_context, lineup_reports.get(away_team, {}))
-        home_tactics = self._apply_lineup_tactics(home_team, self.store.team_tactics(home_team), lineup_reports.get(home_team, {}), prediction_fixture)
-        away_tactics = self._apply_lineup_tactics(away_team, self.store.team_tactics(away_team), lineup_reports.get(away_team, {}), prediction_fixture)
+        home_tactics = self._prediction_tactics(home_team, matches, target_date)
+        away_tactics = self._prediction_tactics(away_team, matches, target_date)
+        home_tactics = self._apply_lineup_tactics(home_team, home_tactics, lineup_reports.get(home_team, {}), prediction_fixture)
+        away_tactics = self._apply_lineup_tactics(away_team, away_tactics, lineup_reports.get(away_team, {}), prediction_fixture)
         tactical_matchup = summarize_matchup(home_team, away_team, home_tactics, away_tactics)
-        state = self._state_for_prediction(self.store.load_model_state(), matches, all_matches, target_date)
+        h2h_report = self._head_to_head_report(matches, home_team, away_team, target_date)
+        raw_state = model_state_override if model_state_override is not None else self.store.load_model_state()
+        state = self._state_for_prediction(
+            raw_state,
+            matches,
+            all_matches,
+            target_date,
+            trusted_snapshot=temporal_snapshot,
+        )
         weights = state["weights"]
         warnings = self._warnings(home_stats, away_stats, home_tactics, away_tactics)
         warnings.extend(self._lineup_warnings(home_team, away_team, lineup_reports))
@@ -148,6 +166,7 @@ class MatchPredictor:
             match_context,
             weights,
             neutral,
+            h2h_report,
         )
         base_home_win, base_draw, base_away_win = self._outcome_probabilities(home_xg, away_xg)
         outcome_features = self._outcome_features(
@@ -160,6 +179,7 @@ class MatchPredictor:
             home_xg,
             away_xg,
             neutral,
+            h2h_report,
         )
         home_win, draw, away_win = self._apply_outcome_model(
             {"П1": base_home_win, "X": base_draw, "П2": base_away_win},
@@ -170,8 +190,26 @@ class MatchPredictor:
         market_pick = max(probabilities, key=probabilities.get)
         confidence = probabilities[market_pick]
         markets = self._markets(home_team, away_team, probabilities)
-        corners = self._expected_corners(home_stats, away_stats, home_tactics, away_tactics, home_xg + away_xg, weights, state)
-        foul_forecast = self._foul_forecast(home_stats, away_stats, home_tactics, away_tactics, prediction_fixture, weights, state)
+        corners = self._expected_corners(
+            home_stats,
+            away_stats,
+            home_tactics,
+            away_tactics,
+            home_xg + away_xg,
+            weights,
+            state,
+            h2h_report,
+        )
+        foul_forecast = self._foul_forecast(
+            home_stats,
+            away_stats,
+            home_tactics,
+            away_tactics,
+            prediction_fixture,
+            weights,
+            state,
+            h2h_report,
+        )
         goal_total = self._goal_total_forecast(home_xg, away_xg)
         team_reports = {
             home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg, lineup_reports.get(home_team, {})),
@@ -187,8 +225,12 @@ class MatchPredictor:
             probabilities,
             limit=1,
             state=state,
+            h2h_report=h2h_report,
         )
         exact_scores = [item["score"] for item in exact_score_probabilities]
+        if exact_scores:
+            goal_total["aligned_score"] = exact_scores[0]
+            goal_total["alignment"] = self._score_total_alignment(exact_scores[0], goal_total)
         recommended_bets = self._recommended_bets(
             home_team,
             away_team,
@@ -212,7 +254,7 @@ class MatchPredictor:
         prediction = Prediction(
             home_team=home_team,
             away_team=away_team,
-            match_date=match_date,
+            match_date=target_date,
             neutral=neutral,
             market_pick=market_pick,
             confidence=confidence,
@@ -238,12 +280,13 @@ class MatchPredictor:
             home_tactics=home_tactics,
             away_tactics=away_tactics,
             tactical_matchup=tactical_matchup,
+            h2h_report=h2h_report,
             fixture=fixture,
             result_summary=result_summary,
             data_quality=data_quality,
             warnings=warnings,
         )
-        if remember and match_date:
+        if remember and target_date:
             self.store.save_prediction(prediction.to_dict())
         return prediction
 
@@ -297,6 +340,7 @@ class MatchPredictor:
             clean.pop(key, None)
         clean["completed"] = False
         clean["in_progress"] = False
+        clean["source_in_progress"] = bool(fixture.get("in_progress"))
         clean["prediction_input_sanitized"] = cls._fixture_has_result_data(fixture)
         return clean
 
@@ -326,7 +370,10 @@ class MatchPredictor:
         pre_match_history: list[MatchRecord],
         all_matches: list[MatchRecord],
         target_date: str | None,
+        trusted_snapshot: bool = False,
     ) -> dict[str, Any]:
+        if trusted_snapshot:
+            return copy.deepcopy(state)
         if not target_date:
             return state
         finished_dates = [match.date for match in all_matches if match.is_finished()]
@@ -334,6 +381,7 @@ class MatchPredictor:
             return state
 
         clean = copy.deepcopy(state)
+        clean["weights"] = copy.deepcopy(DEFAULT_MODEL_STATE["weights"])
         clean["outcome_model"] = {}
         clean["stat_profiles"] = self._stat_profiles_from_matches(pre_match_history)
         clean["score_profiles"] = self._score_profiles_from_matches(pre_match_history)
@@ -347,8 +395,12 @@ class MatchPredictor:
     def _stat_profiles_from_matches(cls, matches: list[MatchRecord]) -> dict[str, Any]:
         corner_totals: list[float] = []
         corner_teams: dict[str, list[float]] = {}
+        corner_for: dict[str, list[float]] = {}
+        corner_against: dict[str, list[float]] = {}
         foul_totals: list[float] = []
         foul_teams: dict[str, list[float]] = {}
+        foul_for: dict[str, list[float]] = {}
+        foul_against: dict[str, list[float]] = {}
         foul_referees: dict[str, list[float]] = {}
 
         for match in matches:
@@ -357,26 +409,48 @@ class MatchPredictor:
                 corner_totals.append(total_corners)
                 corner_teams.setdefault(match.home_team, []).append(total_corners)
                 corner_teams.setdefault(match.away_team, []).append(total_corners)
+                corner_for.setdefault(match.home_team, []).append(float(match.home_corners))
+                corner_for.setdefault(match.away_team, []).append(float(match.away_corners))
+                corner_against.setdefault(match.home_team, []).append(float(match.away_corners))
+                corner_against.setdefault(match.away_team, []).append(float(match.home_corners))
             if match.home_fouls is not None and match.away_fouls is not None:
                 total_fouls = float(match.home_fouls) + float(match.away_fouls)
                 foul_totals.append(total_fouls)
                 foul_teams.setdefault(match.home_team, []).append(total_fouls)
                 foul_teams.setdefault(match.away_team, []).append(total_fouls)
+                foul_for.setdefault(match.home_team, []).append(float(match.home_fouls))
+                foul_for.setdefault(match.away_team, []).append(float(match.away_fouls))
+                foul_against.setdefault(match.home_team, []).append(float(match.away_fouls))
+                foul_against.setdefault(match.away_team, []).append(float(match.home_fouls))
                 if match.referee:
                     foul_referees.setdefault(match.referee, []).append(total_fouls)
 
         return {
             "corners": {
                 "global": cls._mean_profile(corner_totals),
+                "global_median": cls._median_profile(corner_totals),
                 "teams": {
-                    team: {"matches": len(values), "avg_total": cls._mean_profile(values)}
+                    team: {
+                        "matches": len(values),
+                        "avg_total": cls._mean_profile(values),
+                        "median_total": cls._median_profile(values),
+                        "avg_for": cls._mean_profile(corner_for.get(team, [])),
+                        "avg_against": cls._mean_profile(corner_against.get(team, [])),
+                    }
                     for team, values in sorted(corner_teams.items())
                 },
             },
             "fouls": {
                 "global": cls._mean_profile(foul_totals),
+                "global_median": cls._median_profile(foul_totals),
                 "teams": {
-                    team: {"matches": len(values), "avg_total": cls._mean_profile(values)}
+                    team: {
+                        "matches": len(values),
+                        "avg_total": cls._mean_profile(values),
+                        "median_total": cls._median_profile(values),
+                        "avg_for": cls._mean_profile(foul_for.get(team, [])),
+                        "avg_against": cls._mean_profile(foul_against.get(team, [])),
+                    }
                     for team, values in sorted(foul_teams.items())
                 },
                 "referees": {
@@ -422,12 +496,294 @@ class MatchPredictor:
         return round(sum(values) / len(values), 2)
 
     @staticmethod
+    def _median_profile(values: list[float]) -> float | None:
+        if not values:
+            return None
+        ordered = sorted(values)
+        middle = len(ordered) // 2
+        if len(ordered) % 2:
+            return round(ordered[middle], 2)
+        return round((ordered[middle - 1] + ordered[middle]) / 2.0, 2)
+
+    @staticmethod
     def _profile_items_from_counter(counter: Counter[str]) -> list[dict[str, Any]]:
         total = sum(counter.values()) or 1
         return [
             {"score": score, "count": count, "probability": round(count / total, 4)}
             for score, count in counter.most_common()
         ]
+
+    def _prediction_tactics(
+        self,
+        team: str,
+        matches: list[MatchRecord],
+        target_date: str | None,
+    ) -> dict[str, Any]:
+        if not target_date:
+            return self.store.team_tactics(team)
+
+        stats = build_team_stats(matches, team, limit=10)
+        if stats.sample_size < 2:
+            fallback = copy.deepcopy(DEFAULT_TACTICAL_PROFILE)
+            fallback.update(
+                {
+                    "team": team,
+                    "sample_size": stats.sample_size,
+                    "formation_source": "pre-match-fallback",
+                    "formation_confidence": 0.20,
+                    "is_fallback": True,
+                }
+            )
+            return fallback
+
+        possession = (stats.avg_possession if stats.avg_possession is not None else 50.0) / 100.0
+        shots = stats.avg_shots_for if stats.avg_shots_for is not None else 10.0
+        shots_against = stats.avg_shots_against if stats.avg_shots_against is not None else 10.0
+        shots_on_target = stats.avg_shots_on_target_for if stats.avg_shots_on_target_for is not None else 3.2
+        corners_for = stats.avg_corners_for if stats.avg_corners_for is not None else 4.5
+        corners_against = stats.avg_corners_against if stats.avg_corners_against is not None else 4.5
+        goals_for = stats.avg_goals_for
+        goals_against = stats.avg_goals_against
+
+        chance_creation = self._clamp01(0.35 + shots / 80.0 + shots_on_target / 40.0 + goals_for / 16.0)
+        defensive_solidity = self._clamp01(0.86 - goals_against / 4.5 - shots_against / 34.0)
+        attack_width = self._clamp01(0.40 + corners_for / 25.0)
+        set_piece_threat = self._clamp01(0.38 + corners_for / 30.0 + goals_for / 20.0)
+        directness = self._clamp01(0.45 + shots / 70.0 - possession * 0.35)
+        transition_attack = self._clamp01(0.38 + directness * 0.25 + goals_for / 8.0)
+        transition_defense = self._clamp01(
+            0.35 + defensive_solidity * 0.55 + (1.0 - corners_against / 12.0) * 0.18
+        )
+        pressing = self._clamp01(0.42 + shots / 70.0 + (1.0 - possession) * 0.12)
+        tempo = self._clamp01(0.38 + (shots + shots_against) / 80.0)
+        central_progression = self._clamp01(0.34 + possession * 0.32 + shots_on_target / 35.0)
+        line_height = self._clamp01(0.40 + pressing * 0.20 + possession * 0.15)
+
+        formation_history = []
+        formation_counts: Counter[str] = Counter()
+        for match in stats.recent:
+            formation = match.formation_for(team)
+            if not formation:
+                continue
+            weight = max(0.35, 1.0 - len(formation_history) * 0.10)
+            formation_counts[formation] += weight
+            formation_history.append(
+                {
+                    "date": match.date,
+                    "opponent": match.away_team if match.home_team == team else match.home_team,
+                    "formation": formation,
+                    "source": "confirmed-lineup" if match.lineup_confirmed_for(team) else "match-record",
+                }
+            )
+
+        estimated_formation = self._formation_from_signals(
+            possession,
+            directness,
+            defensive_solidity,
+            attack_width,
+            central_progression,
+            transition_attack,
+            pressing,
+            line_height,
+            shots,
+            shots_against,
+            goals_for,
+            goals_against,
+        )
+        formation = estimated_formation
+        formation_source = "estimated-from-pre-match-stats"
+        formation_confidence = min(0.82, 0.32 + stats.sample_size * 0.05)
+        if formation_counts:
+            formation, formation_weight = formation_counts.most_common(1)[0]
+            consistency = formation_weight / (sum(formation_counts.values()) or 1.0)
+            formation_source = "confirmed-lineups-before-match"
+            formation_confidence = min(0.94, 0.52 + consistency * 0.30 + len(formation_history) * 0.02)
+
+        return {
+            "team": team,
+            "formation": formation,
+            "formation_source": formation_source,
+            "formation_confidence": round(formation_confidence, 3),
+            "formation_history": formation_history[:6],
+            "estimated_formation": estimated_formation,
+            "style": self._style_from_signals(possession, directness, pressing),
+            "build_up": "short positional build-up" if possession >= 0.60 else "direct build-up" if directness >= 0.62 else "mixed build-up",
+            "primary_attack": "wide attacks" if attack_width >= max(central_progression, transition_attack) else "quick transitions" if transition_attack >= central_progression else "central progression",
+            "defensive_block": "high" if line_height >= 0.62 else "low-mid" if line_height <= 0.45 else "mid",
+            "possession_intent": round(possession, 3),
+            "pressing": round(pressing, 3),
+            "line_height": round(line_height, 3),
+            "defensive_solidity": round(defensive_solidity, 3),
+            "attack_width": round(attack_width, 3),
+            "central_progression": round(central_progression, 3),
+            "directness": round(directness, 3),
+            "chance_creation": round(chance_creation, 3),
+            "transition_attack": round(transition_attack, 3),
+            "transition_defense": round(transition_defense, 3),
+            "set_piece_threat": round(set_piece_threat, 3),
+            "tempo": round(tempo, 3),
+            "sample_size": stats.sample_size,
+            "source": "strict-pre-match-history",
+            "is_fallback": False,
+        }
+
+    @staticmethod
+    def _clamp01(value: float) -> float:
+        return max(0.0, min(1.0, value))
+
+    @staticmethod
+    def _style_from_signals(possession: float, directness: float, pressing: float) -> str:
+        if possession >= 0.60:
+            return "possession control"
+        if directness >= 0.63:
+            return "direct transitions"
+        if pressing >= 0.62:
+            return "pressing and territory"
+        return "balanced tournament football"
+
+    @staticmethod
+    def _formation_from_signals(
+        possession: float,
+        directness: float,
+        defensive_solidity: float,
+        attack_width: float,
+        central_progression: float,
+        transition_attack: float,
+        pressing: float,
+        line_height: float,
+        shots: float,
+        shots_against: float,
+        goals_for: float,
+        goals_against: float,
+    ) -> str:
+        if possession <= 0.38 and shots_against >= 13.0 and goals_for <= 1.1:
+            return "5-4-1"
+        if defensive_solidity >= 0.64 and attack_width >= 0.60 and line_height <= 0.56:
+            return "3-4-2-1"
+        if possession >= 0.61 and central_progression >= 0.60:
+            return "4-3-3"
+        if pressing >= 0.66 and shots >= 13.0 and central_progression >= 0.56:
+            return "4-3-3"
+        if directness >= 0.62 and transition_attack >= 0.60:
+            return "4-2-3-1"
+        if possession <= 0.44 and directness >= 0.56 and attack_width >= 0.56:
+            return "4-4-2"
+        if defensive_solidity >= 0.66 or (goals_against <= 0.7 and shots_against <= 8.0):
+            return "4-3-3" if central_progression >= attack_width else "4-2-3-1"
+        if central_progression >= attack_width and possession >= 0.52:
+            return "4-3-3"
+        return "4-2-3-1"
+
+    @classmethod
+    def _head_to_head_report(
+        cls,
+        matches: list[MatchRecord],
+        home_team: str,
+        away_team: str,
+        target_date: str | None,
+    ) -> dict[str, Any]:
+        try:
+            cutoff = date.fromisoformat(target_date) if target_date else date.today()
+        except ValueError:
+            cutoff = date.today()
+        direct = sorted(
+            [match for match in matches if match.is_finished() and cls._same_pair(match, home_team, away_team)],
+            key=lambda item: item.date,
+            reverse=True,
+        )[:10]
+        if not direct:
+            return {
+                "matches": 0,
+                "recent_matches": 0,
+                "older_matches": 0,
+                "effective_matches": 0.0,
+                "impact": 0.0,
+                "home_goal_edge": 0.0,
+                "average_total_goals": None,
+                "average_corners": None,
+                "average_fouls": None,
+                "history": [],
+                "policy": "no prior meetings",
+            }
+
+        total_weight = 0.0
+        recent_count = 0
+        older_count = 0
+        home_goals_sum = away_goals_sum = 0.0
+        home_points_sum = 0.0
+        goal_total_sum = 0.0
+        corner_sum = corner_weight = 0.0
+        foul_sum = foul_weight = 0.0
+        history = []
+
+        for match in direct:
+            try:
+                match_day = date.fromisoformat(match.date)
+                age_days = max(0, (cutoff - match_day).days)
+            except ValueError:
+                age_days = 1460
+            if age_days <= 730:
+                weight = 1.0 - 0.35 * age_days / 730.0
+                recent_count += 1
+                influence = "main"
+            else:
+                weight = 0.20 * math.exp(-(age_days - 730) / 1460.0)
+                older_count += 1
+                influence = "auxiliary"
+            if "world cup" in (match.competition or "").lower():
+                weight *= 1.12
+
+            if match.home_team == home_team:
+                home_goals = int(match.home_goals or 0)
+                away_goals = int(match.away_goals or 0)
+            else:
+                home_goals = int(match.away_goals or 0)
+                away_goals = int(match.home_goals or 0)
+            points = 3.0 if home_goals > away_goals else 1.0 if home_goals == away_goals else 0.0
+            total_weight += weight
+            home_goals_sum += home_goals * weight
+            away_goals_sum += away_goals * weight
+            home_points_sum += points * weight
+            goal_total_sum += (home_goals + away_goals) * weight
+
+            if match.home_corners is not None and match.away_corners is not None:
+                corner_sum += (float(match.home_corners) + float(match.away_corners)) * weight
+                corner_weight += weight
+            if match.home_fouls is not None and match.away_fouls is not None:
+                foul_sum += (float(match.home_fouls) + float(match.away_fouls)) * weight
+                foul_weight += weight
+            history.append(
+                {
+                    "date": match.date,
+                    "score": f"{home_goals}-{away_goals}",
+                    "competition": match.competition,
+                    "age_days": age_days,
+                    "influence": influence,
+                    "weight": round(weight, 3),
+                }
+            )
+
+        denominator = total_weight or 1.0
+        home_avg = home_goals_sum / denominator
+        away_avg = away_goals_sum / denominator
+        impact = min(1.0, total_weight / 3.0)
+        if recent_count == 0:
+            impact = min(impact, 0.22)
+        return {
+            "matches": len(direct),
+            "recent_matches": recent_count,
+            "older_matches": older_count,
+            "effective_matches": round(total_weight, 2),
+            "impact": round(impact, 3),
+            "home_goal_edge": round(max(-2.0, min(2.0, home_avg - away_avg)), 3),
+            "home_points_per_match": round(home_points_sum / denominator, 2),
+            "average_score": {home_team: round(home_avg, 2), away_team: round(away_avg, 2)},
+            "average_total_goals": round(goal_total_sum / denominator, 2),
+            "average_corners": None if not corner_weight else round(corner_sum / corner_weight, 2),
+            "average_fouls": None if not foul_weight else round(foul_sum / foul_weight, 2),
+            "history": history[:6],
+            "policy": "last 2 years are primary; older meetings are auxiliary",
+        }
 
     def _lineup_reports(
         self,
@@ -554,7 +910,7 @@ class MatchPredictor:
         formation = lineup_report.get("formation")
         if lineup_report.get("status") == "confirmed" and formation:
             adjusted["formation"] = formation
-            adjusted["formation_source"] = "live-lineup" if (fixture or {}).get("in_progress") else "confirmed-lineup"
+            adjusted["formation_source"] = "live-lineup" if (fixture or {}).get("source_in_progress") else "confirmed-lineup"
             adjusted["formation_confidence"] = 0.96
             adjusted["starters"] = lineup_report.get("starters", [])
         adjusted["lineup_status"] = lineup_report.get("status", "not_released")
@@ -573,6 +929,7 @@ class MatchPredictor:
         home_xg: float,
         away_xg: float,
         neutral: bool,
+        h2h_report: dict[str, Any] | None = None,
     ) -> dict[str, float]:
         goal_diff_delta = (home_stats.avg_goals_for - home_stats.avg_goals_against) - (
             away_stats.avg_goals_for - away_stats.avg_goals_against
@@ -583,6 +940,8 @@ class MatchPredictor:
         tactic_delta = tactical_edge(home_tactics, away_tactics)
         attack_delta = home_stats.avg_goals_for - away_stats.avg_goals_for
         defense_delta = away_stats.avg_goals_against - home_stats.avg_goals_against
+        h2h_report = h2h_report or {}
+        h2h_edge = float(h2h_report.get("home_goal_edge") or 0.0) * float(h2h_report.get("impact") or 0.0)
         features = {
             "bias": 1.0,
             "xg_delta": xg_delta,
@@ -593,6 +952,8 @@ class MatchPredictor:
             "attack_delta": attack_delta,
             "defense_delta": defense_delta,
             "tactic_delta": tactic_delta,
+            "h2h_edge": h2h_edge,
+            "h2h_sample": min(1.0, float(h2h_report.get("effective_matches") or 0.0) / 3.0),
             "neutral": 1.0 if neutral else 0.0,
             f"home:{home_team}": 1.0,
             f"away:{away_team}": 1.0,
@@ -644,6 +1005,7 @@ class MatchPredictor:
         match_context: dict[str, Any],
         weights: dict[str, float],
         neutral: bool,
+        h2h_report: dict[str, Any] | None = None,
     ) -> tuple[float, float]:
         home_base = 0.54 * home_stats.avg_goals_for + 0.46 * away_stats.avg_goals_against
         away_base = 0.54 * away_stats.avg_goals_for + 0.46 * home_stats.avg_goals_against
@@ -678,7 +1040,21 @@ class MatchPredictor:
         goal_scale = weights.get("goal_scale", 1.0)
         home_xg = max(0.15, (home_base + adjustment + tempo + intensity_boost + chance_weight * home_chance_edge) * goal_scale)
         away_xg = max(0.15, (away_base - adjustment * 0.78 + tempo + intensity_boost + chance_weight * away_chance_edge) * goal_scale)
-        return min(home_xg, 4.6), min(away_xg, 4.6)
+
+        h2h_report = h2h_report or {}
+        h2h_impact = float(h2h_report.get("impact") or 0.0)
+        if h2h_impact > 0:
+            edge = float(h2h_report.get("home_goal_edge") or 0.0)
+            edge_adjustment = max(-0.28, min(0.28, edge * weights.get("h2h_to_goals", 0.16) * h2h_impact))
+            home_xg += edge_adjustment
+            away_xg -= edge_adjustment * 0.78
+            historical_total = h2h_report.get("average_total_goals")
+            if historical_total is not None:
+                total_shift = max(-0.20, min(0.20, (float(historical_total) - (home_xg + away_xg)) * 0.10 * h2h_impact))
+                home_share = home_xg / max(0.30, home_xg + away_xg)
+                home_xg += total_shift * home_share
+                away_xg += total_shift * (1.0 - home_share)
+        return max(0.15, min(home_xg, 4.6)), max(0.15, min(away_xg, 4.6))
 
     def _expected_corners(
         self,
@@ -689,6 +1065,7 @@ class MatchPredictor:
         total_xg: float,
         weights: dict[str, float],
         state: dict[str, Any] | None = None,
+        h2h_report: dict[str, Any] | None = None,
     ) -> float:
         samples = [value for value in (home_stats.avg_total_corners, away_stats.avg_total_corners) if value is not None]
         base = sum(samples) / len(samples) if samples else 9.2
@@ -698,17 +1075,50 @@ class MatchPredictor:
 
         corner_profile = ((state or {}).get("stat_profiles") or {}).get("corners", {})
         team_profiles = corner_profile.get("teams") or {}
+        home_profile = team_profiles.get(home_stats.team, {})
+        away_profile = team_profiles.get(away_stats.team, {})
+        directional_values = [
+            (home_profile.get("avg_for"), away_profile.get("avg_against")),
+            (away_profile.get("avg_for"), home_profile.get("avg_against")),
+        ]
+        directional_estimates = [
+            (float(first) + float(second)) / 2.0
+            for first, second in directional_values
+            if first is not None and second is not None
+        ]
         profile_values = [
-            profile.get("avg_total")
-            for profile in (team_profiles.get(home_stats.team, {}), team_profiles.get(away_stats.team, {}))
+            profile.get("median_total") if profile.get("median_total") is not None else profile.get("avg_total")
+            for profile in (home_profile, away_profile)
             if profile.get("avg_total") is not None
         ]
-        if profile_values:
-            profile_estimate = sum(float(value) for value in profile_values) / len(profile_values)
-            profile_weight = min(0.92, 0.58 + 0.04 * len(profile_values))
+        if directional_estimates:
+            profile_estimate = sum(directional_estimates)
+            median_estimate = sum(float(value) for value in profile_values) / len(profile_values) if profile_values else profile_estimate
+            profile_estimate = profile_estimate * 0.72 + median_estimate * 0.28
+            profile_weight = min(
+                0.90,
+                0.52 + 0.025 * min(int(home_profile.get("matches", 0)), int(away_profile.get("matches", 0))),
+            )
             expected = expected * (1.0 - profile_weight) + profile_estimate * profile_weight
+        elif profile_values:
+            profile_estimate = sum(float(value) for value in profile_values) / len(profile_values)
+            expected = expected * 0.36 + profile_estimate * 0.64
         elif corner_profile.get("global") is not None:
-            expected = expected * 0.58 + float(corner_profile["global"]) * 0.42
+            global_center = corner_profile.get("global_median") or corner_profile["global"]
+            expected = expected * 0.58 + float(global_center) * 0.42
+
+        global_center = corner_profile.get("global_median")
+        if global_center is None:
+            global_center = corner_profile.get("global")
+        if global_center is not None:
+            sample_reliability = min(1.0, (home_stats.corner_samples + away_stats.corner_samples) / 14.0)
+            expected = expected * sample_reliability + float(global_center) * (1.0 - sample_reliability)
+
+        h2h_corners = (h2h_report or {}).get("average_corners")
+        h2h_impact = float((h2h_report or {}).get("impact") or 0.0)
+        if h2h_corners is not None and h2h_impact > 0:
+            blend = min(0.20, 0.20 * h2h_impact)
+            expected = expected * (1.0 - blend) + float(h2h_corners) * blend
 
         return max(4.0, min(16.0, expected))
 
@@ -721,8 +1131,9 @@ class MatchPredictor:
         fixture: dict[str, Any] | None,
         weights: dict[str, float],
         state: dict[str, Any] | None = None,
+        h2h_report: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        global_average = self._global_foul_average()
+        global_average = self._global_foul_average(state)
         weighted_team_values = []
         for stats in (home_stats, away_stats):
             if stats.avg_total_fouls is None:
@@ -757,23 +1168,73 @@ class MatchPredictor:
         stat_foul_profile = ((state or {}).get("stat_profiles") or {}).get("fouls", {})
         trained_referees = stat_foul_profile.get("referees") or {}
         trained_teams = stat_foul_profile.get("teams") or {}
-        referee_profile = trained_referees.get(referee.get("name") if referee else None) or self.store.referee_profile(referee.get("name") if referee else None)
+        referee_profile = trained_referees.get(referee.get("name") if referee else None)
+        if not referee_profile and state is None:
+            referee_profile = self.store.referee_profile(referee.get("name") if referee else None)
+        referee_profile = referee_profile or {}
         referee_average = referee_profile.get("avg_fouls")
         referee_matches = int(referee_profile.get("matches", 0) or 0)
         if referee_average is not None:
-            referee_weight = min(0.92, 0.55 + referee_matches * 0.08)
-            expected = expected * (1.0 - referee_weight) + float(referee_average) * referee_weight
+            referee_reliability = referee_matches / (referee_matches + 5.0)
+            shrunk_referee_average = (
+                float(referee_average) * referee_reliability
+                + global_average * (1.0 - referee_reliability)
+            )
+            referee_weight = min(0.78, 0.28 + referee_matches * 0.07)
+            expected = expected * (1.0 - referee_weight) + shrunk_referee_average * referee_weight
         else:
+            home_profile = trained_teams.get(home_stats.team, {})
+            away_profile = trained_teams.get(away_stats.team, {})
+            directional_values = [
+                (home_profile.get("avg_for"), away_profile.get("avg_against")),
+                (away_profile.get("avg_for"), home_profile.get("avg_against")),
+            ]
+            directional_estimates = [
+                (float(first) + float(second)) / 2.0
+                for first, second in directional_values
+                if first is not None and second is not None
+            ]
             profile_values = [
-                profile.get("avg_total")
-                for profile in (trained_teams.get(home_stats.team, {}), trained_teams.get(away_stats.team, {}))
+                profile.get("median_total") if profile.get("median_total") is not None else profile.get("avg_total")
+                for profile in (home_profile, away_profile)
                 if profile.get("avg_total") is not None
             ]
-            if profile_values:
+            if directional_estimates:
+                profile_estimate = sum(directional_estimates)
+                median_estimate = sum(float(value) for value in profile_values) / len(profile_values) if profile_values else profile_estimate
+                profile_estimate = profile_estimate * 0.68 + median_estimate * 0.32
+                profile_matches = min(
+                    int(home_profile.get("matches", 0)),
+                    int(away_profile.get("matches", 0)),
+                )
+                profile_reliability = profile_matches / (profile_matches + 6.0)
+                profile_estimate = (
+                    profile_estimate * profile_reliability
+                    + global_average * (1.0 - profile_reliability)
+                )
+                expected = expected * 0.26 + profile_estimate * 0.74
+            elif profile_values:
                 profile_estimate = sum(float(value) for value in profile_values) / len(profile_values)
+                profile_matches = min(
+                    int(profile.get("matches", 0))
+                    for profile in (home_profile, away_profile)
+                    if profile.get("avg_total") is not None
+                )
+                profile_reliability = profile_matches / (profile_matches + 6.0)
+                profile_estimate = (
+                    profile_estimate * profile_reliability
+                    + global_average * (1.0 - profile_reliability)
+                )
                 expected = expected * 0.28 + profile_estimate * 0.72
             elif stat_foul_profile.get("global") is not None:
-                expected = expected * 0.55 + float(stat_foul_profile["global"]) * 0.45
+                global_center = stat_foul_profile.get("global_median") or stat_foul_profile["global"]
+                expected = expected * 0.55 + float(global_center) * 0.45
+
+        h2h_fouls = (h2h_report or {}).get("average_fouls")
+        h2h_impact = float((h2h_report or {}).get("impact") or 0.0)
+        if h2h_fouls is not None and h2h_impact > 0:
+            blend = min(0.16, 0.16 * h2h_impact)
+            expected = expected * (1.0 - blend) + float(h2h_fouls) * blend
 
         expected = max(14.0, min(40.0, expected))
         probabilities = {}
@@ -803,7 +1264,13 @@ class MatchPredictor:
             "probabilities": probabilities,
         }
 
-    def _global_foul_average(self) -> float:
+    def _global_foul_average(self, state: dict[str, Any] | None = None) -> float:
+        foul_profile = (((state or {}).get("stat_profiles") or {}).get("fouls") or {})
+        trained_global = foul_profile.get("global_median")
+        if trained_global is None:
+            trained_global = foul_profile.get("global")
+        if trained_global is not None:
+            return float(trained_global)
         totals = [
             float(match.home_fouls) + float(match.away_fouls)
             for match in self.store.load_matches()
@@ -964,6 +1431,7 @@ class MatchPredictor:
         outcome_probabilities: dict[str, float] | None = None,
         limit: int = 3,
         state: dict[str, Any] | None = None,
+        h2h_report: dict[str, Any] | None = None,
     ) -> list[dict[str, Any]]:
         score_counts_by_outcome = {
             outcome: self._historical_score_counts(outcome, state) for outcome in ("П1", "X", "П2")
@@ -974,14 +1442,7 @@ class MatchPredictor:
             home_win, draw, away_win = self._outcome_probabilities(home_xg, away_xg)
             outcome_probabilities = {"П1": home_win, "X": draw, "П2": away_win}
         profile_candidate = self._profile_score_candidate(market_pick, home_xg, away_xg, state)
-        if limit <= 1 and profile_candidate:
-            profile_candidate["probability"] = self._calibrated_exact_score_probability(
-                profile_candidate["probability"],
-                profile_candidate["outcome"],
-                outcome_probabilities,
-                profile_probability=True,
-            )
-            return [profile_candidate]
+        profile_score = profile_candidate.get("score") if profile_candidate else None
         grid = []
         for home_goals in range(9):
             for away_goals in range(9):
@@ -1000,6 +1461,8 @@ class MatchPredictor:
                     * self._score_total_factor(home_goals, away_goals, home_xg, away_xg, goal_total)
                     * self._mismatch_score_factor(home_goals, away_goals, home_xg, away_xg, market_pick)
                     * self._outcome_score_factor(outcome, market_pick, outcome_probabilities)
+                    * (1.32 if score == profile_score else 1.0)
+                    * self._h2h_score_factor(score, h2h_report)
                 )
                 grid.append((weight, outcome, score))
 
@@ -1271,6 +1734,14 @@ class MatchPredictor:
         limit: int,
     ) -> list[tuple[float, str, str]]:
         ordered = sorted(candidates, reverse=True)
+        if limit <= 1:
+            market_candidates = [item for item in ordered if item[1] == market_pick]
+            aligned = [
+                item
+                for item in market_candidates
+                if self._score_total_compatible(item[2], goal_total)
+            ]
+            return (aligned or market_candidates or ordered)[:1]
         selected = ordered[:limit]
         probabilities = goal_total.get("probabilities", {})
         over_2_5 = float(probabilities.get("over_2_5", 0.0))
@@ -1339,6 +1810,58 @@ class MatchPredictor:
             selected = self._include_score_candidate(selected, market_candidate)
 
         return sorted(selected, reverse=True)[:limit]
+
+    @classmethod
+    def _score_total_compatible(cls, score: str, goal_total: dict[str, Any]) -> bool:
+        total = cls._score_total(score)
+        probabilities = goal_total.get("probabilities", {})
+        over_2_5 = float(probabilities.get("over_2_5", 0.0))
+        under_2_5 = float(probabilities.get("under_2_5", 0.0))
+        over_3_5 = float(probabilities.get("over_3_5", 0.0))
+        if over_3_5 >= 0.52:
+            return total >= 4
+        if over_2_5 >= 0.58:
+            return total >= 3
+        if under_2_5 >= 0.62:
+            return total <= 2
+        return True
+
+    @classmethod
+    def _score_total_alignment(cls, score: str, goal_total: dict[str, Any]) -> dict[str, Any]:
+        total = cls._score_total(score)
+        probabilities = goal_total.get("probabilities", {})
+        over_2_5 = float(probabilities.get("over_2_5", 0.0))
+        under_2_5 = float(probabilities.get("under_2_5", 0.0))
+        if over_2_5 >= 0.58:
+            side = "over_2_5"
+            consistent = total >= 3
+        elif under_2_5 >= 0.62:
+            side = "under_2_5"
+            consistent = total <= 2
+        else:
+            side = "balanced"
+            consistent = True
+        return {
+            "consistent": consistent,
+            "score_total": total,
+            "dominant_total_side": side,
+        }
+
+    @staticmethod
+    def _h2h_score_factor(score: str, h2h_report: dict[str, Any] | None) -> float:
+        report = h2h_report or {}
+        impact = float(report.get("impact") or 0.0)
+        if impact <= 0:
+            return 1.0
+        score_weight = sum(
+            float(item.get("weight") or 0.0)
+            for item in report.get("history", [])
+            if item.get("score") == score
+        )
+        if score_weight <= 0:
+            return 1.0
+        effective = max(1.0, float(report.get("effective_matches") or 1.0))
+        return min(1.35, 1.0 + 0.35 * impact * score_weight / effective)
 
     @staticmethod
     def _remove_weak_opposite_scores(
@@ -1889,6 +2412,9 @@ class MatchPredictor:
                 "targets": backtest.get("targets", {}) if isinstance(backtest, dict) else {},
                 "target_status": backtest.get("target_status", {}) if isinstance(backtest, dict) else {},
                 "trained_match_keys": backtest.get("trained_match_keys") if isinstance(backtest, dict) else None,
+                "training": backtest.get("training", {}) if isinstance(backtest, dict) else {},
+                "evaluation_mode": backtest.get("evaluation_mode")
+                or (backtest.get("training", {}) if isinstance(backtest, dict) else {}).get("evaluation_mode"),
                 "updated_at": backtest.get("updated_at") if isinstance(backtest, dict) else None,
             },
             "home_backtest": by_team.get(home_team, {}),

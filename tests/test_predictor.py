@@ -171,6 +171,34 @@ class PredictorTests(unittest.TestCase):
             self.assertGreater(goal_total["probabilities"]["over_2_5"], 0.52)
             self.assertGreaterEqual(sum(map(int, scores[0]["score"].split("-"))), 3)
 
+    def test_single_score_cannot_bypass_strong_total_with_profile_shortcut(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            predictor = MatchPredictor(store)
+            state = store.load_model_state()
+            state["score_profiles"] = {
+                "by_outcome": {
+                    "П1": [{"score": "1-0", "count": 90, "probability": 0.90}],
+                },
+                "by_outcome_bucket": {},
+            }
+            stats = TeamStats(team="A", sample_size=10, wins=7, draws=2, losses=1)
+            goal_total = predictor._goal_total_forecast(2.05, 1.25)
+            scores = predictor._top_scores(
+                2.05,
+                1.25,
+                "П1",
+                stats,
+                stats,
+                goal_total,
+                {"П1": 0.56, "X": 0.24, "П2": 0.20},
+                limit=1,
+                state=state,
+            )
+            self.assertGreaterEqual(goal_total["probabilities"]["over_2_5"], 0.58)
+            self.assertGreaterEqual(sum(map(int, scores[0]["score"].split("-"))), 3)
+            self.assertEqual(scores[0]["outcome"], "П1")
+
     def test_close_match_exact_scores_can_include_draw(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)
@@ -222,11 +250,14 @@ class PredictorTests(unittest.TestCase):
             self.assertLess(data["lineup_reports"]["France"]["availability_score"], 1.0)
             self.assertIn("Kylian Mbappé", [item["name"] for item in data["lineup_reports"]["France"]["missing_key_players"]])
 
-    def test_dominant_favorite_can_predict_three_nil(self):
+    def test_dominant_favorite_can_predict_three_plus_goals(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)
             prediction = MatchPredictor(store).predict("France", "Iraq", remember=False)
-            self.assertIn("3-0", prediction.exact_scores)
+            home_goals, away_goals = map(int, prediction.exact_scores[0].split("-"))
+            self.assertGreaterEqual(home_goals, 3)
+            self.assertGreater(home_goals, away_goals)
+            self.assertTrue(prediction.goal_total["alignment"]["consistent"])
 
     def test_strong_favorite_keeps_two_nil_candidate(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -337,6 +368,97 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(data["result_summary"]["actual"]["score"], "0-0")
             self.assertTrue(any("исключены" in warning for warning in data["warnings"]))
 
+    def test_future_match_stats_and_tactics_do_not_change_historical_prediction(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = DataStore(Path(tmp_dir) / "project")
+            prior = [
+                MatchRecord(
+                    "2098-11-01",
+                    "A",
+                    "C",
+                    home_goals=2,
+                    away_goals=0,
+                    home_corners=6,
+                    away_corners=2,
+                    home_fouls=10,
+                    away_fouls=12,
+                    home_possession=61,
+                    away_possession=39,
+                    home_shots=15,
+                    away_shots=6,
+                    home_formation="4-3-3",
+                ),
+                MatchRecord(
+                    "2098-11-02",
+                    "B",
+                    "D",
+                    home_goals=1,
+                    away_goals=1,
+                    home_corners=4,
+                    away_corners=4,
+                    home_fouls=13,
+                    away_fouls=14,
+                    home_possession=48,
+                    away_possession=52,
+                    home_shots=9,
+                    away_shots=10,
+                    home_formation="4-4-2",
+                ),
+            ]
+            target = MatchRecord("2099-01-01", "A", "B", home_goals=1, away_goals=0)
+            future = MatchRecord(
+                "2099-02-01",
+                "A",
+                "B",
+                home_goals=8,
+                away_goals=7,
+                home_corners=18,
+                away_corners=17,
+                home_fouls=30,
+                away_fouls=31,
+                home_possession=90,
+                away_possession=10,
+                home_shots=40,
+                away_shots=35,
+                home_formation="3-2-5",
+            )
+            fixture = {"date": "2099-01-01", "home_goals": 1, "away_goals": 0, "completed": True}
+
+            store.save_matches(prior + [target, future])
+            with_future = MatchPredictor(store).predict(
+                "A",
+                "B",
+                match_date="2099-01-01",
+                fixture=fixture,
+                remember=False,
+            )
+            store.save_matches(prior + [target])
+            without_future = MatchPredictor(store).predict(
+                "A",
+                "B",
+                match_date="2099-01-01",
+                fixture=fixture,
+                remember=False,
+            )
+
+            self.assertEqual(with_future.market_pick, without_future.market_pick)
+            self.assertEqual(with_future.exact_scores, without_future.exact_scores)
+            self.assertEqual(with_future.predicted_corners, without_future.predicted_corners)
+            self.assertEqual(with_future.foul_forecast["expected"], without_future.foul_forecast["expected"])
+            self.assertEqual(with_future.home_tactics, without_future.home_tactics)
+
+    def test_old_head_to_head_match_is_only_auxiliary(self):
+        matches = [
+            MatchRecord("2098-08-01", "A", "B", home_goals=2, away_goals=1, competition="FIFA World Cup"),
+            MatchRecord("2094-01-01", "B", "A", home_goals=0, away_goals=4, competition="Friendly"),
+        ]
+        report = MatchPredictor._head_to_head_report(matches, "A", "B", "2099-01-01")
+        self.assertEqual(report["recent_matches"], 1)
+        self.assertEqual(report["older_matches"], 1)
+        self.assertEqual(report["history"][0]["influence"], "main")
+        self.assertEqual(report["history"][1]["influence"], "auxiliary")
+        self.assertGreater(report["history"][0]["weight"], report["history"][1]["weight"] * 4)
+
     def test_learning_records_review(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)
@@ -358,8 +480,11 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(summary["unique_matches"], 2)
             self.assertEqual(summary["trained"], 4)
             self.assertEqual(len(state["trained_match_keys"]), 2)
+            self.assertEqual(len(state["trained_match_fingerprints"]), 2)
             self.assertEqual(state["training"]["epochs"], 2)
             self.assertEqual(store.load_backtest()["matches"], 2)
+            self.assertEqual(state["training"]["evaluation_mode"], "walk_forward_strict_date")
+            self.assertTrue(store.load_backtest()["result_leakage_guard"])
 
     def test_auto_checker_reviews_pending_prediction(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

@@ -9,9 +9,13 @@
   <body>
     <main class="shell">
       <section class="panel controls">
-        <div>
-          <h1>Прогноз сборных</h1>
-          <p class="muted">Введите две команды через запятую.</p>
+        <div class="header-row">
+          <div>
+            <p class="eyebrow">WORLD CUP 2026 · MATCH LAB</p>
+            <h1>Прогноз сборных</h1>
+            <p class="muted">Введите две команды через запятую.</p>
+          </div>
+          <div class="auto-status"><span class="status-dot"></span>Автообучение активно</div>
         </div>
         <form id="predict-form" class="row">
           <input id="matchup" name="matchup" value="Уругвай, Испания" autocomplete="off">
@@ -26,12 +30,6 @@
         <h2>Автопроверка результатов</h2>
         <button id="auto-check" type="button">Проверить сейчас</button>
         <p id="review" class="muted">Прогнозы с найденной датой попадут в очередь. Сервер сам проверяет результаты примерно раз в час.</p>
-      </section>
-
-      <section class="panel">
-        <h2>Обучение модели</h2>
-        <button id="train-model" type="button">Дообучить</button>
-        <p id="train-status" class="muted">Последние матчи будут прогнаны по истории и проверены по факту.</p>
       </section>
     </main>
     <script src="/app.js"></script>

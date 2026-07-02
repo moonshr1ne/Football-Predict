@@ -12,7 +12,7 @@ from .models import MatchRecord
 
 
 DEFAULT_MODEL_STATE = {
-    "version": 1,
+    "version": 2,
     "learning_rate": 0.08,
     "weights": {
         "home_advantage_goals": 0.18,
@@ -24,6 +24,7 @@ DEFAULT_MODEL_STATE = {
         "injury_to_goals": 0.16,
         "lineup_to_goals": 0.24,
         "tactics_to_goals": 0.24,
+        "h2h_to_goals": 0.16,
         "tactics_to_corners": 1.15,
         "foul_bias": 0.0,
         "world_cup_intensity_goals": 0.05,
@@ -35,6 +36,7 @@ DEFAULT_MODEL_STATE = {
     "stat_profiles": {},
     "history": [],
     "trained_match_keys": [],
+    "trained_match_fingerprints": {},
 }
 
 DEFAULT_KEY_PLAYERS = {

@@ -19,32 +19,6 @@ document.querySelector("#auto-check").addEventListener("click", async () => {
     `Проверено: ${data.checked}, обучено: ${data.learned}, ожидают: ${data.pending}, ошибок: ${data.errors}.`;
 });
 
-document.querySelector("#train-model")?.addEventListener("click", async () => {
-  const button = document.querySelector("#train-model");
-  const status = document.querySelector("#train-status");
-  button.disabled = true;
-  status.textContent = "Обучаю модель на прошлых матчах...";
-  try {
-    const response = await fetch("/api/train?epochs=80", {
-      method: "POST",
-    });
-    const data = await response.json();
-    if (!response.ok) {
-      status.textContent = data.error || "Ошибка обучения";
-      return;
-    }
-    const backtest = data.backtest || {};
-    const kept = data.kept_previous ? " Предыдущая версия оставлена, новая попытка была слабее." : "";
-    status.textContent =
-      `Готово: ${data.unique_matches} матчей, ${data.epochs} эпохи, исходы ${probability(backtest.outcome_accuracy)}, точные счета ${probability(backtest.exact_score_accuracy)}.${kept}`;
-    await runPrediction(false);
-  } catch (error) {
-    status.textContent = error.message || "Ошибка обучения";
-  } finally {
-    button.disabled = false;
-  }
-});
-
 async function getJson(url) {
   const response = await fetch(url);
   const data = await response.json();
@@ -55,21 +29,21 @@ async function getJson(url) {
 function renderPrediction(data) {
   const warnings = data.warnings.map((item) => `<p class="warn">${escapeHtml(item)}</p>`).join("");
   prediction.innerHTML = `
-    <article class="card">
+    <article class="card outcome-card">
       <h3>Исход</h3>
       <div class="metric">${data.market_pick}</div>
       <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%${data.match_date ? `, найдено ${data.match_date}` : ""}</p>
     </article>
-    <article class="card">
+    <article class="card stat-card">
       <h3>Угловые</h3>
       <div class="metric">${data.predicted_corners.toFixed(2)}</div>
       <p class="sub">ожидаемый тотал</p>
     </article>
-    <article class="card">
+    <article class="card stat-card">
       <h3>Фолы</h3>
       ${foulForecastBlock(data.foul_forecast)}
     </article>
-    <article class="card">
+    <article class="card stat-card">
       <h3>Голы</h3>
       ${goalTotalBlock(data.goal_total)}
     </article>
@@ -88,6 +62,10 @@ function renderPrediction(data) {
     <article class="card wide">
       <h3>${escapeHtml(data.away_team)}: последние матчи</h3>
       ${statsTable(data.away_stats)}
+    </article>
+    <article class="card wide">
+      <h3>Очные встречи</h3>
+      ${headToHeadBlock(data.h2h_report, data.home_team, data.away_team)}
     </article>
     <article class="card wide">
       <h3>Сведения по сборным</h3>
@@ -118,7 +96,7 @@ function renderPrediction(data) {
       <h3>Прогноз и факт</h3>
       ${resultSummaryBlock(data)}
     </article>
-    <article class="card wide">
+    <article class="card wide bets-card">
       <h3>Рекомендуемые ставки</h3>
       ${recommendedBetsBlock(data.recommended_bets)}
     </article>
@@ -173,6 +151,9 @@ function goalTotalBlock(goalTotal) {
   const likely = (goalTotal.most_likely_totals || [])
     .map((item) => `${escapeHtml(item.goals)} (${probability(item.probability)})`)
     .join(", ");
+  const alignedScore = goalTotal.aligned_score
+    ? `<p class="consistency-ok">Точный счет ${escapeHtml(goalTotal.aligned_score)} согласован с ведущим сценарием тотала.</p>`
+    : "";
   return `
     <div class="metric">${Number(goalTotal.expected ?? 0).toFixed(2)}</div>
     <p class="sub">${escapeHtml(goalTotal.label || "тотал")}</p>
@@ -182,6 +163,39 @@ function goalTotalBlock(goalTotal) {
       <tr><th>ТБ 4.5</th><td>${probability(probabilities.over_4_5)}</td><th>ТМ 4.5</th><td>${probability(probabilities.under_4_5)}</td></tr>
       <tr><th>Чаще всего</th><td colspan="3">${likely || "нет"}</td></tr>
     </table>
+    ${alignedScore}
+  `;
+}
+
+function headToHeadBlock(report, homeTeam, awayTeam) {
+  if (!report?.matches) {
+    return "<p class='muted'>До этой игры очных встреч в доступной базе не найдено.</p>";
+  }
+  const averageScore = report.average_score || {};
+  const history = (report.history || [])
+    .map(
+      (item) => `
+        <tr>
+          <td>${escapeHtml(item.date)}</td>
+          <td><strong>${escapeHtml(item.score)}</strong></td>
+          <td>${escapeHtml(item.competition || "матч сборных")}</td>
+          <td><span class="tag ${item.influence === "main" ? "tag-main" : ""}">${item.influence === "main" ? "основной" : "вспомогательный"}</span></td>
+        </tr>
+      `
+    )
+    .join("");
+  return `
+    <div class="h2h-summary">
+      <div><span>Матчи</span><strong>${report.matches}</strong></div>
+      <div><span>До 2 лет</span><strong>${report.recent_matches || 0}</strong></div>
+      <div><span>Средний счет</span><strong>${Number(averageScore[homeTeam] ?? 0).toFixed(2)} : ${Number(averageScore[awayTeam] ?? 0).toFixed(2)}</strong></div>
+      <div><span>Влияние</span><strong>${probability(report.impact)}</strong></div>
+    </div>
+    <table class="compact h2h-table">
+      <tr><th>Дата</th><th>Счет</th><th>Турнир</th><th>Вес</th></tr>
+      ${history}
+    </table>
+    <p class="sub">Матчи старше двух лет учитываются только как слабый вспомогательный сигнал.</p>
   `;
 }
 
@@ -288,14 +302,15 @@ function dataQualityBlock(quality) {
   const targets = backtest.targets || {};
   const targetStatus = backtest.target_status || {};
   const training = backtest.training || {};
+  const strictMode = backtest.evaluation_mode === "walk_forward_strict_date";
   return `
     <table>
       <tr><th>Общая база</th><td>${percent(quality.score)}</td><th>Участники ЧМ</th><td>${quality.participants || 0}</td></tr>
       <tr><th>Матчи команд</th><td>${quality.home_matches || 0} / ${quality.away_matches || 0}</td><th>Богатые матчи</th><td>${quality.home_rich_matches || 0} / ${quality.away_rich_matches || 0}</td></tr>
-      <tr><th>Бэктест</th><td>${backtest.matches || 0} матчей</td><th>Исходы</th><td>${backtest.outcome_accuracy == null ? "нет" : percent(backtest.outcome_accuracy)}</td></tr>
+      <tr><th>Честный baseline</th><td>${backtest.matches || 0} матчей ЧМ</td><th>Исходы</th><td>${backtest.outcome_accuracy == null ? "нет" : percent(backtest.outcome_accuracy)}</td></tr>
       <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"}</td></tr>
       <tr><th>Фолы выборка</th><td>${quality.home_foul_samples || 0} / ${quality.away_foul_samples || 0}</td><th>Ошибка фолов</th><td>${backtest.foul_mae ?? "нет"}</td></tr>
-      <tr><th>Обучение</th><td>${training.unique_matches || backtest.trained_match_keys || 0} матчей</td><th>Эпохи</th><td>${training.epochs || 1}</td></tr>
+      <tr><th>Обучение</th><td>${training.unique_matches || backtest.trained_match_keys || 0} матчей</td><th>Режим</th><td>${strictMode ? "по времени, без утечки" : "ожидает строгого пересчета"}</td></tr>
       <tr><th>Цель исходов</th><td>${targetCell(backtest.outcome_accuracy, targets.outcome_accuracy, targetStatus.outcome_accuracy, "higher")}</td><th>Цель счетов</th><td>${targetCell(backtest.exact_score_accuracy, targets.exact_score_accuracy, targetStatus.exact_score_accuracy, "higher")}</td></tr>
       <tr><th>Цель угловых</th><td>${targetCell(backtest.corner_mae, targets.corner_mae, targetStatus.corner_mae, "lower", false)}</td><th>Угл. ±1</th><td>${backtest.corner_within_one_rate == null ? "нет" : probability(backtest.corner_within_one_rate)}</td></tr>
     </table>
