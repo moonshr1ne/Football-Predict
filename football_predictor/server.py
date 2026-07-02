@@ -27,7 +27,6 @@ class PredictorHandler(SimpleHTTPRequestHandler):
         if parsed.path == "/api/predict":
             query = parse_qs(parsed.query)
             matchup = query.get("matchup", [""])[0]
-            home_venue = query.get("home_venue", ["false"])[0] == "true"
             match_date = query.get("date", [None])[0] or None
             remember = query.get("remember", ["true"])[0] != "false"
             try:
@@ -50,7 +49,7 @@ class PredictorHandler(SimpleHTTPRequestHandler):
                 prediction = MatchPredictor(self.store).predict(
                     home,
                     away,
-                    neutral=not home_venue,
+                    neutral=True,
                     remember=remember,
                     match_date=match_date,
                     fixture=fixture,
@@ -87,7 +86,7 @@ class PredictorHandler(SimpleHTTPRequestHandler):
                 home_goals=home_goals,
                 away_goals=away_goals,
                 corners_total=_optional_float(body.get("corners")),
-                neutral=not bool(body.get("home_venue")),
+                neutral=True,
                 baseline_prediction=baseline,
             )
             if baseline and baseline.get("prediction_id"):

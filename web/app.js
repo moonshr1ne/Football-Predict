@@ -32,12 +32,13 @@ function renderPrediction(data) {
     <article class="card outcome-card">
       <h3>Исход</h3>
       <div class="metric">${data.market_pick}</div>
-      <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%${data.match_date ? `, найдено ${data.match_date}` : ""}</p>
+      <p class="round-line">${escapeHtml(data.round_info?.label || "Плей-офф")}</p>
+      <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%${data.match_date ? `, ${data.match_date}` : ""}</p>
     </article>
     <article class="card stat-card">
       <h3>Угловые</h3>
-      <div class="metric">${data.predicted_corners.toFixed(2)}</div>
-      <p class="sub">ожидаемый тотал</p>
+      <div class="metric">${Number(data.corner_forecast?.point_estimate ?? data.predicted_corners).toFixed(0)}</div>
+      <p class="sub">точечный прогноз · xC ${Number(data.corner_forecast?.expected ?? data.predicted_corners).toFixed(2)}</p>
     </article>
     <article class="card stat-card">
       <h3>Фолы</h3>
@@ -77,7 +78,7 @@ function renderPrediction(data) {
     </article>
     <article class="card wide">
       <h3>Контекст</h3>
-      ${fixtureBlock(data.fixture)}
+      ${fixtureBlock(data.fixture, data.round_info)}
       <p>Турнир: ${escapeHtml(data.match_context?.competition || "FIFA World Cup")}</p>
       <p>Важность: ${Number(data.match_context?.importance ?? 1).toFixed(2)}, базовая сила состава: ${Number(data.match_context?.lineup_strength_floor ?? 0.92).toFixed(2)}</p>
       <p>${escapeHtml(data.home_team)}: ${contextLine(data.home_context)}</p>
@@ -155,8 +156,8 @@ function goalTotalBlock(goalTotal) {
     ? `<p class="consistency-ok">Точный счет ${escapeHtml(goalTotal.aligned_score)} согласован с ведущим сценарием тотала.</p>`
     : "";
   return `
-    <div class="metric">${Number(goalTotal.expected ?? 0).toFixed(2)}</div>
-    <p class="sub">${escapeHtml(goalTotal.label || "тотал")}</p>
+    <div class="metric">${Number(goalTotal.point_estimate ?? goalTotal.expected ?? 0).toFixed(0)}</div>
+    <p class="sub">точечный прогноз · xG ${Number(goalTotal.expected ?? 0).toFixed(2)} · ${escapeHtml(goalTotal.label || "тотал")}</p>
     <table class="compact">
       <tr><th>ТБ 2.5</th><td>${probability(probabilities.over_2_5)}</td><th>ТМ 2.5</th><td>${probability(probabilities.under_2_5)}</td></tr>
       <tr><th>ТБ 3.5</th><td>${probability(probabilities.over_3_5)}</td><th>ТМ 3.5</th><td>${probability(probabilities.under_3_5)}</td></tr>
@@ -209,8 +210,8 @@ function foulForecastBlock(forecast) {
     ? `${escapeHtml(referee.name)}${referee.avg_fouls == null ? "" : ` · ${Number(referee.avg_fouls).toFixed(2)} за матч`}`
     : "судья пока неизвестен";
   return `
-    <div class="metric">${Number(forecast.expected ?? 0).toFixed(2)}</div>
-    <p class="sub">${escapeHtml(forecast.label || "тотал фолов")}</p>
+    <div class="metric">${Number(forecast.point_estimate ?? forecast.expected ?? 0).toFixed(0)}</div>
+    <p class="sub">точечный прогноз · ожидание ${Number(forecast.expected ?? 0).toFixed(2)} · ${escapeHtml(forecast.label || "тотал фолов")}</p>
     <table class="compact">
       <tr><th>ТБ 20.5</th><td>${probability(probabilities.over_20_5)}</td><th>ТМ 20.5</th><td>${probability(probabilities.under_20_5)}</td></tr>
       <tr><th>ТБ 24.5</th><td>${probability(probabilities.over_24_5)}</td><th>ТМ 24.5</th><td>${probability(probabilities.under_24_5)}</td></tr>
@@ -302,17 +303,24 @@ function dataQualityBlock(quality) {
   const targets = backtest.targets || {};
   const targetStatus = backtest.target_status || {};
   const training = backtest.training || {};
+  const playoff = backtest.playoff || {};
+  const activeMetrics = playoff.matches ? playoff : backtest;
+  const activeStatus = playoff.matches ? (backtest.playoff_target_status || {}) : targetStatus;
   const strictMode = backtest.evaluation_mode === "walk_forward_strict_date";
   return `
     <table>
       <tr><th>Общая база</th><td>${percent(quality.score)}</td><th>Участники ЧМ</th><td>${quality.participants || 0}</td></tr>
       <tr><th>Матчи команд</th><td>${quality.home_matches || 0} / ${quality.away_matches || 0}</td><th>Богатые матчи</th><td>${quality.home_rich_matches || 0} / ${quality.away_rich_matches || 0}</td></tr>
       <tr><th>Честный baseline</th><td>${backtest.matches || 0} матчей ЧМ</td><th>Исходы</th><td>${backtest.outcome_accuracy == null ? "нет" : percent(backtest.outcome_accuracy)}</td></tr>
-      <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"}</td></tr>
-      <tr><th>Фолы выборка</th><td>${quality.home_foul_samples || 0} / ${quality.away_foul_samples || 0}</td><th>Ошибка фолов</th><td>${backtest.foul_mae ?? "нет"}</td></tr>
+      <tr><th>Плей-офф</th><td>${playoff.matches || 0} матчей</td><th>Исход / счет</th><td>${playoff.outcome_accuracy == null ? "нет" : `${probability(playoff.outcome_accuracy)} / ${probability(playoff.exact_score_accuracy)}`}</td></tr>
+      <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"} · xC ${backtest.expected_corner_mae ?? "нет"}</td></tr>
+      <tr><th>Ошибка голов</th><td>${backtest.goal_mae ?? "нет"} · xG ${backtest.expected_goal_mae ?? "нет"}</td><th>В радиусе 0.7</th><td>${backtest.goal_within_0_7_rate == null ? "нет" : probability(backtest.goal_within_0_7_rate)}</td></tr>
+      <tr><th>Угловые ±1.5</th><td>${backtest.corner_within_1_5_rate == null ? "нет" : probability(backtest.corner_within_1_5_rate)}</td><th>Фолы ±2</th><td>${backtest.foul_within_2_rate == null ? "нет" : probability(backtest.foul_within_2_rate)}</td></tr>
+      <tr><th>Фолы выборка</th><td>${quality.home_foul_samples || 0} / ${quality.away_foul_samples || 0}</td><th>Ошибка фолов</th><td>${backtest.foul_mae ?? "нет"} · ожидание ${backtest.expected_foul_mae ?? "нет"}</td></tr>
       <tr><th>Обучение</th><td>${training.unique_matches || backtest.trained_match_keys || 0} матчей</td><th>Режим</th><td>${strictMode ? "по времени, без утечки" : "ожидает строгого пересчета"}</td></tr>
-      <tr><th>Цель исходов</th><td>${targetCell(backtest.outcome_accuracy, targets.outcome_accuracy, targetStatus.outcome_accuracy, "higher")}</td><th>Цель счетов</th><td>${targetCell(backtest.exact_score_accuracy, targets.exact_score_accuracy, targetStatus.exact_score_accuracy, "higher")}</td></tr>
-      <tr><th>Цель угловых</th><td>${targetCell(backtest.corner_mae, targets.corner_mae, targetStatus.corner_mae, "lower", false)}</td><th>Угл. ±1</th><td>${backtest.corner_within_one_rate == null ? "нет" : probability(backtest.corner_within_one_rate)}</td></tr>
+      <tr><th>Цель исходов ПО</th><td>${targetCell(activeMetrics.outcome_accuracy, targets.outcome_accuracy, activeStatus.outcome_accuracy, "higher")}</td><th>Цель счетов ПО</th><td>${targetCell(activeMetrics.exact_score_accuracy, targets.exact_score_accuracy, activeStatus.exact_score_accuracy, "higher")}</td></tr>
+      <tr><th>Цель голов ПО</th><td>${targetCell(activeMetrics.goal_mae, targets.goal_mae, activeStatus.goal_mae, "lower", false)}</td><th>Цель угловых ПО</th><td>${targetCell(activeMetrics.corner_mae, targets.corner_mae, activeStatus.corner_mae, "lower", false)}</td></tr>
+      <tr><th>Цель фолов ПО</th><td>${targetCell(activeMetrics.foul_mae, targets.foul_mae, activeStatus.foul_mae, "lower", false)}</td><th>Без утечки</th><td>${backtest.result_leakage_guard ? "да" : "нет"}</td></tr>
     </table>
   `;
 }
@@ -336,7 +344,7 @@ function contextLine(context) {
   return `мотивация ${motivation}, состав ${lineup}${status}, ${injuries}`;
 }
 
-function fixtureBlock(fixture) {
+function fixtureBlock(fixture, roundInfo) {
   if (!fixture) {
     return "<p class='warn'>Дата матча не найдена автоматически. Проверьте, есть ли такая пара в расписании ЧМ.</p>";
   }
@@ -348,7 +356,8 @@ function fixtureBlock(fixture) {
   const kickoff = fixture.kickoff ? ` · ${escapeHtml(fixture.kickoff)}` : "";
   const referee = fixture.referee?.name || fixture.referee;
   const refereeText = referee ? ` · судья ${escapeHtml(referee)}` : "";
-  return `<p><strong>Матч найден:</strong> ${escapeHtml(fixture.date)} · ${escapeHtml(status)}${kickoff}${refereeText}</p>`;
+  const roundText = roundInfo?.label ? ` · ${escapeHtml(roundInfo.label)}` : "";
+  return `<p><strong>Матч найден:</strong> ${escapeHtml(fixture.date)} · ${escapeHtml(status)}${roundText}${kickoff}${refereeText}</p>`;
 }
 
 function resultSummaryBlock(data) {
@@ -356,9 +365,13 @@ function resultSummaryBlock(data) {
   const predicted = summary.predicted || {};
   const predictedScores = scoreListText(predicted.scores || data.exact_score_probabilities || []);
   const predictedFouls = predicted.fouls?.expected ?? data.foul_forecast?.expected;
+  const predictedFoulCount = predicted.fouls?.point_estimate ?? data.foul_forecast?.point_estimate ?? predictedFouls;
+  const predictedCornerCount = predicted.corner_point_estimate ?? data.corner_forecast?.point_estimate ?? predicted.corners ?? data.predicted_corners;
+  const predictedCornerExpected = predicted.corners ?? data.corner_forecast?.expected ?? data.predicted_corners;
+  const predictedGoalTotal = predicted.goal_total || data.goal_total || {};
   const predictedLine = `<p><strong>Предикт:</strong> ${escapeHtml(
     predicted.outcome_label || data.market_pick
-  )}; счет ${predictedScores}; голы ${Number(predicted.goal_total?.expected ?? data.goal_total?.expected ?? 0).toFixed(2)}; угловые ${Number(predicted.corners ?? data.predicted_corners).toFixed(2)}; фолы ${predictedFouls == null ? "нет" : Number(predictedFouls).toFixed(2)}</p>`;
+  )}; счет ${predictedScores}; голы ${Number(predictedGoalTotal.point_estimate ?? predictedGoalTotal.expected ?? 0).toFixed(0)} (xG ${Number(predictedGoalTotal.expected ?? 0).toFixed(2)}); угловые ${Number(predictedCornerCount).toFixed(0)} (xC ${Number(predictedCornerExpected).toFixed(2)}); фолы ${predictedFoulCount == null ? "нет" : `${Number(predictedFoulCount).toFixed(0)} (ожидание ${Number(predictedFouls).toFixed(2)})`}</p>`;
 
   if (summary.status === "completed" && summary.actual) {
     const cornerText = summary.actual.corners == null ? "угловые: нет данных" : `угловые ${summary.actual.corners}`;
@@ -508,7 +521,6 @@ function escapeHtml(value) {
 async function runPrediction(remember) {
   const requestId = ++activePredictionRequest;
   const matchup = document.querySelector("#matchup").value;
-  const homeVenue = document.querySelector("#home-venue").checked;
   prediction.innerHTML = `
     <article class="card">
       <h3>Обновляю прогноз</h3>
@@ -516,7 +528,7 @@ async function runPrediction(remember) {
     </article>
   `;
   try {
-    const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&home_venue=${homeVenue}&remember=${remember}`);
+    const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&remember=${remember}`);
     if (requestId === activePredictionRequest) {
       renderPrediction(data);
     }

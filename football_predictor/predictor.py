@@ -45,6 +45,7 @@ class Prediction:
     away_tactics: dict[str, Any]
     tactical_matchup: dict[str, Any]
     h2h_report: dict[str, Any]
+    round_info: dict[str, Any]
     fixture: dict[str, Any] | None
     result_summary: dict[str, Any]
     data_quality: dict[str, Any]
@@ -69,6 +70,10 @@ class Prediction:
             },
             "goal_total": self.goal_total,
             "predicted_corners": round(self.predicted_corners, 2),
+            "corner_forecast": {
+                "point_estimate": int(math.floor(self.predicted_corners + 0.5)),
+                "expected": round(self.predicted_corners, 2),
+            },
             "foul_forecast": self.foul_forecast,
             "exact_scores": self.exact_scores,
             "exact_score_probabilities": self.exact_score_probabilities,
@@ -85,6 +90,7 @@ class Prediction:
             "away_tactics": self.away_tactics,
             "tactical_matchup": self.tactical_matchup,
             "h2h_report": self.h2h_report,
+            "round_info": self.round_info,
             "fixture": self.fixture,
             "result_summary": self.result_summary,
             "data_quality": self.data_quality,
@@ -117,8 +123,10 @@ class MatchPredictor:
         model_state_override: dict[str, Any] | None = None,
         temporal_snapshot: bool = False,
     ) -> Prediction:
+        neutral = True
         all_matches = matches_override if matches_override is not None else self.store.load_matches()
         target_date = match_date or (fixture or {}).get("date")
+        round_info = self._round_info(fixture, all_matches, home_team, away_team, target_date)
         matches = self._pre_match_history(all_matches, home_team, away_team, target_date, fixture)
         prediction_fixture = self._fixture_without_result(fixture)
         home_stats = build_team_stats(matches, home_team)
@@ -168,6 +176,12 @@ class MatchPredictor:
             neutral,
             h2h_report,
         )
+        home_xg, away_xg = self._calibrate_goal_rates(
+            home_xg,
+            away_xg,
+            state,
+            round_info,
+        )
         base_home_win, base_draw, base_away_win = self._outcome_probabilities(home_xg, away_xg)
         outcome_features = self._outcome_features(
             home_team,
@@ -200,6 +214,14 @@ class MatchPredictor:
             state,
             h2h_report,
         )
+        corners, corner_calibration = self._calibrate_metric(
+            corners,
+            "corners",
+            state,
+            round_info,
+            4.0,
+            16.0,
+        )
         foul_forecast = self._foul_forecast(
             home_stats,
             away_stats,
@@ -211,6 +233,11 @@ class MatchPredictor:
             h2h_report,
         )
         goal_total = self._goal_total_forecast(home_xg, away_xg)
+        goal_total["calibration_adjustment"] = round(
+            float(state.get("_last_goal_calibration_adjustment", 0.0)),
+            3,
+        )
+        goal_total["corner_calibration_adjustment"] = round(corner_calibration, 3)
         team_reports = {
             home_team: self._team_report(home_team, home_stats, home_tactics, home_context, home_xg, lineup_reports.get(home_team, {})),
             away_team: self._team_report(away_team, away_stats, away_tactics, away_context, away_xg, lineup_reports.get(away_team, {})),
@@ -226,6 +253,7 @@ class MatchPredictor:
             limit=1,
             state=state,
             h2h_report=h2h_report,
+            round_info=round_info,
         )
         exact_scores = [item["score"] for item in exact_score_probabilities]
         if exact_scores:
@@ -281,6 +309,7 @@ class MatchPredictor:
             away_tactics=away_tactics,
             tactical_matchup=tactical_matchup,
             h2h_report=h2h_report,
+            round_info=round_info,
             fixture=fixture,
             result_summary=result_summary,
             data_quality=data_quality,
@@ -317,6 +346,66 @@ class MatchPredictor:
             (match.home_team == home_team and match.away_team == away_team)
             or (match.home_team == away_team and match.away_team == home_team)
         )
+
+    @classmethod
+    def _round_info(
+        cls,
+        fixture: dict[str, Any] | None,
+        matches: list[MatchRecord],
+        home_team: str,
+        away_team: str,
+        target_date: str | None,
+    ) -> dict[str, Any]:
+        competition = str((fixture or {}).get("competition") or "")
+        source = "fixture" if competition else None
+        if not competition and target_date:
+            stored = next(
+                (
+                    match
+                    for match in matches
+                    if match.date == target_date and cls._same_pair(match, home_team, away_team)
+                ),
+                None,
+            )
+            if stored:
+                competition = stored.competition or ""
+                source = "match-history"
+
+        normalized = competition.lower()
+        rounds = (
+            (("round of 64",), "1/32", "1/32 финала"),
+            (("round of 32",), "1/16", "1/16 финала"),
+            (("round of 16",), "1/8", "1/8 финала"),
+            (("quarterfinal", "quarter-final"), "1/4", "1/4 финала"),
+            (("semifinal", "semi-final"), "1/2", "1/2 финала"),
+            (("third place", "3rd place"), "3rd", "Матч за 3-е место"),
+            (("final",), "final", "Финал"),
+        )
+        for aliases, code, label in rounds:
+            if any(alias in normalized for alias in aliases):
+                return {
+                    "code": code,
+                    "label": label,
+                    "knockout": True,
+                    "competition": competition,
+                    "source": source,
+                }
+        if "group" in normalized:
+            group_name = competition.split(",", 1)[1].strip() if "," in competition else "Групповой этап"
+            return {
+                "code": "group",
+                "label": group_name,
+                "knockout": False,
+                "competition": competition,
+                "source": source,
+            }
+        return {
+            "code": "playoff" if target_date and target_date >= "2026-06-28" else "unknown",
+            "label": "Плей-офф" if target_date and target_date >= "2026-06-28" else "Стадия не определена",
+            "knockout": bool(target_date and target_date >= "2026-06-28"),
+            "competition": competition or None,
+            "source": source,
+        }
 
     @classmethod
     def _fixture_without_result(cls, fixture: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -1056,6 +1145,75 @@ class MatchPredictor:
                 away_xg += total_shift * (1.0 - home_share)
         return max(0.15, min(home_xg, 4.6)), max(0.15, min(away_xg, 4.6))
 
+    def _calibrate_goal_rates(
+        self,
+        home_xg: float,
+        away_xg: float,
+        state: dict[str, Any],
+        round_info: dict[str, Any],
+    ) -> tuple[float, float]:
+        total = home_xg + away_xg
+        calibrated, adjustment = self._calibrate_metric(
+            total,
+            "goals",
+            state,
+            round_info,
+            0.45,
+            8.5,
+        )
+        state["_last_goal_calibration_adjustment"] = adjustment
+        home_share = home_xg / max(total, 0.30)
+        return (
+            max(0.15, min(4.6, calibrated * home_share)),
+            max(0.15, min(4.6, calibrated * (1.0 - home_share))),
+        )
+
+    @classmethod
+    def _calibrate_metric(
+        cls,
+        value: float,
+        metric: str,
+        state: dict[str, Any],
+        round_info: dict[str, Any],
+        low: float,
+        high: float,
+    ) -> tuple[float, float]:
+        profiles = ((state.get("calibration_profiles") or {}).get(metric) or {})
+        candidates: list[tuple[float, float]] = []
+
+        global_profile = profiles.get("global") or {}
+        global_count = int(global_profile.get("matches", 0) or 0)
+        global_error = global_profile.get("median_error")
+        if global_error is not None and global_count >= 12:
+            candidates.append((float(global_error), min(1.0, global_count / 40.0)))
+
+        stage = "knockout" if round_info.get("knockout") else "group"
+        stage_profile = (profiles.get("by_stage") or {}).get(stage) or {}
+        stage_count = int(stage_profile.get("matches", 0) or 0)
+        stage_error = stage_profile.get("median_error")
+        if stage_error is not None and stage_count >= 6:
+            candidates.append((float(stage_error), 0.75 * min(1.0, stage_count / 24.0)))
+
+        bucket = cls._calibration_bin(metric, value)
+        bin_profile = (profiles.get("by_bin") or {}).get(bucket) or {}
+        bin_count = int(bin_profile.get("matches", 0) or 0)
+        bin_error = bin_profile.get("median_error")
+        if bin_error is not None and bin_count >= 8:
+            candidates.append((float(bin_error), 0.90 * min(1.0, bin_count / 24.0)))
+
+        if not candidates:
+            return value, 0.0
+        total_weight = sum(weight for _, weight in candidates) or 1.0
+        correction = sum(error * weight for error, weight in candidates) / total_weight
+        correction = max(-1.25, min(1.25, correction))
+        return max(low, min(high, value + correction)), correction
+
+    @staticmethod
+    def _calibration_bin(metric: str, value: float) -> str:
+        width = {"goals": 0.5, "corners": 1.0, "fouls": 2.0}.get(metric, 1.0)
+        center = round(value / width) * width
+        return f"{center:.1f}"
+
     def _expected_corners(
         self,
         home_stats: TeamStats,
@@ -1246,6 +1404,7 @@ class MatchPredictor:
 
         return {
             "expected": round(expected, 2),
+            "point_estimate": int(math.floor(expected + 0.5)),
             "label": self._foul_label(expected),
             "team_average": round(team_average, 2),
             "global_average": round(global_average, 2),
@@ -1432,6 +1591,7 @@ class MatchPredictor:
         limit: int = 3,
         state: dict[str, Any] | None = None,
         h2h_report: dict[str, Any] | None = None,
+        round_info: dict[str, Any] | None = None,
     ) -> list[dict[str, Any]]:
         score_counts_by_outcome = {
             outcome: self._historical_score_counts(outcome, state) for outcome in ("П1", "X", "П2")
@@ -1441,7 +1601,13 @@ class MatchPredictor:
         if outcome_probabilities is None:
             home_win, draw, away_win = self._outcome_probabilities(home_xg, away_xg)
             outcome_probabilities = {"П1": home_win, "X": draw, "П2": away_win}
-        profile_candidate = self._profile_score_candidate(market_pick, home_xg, away_xg, state)
+        profile_candidate = self._profile_score_candidate(
+            market_pick,
+            home_xg,
+            away_xg,
+            state,
+            round_info,
+        )
         profile_score = profile_candidate.get("score") if profile_candidate else None
         grid = []
         for home_goals in range(9):
@@ -1505,12 +1671,24 @@ class MatchPredictor:
         home_xg: float,
         away_xg: float,
         state: dict[str, Any] | None = None,
+        round_info: dict[str, Any] | None = None,
     ) -> dict[str, Any] | None:
         profiles = ((state or self.store.load_model_state()).get("score_profiles") or {})
         bucket = self._score_profile_bucket(market_pick, home_xg, away_xg)
+        stage = "knockout" if (round_info or {}).get("knockout") else "group"
+        by_stage_bucket = profiles.get("by_outcome_stage_bucket") or {}
+        by_stage = profiles.get("by_outcome_stage") or {}
         by_bucket = profiles.get("by_outcome_bucket") or {}
         by_outcome = profiles.get("by_outcome") or {}
-        candidates = by_bucket.get(f"{market_pick}|{bucket}") or by_outcome.get(market_pick) or []
+        stage_bucket_candidates = by_stage_bucket.get(f"{market_pick}|{stage}|{bucket}") or []
+        stage_candidates = by_stage.get(f"{market_pick}|{stage}") or []
+        candidates = (
+            (stage_bucket_candidates if self._profile_sample(stage_bucket_candidates) >= 6 else [])
+            or (stage_candidates if self._profile_sample(stage_candidates) >= 8 else [])
+            or by_bucket.get(f"{market_pick}|{bucket}")
+            or by_outcome.get(market_pick)
+            or []
+        )
         if not candidates:
             return None
         candidate = self._select_profile_score(candidates, bucket, home_xg, away_xg)
@@ -1523,6 +1701,10 @@ class MatchPredictor:
             "outcome": self._outcome_from_score(home_goals, away_goals),
             "probability": round(float(candidate.get("probability", 0.0)), 4),
         }
+
+    @staticmethod
+    def _profile_sample(candidates: list[dict[str, Any]]) -> int:
+        return sum(int(item.get("count", 0) or 0) for item in candidates)
 
     @classmethod
     def _select_profile_score(
@@ -1603,6 +1785,7 @@ class MatchPredictor:
             label = "умеренный тотал"
         return {
             "expected": round(total_xg, 2),
+            "point_estimate": int(math.floor(total_xg + 0.5)),
             "label": label,
             "most_likely_totals": [
                 {"goals": goals, "probability": round(probability, 4)}
@@ -2086,6 +2269,7 @@ class MatchPredictor:
             "outcome_label": self._market_label(market_pick, home_team, away_team),
             "scores": exact_score_probabilities,
             "corners": round(predicted_corners, 2),
+            "corner_point_estimate": int(math.floor(predicted_corners + 0.5)),
             "goal_total": goal_total,
             "fouls": foul_forecast,
         }
@@ -2105,6 +2289,9 @@ class MatchPredictor:
             actual_outcome = self._outcome_from_score(int(home_goals), int(away_goals))
             actual_corners = self._fixture_total_corners(fixture)
             actual_fouls = self._fixture_total_fouls(fixture)
+            corner_point = int(math.floor(predicted_corners + 0.5))
+            foul_expected = float(foul_forecast.get("expected", 0.0))
+            foul_point = int(foul_forecast.get("point_estimate", math.floor(foul_expected + 0.5)))
             return {
                 "status": "completed",
                 "predicted": predicted,
@@ -2117,8 +2304,10 @@ class MatchPredictor:
                 },
                 "outcome_hit": market_pick == actual_outcome,
                 "score_hit": actual_score in [item["score"] for item in exact_score_probabilities],
-                "corner_error": None if actual_corners is None else round(predicted_corners - actual_corners, 2),
-                "foul_error": None if actual_fouls is None else round(float(foul_forecast.get("expected", 0.0)) - actual_fouls, 2),
+                "corner_error": None if actual_corners is None else round(corner_point - actual_corners, 2),
+                "expected_corner_error": None if actual_corners is None else round(predicted_corners - actual_corners, 2),
+                "foul_error": None if actual_fouls is None else round(foul_point - actual_fouls, 2),
+                "expected_foul_error": None if actual_fouls is None else round(foul_expected - actual_fouls, 2),
                 "message": "Матч завершен, факт уже доступен.",
             }
 
@@ -2406,15 +2595,24 @@ class MatchPredictor:
                 "matches": backtest.get("matches", 0) if isinstance(backtest, dict) else 0,
                 "outcome_accuracy": backtest.get("outcome_accuracy") if isinstance(backtest, dict) else None,
                 "exact_score_accuracy": backtest.get("exact_score_accuracy") if isinstance(backtest, dict) else None,
+                "goal_mae": backtest.get("goal_mae") if isinstance(backtest, dict) else None,
+                "expected_goal_mae": backtest.get("expected_goal_mae") if isinstance(backtest, dict) else None,
+                "goal_within_0_7_rate": backtest.get("goal_within_0_7_rate") if isinstance(backtest, dict) else None,
                 "corner_mae": backtest.get("corner_mae") if isinstance(backtest, dict) else None,
-                "corner_within_one_rate": backtest.get("corner_within_one_rate") if isinstance(backtest, dict) else None,
+                "expected_corner_mae": backtest.get("expected_corner_mae") if isinstance(backtest, dict) else None,
+                "corner_within_1_5_rate": backtest.get("corner_within_1_5_rate") if isinstance(backtest, dict) else None,
                 "foul_mae": backtest.get("foul_mae") if isinstance(backtest, dict) else None,
+                "expected_foul_mae": backtest.get("expected_foul_mae") if isinstance(backtest, dict) else None,
+                "foul_within_2_rate": backtest.get("foul_within_2_rate") if isinstance(backtest, dict) else None,
+                "playoff": backtest.get("playoff", {}) if isinstance(backtest, dict) else {},
+                "playoff_target_status": backtest.get("playoff_target_status", {}) if isinstance(backtest, dict) else {},
                 "targets": backtest.get("targets", {}) if isinstance(backtest, dict) else {},
                 "target_status": backtest.get("target_status", {}) if isinstance(backtest, dict) else {},
                 "trained_match_keys": backtest.get("trained_match_keys") if isinstance(backtest, dict) else None,
                 "training": backtest.get("training", {}) if isinstance(backtest, dict) else {},
                 "evaluation_mode": backtest.get("evaluation_mode")
                 or (backtest.get("training", {}) if isinstance(backtest, dict) else {}).get("evaluation_mode"),
+                "result_leakage_guard": bool(backtest.get("result_leakage_guard")) if isinstance(backtest, dict) else False,
                 "updated_at": backtest.get("updated_at") if isinstance(backtest, dict) else None,
             },
             "home_backtest": by_team.get(home_team, {}),

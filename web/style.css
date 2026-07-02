@@ -116,7 +116,7 @@ h3 {
 .row,
 .result-grid {
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) auto auto;
+  grid-template-columns: minmax(220px, 1fr) auto;
   gap: 10px;
   align-items: center;
 }
@@ -186,6 +186,14 @@ button:hover {
 
 .outcome-card .sub {
   color: #d8e5ef;
+}
+
+.round-line {
+  margin-top: 10px;
+  color: #a9d8cf;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .stat-card {

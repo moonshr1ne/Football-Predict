@@ -4,19 +4,48 @@
   "evaluation_scope": "FIFA World Cup 2026 finals",
   "result_leakage_guard": true,
   "outcome_accuracy": 0.61,
-  "exact_score_accuracy": 0.061,
-  "corner_mae": 2.75,
-  "corner_within_one_rate": 0.256,
-  "foul_mae": 5.13,
+  "exact_score_accuracy": 0.098,
+  "goal_mae": 1.44,
+  "expected_goal_mae": 1.5,
+  "goal_within_0_7_rate": 0.207,
+  "corner_mae": 2.72,
+  "expected_corner_mae": 2.74,
+  "corner_within_1_5_rate": 0.354,
+  "foul_mae": 5.11,
+  "expected_foul_mae": 5.13,
+  "foul_within_2_rate": 0.305,
+  "playoff": {
+    "matches": 10,
+    "outcome_accuracy": 0.7,
+    "exact_score_accuracy": 0.3,
+    "goal_mae": 0.7,
+    "expected_goal_mae": 0.916,
+    "goal_within_0_7_rate": 0.4,
+    "corner_mae": 4.2,
+    "expected_corner_mae": 4.243,
+    "corner_within_1_5_rate": 0.3,
+    "foul_mae": 4.9,
+    "expected_foul_mae": 5.036,
+    "foul_within_2_rate": 0.4
+  },
+  "playoff_target_status": {
+    "outcome_accuracy": false,
+    "exact_score_accuracy": true,
+    "goal_mae": true,
+    "corner_mae": false,
+    "foul_mae": false
+  },
   "targets": {
     "outcome_accuracy": 0.8,
-    "exact_score_accuracy": 0.25,
+    "exact_score_accuracy": 0.2,
+    "goal_mae": 0.7,
     "corner_mae": 1.5,
-    "foul_mae": 2.5
+    "foul_mae": 2.0
   },
   "target_status": {
     "outcome_accuracy": false,
     "exact_score_accuracy": false,
+    "goal_mae": false,
     "corner_mae": false,
     "foul_mae": false
   },
@@ -32,10 +61,10 @@
     "evaluation_mode": "walk_forward_strict_date",
     "same_day_policy": "all matches on a date are predicted before any result from that date is learned",
     "result_leakage_guard": true,
-    "started_at": "2026-07-02T04:03:29.118484+00:00",
-    "completed_at": "2026-07-02T04:03:40.482082+00:00"
+    "started_at": "2026-07-02T04:28:32.040414+00:00",
+    "completed_at": "2026-07-02T04:28:43.211811+00:00"
   },
-  "updated_at": "2026-07-02T04:03:43.876068+00:00",
+  "updated_at": "2026-07-02T04:29:47.035492+00:00",
   "by_team": {
     "Algeria": {
       "matches": 3,

@@ -29,7 +29,6 @@ def build_parser() -> argparse.ArgumentParser:
     predict.add_argument("matchup")
     predict.add_argument("--date", help="Дата матча YYYY-MM-DD. Если указана, прогноз попадет в очередь автопроверки.")
     predict.add_argument("--no-auto-date", action="store_true", help="Не искать дату матча автоматически.")
-    predict.add_argument("--home-venue", action="store_true", help="Считать, что первая команда играет дома.")
     predict.add_argument("--json", action="store_true")
 
     result = subparsers.add_parser("result", help="Внести итог матча и обновить модель.")
@@ -39,7 +38,6 @@ def build_parser() -> argparse.ArgumentParser:
     result.add_argument("--corners", type=float, help="Общее количество угловых.")
     result.add_argument("--home-corners", type=float)
     result.add_argument("--away-corners", type=float)
-    result.add_argument("--home-venue", action="store_true")
     result.add_argument("--competition", default="")
     result.add_argument("--stage", default="")
     result.add_argument("--json", action="store_true")
@@ -47,7 +45,6 @@ def build_parser() -> argparse.ArgumentParser:
     check = subparsers.add_parser("check", help="Проверить результат через API-Football и обучиться.")
     check.add_argument("matchup")
     check.add_argument("--date")
-    check.add_argument("--home-venue", action="store_true")
     check.add_argument("--json", action="store_true")
 
     auto_check = subparsers.add_parser("auto-check", help="Проверить все прогнозы в очереди через API-Football.")
@@ -111,7 +108,6 @@ def main(argv: list[str] | None = None) -> int:
         args.matchup = "Англия, Гана"
         args.date = None
         args.no_auto_date = False
-        args.home_venue = False
         args.json = False
 
     store = DataStore()
@@ -131,7 +127,7 @@ def main(argv: list[str] | None = None) -> int:
         prediction = MatchPredictor(store).predict(
             home_team,
             away_team,
-            neutral=not args.home_venue,
+            neutral=True,
             match_date=match_date,
             fixture=fixture,
             extra_warnings=lookup_warnings,
@@ -160,7 +156,7 @@ def main(argv: list[str] | None = None) -> int:
             away_corners=args.away_corners,
             competition=args.competition,
             stage=args.stage,
-            neutral=not args.home_venue,
+            neutral=True,
             baseline_prediction=baseline,
         )
         if baseline and baseline.get("prediction_id"):
@@ -231,7 +227,7 @@ def main(argv: list[str] | None = None) -> int:
             home_fouls=result.get("home_fouls"),
             away_fouls=result.get("away_fouls"),
             referee=(result.get("referee") or {}).get("name") if isinstance(result.get("referee"), dict) else result.get("referee"),
-            neutral=not args.home_venue,
+            neutral=True,
             source=result.get("source", "api"),
             baseline_prediction=baseline,
         )

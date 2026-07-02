@@ -34,6 +34,7 @@ DEFAULT_MODEL_STATE = {
     "outcome_model": {},
     "score_profiles": {},
     "stat_profiles": {},
+    "calibration_profiles": {},
     "history": [],
     "trained_match_keys": [],
     "trained_match_fingerprints": {},

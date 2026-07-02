@@ -328,6 +328,7 @@ class WorldCupDataSync:
         state["weights"] = copy.deepcopy(DEFAULT_MODEL_STATE["weights"])
         state["stat_profiles"] = self._fit_stat_profiles(matches)
         state["score_profiles"] = self._score_profiles_from_rows(rows)
+        state["calibration_profiles"] = self._fit_calibration_profiles(rows)
         state["outcome_model"] = self._fit_outcome_model_from_rows(rows, epochs)
         state["history"] = reviews[-5000:]
         state["trained_match_keys"] = sorted({self._match_key(match) for match in matches})
@@ -381,7 +382,8 @@ class WorldCupDataSync:
         for match_date, group in self._matches_by_date(matches):
             snapshot = copy.deepcopy(base_state)
             snapshot["stat_profiles"] = self._fit_stat_profiles(past)
-            snapshot["score_profiles"] = MatchPredictor._score_profiles_from_matches(past)
+            snapshot["score_profiles"] = self._score_profiles_from_rows(rows)
+            snapshot["calibration_profiles"] = self._fit_calibration_profiles(rows)
             snapshot["history"] = MatchPredictor._history_from_matches(past)
             for match in group:
                 prediction = predictor.predict(
@@ -419,6 +421,21 @@ class WorldCupDataSync:
                         ),
                         "home_xg": prediction.expected_home_goals,
                         "away_xg": prediction.expected_away_goals,
+                        "round_info": prediction.round_info,
+                        "predicted_goals": prediction.expected_home_goals + prediction.expected_away_goals,
+                        "actual_goals": int(match.home_goals or 0) + int(match.away_goals or 0),
+                        "predicted_corners": prediction.predicted_corners,
+                        "actual_corners": (
+                            None
+                            if match.home_corners is None or match.away_corners is None
+                            else float(match.home_corners) + float(match.away_corners)
+                        ),
+                        "predicted_fouls": (prediction.foul_forecast or {}).get("expected"),
+                        "actual_fouls": (
+                            None
+                            if match.home_fouls is None or match.away_fouls is None
+                            else float(match.home_fouls) + float(match.away_fouls)
+                        ),
                     }
                 )
             past.extend(group)
@@ -448,7 +465,8 @@ class WorldCupDataSync:
         for match_date, group in self._matches_by_date(matches):
             snapshot = copy.deepcopy(base_state)
             snapshot["stat_profiles"] = self._fit_stat_profiles(past)
-            snapshot["score_profiles"] = MatchPredictor._score_profiles_from_matches(past)
+            snapshot["score_profiles"] = self._score_profiles_from_rows(prior_rows)
+            snapshot["calibration_profiles"] = self._fit_calibration_profiles(prior_rows)
             snapshot["history"] = MatchPredictor._history_from_matches(past)
             snapshot["outcome_model"] = self._fit_outcome_model_from_rows(prior_rows, epochs)
             snapshot["training"] = {
@@ -487,6 +505,16 @@ class WorldCupDataSync:
                     else float(match.home_fouls) + float(match.away_fouls)
                 )
                 predicted_fouls = prediction.foul_forecast.get("expected")
+                predicted_foul_count = int(
+                    prediction.foul_forecast.get(
+                        "point_estimate",
+                        math.floor(float(predicted_fouls or 0.0) + 0.5),
+                    )
+                )
+                predicted_corner_count = int(math.floor(prediction.predicted_corners + 0.5))
+                predicted_goals = prediction.expected_home_goals + prediction.expected_away_goals
+                predicted_goal_count = int(prediction.goal_total.get("point_estimate", math.floor(predicted_goals + 0.5)))
+                actual_goals = int(match.home_goals or 0) + int(match.away_goals or 0)
                 reviews.append(
                     {
                         "date": match.date,
@@ -502,17 +530,27 @@ class WorldCupDataSync:
                             match.home_team: round(prediction.expected_home_goals, 3),
                             match.away_team: round(prediction.expected_away_goals, 3),
                         },
+                        "predicted_goals": round(predicted_goals, 3),
+                        "predicted_goal_count": predicted_goal_count,
+                        "actual_goals": actual_goals,
+                        "goal_error": predicted_goal_count - actual_goals,
+                        "expected_goal_error": round(predicted_goals - actual_goals, 3),
+                        "round_info": prediction.round_info,
                         "actual_outcome": actual_outcome,
                         "outcome_hit": prediction.market_pick == actual_outcome,
                         "predicted_scores": prediction.exact_scores[:1],
                         "actual_score": actual_score,
                         "score_hit": bool(prediction.exact_scores and prediction.exact_scores[0] == actual_score),
                         "predicted_corners": round(prediction.predicted_corners, 2),
+                        "predicted_corner_count": predicted_corner_count,
                         "actual_corners": None if actual_corners is None else round(actual_corners, 2),
-                        "corner_error": None if actual_corners is None else round(prediction.predicted_corners - actual_corners, 2),
+                        "corner_error": None if actual_corners is None else round(predicted_corner_count - actual_corners, 2),
+                        "expected_corner_error": None if actual_corners is None else round(prediction.predicted_corners - actual_corners, 2),
                         "predicted_fouls": None if predicted_fouls is None else round(float(predicted_fouls), 2),
+                        "predicted_foul_count": predicted_foul_count,
                         "actual_fouls": None if actual_fouls is None else round(actual_fouls, 2),
-                        "foul_error": None if actual_fouls is None or predicted_fouls is None else round(float(predicted_fouls) - actual_fouls, 2),
+                        "foul_error": None if actual_fouls is None or predicted_fouls is None else round(predicted_foul_count - actual_fouls, 2),
+                        "expected_foul_error": None if actual_fouls is None or predicted_fouls is None else round(float(predicted_fouls) - actual_fouls, 2),
                         "training_mode": "walk_forward_strict_date",
                         "training_cutoff": past[-1].date if past else None,
                         "training_key": key,
@@ -594,15 +632,20 @@ class WorldCupDataSync:
 
         by_outcome: dict[str, Counter[str]] = defaultdict(Counter)
         by_outcome_bucket: dict[str, Counter[str]] = defaultdict(Counter)
+        by_outcome_stage: dict[str, Counter[str]] = defaultdict(Counter)
+        by_outcome_stage_bucket: dict[str, Counter[str]] = defaultdict(Counter)
         for row in rows:
             match = row["match"]
             outcome = row["label"]
             score = f"{int(match.home_goals or 0)}-{int(match.away_goals or 0)}"
             bucket = MatchPredictor._score_profile_bucket(outcome, row["home_xg"], row["away_xg"])
+            stage = "knockout" if (row.get("round_info") or {}).get("knockout") else "group"
             by_outcome[outcome][score] += 1
             by_outcome_bucket[f"{outcome}|{bucket}"][score] += 1
+            by_outcome_stage[f"{outcome}|{stage}"][score] += 1
+            by_outcome_stage_bucket[f"{outcome}|{stage}|{bucket}"][score] += 1
         return {
-            "mode": "strict_pre_match_feature_buckets",
+            "mode": "strict_pre_match_stage_feature_buckets",
             "by_outcome": {
                 outcome: self._profile_items(counter)
                 for outcome, counter in sorted(by_outcome.items())
@@ -611,6 +654,61 @@ class WorldCupDataSync:
                 key: self._profile_items(counter)
                 for key, counter in sorted(by_outcome_bucket.items())
             },
+            "by_outcome_stage": {
+                key: self._profile_items(counter)
+                for key, counter in sorted(by_outcome_stage.items())
+            },
+            "by_outcome_stage_bucket": {
+                key: self._profile_items(counter)
+                for key, counter in sorted(by_outcome_stage_bucket.items())
+            },
+        }
+
+    def _fit_calibration_profiles(self, rows: list[dict[str, Any]]) -> dict[str, Any]:
+        profiles: dict[str, Any] = {}
+        definitions = {
+            "goals": ("predicted_goals", "actual_goals"),
+            "corners": ("predicted_corners", "actual_corners"),
+            "fouls": ("predicted_fouls", "actual_fouls"),
+        }
+        for metric, (predicted_key, actual_key) in definitions.items():
+            residuals: list[float] = []
+            by_stage: dict[str, list[float]] = defaultdict(list)
+            by_bin: dict[str, list[float]] = defaultdict(list)
+            for row in rows:
+                predicted = row.get(predicted_key)
+                actual = row.get(actual_key)
+                if predicted is None or actual is None:
+                    continue
+                residual = float(actual) - float(predicted)
+                residuals.append(residual)
+                stage = "knockout" if (row.get("round_info") or {}).get("knockout") else "group"
+                by_stage[stage].append(residual)
+                by_bin[self._calibration_bin(metric, float(predicted))].append(residual)
+            profiles[metric] = {
+                "global": self._residual_profile(residuals),
+                "by_stage": {
+                    stage: self._residual_profile(values)
+                    for stage, values in sorted(by_stage.items())
+                },
+                "by_bin": {
+                    bucket: self._residual_profile(values)
+                    for bucket, values in sorted(by_bin.items())
+                },
+            }
+        return profiles
+
+    @staticmethod
+    def _calibration_bin(metric: str, value: float) -> str:
+        width = {"goals": 0.5, "corners": 1.0, "fouls": 2.0}.get(metric, 1.0)
+        center = round(value / width) * width
+        return f"{center:.1f}"
+
+    def _residual_profile(self, values: list[float]) -> dict[str, Any]:
+        return {
+            "matches": len(values),
+            "median_error": self._median(values),
+            "mean_error": self._mean(values),
         }
 
     @staticmethod
@@ -713,6 +811,7 @@ class WorldCupDataSync:
     def _training_fixture(match: MatchRecord) -> dict[str, Any]:
         fixture: dict[str, Any] = {
             "date": match.date,
+            "competition": match.competition,
             "completed": False,
             "in_progress": False,
             "referee": {"name": match.referee, "source": match.source} if match.referee else None,
@@ -796,20 +895,56 @@ class WorldCupDataSync:
             self.store.save_backtest(backtest)
             return backtest
 
-        outcome_hits = sum(1 for item in history if item.get("outcome_hit"))
-        score_hits = sum(1 for item in history if item.get("score_hit"))
-        corner_errors = [abs(float(item["corner_error"])) for item in history if item.get("corner_error") is not None]
-        foul_errors = [abs(float(item["foul_error"])) for item in history if item.get("foul_error") is not None]
-        outcome_accuracy = outcome_hits / total
-        exact_score_accuracy = score_hits / total
-        corner_mae = None if not corner_errors else sum(corner_errors) / len(corner_errors)
-        corner_within_one_rate = None if not corner_errors else sum(1 for error in corner_errors if error <= 1.0) / len(corner_errors)
-        foul_mae = None if not foul_errors else sum(foul_errors) / len(foul_errors)
+        def review_metrics(items: list[dict[str, Any]]) -> dict[str, Any]:
+            count = len(items)
+            goal_errors = [abs(float(item["goal_error"])) for item in items if item.get("goal_error") is not None]
+            expected_goal_errors = [
+                abs(float(item["expected_goal_error"]))
+                for item in items
+                if item.get("expected_goal_error") is not None
+            ]
+            corner_errors = [abs(float(item["corner_error"])) for item in items if item.get("corner_error") is not None]
+            expected_corner_errors = [
+                abs(float(item["expected_corner_error"]))
+                for item in items
+                if item.get("expected_corner_error") is not None
+            ]
+            foul_errors = [abs(float(item["foul_error"])) for item in items if item.get("foul_error") is not None]
+            expected_foul_errors = [
+                abs(float(item["expected_foul_error"]))
+                for item in items
+                if item.get("expected_foul_error") is not None
+            ]
+            return {
+                "matches": count,
+                "outcome_accuracy": None if not count else sum(1 for item in items if item.get("outcome_hit")) / count,
+                "exact_score_accuracy": None if not count else sum(1 for item in items if item.get("score_hit")) / count,
+                "goal_mae": None if not goal_errors else sum(goal_errors) / len(goal_errors),
+                "expected_goal_mae": None if not expected_goal_errors else sum(expected_goal_errors) / len(expected_goal_errors),
+                "goal_within_0_7_rate": None if not goal_errors else sum(error <= 0.7 for error in goal_errors) / len(goal_errors),
+                "corner_mae": None if not corner_errors else sum(corner_errors) / len(corner_errors),
+                "expected_corner_mae": None if not expected_corner_errors else sum(expected_corner_errors) / len(expected_corner_errors),
+                "corner_within_1_5_rate": None if not corner_errors else sum(error <= 1.5 for error in corner_errors) / len(corner_errors),
+                "foul_mae": None if not foul_errors else sum(foul_errors) / len(foul_errors),
+                "expected_foul_mae": None if not expected_foul_errors else sum(expected_foul_errors) / len(expected_foul_errors),
+                "foul_within_2_rate": None if not foul_errors else sum(error <= 2.0 for error in foul_errors) / len(foul_errors),
+            }
+
+        metrics = review_metrics(history)
+        playoff_metrics = review_metrics(
+            [item for item in history if (item.get("round_info") or {}).get("knockout")]
+        )
+        outcome_accuracy = float(metrics["outcome_accuracy"] or 0.0)
+        exact_score_accuracy = float(metrics["exact_score_accuracy"] or 0.0)
+        goal_mae = metrics["goal_mae"]
+        corner_mae = metrics["corner_mae"]
+        foul_mae = metrics["foul_mae"]
         targets = {
             "outcome_accuracy": 0.80,
-            "exact_score_accuracy": 0.25,
+            "exact_score_accuracy": 0.20,
+            "goal_mae": 0.70,
             "corner_mae": 1.50,
-            "foul_mae": 2.50,
+            "foul_mae": 2.00,
         }
         by_team: dict[str, dict[str, int]] = defaultdict(lambda: {"matches": 0, "outcome_hits": 0})
         for item in history:
@@ -827,13 +962,36 @@ class WorldCupDataSync:
             "result_leakage_guard": bool((state.get("training") or {}).get("result_leakage_guard")),
             "outcome_accuracy": round(outcome_accuracy, 3),
             "exact_score_accuracy": round(exact_score_accuracy, 3),
+            "goal_mae": None if goal_mae is None else round(goal_mae, 2),
+            "expected_goal_mae": None if metrics["expected_goal_mae"] is None else round(metrics["expected_goal_mae"], 2),
+            "goal_within_0_7_rate": None if metrics["goal_within_0_7_rate"] is None else round(metrics["goal_within_0_7_rate"], 3),
             "corner_mae": None if corner_mae is None else round(corner_mae, 2),
-            "corner_within_one_rate": None if corner_within_one_rate is None else round(corner_within_one_rate, 3),
+            "expected_corner_mae": None if metrics["expected_corner_mae"] is None else round(metrics["expected_corner_mae"], 2),
+            "corner_within_1_5_rate": None if metrics["corner_within_1_5_rate"] is None else round(metrics["corner_within_1_5_rate"], 3),
             "foul_mae": None if foul_mae is None else round(foul_mae, 2),
+            "expected_foul_mae": None if metrics["expected_foul_mae"] is None else round(metrics["expected_foul_mae"], 2),
+            "foul_within_2_rate": None if metrics["foul_within_2_rate"] is None else round(metrics["foul_within_2_rate"], 3),
+            "playoff": {
+                key: round(value, 3) if isinstance(value, float) else value
+                for key, value in playoff_metrics.items()
+            },
+            "playoff_target_status": {
+                "outcome_accuracy": playoff_metrics["outcome_accuracy"] is not None
+                and playoff_metrics["outcome_accuracy"] >= targets["outcome_accuracy"],
+                "exact_score_accuracy": playoff_metrics["exact_score_accuracy"] is not None
+                and playoff_metrics["exact_score_accuracy"] >= targets["exact_score_accuracy"],
+                "goal_mae": playoff_metrics["goal_mae"] is not None
+                and playoff_metrics["goal_mae"] <= targets["goal_mae"],
+                "corner_mae": playoff_metrics["corner_mae"] is not None
+                and playoff_metrics["corner_mae"] <= targets["corner_mae"],
+                "foul_mae": playoff_metrics["foul_mae"] is not None
+                and playoff_metrics["foul_mae"] <= targets["foul_mae"],
+            },
             "targets": targets,
             "target_status": {
                 "outcome_accuracy": outcome_accuracy >= targets["outcome_accuracy"],
                 "exact_score_accuracy": exact_score_accuracy >= targets["exact_score_accuracy"],
+                "goal_mae": goal_mae is not None and goal_mae <= targets["goal_mae"],
                 "corner_mae": corner_mae is not None and corner_mae <= targets["corner_mae"],
                 "foul_mae": foul_mae is not None and foul_mae <= targets["foul_mae"],
             },

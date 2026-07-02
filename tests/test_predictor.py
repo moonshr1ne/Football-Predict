@@ -45,6 +45,9 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("recommended_bets", prediction.to_dict())
             self.assertIn("over_2_5", prediction.to_dict()["goal_total"]["probabilities"])
             self.assertIn("under_2_5", prediction.to_dict()["goal_total"]["probabilities"])
+            self.assertIsInstance(prediction.to_dict()["goal_total"]["point_estimate"], int)
+            self.assertIsInstance(prediction.to_dict()["corner_forecast"]["point_estimate"], int)
+            self.assertIsInstance(prediction.to_dict()["foul_forecast"]["point_estimate"], int)
             self.assertGreater(prediction.to_dict()["foul_forecast"]["expected"], 0)
             self.assertEqual(len(prediction.to_dict()["recommended_bets"]["items"]), 4)
             self.assertIn("team_reports", prediction.to_dict())
@@ -52,6 +55,7 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("lineup_reports", prediction.to_dict())
             self.assertIn(home, prediction.to_dict()["lineup_reports"])
             self.assertIn("data_quality", prediction.to_dict())
+            self.assertIn("round_info", prediction.to_dict())
             for item in prediction.exact_score_probabilities:
                 self.assertGreaterEqual(item["probability"], 0)
                 self.assertLessEqual(item["probability"], 1)
@@ -63,6 +67,33 @@ class PredictorTests(unittest.TestCase):
                     self.assertGreater(away_goals, home_goals)
                 else:
                     self.assertEqual(home_goals, away_goals)
+
+    def test_playoff_round_is_exposed_and_home_advantage_is_disabled(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            fixture = {
+                "date": "2099-07-01",
+                "competition": "FIFA World Cup, Round of 32",
+                "completed": False,
+                "in_progress": False,
+            }
+            prediction = MatchPredictor(store).predict(
+                "England",
+                "Ghana",
+                neutral=False,
+                fixture=fixture,
+                remember=False,
+            )
+            self.assertTrue(prediction.neutral)
+            self.assertEqual(prediction.round_info["code"], "1/16")
+            self.assertEqual(prediction.round_info["label"], "1/16 финала")
+            self.assertTrue(prediction.round_info["knockout"])
+
+    def test_web_form_has_no_home_team_toggle(self):
+        index = (Path(__file__).resolve().parents[1] / "web" / "index.html").read_text(encoding="utf-8")
+        app = (Path(__file__).resolve().parents[1] / "web" / "app.js").read_text(encoding="utf-8")
+        self.assertNotIn("home-venue", index)
+        self.assertNotIn("home_venue", app)
 
     def test_world_cup_russian_aliases_use_real_profiles(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -518,6 +549,8 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(store.load_backtest()["matches"], 2)
             self.assertEqual(state["training"]["evaluation_mode"], "walk_forward_strict_date")
             self.assertTrue(store.load_backtest()["result_leakage_guard"])
+            self.assertEqual(store.load_backtest()["targets"]["exact_score_accuracy"], 0.20)
+            self.assertIn("goal_mae", store.load_backtest())
 
     def test_auto_checker_reviews_pending_prediction(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
