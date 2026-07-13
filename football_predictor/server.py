@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from .aliases import parse_matchup
-from .data_store import DataStore, project_root
+from .data_store import DataStore, fixture_has_started, project_root
 from .autocheck import AutoChecker
 from .learning import OnlineLearner
 from .predictor import MatchPredictor
@@ -31,22 +31,46 @@ class PredictorHandler(SimpleHTTPRequestHandler):
             remember = query.get("remember", ["true"])[0] != "false"
             try:
                 home, away = parse_matchup(matchup, self.store.resolver)
-                sync_info = WorldCupDataSync(self.store).sync_all()
+                provider = EspnWorldCupProvider()
                 fixture = None
                 warnings = []
+                try:
+                    fixture = provider.find_fixture(
+                        home,
+                        away,
+                        start_date=match_date,
+                        end_date=match_date,
+                    )
+                    match_date = fixture.get("date") or match_date
+                except ProviderError as exc:
+                    fixture = _stored_fixture(self.store, home, away, match_date)
+                    warnings.append(f"Автодата: {exc}")
+
+                predictor = MatchPredictor(self.store)
+                saved = self.store.latest_prediction(home, away, match_date=match_date)
+                if fixture_has_started(fixture):
+                    payload = (
+                        predictor.hydrate_saved_prediction(saved, fixture)
+                        if saved
+                        else predictor.result_only_payload(home, away, fixture)
+                    )
+                    self._json(200, payload)
+                    return
+
+                sync_info = WorldCupDataSync(self.store).sync_all()
                 if sync_info.get("imported"):
                     recent = "уже свежие" if sync_info.get("skipped_full_sync") else f"{sync_info.get('recent_imported', 0)}"
                     action = "База проверена" if sync_info.get("skipped_full_sync") else "База обновлена"
                     warnings.append(
                         f"{action}: участников {sync_info.get('participants', 0)}, last-10 матчей {recent}, матчей ЧМ {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, судей {sync_info.get('referees_updated', 0)}, обучающих матчей {sync_info.get('trained', 0)}."
                     )
-                if not match_date:
+                if not fixture and not match_date:
                     try:
-                        fixture = EspnWorldCupProvider().find_fixture(home, away)
+                        fixture = provider.find_fixture(home, away)
                         match_date = fixture.get("date")
                     except ProviderError as exc:
                         warnings.append(f"Автодата: {exc}")
-                prediction = MatchPredictor(self.store).predict(
+                prediction = predictor.predict(
                     home,
                     away,
                     neutral=True,
@@ -55,7 +79,18 @@ class PredictorHandler(SimpleHTTPRequestHandler):
                     fixture=fixture,
                     extra_warnings=warnings,
                 )
-                self._json(200, prediction.to_dict())
+                payload = prediction.to_dict()
+                if remember and match_date:
+                    saved = self.store.latest_prediction(home, away, match_date=match_date)
+                    if saved:
+                        payload = predictor.hydrate_saved_prediction(saved, fixture)
+                else:
+                    payload["prediction_snapshot"] = {
+                        "immutable": False,
+                        "source": "preview",
+                        "message": "Предпросмотр. Нажмите «Прогноз», чтобы сохранить предматчевый снимок.",
+                    }
+                self._json(200, payload)
             except Exception as exc:
                 self._json(400, {"error": str(exc)})
             return
@@ -108,6 +143,40 @@ class PredictorHandler(SimpleHTTPRequestHandler):
 
     def log_message(self, format: str, *args) -> None:
         return
+
+
+def _stored_fixture(store: DataStore, home_team: str, away_team: str, match_date: str | None) -> dict | None:
+    candidates = [
+        match
+        for match in store.load_matches()
+        if {match.home_team, match.away_team} == {home_team, away_team}
+        and (match_date is None or match.date == match_date)
+    ]
+    if not candidates:
+        return None
+    match = sorted(candidates, key=lambda item: item.date)[-1]
+    direct = match.home_team == home_team
+    return {
+        "fixture_id": match.fixture_id,
+        "date": match.date,
+        "kickoff": None,
+        "home_team": home_team,
+        "away_team": away_team,
+        "actual_home_team": match.home_team,
+        "actual_away_team": match.away_team,
+        "home_goals": match.home_goals if direct else match.away_goals,
+        "away_goals": match.away_goals if direct else match.home_goals,
+        "home_corners": match.home_corners if direct else match.away_corners,
+        "away_corners": match.away_corners if direct else match.home_corners,
+        "home_fouls": match.home_fouls if direct else match.away_fouls,
+        "away_fouls": match.away_fouls if direct else match.home_fouls,
+        "referee": match.referee,
+        "competition": match.competition,
+        "completed": match.is_finished(),
+        "in_progress": False,
+        "status": "STATUS_FINAL" if match.is_finished() else "",
+        "source": match.source,
+    }
 
 
 def _parse_score(value: str) -> tuple[int, int]:

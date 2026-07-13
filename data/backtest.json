@@ -1,118 +1,133 @@
 {
-  "matches": 82,
+  "matches": 100,
   "evaluation_mode": "walk_forward_strict_date",
   "evaluation_scope": "FIFA World Cup 2026 finals",
   "result_leakage_guard": true,
-  "outcome_accuracy": 0.61,
-  "exact_score_accuracy": 0.098,
-  "goal_mae": 1.44,
-  "expected_goal_mae": 1.5,
-  "goal_within_0_7_rate": 0.207,
-  "corner_mae": 2.72,
-  "expected_corner_mae": 2.74,
-  "corner_within_1_5_rate": 0.354,
-  "foul_mae": 5.11,
-  "expected_foul_mae": 5.13,
-  "foul_within_2_rate": 0.305,
+  "outcome_accuracy": 0.65,
+  "exact_score_accuracy": 0.12,
+  "goal_mae": 1.39,
+  "expected_goal_mae": 1.45,
+  "goal_within_0_7_rate": 0.22,
+  "corner_mae": 2.65,
+  "expected_corner_mae": 2.69,
+  "corner_within_1_rate": 0.37,
+  "corner_within_1_5_rate": 0.37,
+  "foul_mae": 5.04,
+  "expected_foul_mae": 5.04,
+  "foul_within_1_rate": 0.22,
+  "foul_within_2_rate": 0.33,
+  "recommended_bet_count": 100,
+  "recommended_bet_coverage": 1.0,
+  "recommended_bet_hit_rate": 0.88,
+  "recommended_bet_average_probability": 0.854,
   "playoff": {
-    "matches": 10,
+    "matches": 30,
     "outcome_accuracy": 0.7,
-    "exact_score_accuracy": 0.3,
-    "goal_mae": 0.7,
-    "expected_goal_mae": 0.916,
-    "goal_within_0_7_rate": 0.4,
-    "corner_mae": 4.2,
-    "expected_corner_mae": 4.243,
-    "corner_within_1_5_rate": 0.3,
-    "foul_mae": 4.9,
-    "expected_foul_mae": 5.036,
-    "foul_within_2_rate": 0.4
+    "exact_score_accuracy": 0.167,
+    "goal_mae": 1.067,
+    "expected_goal_mae": 1.161,
+    "goal_within_0_7_rate": 0.3,
+    "corner_mae": 2.967,
+    "expected_corner_mae": 3.069,
+    "corner_within_1_rate": 0.4,
+    "corner_within_1_5_rate": 0.4,
+    "foul_mae": 4.933,
+    "expected_foul_mae": 4.909,
+    "foul_within_1_rate": 0.267,
+    "foul_within_2_rate": 0.4,
+    "recommended_bet_count": 30,
+    "recommended_bet_coverage": 1.0,
+    "recommended_bet_hit_rate": 0.9,
+    "recommended_bet_average_probability": 0.852
   },
   "playoff_target_status": {
     "outcome_accuracy": false,
-    "exact_score_accuracy": true,
-    "goal_mae": true,
+    "exact_score_accuracy": false,
+    "goal_mae": false,
     "corner_mae": false,
-    "foul_mae": false
+    "foul_mae": false,
+    "recommended_bet_probability": true
   },
   "targets": {
-    "outcome_accuracy": 0.8,
-    "exact_score_accuracy": 0.2,
+    "outcome_accuracy": 0.85,
+    "exact_score_accuracy": 0.3,
     "goal_mae": 0.7,
-    "corner_mae": 1.5,
-    "foul_mae": 2.0
+    "corner_mae": 1.0,
+    "foul_mae": 1.0,
+    "recommended_bet_probability": 0.75
   },
   "target_status": {
     "outcome_accuracy": false,
     "exact_score_accuracy": false,
     "goal_mae": false,
     "corner_mae": false,
-    "foul_mae": false
+    "foul_mae": false,
+    "recommended_bet_probability": true
   },
-  "trained_match_keys": 390,
+  "trained_match_keys": 408,
   "training": {
-    "mode": "automatic_walk_forward",
+    "mode": "walk_forward",
     "status": "complete",
     "epochs": 12,
-    "unique_matches": 390,
-    "training_rows": 390,
-    "evaluation_matches": 82,
+    "unique_matches": 408,
+    "training_rows": 408,
+    "evaluation_matches": 100,
     "evaluation_scope": "FIFA World Cup 2026 finals",
     "evaluation_mode": "walk_forward_strict_date",
     "same_day_policy": "all matches on a date are predicted before any result from that date is learned",
     "result_leakage_guard": true,
-    "started_at": "2026-07-02T04:28:32.040414+00:00",
-    "completed_at": "2026-07-02T04:28:43.211811+00:00"
+    "started_at": "2026-07-13T18:34:57.359601+00:00",
+    "completed_at": "2026-07-13T18:35:24.501197+00:00"
   },
-  "updated_at": "2026-07-02T04:29:47.035492+00:00",
+  "updated_at": "2026-07-13T18:36:19.163109+00:00",
   "by_team": {
     "Algeria": {
-      "matches": 3,
-      "outcome_accuracy": 0.667
+      "matches": 4,
+      "outcome_accuracy": 0.5
     },
     "Argentina": {
-      "matches": 3,
-      "outcome_accuracy": 1.0
-    },
-    "Australia": {
-      "matches": 3,
-      "outcome_accuracy": 0.333
-    },
-    "Austria": {
-      "matches": 3,
+      "matches": 6,
       "outcome_accuracy": 0.667
     },
-    "Belgium": {
+    "Australia": {
       "matches": 4,
+      "outcome_accuracy": 0.25
+    },
+    "Austria": {
+      "matches": 4,
+      "outcome_accuracy": 0.25
+    },
+    "Belgium": {
+      "matches": 6,
       "outcome_accuracy": 0.5
     },
     "Bosnia-Herzegovina": {
       "matches": 4,
-      "outcome_accuracy": 0.75
+      "outcome_accuracy": 1.0
     },
     "Brazil": {
-      "matches": 4,
-      "outcome_accuracy": 0.75
+      "matches": 5,
+      "outcome_accuracy": 0.6
     },
     "Canada": {
-      "matches": 4,
-      "outcome_accuracy": 0.75
+      "matches": 5,
+      "outcome_accuracy": 0.8
     },
     "Cape Verde": {
-      "matches": 3,
-      "outcome_accuracy": 0.0
+      "matches": 4,
+      "outcome_accuracy": 0.25
     },
     "Colombia": {
-      "matches": 3,
-      "outcome_accuracy": 0.667
+      "matches": 5,
+      "outcome_accuracy": 0.8
     },
     "Congo DR": {
       "matches": 4,
-      "outcome_accuracy": 0.75
+      "outcome_accuracy": 1.0
     },
     "Croatia": {
-      "matches": 3,
-      "outcome_accuracy": 0.667
+      "matches": 4,
+      "outcome_accuracy": 1.0
     },
     "Curaçao": {
       "matches": 3,
@@ -124,18 +139,18 @@
     },
     "Ecuador": {
       "matches": 4,
-      "outcome_accuracy": 0.25
+      "outcome_accuracy": 0.5
     },
     "Egypt": {
-      "matches": 3,
-      "outcome_accuracy": 0.333
+      "matches": 5,
+      "outcome_accuracy": 0.4
     },
     "England": {
-      "matches": 4,
-      "outcome_accuracy": 0.75
+      "matches": 6,
+      "outcome_accuracy": 0.667
     },
     "France": {
-      "matches": 4,
+      "matches": 6,
       "outcome_accuracy": 1.0
     },
     "Germany": {
@@ -143,8 +158,8 @@
       "outcome_accuracy": 0.5
     },
     "Ghana": {
-      "matches": 3,
-      "outcome_accuracy": 0.333
+      "matches": 4,
+      "outcome_accuracy": 0.5
     },
     "Haiti": {
       "matches": 3,
@@ -160,7 +175,7 @@
     },
     "Ivory Coast": {
       "matches": 4,
-      "outcome_accuracy": 0.5
+      "outcome_accuracy": 0.75
     },
     "Japan": {
       "matches": 4,
@@ -171,12 +186,12 @@
       "outcome_accuracy": 1.0
     },
     "Mexico": {
-      "matches": 4,
-      "outcome_accuracy": 1.0
+      "matches": 5,
+      "outcome_accuracy": 0.8
     },
     "Morocco": {
-      "matches": 4,
-      "outcome_accuracy": 0.5
+      "matches": 6,
+      "outcome_accuracy": 0.667
     },
     "Netherlands": {
       "matches": 4,
@@ -187,20 +202,20 @@
       "outcome_accuracy": 0.667
     },
     "Norway": {
-      "matches": 4,
-      "outcome_accuracy": 0.75
+      "matches": 6,
+      "outcome_accuracy": 0.667
     },
     "Panama": {
       "matches": 3,
-      "outcome_accuracy": 0.333
+      "outcome_accuracy": 0.667
     },
     "Paraguay": {
-      "matches": 4,
-      "outcome_accuracy": 0.25
+      "matches": 5,
+      "outcome_accuracy": 0.4
     },
     "Portugal": {
-      "matches": 3,
-      "outcome_accuracy": 0.333
+      "matches": 5,
+      "outcome_accuracy": 0.8
     },
     "Qatar": {
       "matches": 3,
@@ -227,16 +242,16 @@
       "outcome_accuracy": 0.333
     },
     "Spain": {
-      "matches": 3,
-      "outcome_accuracy": 0.667
+      "matches": 6,
+      "outcome_accuracy": 0.5
     },
     "Sweden": {
       "matches": 4,
       "outcome_accuracy": 0.5
     },
     "Switzerland": {
-      "matches": 3,
-      "outcome_accuracy": 0.0
+      "matches": 6,
+      "outcome_accuracy": 0.667
     },
     "Tunisia": {
       "matches": 3,
@@ -247,7 +262,7 @@
       "outcome_accuracy": 0.333
     },
     "United States": {
-      "matches": 4,
+      "matches": 5,
       "outcome_accuracy": 1.0
     },
     "Uruguay": {

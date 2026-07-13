@@ -330,7 +330,9 @@ class WorldCupDataSync:
         state["score_profiles"] = self._score_profiles_from_rows(rows)
         state["calibration_profiles"] = self._fit_calibration_profiles(rows)
         state["outcome_model"] = self._fit_outcome_model_from_rows(rows, epochs)
+        state["score_model"] = self._fit_score_model_from_rows(rows)
         state["history"] = reviews[-5000:]
+        state["backtest_history"] = reviews[-5000:]
         state["trained_match_keys"] = sorted({self._match_key(match) for match in matches})
         state["trained_match_fingerprints"] = {
             self._match_key(match): self._match_fingerprint(match)
@@ -408,6 +410,7 @@ class WorldCupDataSync:
                     prediction.expected_away_goals,
                     match.neutral,
                     prediction.h2h_report,
+                    *predictor._dynamic_rating_delta(past, match.home_team, match.away_team),
                 )
                 rows.append(
                     {
@@ -469,6 +472,7 @@ class WorldCupDataSync:
             snapshot["calibration_profiles"] = self._fit_calibration_profiles(prior_rows)
             snapshot["history"] = MatchPredictor._history_from_matches(past)
             snapshot["outcome_model"] = self._fit_outcome_model_from_rows(prior_rows, epochs)
+            snapshot["score_model"] = self._fit_score_model_from_rows(prior_rows)
             snapshot["training"] = {
                 "evaluation_mode": "walk_forward_strict_date",
                 "trained_until": past[-1].date if past else None,
@@ -515,6 +519,14 @@ class WorldCupDataSync:
                 predicted_goals = prediction.expected_home_goals + prediction.expected_away_goals
                 predicted_goal_count = int(prediction.goal_total.get("point_estimate", math.floor(predicted_goals + 0.5)))
                 actual_goals = int(match.home_goals or 0) + int(match.away_goals or 0)
+                recommended_bet = copy.deepcopy((prediction.recommended_bets or {}).get("best_bet"))
+                recommended_bet_hit = self._recommended_bet_hit(
+                    recommended_bet,
+                    int(match.home_goals or 0),
+                    int(match.away_goals or 0),
+                    actual_corners,
+                    actual_fouls,
+                )
                 reviews.append(
                     {
                         "date": match.date,
@@ -551,6 +563,8 @@ class WorldCupDataSync:
                         "actual_fouls": None if actual_fouls is None else round(actual_fouls, 2),
                         "foul_error": None if actual_fouls is None or predicted_fouls is None else round(predicted_foul_count - actual_fouls, 2),
                         "expected_foul_error": None if actual_fouls is None or predicted_fouls is None else round(float(predicted_fouls) - actual_fouls, 2),
+                        "recommended_bet": recommended_bet,
+                        "recommended_bet_hit": recommended_bet_hit,
                         "training_mode": "walk_forward_strict_date",
                         "training_cutoff": past[-1].date if past else None,
                         "training_key": key,
@@ -561,6 +575,36 @@ class WorldCupDataSync:
             prior_rows.extend(rows_by_key[self._match_key(match)] for match in group)
             past.extend(group)
         return reviews
+
+    @staticmethod
+    def _recommended_bet_hit(
+        bet: dict[str, Any] | None,
+        home_goals: int,
+        away_goals: int,
+        actual_corners: float | None,
+        actual_fouls: float | None,
+    ) -> bool | None:
+        if not bet:
+            return None
+        bet_type = str(bet.get("type") or "")
+        if bet_type == "double_chance":
+            code = str(bet.get("code") or "")
+            return (code == "1X" and home_goals >= away_goals) or (code == "X2" and away_goals >= home_goals)
+
+        actual = {
+            "safe_goals_total": float(home_goals + away_goals),
+            "safe_corners_total": actual_corners,
+            "safe_fouls_total": actual_fouls,
+        }.get(bet_type)
+        if actual is None or bet.get("line") is None:
+            return None
+        line = float(bet["line"])
+        side = str(bet.get("side") or "")
+        if side == "over":
+            return float(actual) > line
+        if side == "under":
+            return float(actual) < line
+        return None
 
     def _fit_outcome_model_from_rows(
         self,
@@ -586,6 +630,61 @@ class WorldCupDataSync:
                 "training_rows": 0,
                 "weights": weights,
             }
+
+        if len({row["label"] for row in rows}) < 2:
+            return {
+                "type": "none",
+                "labels": labels,
+                "epochs": 0,
+                "blend": 0.0,
+                "temperature": 1.0,
+                "training_rows": len(rows),
+                "weights": weights,
+            }
+
+        try:
+            from sklearn.feature_extraction import DictVectorizer
+            from sklearn.linear_model import LogisticRegression
+
+            def general_features(row: dict[str, Any]) -> dict[str, float]:
+                return {
+                    feature: float(value)
+                    for feature, value in row["features"].items()
+                    if not feature.startswith(("home:", "away:", "home_form:", "away_form:"))
+                }
+
+            vectorizer = DictVectorizer(sparse=False)
+            matrix = vectorizer.fit_transform([general_features(row) for row in rows])
+            model = LogisticRegression(C=0.5, max_iter=2000, random_state=42)
+            model.fit(matrix, [row["label"] for row in rows])
+            feature_names = list(vectorizer.get_feature_names_out())
+            learned_weights = {
+                str(label): {
+                    feature: round(float(weight), 7)
+                    for feature, weight in zip(feature_names, coefficients)
+                    if abs(float(weight)) >= 1e-8
+                }
+                for label, coefficients in zip(model.classes_, model.coef_)
+            }
+            intercepts = {
+                str(label): round(float(intercept), 7)
+                for label, intercept in zip(model.classes_, model.intercept_)
+            }
+            return {
+                "type": "sklearn_multiclass_logistic",
+                "labels": [str(label) for label in model.classes_],
+                "epochs": epochs,
+                "learning_rate": None,
+                "regularization_c": 0.5,
+                "blend": 0.40,
+                "temperature": 1.0,
+                "training_rows": len(rows),
+                "feature_policy": "generalized_plus_dynamic_elo",
+                "intercepts": intercepts,
+                "weights": learned_weights,
+            }
+        except ImportError:
+            pass
 
         learning_rate = 0.035
         l2 = 0.0004
@@ -625,6 +724,61 @@ class WorldCupDataSync:
             "temperature": 1.0,
             "training_rows": len(rows),
             "weights": compact_weights,
+        }
+
+    def _fit_score_model_from_rows(self, rows: list[dict[str, Any]]) -> dict[str, Any]:
+        if len(rows) < 60:
+            return {"type": "none", "training_rows": len(rows), "weights": {}}
+        try:
+            from sklearn.feature_extraction import DictVectorizer
+            from sklearn.linear_model import LogisticRegression
+        except ImportError:
+            return {"type": "none", "training_rows": len(rows), "weights": {}}
+
+        def features(row: dict[str, Any]) -> dict[str, float]:
+            values = {
+                feature: float(value)
+                for feature, value in row["features"].items()
+                if not feature.startswith(("home:", "away:", "home_form:", "away_form:"))
+            }
+            values.update(
+                {
+                    "home_xg": float(row["home_xg"]),
+                    "away_xg": float(row["away_xg"]),
+                    "total_xg": float(row["home_xg"] + row["away_xg"]),
+                }
+            )
+            return values
+
+        vectorizer = DictVectorizer(sparse=True)
+        matrix = vectorizer.fit_transform([features(row) for row in rows])
+        targets = [
+            f"{int(row['match'].home_goals or 0)}-{int(row['match'].away_goals or 0)}"
+            for row in rows
+        ]
+        if len(set(targets)) < 2:
+            return {"type": "none", "training_rows": len(rows), "weights": {}}
+        model = LogisticRegression(C=0.2, max_iter=2000, random_state=42)
+        model.fit(matrix, targets)
+        feature_names = list(vectorizer.get_feature_names_out())
+        return {
+            "type": "sklearn_exact_score_logistic",
+            "training_rows": len(rows),
+            "regularization_c": 0.2,
+            "minimum_probability": 0.12,
+            "classes": [str(label) for label in model.classes_],
+            "intercepts": {
+                str(label): round(float(intercept), 7)
+                for label, intercept in zip(model.classes_, model.intercept_)
+            },
+            "weights": {
+                str(label): {
+                    feature: round(float(weight), 7)
+                    for feature, weight in zip(feature_names, coefficients)
+                    if abs(float(weight)) >= 1e-8
+                }
+                for label, coefficients in zip(model.classes_, model.coef_)
+            },
         }
 
     def _score_profiles_from_rows(self, rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -888,7 +1042,13 @@ class WorldCupDataSync:
 
     def _save_backtest_summary(self) -> dict[str, Any]:
         state = self.store.load_model_state()
-        history = state.get("history", [])
+        history = state.get("backtest_history") or [
+            item
+            for item in state.get("history", [])
+            if str(item.get("training_mode") or "").startswith("walk_forward")
+        ]
+        if not history:
+            history = state.get("history", [])
         total = len(history)
         if not total:
             backtest = {"matches": 0}
@@ -915,6 +1075,22 @@ class WorldCupDataSync:
                 for item in items
                 if item.get("expected_foul_error") is not None
             ]
+            recommended_bets = [
+                item
+                for item in items
+                if item.get("recommended_bet_hit") is not None and item.get("recommended_bet")
+            ]
+            recommended_bet_hit_rate = (
+                None
+                if not recommended_bets
+                else sum(bool(item["recommended_bet_hit"]) for item in recommended_bets) / len(recommended_bets)
+            )
+            recommended_bet_average_probability = (
+                None
+                if not recommended_bets
+                else sum(float(item["recommended_bet"].get("probability", 0.0)) for item in recommended_bets)
+                / len(recommended_bets)
+            )
             return {
                 "matches": count,
                 "outcome_accuracy": None if not count else sum(1 for item in items if item.get("outcome_hit")) / count,
@@ -924,10 +1100,16 @@ class WorldCupDataSync:
                 "goal_within_0_7_rate": None if not goal_errors else sum(error <= 0.7 for error in goal_errors) / len(goal_errors),
                 "corner_mae": None if not corner_errors else sum(corner_errors) / len(corner_errors),
                 "expected_corner_mae": None if not expected_corner_errors else sum(expected_corner_errors) / len(expected_corner_errors),
+                "corner_within_1_rate": None if not corner_errors else sum(error <= 1.0 for error in corner_errors) / len(corner_errors),
                 "corner_within_1_5_rate": None if not corner_errors else sum(error <= 1.5 for error in corner_errors) / len(corner_errors),
                 "foul_mae": None if not foul_errors else sum(foul_errors) / len(foul_errors),
                 "expected_foul_mae": None if not expected_foul_errors else sum(expected_foul_errors) / len(expected_foul_errors),
+                "foul_within_1_rate": None if not foul_errors else sum(error <= 1.0 for error in foul_errors) / len(foul_errors),
                 "foul_within_2_rate": None if not foul_errors else sum(error <= 2.0 for error in foul_errors) / len(foul_errors),
+                "recommended_bet_count": len(recommended_bets),
+                "recommended_bet_coverage": None if not count else len(recommended_bets) / count,
+                "recommended_bet_hit_rate": recommended_bet_hit_rate,
+                "recommended_bet_average_probability": recommended_bet_average_probability,
             }
 
         metrics = review_metrics(history)
@@ -940,11 +1122,12 @@ class WorldCupDataSync:
         corner_mae = metrics["corner_mae"]
         foul_mae = metrics["foul_mae"]
         targets = {
-            "outcome_accuracy": 0.80,
-            "exact_score_accuracy": 0.20,
+            "outcome_accuracy": 0.85,
+            "exact_score_accuracy": 0.30,
             "goal_mae": 0.70,
-            "corner_mae": 1.50,
-            "foul_mae": 2.00,
+            "corner_mae": 1.00,
+            "foul_mae": 1.00,
+            "recommended_bet_probability": 0.75,
         }
         by_team: dict[str, dict[str, int]] = defaultdict(lambda: {"matches": 0, "outcome_hits": 0})
         for item in history:
@@ -967,10 +1150,16 @@ class WorldCupDataSync:
             "goal_within_0_7_rate": None if metrics["goal_within_0_7_rate"] is None else round(metrics["goal_within_0_7_rate"], 3),
             "corner_mae": None if corner_mae is None else round(corner_mae, 2),
             "expected_corner_mae": None if metrics["expected_corner_mae"] is None else round(metrics["expected_corner_mae"], 2),
+            "corner_within_1_rate": None if metrics["corner_within_1_rate"] is None else round(metrics["corner_within_1_rate"], 3),
             "corner_within_1_5_rate": None if metrics["corner_within_1_5_rate"] is None else round(metrics["corner_within_1_5_rate"], 3),
             "foul_mae": None if foul_mae is None else round(foul_mae, 2),
             "expected_foul_mae": None if metrics["expected_foul_mae"] is None else round(metrics["expected_foul_mae"], 2),
+            "foul_within_1_rate": None if metrics["foul_within_1_rate"] is None else round(metrics["foul_within_1_rate"], 3),
             "foul_within_2_rate": None if metrics["foul_within_2_rate"] is None else round(metrics["foul_within_2_rate"], 3),
+            "recommended_bet_count": metrics["recommended_bet_count"],
+            "recommended_bet_coverage": None if metrics["recommended_bet_coverage"] is None else round(metrics["recommended_bet_coverage"], 3),
+            "recommended_bet_hit_rate": None if metrics["recommended_bet_hit_rate"] is None else round(metrics["recommended_bet_hit_rate"], 3),
+            "recommended_bet_average_probability": None if metrics["recommended_bet_average_probability"] is None else round(metrics["recommended_bet_average_probability"], 3),
             "playoff": {
                 key: round(value, 3) if isinstance(value, float) else value
                 for key, value in playoff_metrics.items()
@@ -986,6 +1175,8 @@ class WorldCupDataSync:
                 and playoff_metrics["corner_mae"] <= targets["corner_mae"],
                 "foul_mae": playoff_metrics["foul_mae"] is not None
                 and playoff_metrics["foul_mae"] <= targets["foul_mae"],
+                "recommended_bet_probability": playoff_metrics["recommended_bet_hit_rate"] is not None
+                and playoff_metrics["recommended_bet_hit_rate"] >= targets["recommended_bet_probability"],
             },
             "targets": targets,
             "target_status": {
@@ -994,6 +1185,8 @@ class WorldCupDataSync:
                 "goal_mae": goal_mae is not None and goal_mae <= targets["goal_mae"],
                 "corner_mae": corner_mae is not None and corner_mae <= targets["corner_mae"],
                 "foul_mae": foul_mae is not None and foul_mae <= targets["foul_mae"],
+                "recommended_bet_probability": metrics["recommended_bet_hit_rate"] is not None
+                and metrics["recommended_bet_hit_rate"] >= targets["recommended_bet_probability"],
             },
             "trained_match_keys": len(state.get("trained_match_keys", [])),
             "training": state.get("training", {}),

@@ -173,6 +173,30 @@ button:hover {
   grid-column: span 2;
 }
 
+.snapshot-card,
+.missing-snapshot-card {
+  grid-column: 1 / -1;
+}
+
+.snapshot-card {
+  border-left: 4px solid var(--accent);
+  background: #f5faf7;
+}
+
+.snapshot-preview {
+  border-left-color: var(--gold);
+  background: #fffdf8;
+}
+
+.missing-snapshot-card {
+  border-left: 4px solid #a44737;
+  background: #fff8f6;
+}
+
+.missing-snapshot-card p + p {
+  margin-top: 10px;
+}
+
 .card {
   min-width: 0;
   overflow-x: auto;
@@ -204,6 +228,29 @@ button:hover {
 .bets-card {
   border-left: 4px solid var(--gold);
   background: #fffdf8;
+}
+
+.final-bet {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #d7c28e;
+  border-radius: 6px;
+  background: #fff9e9;
+}
+
+.final-bet span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.final-bet b {
+  color: #23633f;
+  font-size: 18px;
 }
 
 .metric {
@@ -341,5 +388,9 @@ th {
 
   .h2h-summary > div:nth-child(2) {
     border-right: 0;
+  }
+
+  .final-bet {
+    grid-template-columns: 1fr;
   }
 }

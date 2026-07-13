@@ -25,6 +25,34 @@ def make_store(tmp_dir):
 
 
 class PredictorTests(unittest.TestCase):
+    def test_close_match_can_select_draw_as_main_outcome(self):
+        probabilities = {"П1": 0.38, "X": 0.27, "П2": 0.35}
+        self.assertEqual(MatchPredictor._select_market_pick(probabilities), "X")
+        self.assertEqual(
+            MatchPredictor._select_market_pick({"П1": 0.52, "X": 0.27, "П2": 0.21}),
+            "П1",
+        )
+
+    def test_recommended_bet_settlement(self):
+        self.assertTrue(
+            WorldCupDataSync._recommended_bet_hit(
+                {"type": "double_chance", "code": "1X"},
+                1,
+                1,
+                8.0,
+                22.0,
+            )
+        )
+        self.assertFalse(
+            WorldCupDataSync._recommended_bet_hit(
+                {"type": "safe_corners_total", "line": 9.5, "side": "over"},
+                1,
+                0,
+                8.0,
+                22.0,
+            )
+        )
+
     def test_predict_england_ghana_smoke(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)
@@ -55,6 +83,7 @@ class PredictorTests(unittest.TestCase):
             self.assertIn("lineup_reports", prediction.to_dict())
             self.assertIn(home, prediction.to_dict()["lineup_reports"])
             self.assertIn("data_quality", prediction.to_dict())
+            self.assertIn("recommended_bet_hit_rate", prediction.to_dict()["data_quality"]["backtest"])
             self.assertIn("round_info", prediction.to_dict())
             for item in prediction.exact_score_probabilities:
                 self.assertGreaterEqual(item["probability"], 0)
@@ -209,13 +238,14 @@ class PredictorTests(unittest.TestCase):
             self.assertGreater(forecast["expected"], no_ref_forecast["expected"])
             self.assertEqual(forecast["referee"]["name"], "Strict Ref")
 
-    def test_high_total_matchup_gets_high_score_candidate(self):
+    def test_high_total_matchup_gets_total_aligned_score_candidate(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             store = make_store(tmp_dir)
             prediction = MatchPredictor(store).predict("Norway", "Senegal", remember=False)
             score_totals = [sum(map(int, score.split("-"))) for score in prediction.exact_scores]
             self.assertGreaterEqual(prediction.goal_total["probabilities"]["over_3_5"], 0.33)
-            self.assertTrue(any(total >= 4 for total in score_totals))
+            self.assertTrue(any(total >= 3 for total in score_totals))
+            self.assertTrue(prediction.goal_total["alignment"]["consistent"])
 
     def test_over_total_does_not_rank_one_nil_first(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -549,8 +579,27 @@ class PredictorTests(unittest.TestCase):
             self.assertEqual(store.load_backtest()["matches"], 2)
             self.assertEqual(state["training"]["evaluation_mode"], "walk_forward_strict_date")
             self.assertTrue(store.load_backtest()["result_leakage_guard"])
-            self.assertEqual(store.load_backtest()["targets"]["exact_score_accuracy"], 0.20)
+            self.assertEqual(store.load_backtest()["targets"]["exact_score_accuracy"], 0.30)
             self.assertIn("goal_mae", store.load_backtest())
+            self.assertIn("recommended_bet_hit_rate", store.load_backtest())
+
+            OnlineLearner(store).record_result(
+                "A",
+                "B",
+                "2099-01-03",
+                1,
+                0,
+                baseline_prediction={
+                    "expected_goals": {"A": 1.2, "B": 0.8},
+                    "predicted_corners": 8.0,
+                    "foul_forecast": {"expected": 22.0},
+                    "market_pick": "П1",
+                    "exact_scores": ["1-0"],
+                    "tactical_matchup": {},
+                },
+            )
+            WorldCupDataSync(store)._save_backtest_summary()
+            self.assertEqual(store.load_backtest()["matches"], 2)
 
     def test_auto_checker_reviews_pending_prediction(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -594,6 +643,68 @@ class PredictorTests(unittest.TestCase):
         referee = provider._referee_from_summary(sample_espn_summary())
         self.assertEqual(referee["name"], "Drew Fischer")
         self.assertEqual(referee["source"], "espn-summary-officials")
+
+    def test_saved_predictions_are_immutable_revisions(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            base = {
+                "home_team": "Portugal",
+                "away_team": "Spain",
+                "match_date": "2099-07-06",
+                "market_pick": "П1",
+                "fixture": {"date": "2099-07-06", "completed": False, "in_progress": False},
+            }
+            first = store.save_prediction(base)
+            second = store.save_prediction({**base, "market_pick": "П2"})
+            saved = store.load_predictions()
+
+            self.assertNotEqual(first["prediction_id"], second["prediction_id"])
+            self.assertEqual(saved[0]["market_pick"], "П1")
+            self.assertEqual(saved[0]["status"], "superseded")
+            self.assertEqual(saved[1]["market_pick"], "П2")
+            self.assertEqual(saved[1]["revision"], 2)
+            self.assertEqual(saved[1]["status"], "pending")
+
+    def test_prediction_cannot_be_created_after_match_started(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            with self.assertRaisesRegex(ValueError, "уже начался"):
+                store.save_prediction(
+                    {
+                        "home_team": "Portugal",
+                        "away_team": "Spain",
+                        "match_date": "2026-07-06",
+                        "market_pick": "П2",
+                        "fixture": {"date": "2026-07-06", "completed": True, "in_progress": False},
+                    }
+                )
+
+    def test_completed_result_does_not_change_saved_pick(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            store = make_store(tmp_dir)
+            saved = MatchPredictor(store).predict("Portugal", "Spain", remember=False).to_dict()
+            saved.update(
+                {
+                    "prediction_id": "locked",
+                    "created_at": "2026-07-06T10:00:00+00:00",
+                    "revision": 1,
+                    "market_pick": "П1",
+                }
+            )
+            fixture = {
+                "date": "2026-07-06",
+                "home_goals": 0,
+                "away_goals": 1,
+                "completed": True,
+                "in_progress": False,
+            }
+            payload = MatchPredictor(store).hydrate_saved_prediction(saved, fixture)
+
+            self.assertEqual(payload["market_pick"], "П1")
+            self.assertEqual(payload["result_summary"]["predicted"]["outcome"], "П1")
+            self.assertEqual(payload["result_summary"]["actual"]["score"], "0-1")
+            self.assertFalse(payload["result_summary"]["outcome_hit"])
+            self.assertTrue(payload["prediction_snapshot"]["immutable"])
 
 
 class FakeProvider:

@@ -27,8 +27,13 @@ async function getJson(url) {
 }
 
 function renderPrediction(data) {
-  const warnings = data.warnings.map((item) => `<p class="warn">${escapeHtml(item)}</p>`).join("");
+  if (data.prediction_available === false) {
+    prediction.innerHTML = unavailablePredictionBlock(data);
+    return;
+  }
+  const warnings = (data.warnings || []).map((item) => `<p class="warn">${escapeHtml(item)}</p>`).join("");
   prediction.innerHTML = `
+    ${predictionSnapshotBlock(data)}
     <article class="card outcome-card">
       <h3>Исход</h3>
       <div class="metric">${data.market_pick}</div>
@@ -100,6 +105,43 @@ function renderPrediction(data) {
     <article class="card wide bets-card">
       <h3>Рекомендуемые ставки</h3>
       ${recommendedBetsBlock(data.recommended_bets)}
+    </article>
+  `;
+}
+
+function predictionSnapshotBlock(data) {
+  const snapshot = data.prediction_snapshot || {};
+  const savedAt = snapshot.created_at
+    ? new Date(snapshot.created_at).toLocaleString("ru-RU")
+    : null;
+  const revision = snapshot.revision ? ` · ревизия ${snapshot.revision}` : "";
+  const stateClass = snapshot.immutable ? "snapshot-locked" : "snapshot-preview";
+  const title = snapshot.immutable ? "Предматчевый прогноз зафиксирован" : "Предпросмотр прогноза";
+  const time = savedAt ? ` · ${escapeHtml(savedAt)}` : "";
+  return `
+    <article class="card snapshot-card ${stateClass}">
+      <strong>${title}</strong>${time}${revision}
+      <p class="sub">${escapeHtml(snapshot.message || "")}</p>
+    </article>
+  `;
+}
+
+function unavailablePredictionBlock(data) {
+  const summary = data.result_summary || {};
+  const actual = summary.actual || {};
+  const fact = summary.status === "completed" && actual.score
+    ? `<p><strong>Факт:</strong> ${escapeHtml(actual.outcome_label || "матч завершён")}; счёт ${escapeHtml(actual.score)}.</p>`
+    : summary.status === "live"
+      ? `<p><strong>Факт:</strong> матч идёт${actual.score ? `, текущий счёт ${escapeHtml(actual.score)}` : ""}.</p>`
+      : "<p><strong>Факт:</strong> матч уже начался.</p>";
+  const warnings = (data.warnings || []).map((item) => `<p class="warn">${escapeHtml(item)}</p>`).join("");
+  return `
+    <article class="card missing-snapshot-card">
+      <h3>Предматчевого прогноза в журнале нет</h3>
+      <p>После начала матча новый прогноз заблокирован, поэтому результат не сможет изменить старый выбор победителя.</p>
+      ${fact}
+      <p class="sub">${escapeHtml(summary.message || "")}</p>
+      ${warnings}
     </article>
   `;
 }
@@ -315,8 +357,9 @@ function dataQualityBlock(quality) {
       <tr><th>Плей-офф</th><td>${playoff.matches || 0} матчей</td><th>Исход / счет</th><td>${playoff.outcome_accuracy == null ? "нет" : `${probability(playoff.outcome_accuracy)} / ${probability(playoff.exact_score_accuracy)}`}</td></tr>
       <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"} · xC ${backtest.expected_corner_mae ?? "нет"}</td></tr>
       <tr><th>Ошибка голов</th><td>${backtest.goal_mae ?? "нет"} · xG ${backtest.expected_goal_mae ?? "нет"}</td><th>В радиусе 0.7</th><td>${backtest.goal_within_0_7_rate == null ? "нет" : probability(backtest.goal_within_0_7_rate)}</td></tr>
-      <tr><th>Угловые ±1.5</th><td>${backtest.corner_within_1_5_rate == null ? "нет" : probability(backtest.corner_within_1_5_rate)}</td><th>Фолы ±2</th><td>${backtest.foul_within_2_rate == null ? "нет" : probability(backtest.foul_within_2_rate)}</td></tr>
+      <tr><th>Угловые ±1</th><td>${backtest.corner_within_1_rate == null ? "нет" : probability(backtest.corner_within_1_rate)}</td><th>Фолы ±1</th><td>${backtest.foul_within_1_rate == null ? "нет" : probability(backtest.foul_within_1_rate)}</td></tr>
       <tr><th>Фолы выборка</th><td>${quality.home_foul_samples || 0} / ${quality.away_foul_samples || 0}</td><th>Ошибка фолов</th><td>${backtest.foul_mae ?? "нет"} · ожидание ${backtest.expected_foul_mae ?? "нет"}</td></tr>
+      <tr><th>Итоговая ставка</th><td>${backtest.recommended_bet_hit_rate == null ? "нет" : `${probability(backtest.recommended_bet_hit_rate)} · ${backtest.recommended_bet_count || 0} матчей`}</td><th>Цель ставки</th><td>${targetCell(backtest.recommended_bet_hit_rate, targets.recommended_bet_probability, targetStatus.recommended_bet_probability, "higher")}</td></tr>
       <tr><th>Обучение</th><td>${training.unique_matches || backtest.trained_match_keys || 0} матчей</td><th>Режим</th><td>${strictMode ? "по времени, без утечки" : "ожидает строгого пересчета"}</td></tr>
       <tr><th>Цель исходов ПО</th><td>${targetCell(activeMetrics.outcome_accuracy, targets.outcome_accuracy, activeStatus.outcome_accuracy, "higher")}</td><th>Цель счетов ПО</th><td>${targetCell(activeMetrics.exact_score_accuracy, targets.exact_score_accuracy, activeStatus.exact_score_accuracy, "higher")}</td></tr>
       <tr><th>Цель голов ПО</th><td>${targetCell(activeMetrics.goal_mae, targets.goal_mae, activeStatus.goal_mae, "lower", false)}</td><th>Цель угловых ПО</th><td>${targetCell(activeMetrics.corner_mae, targets.corner_mae, activeStatus.corner_mae, "lower", false)}</td></tr>
@@ -411,8 +454,19 @@ function recommendedBetsBlock(recommended) {
   if (!items.length) {
     return "<p class='muted'>нет расчета</p>";
   }
+  const best = recommended.best_bet;
+  const finalBet = best
+    ? `
+      <div class="final-bet">
+        <span>Итоговая ставка</span>
+        <strong>${escapeHtml(best.pick)}</strong>
+        <b>${probability(best.probability)}</b>
+      </div>
+    `
+    : `<p class="warn">В сохраненном снимке нет одиночной ставки с расчетной вероятностью 75%+.</p>`;
   return `
-    <p><strong>${escapeHtml(recommended.summary || "")}</strong></p>
+    ${finalBet}
+    <p class="sub">Одиночная ставка. События ниже показаны для анализа и не объединяются в экспресс.</p>
     <table class="compact">
       ${items
         .map(

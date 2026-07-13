@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import threading
 import time
 import uuid
 from datetime import datetime, timezone
@@ -9,6 +10,9 @@ from typing import Any
 
 from .aliases import TeamResolver
 from .models import MatchRecord
+
+
+_PREDICTION_LOCK = threading.RLock()
 
 
 DEFAULT_MODEL_STATE = {
@@ -32,10 +36,12 @@ DEFAULT_MODEL_STATE = {
         "goal_scale": 1.0,
     },
     "outcome_model": {},
+    "score_model": {},
     "score_profiles": {},
     "stat_profiles": {},
     "calibration_profiles": {},
     "history": [],
+    "backtest_history": [],
     "trained_match_keys": [],
     "trained_match_fingerprints": {},
 }
@@ -318,28 +324,39 @@ class DataStore:
     def save_model_state(self, state: dict[str, Any]) -> None:
         self._write_json(self.model_path, state)
 
-    def save_prediction(self, prediction: dict[str, Any]) -> None:
-        predictions = self._read_json(self.predictions_path, [])
-        prediction = dict(prediction)
-        prediction.setdefault("prediction_id", uuid.uuid4().hex)
-        prediction.setdefault("created_at", datetime.now(timezone.utc).isoformat())
-        prediction.setdefault("status", "pending" if prediction.get("match_date") else "recorded")
-        for existing in predictions:
-            same_match = (
-                existing.get("home_team") == prediction.get("home_team")
-                and existing.get("away_team") == prediction.get("away_team")
-                and existing.get("match_date") == prediction.get("match_date")
-                and existing.get("status") == "pending"
-                and prediction.get("status") == "pending"
-            )
-            if same_match:
-                prediction["prediction_id"] = existing.get("prediction_id", prediction["prediction_id"])
-                prediction["created_at"] = existing.get("created_at", prediction["created_at"])
-                existing.update(prediction)
-                self._write_json(self.predictions_path, predictions[-500:])
-                return
-        predictions.append(prediction)
-        self._write_json(self.predictions_path, predictions[-500:])
+    def save_prediction(self, prediction: dict[str, Any]) -> dict[str, Any]:
+        with _PREDICTION_LOCK:
+            predictions = self._read_json(self.predictions_path, [])
+            prediction = dict(prediction)
+            prediction.setdefault("prediction_id", uuid.uuid4().hex)
+            prediction.setdefault("created_at", datetime.now(timezone.utc).isoformat())
+            prediction.setdefault("status", "pending" if prediction.get("match_date") else "recorded")
+            prediction.setdefault("snapshot_type", "pre_match")
+            prediction.setdefault("immutable", True)
+
+            same_match = [
+                item
+                for item in predictions
+                if item.get("home_team") == prediction.get("home_team")
+                and item.get("away_team") == prediction.get("away_team")
+                and item.get("match_date") == prediction.get("match_date")
+            ]
+            if fixture_has_started(prediction.get("fixture")):
+                if same_match:
+                    return dict(same_match[-1])
+                raise ValueError("Матч уже начался: новый предматчевый прогноз создавать нельзя.")
+
+            active = next((item for item in reversed(same_match) if item.get("status") == "pending"), None)
+            revision = max((int(item.get("revision", 1)) for item in same_match), default=0) + 1
+            prediction["revision"] = revision
+            if active:
+                active["status"] = "superseded"
+                active["superseded_at"] = prediction["created_at"]
+                active["superseded_by"] = prediction["prediction_id"]
+
+            predictions.append(prediction)
+            self._write_json(self.predictions_path, predictions[-500:])
+            return dict(prediction)
 
     def load_predictions(self) -> list[dict[str, Any]]:
         return self._read_json(self.predictions_path, [])
@@ -386,3 +403,24 @@ def _merge_match(existing: MatchRecord, incoming: MatchRecord) -> MatchRecord:
     if existing.source == "espn-world-cup":
         merged["source"] = existing.source
     return MatchRecord.from_dict(merged)
+
+
+def fixture_has_started(fixture: dict[str, Any] | None, now: datetime | None = None) -> bool:
+    if not fixture:
+        return False
+    if fixture.get("completed") or fixture.get("in_progress"):
+        return True
+
+    current = now or datetime.now(timezone.utc)
+    kickoff = fixture.get("kickoff")
+    if kickoff:
+        try:
+            parsed = datetime.fromisoformat(str(kickoff).replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone.utc)
+            return parsed.astimezone(timezone.utc) <= current.astimezone(timezone.utc)
+        except ValueError:
+            pass
+
+    match_date = fixture.get("date")
+    return bool(match_date and str(match_date) < current.date().isoformat())

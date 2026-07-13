@@ -53,6 +53,7 @@ class Prediction:
 
     def to_dict(self) -> dict[str, Any]:
         return {
+            "prediction_available": True,
             "home_team": self.home_team,
             "away_team": self.away_team,
             "match_date": self.match_date,
@@ -183,6 +184,7 @@ class MatchPredictor:
             round_info,
         )
         base_home_win, base_draw, base_away_win = self._outcome_probabilities(home_xg, away_xg)
+        rating_delta, rating_reliability = self._dynamic_rating_delta(matches, home_team, away_team)
         outcome_features = self._outcome_features(
             home_team,
             away_team,
@@ -194,6 +196,8 @@ class MatchPredictor:
             away_xg,
             neutral,
             h2h_report,
+            rating_delta,
+            rating_reliability,
         )
         home_win, draw, away_win = self._apply_outcome_model(
             {"П1": base_home_win, "X": base_draw, "П2": base_away_win},
@@ -201,7 +205,7 @@ class MatchPredictor:
             state,
         )
         probabilities = {"П1": home_win, "X": draw, "П2": away_win}
-        market_pick = max(probabilities, key=probabilities.get)
+        market_pick = self._select_market_pick(probabilities)
         confidence = probabilities[market_pick]
         markets = self._markets(home_team, away_team, probabilities)
         corners = self._expected_corners(
@@ -254,6 +258,7 @@ class MatchPredictor:
             state=state,
             h2h_report=h2h_report,
             round_info=round_info,
+            model_features=outcome_features,
         )
         exact_scores = [item["score"] for item in exact_score_probabilities]
         if exact_scores:
@@ -318,6 +323,91 @@ class MatchPredictor:
         if remember and target_date:
             self.store.save_prediction(prediction.to_dict())
         return prediction
+
+    def hydrate_saved_prediction(
+        self,
+        saved: dict[str, Any],
+        fixture: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        payload = copy.deepcopy(saved)
+        home_team = str(payload.get("home_team") or "")
+        away_team = str(payload.get("away_team") or "")
+        exact_score_probabilities = payload.get("exact_score_probabilities") or [
+            {"score": score, "probability": None}
+            for score in payload.get("exact_scores", [])
+        ]
+        predicted_corners = float(payload.get("predicted_corners", 0.0))
+        goal_total = payload.get("goal_total") or {}
+        foul_forecast = payload.get("foul_forecast") or {}
+        payload["prediction_available"] = True
+        payload["fixture"] = fixture or payload.get("fixture")
+        payload["result_summary"] = self._result_summary(
+            str(payload.get("market_pick") or "X"),
+            exact_score_probabilities,
+            predicted_corners,
+            goal_total,
+            foul_forecast,
+            fixture,
+            home_team,
+            away_team,
+        )
+        payload["prediction_snapshot"] = {
+            "prediction_id": payload.get("prediction_id"),
+            "created_at": payload.get("created_at"),
+            "revision": int(payload.get("revision", 1)),
+            "immutable": True,
+            "source": "saved_pre_match",
+            "message": "Предматчевый прогноз зафиксирован и после начала матча не пересчитывается.",
+        }
+        warnings = list(payload.get("warnings") or [])
+        lock_warning = "Показан сохранённый предматчевый прогноз; фактический результат не использован для его пересчёта."
+        if lock_warning not in warnings:
+            warnings.append(lock_warning)
+        payload["warnings"] = warnings
+        return payload
+
+    def result_only_payload(
+        self,
+        home_team: str,
+        away_team: str,
+        fixture: dict[str, Any],
+    ) -> dict[str, Any]:
+        home_goals = fixture.get("home_goals")
+        away_goals = fixture.get("away_goals")
+        actual = None
+        status = "live" if fixture.get("in_progress") else "scheduled"
+        if fixture.get("completed") and home_goals is not None and away_goals is not None:
+            outcome = self._outcome_from_score(int(home_goals), int(away_goals))
+            actual = {
+                "score": f"{int(home_goals)}-{int(away_goals)}",
+                "outcome": outcome,
+                "outcome_label": self._market_label(outcome, home_team, away_team),
+                "corners": self._fixture_total_corners(fixture),
+                "fouls": self._fixture_total_fouls(fixture),
+            }
+            status = "completed"
+        elif fixture.get("in_progress"):
+            score = None
+            if home_goals is not None and away_goals is not None:
+                score = f"{int(home_goals)}-{int(away_goals)}"
+            actual = {"score": score, "outcome": None, "corners": None, "fouls": None}
+
+        return {
+            "prediction_available": False,
+            "home_team": home_team,
+            "away_team": away_team,
+            "match_date": fixture.get("date"),
+            "fixture": fixture,
+            "result_summary": {
+                "status": status,
+                "predicted": None,
+                "actual": actual,
+                "message": "Предматчевый снимок не был сохранён. Ретроспективный прогноз после старта запрещён.",
+            },
+            "warnings": [
+                "Для этого матча нет сохранённого предматчевого прогноза. Приложение не будет выдавать расчёт после матча за старый прогноз."
+            ],
+        }
 
     @classmethod
     def _pre_match_history(
@@ -472,6 +562,7 @@ class MatchPredictor:
         clean = copy.deepcopy(state)
         clean["weights"] = copy.deepcopy(DEFAULT_MODEL_STATE["weights"])
         clean["outcome_model"] = {}
+        clean["score_model"] = {}
         clean["stat_profiles"] = self._stat_profiles_from_matches(pre_match_history)
         clean["score_profiles"] = self._score_profiles_from_matches(pre_match_history)
         clean["history"] = self._history_from_matches(pre_match_history)
@@ -1019,6 +1110,8 @@ class MatchPredictor:
         away_xg: float,
         neutral: bool,
         h2h_report: dict[str, Any] | None = None,
+        rating_delta: float = 0.0,
+        rating_reliability: float = 0.0,
     ) -> dict[str, float]:
         goal_diff_delta = (home_stats.avg_goals_for - home_stats.avg_goals_against) - (
             away_stats.avg_goals_for - away_stats.avg_goals_against
@@ -1043,6 +1136,10 @@ class MatchPredictor:
             "tactic_delta": tactic_delta,
             "h2h_edge": h2h_edge,
             "h2h_sample": min(1.0, float(h2h_report.get("effective_matches") or 0.0) / 3.0),
+            "elo_delta": rating_delta,
+            "elo_expectancy": 1.0 / (1.0 + 10 ** (-rating_delta)),
+            "elo_reliability": rating_reliability,
+            "elo_weighted_delta": rating_delta * rating_reliability,
             "neutral": 1.0 if neutral else 0.0,
             f"home:{home_team}": 1.0,
             f"away:{away_team}": 1.0,
@@ -1050,6 +1147,41 @@ class MatchPredictor:
             f"away_form:{away_team}": -points_delta,
         }
         return {key: float(value) for key, value in features.items() if value}
+
+    @classmethod
+    def _dynamic_rating_delta(
+        cls,
+        matches: list[MatchRecord],
+        home_team: str,
+        away_team: str,
+    ) -> tuple[float, float]:
+        ratings: dict[str, float] = {}
+        appearances: Counter[str] = Counter()
+        for match in sorted(matches, key=lambda item: (item.date, item.home_team, item.away_team)):
+            if not match.is_finished():
+                continue
+            home_rating = ratings.get(match.home_team, 1500.0)
+            away_rating = ratings.get(match.away_team, 1500.0)
+            expectation = 1.0 / (1.0 + 10 ** ((away_rating - home_rating) / 400.0))
+            actual = 1.0 if match.home_goals > match.away_goals else 0.5 if match.home_goals == match.away_goals else 0.0
+            margin = abs(int(match.home_goals or 0) - int(match.away_goals or 0))
+            margin_factor = 1.0 if margin <= 1 else 1.0 + math.log(float(margin))
+            competition = (match.competition or "").lower()
+            importance = 1.15 if "world cup" in competition and "qualif" not in competition else 1.0
+            if "friendly" in competition:
+                importance = 0.65
+            adjustment = 18.0 * margin_factor * importance * (actual - expectation)
+            ratings[match.home_team] = home_rating + adjustment
+            ratings[match.away_team] = away_rating - adjustment
+            appearances[match.home_team] += 1
+            appearances[match.away_team] += 1
+
+        home_rating = ratings.get(home_team, 1500.0)
+        away_rating = ratings.get(away_team, 1500.0)
+        delta = max(-1.75, min(1.75, (home_rating - away_rating) / 400.0))
+        minimum_sample = min(appearances[home_team], appearances[away_team])
+        reliability = minimum_sample / (minimum_sample + 5.0)
+        return delta, reliability
 
     @staticmethod
     def _apply_outcome_model(
@@ -1064,9 +1196,13 @@ class MatchPredictor:
             return base_probabilities["П1"], base_probabilities["X"], base_probabilities["П2"]
 
         scores: dict[str, float] = {}
+        intercepts = model.get("intercepts") or {}
         for label in labels:
             label_weights = weights.get(label, {})
-            scores[label] = sum(float(label_weights.get(key, 0.0)) * value for key, value in features.items())
+            scores[label] = float(intercepts.get(label, 0.0)) + sum(
+                float(label_weights.get(key, 0.0)) * value
+                for key, value in features.items()
+            )
         if max(abs(value) for value in scores.values()) < 1e-9:
             return base_probabilities["П1"], base_probabilities["X"], base_probabilities["П2"]
 
@@ -1082,6 +1218,15 @@ class MatchPredictor:
         }
         mixed_total = sum(mixed.values()) or 1.0
         return mixed["П1"] / mixed_total, mixed["X"] / mixed_total, mixed["П2"] / mixed_total
+
+    @staticmethod
+    def _select_market_pick(probabilities: dict[str, float]) -> str:
+        non_draw = max(("П1", "П2"), key=lambda label: float(probabilities.get(label, 0.0)))
+        draw_probability = float(probabilities.get("X", 0.0))
+        non_draw_probability = float(probabilities.get(non_draw, 0.0))
+        if draw_probability >= 0.26 and non_draw_probability - draw_probability <= 0.13:
+            return "X"
+        return non_draw
 
     def _expected_goals(
         self,
@@ -1482,9 +1627,125 @@ class MatchPredictor:
         corners = self._corner_total_bet(predicted_corners)
         fouls = self._foul_total_bet(foul_forecast)
         items = [winner, goals, corners, fouls]
+        safe_candidates = [
+            {
+                "type": "double_chance",
+                "label": "Двойной шанс",
+                "pick": f"{home_team} не проиграет (1X)",
+                "code": "1X",
+                "probability": round(float(outcome_probabilities.get("П1", 0.0) + outcome_probabilities.get("X", 0.0)), 4),
+            },
+            {
+                "type": "double_chance",
+                "label": "Двойной шанс",
+                "pick": f"{away_team} не проиграет (X2)",
+                "code": "X2",
+                "probability": round(float(outcome_probabilities.get("X", 0.0) + outcome_probabilities.get("П2", 0.0)), 4),
+            },
+            self._safe_goal_total_bet(goal_total),
+            self._safe_corner_total_bet(predicted_corners),
+            self._safe_foul_total_bet(foul_forecast),
+        ]
+        qualified = [item for item in safe_candidates if float(item.get("probability", 0.0)) >= 0.75]
+        best_bet = max(qualified, key=lambda item: float(item["probability"])) if qualified else None
         return {
-            "summary": " + ".join(item["pick"] for item in items if item.get("pick")),
+            "summary": (
+                f"{best_bet['pick']} · расчётная вероятность {float(best_bet['probability']):.1%}"
+                if best_bet
+                else "Нет ставки с расчётной вероятностью не ниже 75%."
+            ),
             "items": items,
+            "best_bet": best_bet,
+            "confidence_threshold": 0.75,
+            "safe_candidates": safe_candidates,
+            "accumulator_recommended": False,
+        }
+
+    @staticmethod
+    def _safe_goal_total_bet(goal_total: dict[str, Any]) -> dict[str, Any]:
+        probabilities = (goal_total or {}).get("probabilities", {})
+        candidates = [
+            ("ТБ 1.5 голов", 1.5, "over", probabilities.get("over_1_5")),
+            ("ТМ 2.5 голов", 2.5, "under", probabilities.get("under_2_5")),
+            ("ТМ 3.5 голов", 3.5, "under", probabilities.get("under_3_5")),
+            ("ТМ 4.5 голов", 4.5, "under", probabilities.get("under_4_5")),
+        ]
+        available = [item for item in candidates if item[3] is not None]
+        pick, line, side, probability = min(
+            available,
+            key=lambda item: (
+                0 if float(item[3]) >= 0.75 else 1,
+                abs(float(item[3]) - 0.80),
+            ),
+        )
+        return {
+            "type": "safe_goals_total",
+            "label": "Надёжный тотал голов",
+            "pick": pick,
+            "line": line,
+            "side": side,
+            "probability": round(float(probability), 4),
+            "expected": (goal_total or {}).get("expected"),
+        }
+
+    @classmethod
+    def _safe_corner_total_bet(cls, expected_corners: float) -> dict[str, Any]:
+        expected = float(expected_corners)
+        candidates = []
+        for line in (value + 0.5 for value in range(4, 17)):
+            over = cls._total_probability_over(expected, line, spread=2.05)
+            candidates.extend(
+                [
+                    (f"ТБ {line:.1f} угловых", line, "over", over),
+                    (f"ТМ {line:.1f} угловых", line, "under", 1.0 - over),
+                ]
+            )
+        pick, line, side, probability = min(
+            candidates,
+            key=lambda item: (
+                0 if item[3] >= 0.75 else 1,
+                abs(item[3] - 0.80),
+                abs(item[1] - expected),
+            ),
+        )
+        return {
+            "type": "safe_corners_total",
+            "label": "Надёжный тотал угловых",
+            "pick": pick,
+            "line": line,
+            "side": side,
+            "probability": round(probability, 4),
+            "expected": round(expected, 2),
+        }
+
+    @classmethod
+    def _safe_foul_total_bet(cls, foul_forecast: dict[str, Any]) -> dict[str, Any]:
+        expected = float((foul_forecast or {}).get("expected") or 24.0)
+        candidates = []
+        for line in (value + 0.5 for value in range(12, 43, 2)):
+            over = cls._total_probability_over(expected, line, spread=3.6)
+            candidates.extend(
+                [
+                    (f"ТБ {line:.1f} фолов", line, "over", over),
+                    (f"ТМ {line:.1f} фолов", line, "under", 1.0 - over),
+                ]
+            )
+        pick, line, side, probability = min(
+            candidates,
+            key=lambda item: (
+                0 if item[3] >= 0.75 else 1,
+                abs(item[3] - 0.80),
+                abs(item[1] - expected),
+            ),
+        )
+        return {
+            "type": "safe_fouls_total",
+            "label": "Надёжный тотал фолов",
+            "pick": pick,
+            "line": line,
+            "side": side,
+            "probability": round(probability, 4),
+            "expected": round(expected, 2),
         }
 
     @staticmethod
@@ -1592,6 +1853,7 @@ class MatchPredictor:
         state: dict[str, Any] | None = None,
         h2h_report: dict[str, Any] | None = None,
         round_info: dict[str, Any] | None = None,
+        model_features: dict[str, float] | None = None,
     ) -> list[dict[str, Any]]:
         score_counts_by_outcome = {
             outcome: self._historical_score_counts(outcome, state) for outcome in ("П1", "X", "П2")
@@ -1609,6 +1871,15 @@ class MatchPredictor:
             round_info,
         )
         profile_score = profile_candidate.get("score") if profile_candidate else None
+        model_candidate = self._score_model_candidate(
+            market_pick,
+            home_xg,
+            away_xg,
+            goal_total,
+            state,
+            model_features,
+        )
+        model_score = model_candidate.get("score") if model_candidate else None
         grid = []
         for home_goals in range(9):
             for away_goals in range(9):
@@ -1628,6 +1899,7 @@ class MatchPredictor:
                     * self._mismatch_score_factor(home_goals, away_goals, home_xg, away_xg, market_pick)
                     * self._outcome_score_factor(outcome, market_pick, outcome_probabilities)
                     * (1.32 if score == profile_score else 1.0)
+                    * (1.75 if score == model_score else 1.0)
                     * self._h2h_score_factor(score, h2h_report)
                 )
                 grid.append((weight, outcome, score))
@@ -1649,6 +1921,67 @@ class MatchPredictor:
             }
             for weight, outcome, score in selected
         ]
+
+    def _score_model_candidate(
+        self,
+        market_pick: str,
+        home_xg: float,
+        away_xg: float,
+        goal_total: dict[str, Any],
+        state: dict[str, Any] | None,
+        model_features: dict[str, float] | None,
+    ) -> dict[str, Any] | None:
+        model = ((state or {}).get("score_model") or {})
+        weights = model.get("weights") or {}
+        if not weights or not model_features:
+            return None
+        features = dict(model_features)
+        features.update({"home_xg": home_xg, "away_xg": away_xg, "total_xg": home_xg + away_xg})
+        intercepts = model.get("intercepts") or {}
+        scores = {
+            score: float(intercepts.get(score, 0.0))
+            + sum(float(score_weights.get(feature, 0.0)) * value for feature, value in features.items())
+            for score, score_weights in weights.items()
+        }
+        if not scores:
+            return None
+        top = max(scores.values())
+        exponentials = {score: math.exp(max(-30.0, min(30.0, value - top))) for score, value in scores.items()}
+        total = sum(exponentials.values()) or 1.0
+        probabilities = {score: value / total for score, value in exponentials.items()}
+        candidates = []
+        for score, probability in probabilities.items():
+            if "-" not in score:
+                continue
+            try:
+                home_goals, away_goals = [int(value) for value in score.split("-", 1)]
+            except ValueError:
+                continue
+            if self._outcome_from_score(home_goals, away_goals) != market_pick:
+                continue
+            if not self._score_matches_total_signal(home_goals + away_goals, goal_total):
+                continue
+            candidates.append((probability, score))
+        if not candidates:
+            return None
+        probability, score = max(candidates)
+        minimum_probability = float(model.get("minimum_probability", 0.12))
+        if probability < minimum_probability:
+            return None
+        return {"score": score, "probability": round(probability, 4), "source": "score_model"}
+
+    @staticmethod
+    def _score_matches_total_signal(total_goals: int, goal_total: dict[str, Any]) -> bool:
+        probabilities = (goal_total or {}).get("probabilities", {})
+        if float(probabilities.get("over_3_5", 0.0)) >= 0.45 and total_goals < 4:
+            return False
+        if float(probabilities.get("over_2_5", 0.0)) >= 0.58 and total_goals < 3:
+            return False
+        if float(probabilities.get("under_2_5", 0.0)) >= 0.60 and total_goals > 2:
+            return False
+        if float(probabilities.get("under_3_5", 0.0)) >= 0.72 and total_goals > 3:
+            return False
+        return True
 
     @staticmethod
     def _calibrated_exact_score_probability(
@@ -2600,10 +2933,16 @@ class MatchPredictor:
                 "goal_within_0_7_rate": backtest.get("goal_within_0_7_rate") if isinstance(backtest, dict) else None,
                 "corner_mae": backtest.get("corner_mae") if isinstance(backtest, dict) else None,
                 "expected_corner_mae": backtest.get("expected_corner_mae") if isinstance(backtest, dict) else None,
+                "corner_within_1_rate": backtest.get("corner_within_1_rate") if isinstance(backtest, dict) else None,
                 "corner_within_1_5_rate": backtest.get("corner_within_1_5_rate") if isinstance(backtest, dict) else None,
                 "foul_mae": backtest.get("foul_mae") if isinstance(backtest, dict) else None,
                 "expected_foul_mae": backtest.get("expected_foul_mae") if isinstance(backtest, dict) else None,
+                "foul_within_1_rate": backtest.get("foul_within_1_rate") if isinstance(backtest, dict) else None,
                 "foul_within_2_rate": backtest.get("foul_within_2_rate") if isinstance(backtest, dict) else None,
+                "recommended_bet_count": backtest.get("recommended_bet_count", 0) if isinstance(backtest, dict) else 0,
+                "recommended_bet_coverage": backtest.get("recommended_bet_coverage") if isinstance(backtest, dict) else None,
+                "recommended_bet_hit_rate": backtest.get("recommended_bet_hit_rate") if isinstance(backtest, dict) else None,
+                "recommended_bet_average_probability": backtest.get("recommended_bet_average_probability") if isinstance(backtest, dict) else None,
                 "playoff": backtest.get("playoff", {}) if isinstance(backtest, dict) else {},
                 "playoff_target_status": backtest.get("playoff_target_status", {}) if isinstance(backtest, dict) else {},
                 "targets": backtest.get("targets", {}) if isinstance(backtest, dict) else {},
