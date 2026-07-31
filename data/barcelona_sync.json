@@ -1,0 +1,12 @@
+{
+  "last_sync": "2026-07-31T23:25:43.541216+00:00",
+  "full_history": true,
+  "fixtures": 2023,
+  "barcelona_matches": 188,
+  "details_loaded": 150,
+  "errors": 31,
+  "leagues": [
+    "esp.1",
+    "uefa.champions"
+  ]
+}

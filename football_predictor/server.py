@@ -4,20 +4,14 @@ import json
 import threading
 import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from .aliases import parse_matchup
-from .data_store import DataStore, fixture_has_started, project_root
-from .autocheck import AutoChecker
-from .learning import OnlineLearner
-from .predictor import MatchPredictor
-from .providers import EspnWorldCupProvider, ProviderError
-from .sync import WorldCupDataSync
+from .barcelona_service import BarcelonaService
+from .data_store import project_root
 
 
 class PredictorHandler(SimpleHTTPRequestHandler):
-    store = DataStore()
+    service = BarcelonaService()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(project_root() / "web"), **kwargs)
@@ -26,118 +20,45 @@ class PredictorHandler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         if parsed.path == "/api/predict":
             query = parse_qs(parsed.query)
-            matchup = query.get("matchup", [""])[0]
-            match_date = query.get("date", [None])[0] or None
+            opponent = query.get("opponent", [""])[0]
             remember = query.get("remember", ["true"])[0] != "false"
             try:
-                home, away = parse_matchup(matchup, self.store.resolver)
-                provider = EspnWorldCupProvider()
-                fixture = None
-                warnings = []
-                try:
-                    fixture = provider.find_fixture(
-                        home,
-                        away,
-                        start_date=match_date,
-                        end_date=match_date,
-                    )
-                    match_date = fixture.get("date") or match_date
-                except ProviderError as exc:
-                    fixture = _stored_fixture(self.store, home, away, match_date)
-                    warnings.append(f"Автодата: {exc}")
-
-                predictor = MatchPredictor(self.store)
-                saved = self.store.latest_prediction(home, away, match_date=match_date)
-                if fixture_has_started(fixture):
-                    payload = (
-                        predictor.hydrate_saved_prediction(saved, fixture)
-                        if saved
-                        else predictor.result_only_payload(home, away, fixture)
-                    )
-                    self._json(200, payload)
-                    return
-
-                sync_info = WorldCupDataSync(self.store).sync_all()
-                if sync_info.get("imported"):
-                    recent = "уже свежие" if sync_info.get("skipped_full_sync") else f"{sync_info.get('recent_imported', 0)}"
-                    action = "База проверена" if sync_info.get("skipped_full_sync") else "База обновлена"
-                    warnings.append(
-                        f"{action}: участников {sync_info.get('participants', 0)}, last-10 матчей {recent}, матчей ЧМ {sync_info['imported']}, тактических профилей {sync_info['profiles_updated']}, судей {sync_info.get('referees_updated', 0)}, обучающих матчей {sync_info.get('trained', 0)}."
-                    )
-                if not fixture and not match_date:
-                    try:
-                        fixture = provider.find_fixture(home, away)
-                        match_date = fixture.get("date")
-                    except ProviderError as exc:
-                        warnings.append(f"Автодата: {exc}")
-                prediction = predictor.predict(
-                    home,
-                    away,
-                    neutral=True,
-                    remember=remember,
-                    match_date=match_date,
-                    fixture=fixture,
-                    extra_warnings=warnings,
-                )
-                payload = prediction.to_dict()
-                if remember and match_date:
-                    saved = self.store.latest_prediction(home, away, match_date=match_date)
-                    if saved:
-                        payload = predictor.hydrate_saved_prediction(saved, fixture)
-                else:
-                    payload["prediction_snapshot"] = {
-                        "immutable": False,
-                        "source": "preview",
-                        "message": "Предпросмотр. Нажмите «Прогноз», чтобы сохранить предматчевый снимок.",
-                    }
-                self._json(200, payload)
+                self._json(200, self.service.predict(opponent, remember=remember))
             except Exception as exc:
                 self._json(400, {"error": str(exc)})
+            return
+        if parsed.path == "/api/opponents":
+            try:
+                self._json(200, {"opponents": self.service.opponents()})
+            except Exception as exc:
+                self._json(400, {"error": str(exc)})
+            return
+        if parsed.path == "/api/status":
+            self._json(200, self.service.status())
             return
         return super().do_GET()
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path == "/api/auto-check":
-            try:
-                summary = AutoChecker(self.store).check_pending()
-                self._json(200, summary)
-            except Exception as exc:
-                self._json(400, {"error": str(exc)})
-            return
-        if parsed.path != "/api/result":
+        if parsed.path != "/api/auto-check":
             self._json(404, {"error": "Not found"})
             return
         try:
-            size = int(self.headers.get("Content-Length", "0"))
-            body = json.loads(self.rfile.read(size).decode("utf-8"))
-            home, away = parse_matchup(body["matchup"], self.store.resolver)
-            home_goals, away_goals = _parse_score(body["score"])
-            baseline = self.store.latest_prediction(home, away, match_date=body["date"], status="pending")
-            review = OnlineLearner(self.store).record_result(
-                home_team=home,
-                away_team=away,
-                date=body["date"],
-                home_goals=home_goals,
-                away_goals=away_goals,
-                corners_total=_optional_float(body.get("corners")),
-                neutral=True,
-                baseline_prediction=baseline,
-            )
-            if baseline and baseline.get("prediction_id"):
-                self.store.update_prediction(
-                    baseline["prediction_id"],
-                    {"status": "reviewed", "review": review, "reviewed_at": review["updated_at"]},
-                )
-            self._json(200, review)
+            self._json(200, self.service.auto_check())
         except Exception as exc:
             self._json(400, {"error": str(exc)})
+
+    def end_headers(self) -> None:
+        if self.path.endswith((".html", ".js", ".css")) or self.path == "/":
+            self.send_header("Cache-Control", "no-store")
+        super().end_headers()
 
     def _json(self, status: int, payload: dict) -> None:
         encoded = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(encoded)))
+        self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(encoded)
 
@@ -145,67 +66,20 @@ class PredictorHandler(SimpleHTTPRequestHandler):
         return
 
 
-def _stored_fixture(store: DataStore, home_team: str, away_team: str, match_date: str | None) -> dict | None:
-    candidates = [
-        match
-        for match in store.load_matches()
-        if {match.home_team, match.away_team} == {home_team, away_team}
-        and (match_date is None or match.date == match_date)
-    ]
-    if not candidates:
-        return None
-    match = sorted(candidates, key=lambda item: item.date)[-1]
-    direct = match.home_team == home_team
-    return {
-        "fixture_id": match.fixture_id,
-        "date": match.date,
-        "kickoff": None,
-        "home_team": home_team,
-        "away_team": away_team,
-        "actual_home_team": match.home_team,
-        "actual_away_team": match.away_team,
-        "home_goals": match.home_goals if direct else match.away_goals,
-        "away_goals": match.away_goals if direct else match.home_goals,
-        "home_corners": match.home_corners if direct else match.away_corners,
-        "away_corners": match.away_corners if direct else match.home_corners,
-        "home_fouls": match.home_fouls if direct else match.away_fouls,
-        "away_fouls": match.away_fouls if direct else match.home_fouls,
-        "referee": match.referee,
-        "competition": match.competition,
-        "completed": match.is_finished(),
-        "in_progress": False,
-        "status": "STATUS_FINAL" if match.is_finished() else "",
-        "source": match.source,
-    }
-
-
-def _parse_score(value: str) -> tuple[int, int]:
-    home, away = value.replace(":", "-").split("-")
-    return int(home), int(away)
-
-
-def _optional_float(value) -> float | None:
-    if value in (None, ""):
-        return None
-    return float(value)
-
-
 def run_server(host: str = "127.0.0.1", port: int = 8765) -> None:
-    _start_auto_check_worker(PredictorHandler.store)
     server = ThreadingHTTPServer((host, port), PredictorHandler)
-    print(f"Открывайте: http://{host}:{port}")
+    _start_background_worker(PredictorHandler.service)
+    print(f"Barcelona Match Lab: http://{host}:{port}")
     server.serve_forever()
 
 
-def _start_auto_check_worker(store: DataStore, interval_seconds: int = 3600) -> None:
+def _start_background_worker(service: BarcelonaService, interval_seconds: int = 3600) -> None:
     def worker() -> None:
         while True:
             try:
-                WorldCupDataSync(store).sync_all()
-                AutoChecker(store).check_pending()
+                service.background_refresh()
             except Exception:
                 pass
             time.sleep(interval_seconds)
 
-    thread = threading.Thread(target=worker, daemon=True)
-    thread.start()
+    threading.Thread(target=worker, daemon=True, name="barcelona-data-refresh").start()

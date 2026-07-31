@@ -1,0 +1,15 @@
+{
+  "fingerprint": "142:748519",
+  "generated_at": "2026-07-31T23:34:11.076063+00:00",
+  "honest_walk_forward": true,
+  "sample_size": 112,
+  "training_matches": 142,
+  "outcome_accuracy": 0.7321,
+  "exact_score_accuracy": 0.125,
+  "goal_total_mae": 1.561,
+  "corner_mae": 2.652,
+  "foul_mae": 3.625,
+  "corners_within_1_5": 0.3214,
+  "fouls_within_2_5": 0.4018,
+  "evaluation": "Каждый матч предсказан только по данным, доступным до его стартового времени."
+}

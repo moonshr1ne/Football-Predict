@@ -2257,6 +2257,16 @@ class MatchPredictor:
                 for item in market_candidates
                 if self._score_total_compatible(item[2], goal_total)
             ]
+            favorite_xg = max(home_xg, away_xg)
+            underdog_xg = min(home_xg, away_xg)
+            if favorite_xg >= 2.25 and underdog_xg <= 0.85:
+                clean_big = [
+                    item
+                    for item in aligned
+                    if self._is_big_clean_favorite_score(item[2], home_xg >= away_xg, market_pick)
+                ]
+                if clean_big:
+                    return clean_big[:1]
             return (aligned or market_candidates or ordered)[:1]
         selected = ordered[:limit]
         probabilities = goal_total.get("probabilities", {})

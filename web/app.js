@@ -1,601 +1,378 @@
-const prediction = document.querySelector("#prediction");
-let activePredictionRequest = 0;
+const predictionRoot = document.querySelector("#prediction");
+const loading = document.querySelector("#loading");
+const errorBox = document.querySelector("#error");
+const opponentInput = document.querySelector("#opponent");
+let requestId = 0;
 
 document.querySelector("#predict-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   await runPrediction(true);
 });
 
-document.querySelector("#auto-check").addEventListener("click", async () => {
-  const response = await fetch("/api/auto-check", {
-    method: "POST",
-  });
-  const data = await response.json();
-  if (!response.ok) {
-    document.querySelector("#review").textContent = data.error || "Ошибка автопроверки";
-    return;
+document.querySelector("#auto-check").addEventListener("click", async (event) => {
+  const button = event.currentTarget;
+  button.disabled = true;
+  button.classList.add("spinning");
+  setSystem("Обновляю результаты и модель…", true);
+  try {
+    const response = await fetch("/api/auto-check", { method: "POST" });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Ошибка обновления");
+    const reviewed = data.review?.reviewed ?? 0;
+    setSystem(`База обновлена · проверено прогнозов: ${reviewed}`, false);
+    await runPrediction(false);
+  } catch (error) {
+    showError(error.message);
+    setSystem("Обновление не выполнено", false);
+  } finally {
+    button.disabled = false;
+    button.classList.remove("spinning");
   }
-  document.querySelector("#review").textContent =
-    `Проверено: ${data.checked}, обучено: ${data.learned}, ожидают: ${data.pending}, ошибок: ${data.errors}.`;
 });
 
-async function getJson(url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.error || "Ошибка");
-  return data;
+async function runPrediction(remember) {
+  const current = ++requestId;
+  hideError();
+  loading.hidden = false;
+  predictionRoot.classList.add("is-loading");
+  try {
+    const opponent = opponentInput.value.trim();
+    const response = await fetch(`/api/predict?opponent=${encodeURIComponent(opponent)}&remember=${remember}`);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Не удалось построить прогноз");
+    if (current !== requestId) return;
+    render(data);
+    const freshness = data.sync?.skipped ? "данные актуальны" : "данные обновлены";
+    setSystem(`${freshness} · модель обучается автоматически`, false);
+  } catch (error) {
+    if (current === requestId) showError(error.message);
+  } finally {
+    if (current === requestId) {
+      loading.hidden = true;
+      predictionRoot.classList.remove("is-loading");
+    }
+  }
 }
 
-function renderPrediction(data) {
+function render(data) {
   if (data.prediction_available === false) {
-    prediction.innerHTML = unavailablePredictionBlock(data);
+    predictionRoot.innerHTML = renderUnavailable(data);
     return;
   }
-  const warnings = (data.warnings || []).map((item) => `<p class="warn">${escapeHtml(item)}</p>`).join("");
-  prediction.innerHTML = `
-    ${predictionSnapshotBlock(data)}
-    <article class="card outcome-card">
-      <h3>Исход</h3>
-      <div class="metric">${data.market_pick}</div>
-      <p class="round-line">${escapeHtml(data.round_info?.label || "Плей-офф")}</p>
-      <p class="sub">уверенность ${(data.confidence * 100).toFixed(1)}%${data.match_date ? `, ${data.match_date}` : ""}</p>
-    </article>
-    <article class="card stat-card">
-      <h3>Угловые</h3>
-      <div class="metric">${Number(data.corner_forecast?.point_estimate ?? data.predicted_corners).toFixed(0)}</div>
-      <p class="sub">точечный прогноз · xC ${Number(data.corner_forecast?.expected ?? data.predicted_corners).toFixed(2)}</p>
-    </article>
-    <article class="card stat-card">
-      <h3>Фолы</h3>
-      ${foulForecastBlock(data.foul_forecast)}
-    </article>
-    <article class="card stat-card">
-      <h3>Голы</h3>
-      ${goalTotalBlock(data.goal_total)}
-    </article>
-    <article class="card">
-      <h3>Точный счет</h3>
-      <div class="pill-row">${scorePills(data)}</div>
-    </article>
-    <article class="card">
-      <h3>Вероятности</h3>
-      ${marketTable(data)}
-    </article>
-    <article class="card wide">
-      <h3>${escapeHtml(data.home_team)}: последние матчи</h3>
-      ${statsTable(data.home_stats)}
-    </article>
-    <article class="card wide">
-      <h3>${escapeHtml(data.away_team)}: последние матчи</h3>
-      ${statsTable(data.away_stats)}
-    </article>
-    <article class="card wide">
-      <h3>Очные встречи</h3>
-      ${headToHeadBlock(data.h2h_report, data.home_team, data.away_team)}
-    </article>
-    <article class="card wide">
-      <h3>Сведения по сборным</h3>
-      ${teamReportsBlock(data.team_reports, data.home_team, data.away_team)}
-    </article>
-    <article class="card wide">
-      <h3>Составы и ключевые игроки</h3>
-      ${lineupReportsBlock(data.lineup_reports, data.home_team, data.away_team)}
-    </article>
-    <article class="card wide">
-      <h3>Контекст</h3>
-      ${fixtureBlock(data.fixture, data.round_info)}
-      <p>Турнир: ${escapeHtml(data.match_context?.competition || "FIFA World Cup")}</p>
-      <p>Важность: ${Number(data.match_context?.importance ?? 1).toFixed(2)}, базовая сила состава: ${Number(data.match_context?.lineup_strength_floor ?? 0.92).toFixed(2)}</p>
-      <p>${escapeHtml(data.home_team)}: ${contextLine(data.home_context)}</p>
-      <p>${escapeHtml(data.away_team)}: ${contextLine(data.away_context)}</p>
-    </article>
-    <article class="card wide">
-      <h3>Тактика и схема</h3>
-      ${tacticsComparisonBlock(data)}
-    </article>
-    <article class="card wide">
-      <h3>Качество данных</h3>
-      ${dataQualityBlock(data.data_quality)}
-      ${warnings || "<p class='muted'>Предупреждений нет.</p>"}
-    </article>
-    <article class="card wide">
-      <h3>Прогноз и факт</h3>
-      ${resultSummaryBlock(data)}
-    </article>
-    <article class="card wide bets-card">
-      <h3>Рекомендуемые ставки</h3>
-      ${recommendedBetsBlock(data.recommended_bets)}
-    </article>
-  `;
-}
+  const fixture = data.fixture || {};
+  const isBarcaHome = data.barcelona_side === "home";
+  const opponentLogo = isBarcaHome ? fixture.away_logo : fixture.home_logo;
+  const kickoff = formatKickoff(fixture.kickoff || data.match_date);
+  const probs = data.outcome?.probabilities || {};
+  const goals = data.goals || {};
+  const backtest = data.data_quality?.backtest || {};
+  const recommendation = data.recommended_bet || {};
 
-function predictionSnapshotBlock(data) {
-  const snapshot = data.prediction_snapshot || {};
-  const savedAt = snapshot.created_at
-    ? new Date(snapshot.created_at).toLocaleString("ru-RU")
-    : null;
-  const revision = snapshot.revision ? ` · ревизия ${snapshot.revision}` : "";
-  const stateClass = snapshot.immutable ? "snapshot-locked" : "snapshot-preview";
-  const title = snapshot.immutable ? "Предматчевый прогноз зафиксирован" : "Предпросмотр прогноза";
-  const time = savedAt ? ` · ${escapeHtml(savedAt)}` : "";
-  return `
-    <article class="card snapshot-card ${stateClass}">
-      <strong>${title}</strong>${time}${revision}
-      <p class="sub">${escapeHtml(snapshot.message || "")}</p>
-    </article>
-  `;
-}
-
-function unavailablePredictionBlock(data) {
-  const summary = data.result_summary || {};
-  const actual = summary.actual || {};
-  const fact = summary.status === "completed" && actual.score
-    ? `<p><strong>Факт:</strong> ${escapeHtml(actual.outcome_label || "матч завершён")}; счёт ${escapeHtml(actual.score)}.</p>`
-    : summary.status === "live"
-      ? `<p><strong>Факт:</strong> матч идёт${actual.score ? `, текущий счёт ${escapeHtml(actual.score)}` : ""}.</p>`
-      : "<p><strong>Факт:</strong> матч уже начался.</p>";
-  const warnings = (data.warnings || []).map((item) => `<p class="warn">${escapeHtml(item)}</p>`).join("");
-  return `
-    <article class="card missing-snapshot-card">
-      <h3>Предматчевого прогноза в журнале нет</h3>
-      <p>После начала матча новый прогноз заблокирован, поэтому результат не сможет изменить старый выбор победителя.</p>
-      ${fact}
-      <p class="sub">${escapeHtml(summary.message || "")}</p>
-      ${warnings}
-    </article>
-  `;
-}
-
-function scorePills(data) {
-  const items = data.exact_score_probabilities?.length
-    ? data.exact_score_probabilities
-    : (data.exact_scores || []).map((score) => ({ score, probability: null }));
-  return items
-    .map((item) => {
-      const probabilityText =
-        item.probability == null ? "" : `<span class="pill-prob">${probability(item.probability)}</span>`;
-      const outcomeText =
-        item.outcome && item.outcome !== data.market_pick ? `<span class="pill-prob">${escapeHtml(item.outcome)}</span>` : "";
-      return `<span class="pill">${escapeHtml(item.score)}${outcomeText}${probabilityText}</span>`;
-    })
-    .join("");
-}
-
-function marketTable(data) {
-  const markets = data.markets?.length
-    ? data.markets
-    : [
-        { code: "П1", label: `Победа ${data.home_team}`, probability: data.probabilities?.["П1"] },
-        { code: "X", label: "Ничья", probability: data.probabilities?.X },
-        { code: "П2", label: `Победа ${data.away_team}`, probability: data.probabilities?.["П2"] },
-      ];
-  return `
-    <table class="compact">
-      ${markets
-        .map(
-          (market) => `
-            <tr>
-              <th>${escapeHtml(market.code)}</th>
-              <td>${escapeHtml(market.label)}</td>
-              <td>${probability(market.probability)}</td>
-            </tr>
-          `
-        )
-        .join("")}
-    </table>
-  `;
-}
-
-function goalTotalBlock(goalTotal) {
-  if (!goalTotal) {
-    return "<p class='muted'>нет расчета</p>";
-  }
-  const probabilities = goalTotal.probabilities || {};
-  const likely = (goalTotal.most_likely_totals || [])
-    .map((item) => `${escapeHtml(item.goals)} (${probability(item.probability)})`)
-    .join(", ");
-  const alignedScore = goalTotal.aligned_score
-    ? `<p class="consistency-ok">Точный счет ${escapeHtml(goalTotal.aligned_score)} согласован с ведущим сценарием тотала.</p>`
-    : "";
-  return `
-    <div class="metric">${Number(goalTotal.point_estimate ?? goalTotal.expected ?? 0).toFixed(0)}</div>
-    <p class="sub">точечный прогноз · xG ${Number(goalTotal.expected ?? 0).toFixed(2)} · ${escapeHtml(goalTotal.label || "тотал")}</p>
-    <table class="compact">
-      <tr><th>ТБ 2.5</th><td>${probability(probabilities.over_2_5)}</td><th>ТМ 2.5</th><td>${probability(probabilities.under_2_5)}</td></tr>
-      <tr><th>ТБ 3.5</th><td>${probability(probabilities.over_3_5)}</td><th>ТМ 3.5</th><td>${probability(probabilities.under_3_5)}</td></tr>
-      <tr><th>ТБ 4.5</th><td>${probability(probabilities.over_4_5)}</td><th>ТМ 4.5</th><td>${probability(probabilities.under_4_5)}</td></tr>
-      <tr><th>Чаще всего</th><td colspan="3">${likely || "нет"}</td></tr>
-    </table>
-    ${alignedScore}
-  `;
-}
-
-function headToHeadBlock(report, homeTeam, awayTeam) {
-  if (!report?.matches) {
-    return "<p class='muted'>До этой игры очных встреч в доступной базе не найдено.</p>";
-  }
-  const averageScore = report.average_score || {};
-  const history = (report.history || [])
-    .map(
-      (item) => `
-        <tr>
-          <td>${escapeHtml(item.date)}</td>
-          <td><strong>${escapeHtml(item.score)}</strong></td>
-          <td>${escapeHtml(item.competition || "матч сборных")}</td>
-          <td><span class="tag ${item.influence === "main" ? "tag-main" : ""}">${item.influence === "main" ? "основной" : "вспомогательный"}</span></td>
-        </tr>
-      `
-    )
-    .join("");
-  return `
-    <div class="h2h-summary">
-      <div><span>Матчи</span><strong>${report.matches}</strong></div>
-      <div><span>До 2 лет</span><strong>${report.recent_matches || 0}</strong></div>
-      <div><span>Средний счет</span><strong>${Number(averageScore[homeTeam] ?? 0).toFixed(2)} : ${Number(averageScore[awayTeam] ?? 0).toFixed(2)}</strong></div>
-      <div><span>Влияние</span><strong>${probability(report.impact)}</strong></div>
-    </div>
-    <table class="compact h2h-table">
-      <tr><th>Дата</th><th>Счет</th><th>Турнир</th><th>Вес</th></tr>
-      ${history}
-    </table>
-    <p class="sub">Матчи старше двух лет учитываются только как слабый вспомогательный сигнал.</p>
-  `;
-}
-
-function foulForecastBlock(forecast) {
-  if (!forecast) {
-    return "<p class='muted'>нет расчета</p>";
-  }
-  const probabilities = forecast.probabilities || {};
-  const referee = forecast.referee || {};
-  const refereeText = referee.name
-    ? `${escapeHtml(referee.name)}${referee.avg_fouls == null ? "" : ` · ${Number(referee.avg_fouls).toFixed(2)} за матч`}`
-    : "судья пока неизвестен";
-  return `
-    <div class="metric">${Number(forecast.point_estimate ?? forecast.expected ?? 0).toFixed(0)}</div>
-    <p class="sub">точечный прогноз · ожидание ${Number(forecast.expected ?? 0).toFixed(2)} · ${escapeHtml(forecast.label || "тотал фолов")}</p>
-    <table class="compact">
-      <tr><th>ТБ 20.5</th><td>${probability(probabilities.over_20_5)}</td><th>ТМ 20.5</th><td>${probability(probabilities.under_20_5)}</td></tr>
-      <tr><th>ТБ 24.5</th><td>${probability(probabilities.over_24_5)}</td><th>ТМ 24.5</th><td>${probability(probabilities.under_24_5)}</td></tr>
-      <tr><th>ТБ 28.5</th><td>${probability(probabilities.over_28_5)}</td><th>ТМ 28.5</th><td>${probability(probabilities.under_28_5)}</td></tr>
-      <tr><th>Судья</th><td colspan="3">${refereeText}</td></tr>
-      <tr><th>Выборка</th><td colspan="3">${forecast.home_samples || 0} / ${forecast.away_samples || 0}</td></tr>
-    </table>
-  `;
-}
-
-function teamReportsBlock(reports, homeTeam, awayTeam) {
-  const home = reports?.[homeTeam] || {};
-  const away = reports?.[awayTeam] || {};
-  return `
-    <table>
-      <tr><th>Сборная</th><th>Уровень</th><th>Атака</th><th>Оборона</th><th>xG</th></tr>
-      ${teamReportRow(home, homeTeam)}
-      ${teamReportRow(away, awayTeam)}
-    </table>
-  `;
-}
-
-function teamReportRow(report, fallbackTeam) {
-  return `
-    <tr>
-      <th>${escapeHtml(report.team || fallbackTeam)}</th>
-      <td>${escapeHtml(report.level || "нет")} · рейтинг ${percent(report.overall_score)} · форма ${percent(report.form_score)}</td>
-      <td>${percent(report.attack_score)} · ${listText(report.strengths)}</td>
-      <td>${percent(report.defense_score)} · ${listText(report.risks)}</td>
-      <td>${Number(report.expected_goals ?? 0).toFixed(2)}</td>
-    </tr>
-  `;
-}
-
-function lineupReportsBlock(reports, homeTeam, awayTeam) {
-  const home = reports?.[homeTeam] || {};
-  const away = reports?.[awayTeam] || {};
-  return `
-    <table>
-      <tr><th>Сборная</th><th>Статус</th><th>Сила состава</th><th>Ключевые в старте</th><th>Потери/скамейка</th></tr>
-      ${lineupReportRow(home, homeTeam)}
-      ${lineupReportRow(away, awayTeam)}
-    </table>
-  `;
-}
-
-function lineupReportRow(report, fallbackTeam) {
-  const impacted = [...(report.missing_key_players || []), ...(report.benched_key_players || [])];
-  return `
-    <tr>
-      <th>${escapeHtml(report.team || fallbackTeam)}</th>
-      <td>${lineupStatusText(report.status)}</td>
-      <td>${percent(report.availability_score)}</td>
-      <td>${playerNames(report.starting_key_players)}</td>
-      <td>${playerNames(impacted)}</td>
-    </tr>
-  `;
-}
-
-function playerNames(players) {
-  return (players || []).map((player) => escapeHtml(player.name || player)).join(", ") || "нет";
-}
-
-function lineupStatusText(status) {
-  if (status === "confirmed") return "подтвержден";
-  if (status === "not_released") return "не вышел";
-  return escapeHtml(status || "нет");
-}
-
-function statsTable(stats) {
-  return `
-    <table>
-      <tr><th>Матчи</th><td>${stats.sample_size}</td><th>Форма</th><td>${stats.wins}-${stats.draws}-${stats.losses}</td></tr>
-      <tr><th>Голы</th><td>${stats.avg_goals_for} / ${stats.avg_goals_against}</td><th>Очки</th><td>${stats.points_per_match}</td></tr>
-      <tr><th>Угловые</th><td>${stats.avg_total_corners ?? "нет"}</td><th>Сухие</th><td>${stats.clean_sheets}</td></tr>
-      <tr><th>Фолы</th><td>${stats.avg_total_fouls ?? "нет"}</td><th>Фолы за/против</th><td>${stats.avg_fouls_for ?? "нет"} / ${stats.avg_fouls_against ?? "нет"}</td></tr>
-      <tr><th>Владение</th><td>${stats.avg_possession ?? "нет"}%</td><th>Удары</th><td>${stats.avg_shots_for ?? "нет"} / ${stats.avg_shots_against ?? "нет"}</td></tr>
-      <tr><th>В створ</th><td>${stats.avg_shots_on_target_for ?? "нет"}</td><th>Источник</th><td>${stats.recent?.[0]?.source || "local"}</td></tr>
-      <tr><th>Угл./фолы</th><td>${stats.corner_samples}/${stats.foul_samples || 0}</td><th>Влад/удары</th><td>${stats.possession_samples}/${stats.shot_samples}</td></tr>
-    </table>
-  `;
-}
-
-function dataQualityBlock(quality) {
-  if (!quality) {
-    return "<p class='muted'>Сводка качества пока не рассчитана.</p>";
-  }
-  const backtest = quality.backtest || {};
-  const targets = backtest.targets || {};
-  const targetStatus = backtest.target_status || {};
-  const training = backtest.training || {};
-  const playoff = backtest.playoff || {};
-  const activeMetrics = playoff.matches ? playoff : backtest;
-  const activeStatus = playoff.matches ? (backtest.playoff_target_status || {}) : targetStatus;
-  const strictMode = backtest.evaluation_mode === "walk_forward_strict_date";
-  return `
-    <table>
-      <tr><th>Общая база</th><td>${percent(quality.score)}</td><th>Участники ЧМ</th><td>${quality.participants || 0}</td></tr>
-      <tr><th>Матчи команд</th><td>${quality.home_matches || 0} / ${quality.away_matches || 0}</td><th>Богатые матчи</th><td>${quality.home_rich_matches || 0} / ${quality.away_rich_matches || 0}</td></tr>
-      <tr><th>Честный baseline</th><td>${backtest.matches || 0} матчей ЧМ</td><th>Исходы</th><td>${backtest.outcome_accuracy == null ? "нет" : percent(backtest.outcome_accuracy)}</td></tr>
-      <tr><th>Плей-офф</th><td>${playoff.matches || 0} матчей</td><th>Исход / счет</th><td>${playoff.outcome_accuracy == null ? "нет" : `${probability(playoff.outcome_accuracy)} / ${probability(playoff.exact_score_accuracy)}`}</td></tr>
-      <tr><th>Точные счета</th><td>${backtest.exact_score_accuracy == null ? "нет" : percent(backtest.exact_score_accuracy)}</td><th>Ошибка угл.</th><td>${backtest.corner_mae ?? "нет"} · xC ${backtest.expected_corner_mae ?? "нет"}</td></tr>
-      <tr><th>Ошибка голов</th><td>${backtest.goal_mae ?? "нет"} · xG ${backtest.expected_goal_mae ?? "нет"}</td><th>В радиусе 0.7</th><td>${backtest.goal_within_0_7_rate == null ? "нет" : probability(backtest.goal_within_0_7_rate)}</td></tr>
-      <tr><th>Угловые ±1</th><td>${backtest.corner_within_1_rate == null ? "нет" : probability(backtest.corner_within_1_rate)}</td><th>Фолы ±1</th><td>${backtest.foul_within_1_rate == null ? "нет" : probability(backtest.foul_within_1_rate)}</td></tr>
-      <tr><th>Фолы выборка</th><td>${quality.home_foul_samples || 0} / ${quality.away_foul_samples || 0}</td><th>Ошибка фолов</th><td>${backtest.foul_mae ?? "нет"} · ожидание ${backtest.expected_foul_mae ?? "нет"}</td></tr>
-      <tr><th>Итоговая ставка</th><td>${backtest.recommended_bet_hit_rate == null ? "нет" : `${probability(backtest.recommended_bet_hit_rate)} · ${backtest.recommended_bet_count || 0} матчей`}</td><th>Цель ставки</th><td>${targetCell(backtest.recommended_bet_hit_rate, targets.recommended_bet_probability, targetStatus.recommended_bet_probability, "higher")}</td></tr>
-      <tr><th>Обучение</th><td>${training.unique_matches || backtest.trained_match_keys || 0} матчей</td><th>Режим</th><td>${strictMode ? "по времени, без утечки" : "ожидает строгого пересчета"}</td></tr>
-      <tr><th>Цель исходов ПО</th><td>${targetCell(activeMetrics.outcome_accuracy, targets.outcome_accuracy, activeStatus.outcome_accuracy, "higher")}</td><th>Цель счетов ПО</th><td>${targetCell(activeMetrics.exact_score_accuracy, targets.exact_score_accuracy, activeStatus.exact_score_accuracy, "higher")}</td></tr>
-      <tr><th>Цель голов ПО</th><td>${targetCell(activeMetrics.goal_mae, targets.goal_mae, activeStatus.goal_mae, "lower", false)}</td><th>Цель угловых ПО</th><td>${targetCell(activeMetrics.corner_mae, targets.corner_mae, activeStatus.corner_mae, "lower", false)}</td></tr>
-      <tr><th>Цель фолов ПО</th><td>${targetCell(activeMetrics.foul_mae, targets.foul_mae, activeStatus.foul_mae, "lower", false)}</td><th>Без утечки</th><td>${backtest.result_leakage_guard ? "да" : "нет"}</td></tr>
-    </table>
-  `;
-}
-
-function targetCell(actual, target, met, direction, asPercent = true) {
-  if (actual == null || target == null) {
-    return "нет";
-  }
-  const actualText = asPercent ? probability(actual) : Number(actual).toFixed(2);
-  const targetText = asPercent ? probability(target) : Number(target).toFixed(2);
-  const sign = direction === "lower" ? "≤" : "≥";
-  const mark = met ? "достигнута" : direction === "lower" ? "выше цели" : "ниже цели";
-  return `${actualText} / ${sign} ${targetText} · ${mark}`;
-}
-
-function contextLine(context) {
-  const injuries = context.injuries?.length ? `${context.injuries.length} травм/рисков` : "травм не внесено";
-  const motivation = context.motivation?.level ?? 0.5;
-  const lineup = context.lineup_strength ?? context.lineup_report?.availability_score ?? "World Cup base";
-  const status = context.lineup_status ? `, статус состава ${lineupStatusText(context.lineup_status)}` : "";
-  return `мотивация ${motivation}, состав ${lineup}${status}, ${injuries}`;
-}
-
-function fixtureBlock(fixture, roundInfo) {
-  if (!fixture) {
-    return "<p class='warn'>Дата матча не найдена автоматически. Проверьте, есть ли такая пара в расписании ЧМ.</p>";
-  }
-  const status = fixture.completed
-    ? "завершен"
-    : fixture.in_progress
-      ? "матч идет"
-      : (fixture.status_detail || fixture.status || "запланирован");
-  const kickoff = fixture.kickoff ? ` · ${escapeHtml(fixture.kickoff)}` : "";
-  const referee = fixture.referee?.name || fixture.referee;
-  const refereeText = referee ? ` · судья ${escapeHtml(referee)}` : "";
-  const roundText = roundInfo?.label ? ` · ${escapeHtml(roundInfo.label)}` : "";
-  return `<p><strong>Матч найден:</strong> ${escapeHtml(fixture.date)} · ${escapeHtml(status)}${roundText}${kickoff}${refereeText}</p>`;
-}
-
-function resultSummaryBlock(data) {
-  const summary = data.result_summary || {};
-  const predicted = summary.predicted || {};
-  const predictedScores = scoreListText(predicted.scores || data.exact_score_probabilities || []);
-  const predictedFouls = predicted.fouls?.expected ?? data.foul_forecast?.expected;
-  const predictedFoulCount = predicted.fouls?.point_estimate ?? data.foul_forecast?.point_estimate ?? predictedFouls;
-  const predictedCornerCount = predicted.corner_point_estimate ?? data.corner_forecast?.point_estimate ?? predicted.corners ?? data.predicted_corners;
-  const predictedCornerExpected = predicted.corners ?? data.corner_forecast?.expected ?? data.predicted_corners;
-  const predictedGoalTotal = predicted.goal_total || data.goal_total || {};
-  const predictedLine = `<p><strong>Предикт:</strong> ${escapeHtml(
-    predicted.outcome_label || data.market_pick
-  )}; счет ${predictedScores}; голы ${Number(predictedGoalTotal.point_estimate ?? predictedGoalTotal.expected ?? 0).toFixed(0)} (xG ${Number(predictedGoalTotal.expected ?? 0).toFixed(2)}); угловые ${Number(predictedCornerCount).toFixed(0)} (xC ${Number(predictedCornerExpected).toFixed(2)}); фолы ${predictedFoulCount == null ? "нет" : `${Number(predictedFoulCount).toFixed(0)} (ожидание ${Number(predictedFouls).toFixed(2)})`}</p>`;
-
-  if (summary.status === "completed" && summary.actual) {
-    const cornerText = summary.actual.corners == null ? "угловые: нет данных" : `угловые ${summary.actual.corners}`;
-    const cornerError = summary.corner_error == null ? "" : `, ошибка угловых ${Math.abs(summary.corner_error).toFixed(2)}`;
-    const foulText = summary.actual.fouls == null ? "фолы: нет данных" : `фолы ${summary.actual.fouls}`;
-    const foulError = summary.foul_error == null ? "" : `, ошибка фолов ${Math.abs(summary.foul_error).toFixed(2)}`;
-    return `
-      ${predictedLine}
-      <p><strong>Факт:</strong> ${escapeHtml(summary.actual.outcome_label)}; счет ${escapeHtml(summary.actual.score)}, ${cornerText}${cornerError}, ${foulText}${foulError}</p>
-      <p class="sub">Исход: ${summary.outcome_hit ? "угадан" : "мимо"}, точный счет: ${summary.score_hit ? "угадан" : "мимо"}.</p>
-    `;
-  }
-
-  if (summary.status === "live") {
-    const score = summary.actual?.score ? ` Текущий счет ${escapeHtml(summary.actual.score)}.` : "";
-    return `
-      ${predictedLine}
-      <p><strong>Факт:</strong> матч сейчас идет.${score} Финальный счет еще не известен.</p>
-    `;
-  }
-
-  if (summary.status === "scheduled") {
-    return `
-      ${predictedLine}
-      <p><strong>Факт:</strong> матч еще не начался.</p>
-    `;
-  }
-
-  return `
-    ${predictedLine}
-    <p><strong>Факт:</strong> матч не найден в расписании, настоящий счет пока неизвестен.</p>
-  `;
-}
-
-function recommendedBetsBlock(recommended) {
-  const items = recommended?.items || [];
-  if (!items.length) {
-    return "<p class='muted'>нет расчета</p>";
-  }
-  const best = recommended.best_bet;
-  const finalBet = best
-    ? `
-      <div class="final-bet">
-        <span>Итоговая ставка</span>
-        <strong>${escapeHtml(best.pick)}</strong>
-        <b>${probability(best.probability)}</b>
+  predictionRoot.innerHTML = `
+    <section class="fixture-band">
+      <div class="content-width fixture-layout">
+        <div class="fixture-meta">
+          <span class="competition-tag">${escapeHtml(data.competition || "")}</span>
+          <span>${escapeHtml(data.stage || "Матч турнира")}</span>
+          <span>${kickoff}</span>
+          <span>${isBarcaHome ? "Барселона дома" : "Барселона в гостях"}</span>
+        </div>
+        <div class="teams-line">
+          ${teamMark("Barcelona", "https://a.espncdn.com/i/teamlogos/soccer/500/83.png")}
+          <div class="score-core">
+            <span class="score-label">ПРОГНОЗ</span>
+            <strong>${escapeHtml(data.exact_score?.score || "—")}</strong>
+            <span>${percent(data.exact_score?.probability)} точный счет</span>
+          </div>
+          ${teamMark(data.opponent, opponentLogo)}
+        </div>
+        <p class="snapshot-note">${escapeHtml(data.prediction_snapshot?.message || "")}</p>
       </div>
-    `
-    : `<p class="warn">В сохраненном снимке нет одиночной ставки с расчетной вероятностью 75%+.</p>`;
-  return `
-    ${finalBet}
-    <p class="sub">Одиночная ставка. События ниже показаны для анализа и не объединяются в экспресс.</p>
-    <table class="compact">
-      ${items
-        .map(
-          (item) => `
-            <tr>
-              <th>${escapeHtml(item.label || "")}</th>
-              <td>${escapeHtml(item.pick || "")}</td>
-              <td>${probability(item.probability)}</td>
-              <td>${item.expected == null ? "" : `ожидание ${Number(item.expected).toFixed(2)}`}</td>
-            </tr>
-          `
-        )
-        .join("")}
-    </table>
+    </section>
+
+    <section class="content-width primary-grid">
+      <article class="metric-panel outcome-panel">
+        <div class="section-heading"><span>Основной исход</span><small>вероятности 1X2</small></div>
+        <h2>${escapeHtml(data.outcome?.label || "—")}</h2>
+        <div class="confidence-number">${percent(data.outcome?.confidence)}</div>
+        ${probabilityRow("Победа Барселоны", probs.barcelona_win)}
+        ${probabilityRow("Ничья", probs.draw)}
+        ${probabilityRow(`Победа ${data.opponent}`, probs.opponent_win)}
+        ${probabilityRow("Барселона не проиграет", probs.barcelona_not_lose, true)}
+      </article>
+
+      <article class="metric-panel">
+        <div class="section-heading"><span>Голы</span><small>модель распределения счета</small></div>
+        <div class="big-value">${number(goals.total_expected, 2)}</div>
+        <p class="value-caption">ожидаемый тотал · ${number(goals.barcelona_expected, 2)} : ${number(goals.opponent_expected, 2)} xG</p>
+        <div class="market-grid">
+          ${marketCell("ТБ 1.5", goals.probabilities?.over_1_5)}
+          ${marketCell("ТМ 1.5", goals.probabilities?.under_1_5)}
+          ${marketCell("ТБ 2.5", goals.probabilities?.over_2_5)}
+          ${marketCell("ТМ 2.5", goals.probabilities?.under_2_5)}
+          ${marketCell("ТБ 3.5", goals.probabilities?.over_3_5)}
+          ${marketCell("ТМ 3.5", goals.probabilities?.under_3_5)}
+        </div>
+      </article>
+
+      ${statPanel("Угловые", data.corners, "xC")}
+      ${statPanel("Фолы", data.fouls, "xF")}
+    </section>
+
+    <section class="recommendation-band">
+      <div class="content-width recommendation-layout">
+        <div>
+          <span class="section-kicker">РЕКОМЕНДУЕМАЯ СТАВКА</span>
+          <h2>${recommendation.eligible ? escapeHtml(recommendation.label) : "Нет ставки с порогом 75%"}</h2>
+          <p>${escapeHtml(recommendation.note || "")}</p>
+        </div>
+        <div class="recommendation-probability ${recommendation.eligible ? "eligible" : ""}">
+          <strong>${percent(recommendation.model_probability)}</strong>
+          <span>оценка модели</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-width comparison-section">
+      <div class="section-title-row">
+        <div><span class="section-kicker">ТАКТИЧЕСКИЙ МАТЧ-АП</span><h2>Форма и структура игры</h2></div>
+        <div class="elo-line"><span>Elo ${data.strength?.barcelona_elo ?? "—"}</span><strong>${signed(data.strength?.difference)}</strong><span>${data.strength?.opponent_elo ?? "—"} Elo</span></div>
+      </div>
+      <div class="team-comparison">
+        ${teamProfile(data.barcelona_profile, true)}
+        ${teamProfile(data.opponent_profile, false)}
+      </div>
+    </section>
+
+    <section class="content-width history-grid">
+      ${recentTable(data.barcelona_profile)}
+      ${recentTable(data.opponent_profile)}
+    </section>
+
+    <section class="detail-band">
+      <div class="content-width detail-grid">
+        ${lineupPanel("Барселона", data.lineups?.barcelona)}
+        ${lineupPanel(data.opponent, data.lineups?.opponent)}
+        ${refereePanel(data.referee)}
+        ${h2hPanel(data.h2h, data.opponent)}
+      </div>
+    </section>
+
+    <section class="content-width validation-section">
+      <div class="section-title-row">
+        <div><span class="section-kicker">WALK-FORWARD</span><h2>Честная проверка модели</h2></div>
+        <span class="audit-chip">без результата прогнозируемого матча</span>
+      </div>
+      <div class="validation-grid">
+        ${validationMetric("Исход", backtest.outcome_accuracy, "accuracy")}
+        ${validationMetric("Точный счет", backtest.exact_score_accuracy, "accuracy")}
+        ${validationMetric("Ошибка голов", backtest.goal_total_mae, "mae")}
+        ${validationMetric("Ошибка угловых", backtest.corner_mae, "mae")}
+        ${validationMetric("Ошибка фолов", backtest.foul_mae, "mae")}
+      </div>
+      <p class="audit-note">${escapeHtml(backtest.evaluation || data.data_quality?.leakage_guard || "")}</p>
+    </section>
+
+    ${resultBand(data)}
   `;
 }
 
-function scoreListText(items) {
-  if (!items.length) {
-    return "нет";
+function renderUnavailable(data) {
+  const fixture = data.fixture || {};
+  const summary = data.result_summary || {};
+  return `
+    <section class="fixture-band">
+      <div class="content-width unavailable">
+        <span class="competition-tag">${escapeHtml(fixture.competition || "Матч")}</span>
+        <h2>Barcelona — ${escapeHtml(data.opponent || "соперник")}</h2>
+        <div class="actual-score">${escapeHtml(summary.actual || "—")}</div>
+        <p>${escapeHtml(data.message || "Прогноз недоступен.")}</p>
+        <p class="snapshot-note">${escapeHtml(data.fixture_status?.label || "")}</p>
+      </div>
+    </section>`;
+}
+
+function teamMark(name, logo) {
+  return `<div class="team-mark">
+    ${logo ? `<img src="${escapeAttribute(logo)}" alt="" width="74" height="74">` : `<span class="logo-fallback">${escapeHtml(name?.slice(0, 2) || "FC")}</span>`}
+    <h2>${escapeHtml(name || "—")}</h2>
+  </div>`;
+}
+
+function probabilityRow(label, value, accent = false) {
+  const width = Math.max(0, Math.min(100, Number(value || 0) * 100));
+  return `<div class="probability-row ${accent ? "accent" : ""}">
+    <div><span>${escapeHtml(label)}</span><strong>${percent(value)}</strong></div>
+    <div class="track"><i style="width:${width.toFixed(1)}%"></i></div>
+  </div>`;
+}
+
+function marketCell(label, value) {
+  return `<div><span>${escapeHtml(label)}</span><strong>${percent(value)}</strong></div>`;
+}
+
+function statPanel(title, payload = {}, prefix) {
+  const interval = payload.interval_70 || [];
+  const markets = Object.entries(payload.markets || {});
+  return `<article class="metric-panel compact-stat">
+    <div class="section-heading"><span>${escapeHtml(title)}</span><small>последние 10 + соперник</small></div>
+    <div class="big-value">${payload.point ?? "—"}</div>
+    <p class="value-caption">${prefix} ${number(payload.expected, 2)} · интервал ${number(interval[0], 1)}–${number(interval[1], 1)}</p>
+    <div class="market-grid two">${markets.map(([key, value]) => marketCell(marketName(key), value)).join("")}</div>
+  </article>`;
+}
+
+function teamProfile(profile = {}, barca) {
+  const metrics = profile.metrics || {};
+  return `<article class="team-profile ${barca ? "barca" : "opponent"}">
+    <div class="profile-head">
+      <div><span>${barca ? "BARÇA" : "СОПЕРНИК"}</span><h3>${escapeHtml(profile.team || "—")}</h3></div>
+      <div class="formation"><strong>${escapeHtml(profile.formation || "—")}</strong><small>${profile.formation_source === "confirmed_lineup" ? "подтверждено" : "по последним матчам"}</small></div>
+    </div>
+    <p class="style-line">${escapeHtml(profile.style || "")}</p>
+    ${profileMetric("Владение", metrics.possession)}
+    ${profileMetric("Атака", metrics.attack)}
+    ${profileMetric("Защита", metrics.defense)}
+    ${profileMetric("Прессинг", metrics.pressing)}
+    ${profileMetric("Фланги", metrics.width)}
+    ${profileMetric("Темп", metrics.tempo)}
+  </article>`;
+}
+
+function profileMetric(label, value) {
+  const width = Math.max(0, Math.min(100, Number(value || 0)));
+  return `<div class="profile-metric"><span>${escapeHtml(label)}</span><div class="track"><i style="width:${width}%"></i></div><strong>${Math.round(width)}%</strong></div>`;
+}
+
+function recentTable(profile = {}) {
+  const rows = (profile.recent_matches || []).map((match) => `<tr>
+    <td>${formatDate(match.date)}</td>
+    <td>${escapeHtml(match.opponent || "—")}</td>
+    <td><span class="result ${match.result || ""}">${escapeHtml(match.result || "—")}</span></td>
+    <td class="score-cell">${escapeHtml(match.score || "—")}</td>
+    <td>${escapeHtml(match.formation || "—")}</td>
+  </tr>`).join("");
+  return `<article class="history-table">
+    <div class="table-head"><h3>${escapeHtml(profile.team || "Команда")} · последние ${profile.sample_size || 0}</h3><span>${number(profile.averages?.goals_for, 2)} забито / ${number(profile.averages?.goals_against, 2)} пропущено</span></div>
+    <div class="table-scroll"><table><thead><tr><th>Дата</th><th>Соперник</th><th>Ф</th><th>Счет</th><th>Схема</th></tr></thead><tbody>${rows || `<tr><td colspan="5">Нет данных</td></tr>`}</tbody></table></div>
+  </article>`;
+}
+
+function lineupPanel(title, lineup = {}) {
+  const regulars = (lineup.regular_core || []).slice(0, 6).map((name) => `<li>${escapeHtml(name)}</li>`).join("");
+  return `<article class="detail-panel">
+    <div class="detail-title"><h3>Состав · ${escapeHtml(title || "")}</h3><span class="status-label ${lineup.confirmed ? "confirmed" : ""}">${lineup.confirmed ? "подтвержден" : "ожидается"}</span></div>
+    <p>${escapeHtml(lineup.message || "")}</p>
+    <div class="lineup-meta"><span>Сила состава</span><strong>${lineup.confirmed ? percent(lineup.strength) : "после публикации"}</strong><span>Схема</span><strong>${escapeHtml(lineup.formation || "—")}</strong></div>
+    <ul class="regular-list">${regulars}</ul>
+  </article>`;
+}
+
+function refereePanel(referee = {}) {
+  return `<article class="detail-panel">
+    <div class="detail-title"><h3>Судья</h3><span class="status-label">${referee.matches || 0} матчей</span></div>
+    <div class="detail-big">${escapeHtml(referee.name || "Не назначен")}</div>
+    <p>${referee.avg_fouls == null ? "Среднее появится после назначения." : `${number(referee.avg_fouls, 2)} фола в среднем`}</p>
+    <small>${escapeHtml(referee.message || "")}</small>
+  </article>`;
+}
+
+function h2hPanel(h2h = {}, opponent) {
+  const matches = (h2h.matches || []).slice(0, 5).map((item) => `<li><span>${formatDate(item.date)}</span><strong>${escapeHtml(item.score)}</strong><small>вес ${number(item.weight, 2)}</small></li>`).join("");
+  return `<article class="detail-panel">
+    <div class="detail-title"><h3>Очные · ${escapeHtml(opponent || "")}</h3><span class="status-label">${h2h.sample || 0} матчей</span></div>
+    <ul class="h2h-list">${matches || "<li>Нет матчей в базе</li>"}</ul>
+    <small>${escapeHtml(h2h.weighting || "")}</small>
+  </article>`;
+}
+
+function validationMetric(label, value, kind) {
+  const displayed = value == null ? "—" : kind === "accuracy" ? percent(value) : number(value, 2);
+  return `<div><span>${escapeHtml(label)}</span><strong>${displayed}</strong><small>${kind === "accuracy" ? "доля попаданий" : "MAE"}</small></div>`;
+}
+
+function resultBand(data) {
+  const summary = data.result_summary || {};
+  const status = data.fixture_status || {};
+  const actual = summary.actual || (status.state === "live" ? "матч идет" : "матч еще не начался");
+  return `<section class="result-band"><div class="content-width result-layout">
+    <div><span>ПРЕДМАТЧЕВЫЙ ПРОГНОЗ</span><strong>${escapeHtml(summary.prediction || data.exact_score?.score || "—")}</strong></div>
+    <div class="result-divider"></div>
+    <div><span>ФАКТИЧЕСКИЙ СЧЕТ</span><strong>${escapeHtml(actual)}</strong></div>
+    <p>${escapeHtml(status.label || "")}${status.detail ? ` · ${escapeHtml(status.detail)}` : ""}</p>
+  </div></section>`;
+}
+
+async function loadOpponents() {
+  try {
+    const response = await fetch("/api/opponents");
+    const data = await response.json();
+    if (!response.ok) return;
+    document.querySelector("#opponents").innerHTML = (data.opponents || [])
+      .map((item) => `<option value="${escapeAttribute(item.name)}"></option>`)
+      .join("");
+  } catch (_) {
+    // Search remains usable if suggestions are temporarily unavailable.
   }
-  return items
-    .map((item) => {
-      const score = typeof item === "string" ? item : item.score;
-      const probabilityValue = typeof item === "string" ? null : item.probability;
-      return probabilityValue == null ? escapeHtml(score) : `${escapeHtml(score)} (${probability(probabilityValue)})`;
-    })
-    .join(", ");
 }
 
-function tacticsComparisonBlock(data) {
-  return `
-    <p>${escapeHtml(data.tactical_matchup?.summary || "")}</p>
-    <table>
-      <tr><th>Сборная</th><th>Схема</th><th>Источник</th><th>Атака</th><th>Защита</th><th>Контроль</th><th>Стандарты</th></tr>
-      ${tacticsRow(data.home_team, data.home_tactics)}
-      ${tacticsRow(data.away_team, data.away_tactics)}
-    </table>
-    <p class="sub">${escapeHtml(data.tactical_matchup?.home_route || "")}</p>
-    <p class="sub">${escapeHtml(data.tactical_matchup?.away_route || "")}</p>
-  `;
+function setSystem(message, busy) {
+  document.querySelector("#system-label").textContent = message;
+  document.querySelector(".system-state").classList.toggle("busy", Boolean(busy));
 }
 
-function tacticsRow(team, tactics) {
-  return `
-    <tr>
-      <th>${escapeHtml(team)}</th>
-      <td>${escapeHtml(tactics.formation || "unknown")}</td>
-      <td>${formationSourceText(tactics)}</td>
-      <td>${percent(tactics.chance_creation)} · ${escapeHtml(tactics.primary_attack || "mixed")}</td>
-      <td>${percent(tactics.defensive_solidity)} · ${escapeHtml(tactics.defensive_block || "mid")}</td>
-      <td>${percent(tactics.possession_intent)} · прессинг ${percent(tactics.pressing)}</td>
-      <td>${percent(tactics.set_piece_threat)}</td>
-    </tr>
-  `;
+function showError(message) {
+  errorBox.textContent = message;
+  errorBox.hidden = false;
 }
 
-function formationSourceText(tactics) {
-  if (tactics.formation_source === "manual") return "manual";
-  if (tactics.formation_source === "confirmed-lineup") return `состав ${percent(tactics.formation_confidence)}`;
-  if (tactics.formation_source === "live-lineup") return `live ${percent(tactics.formation_confidence)}`;
-  if (tactics.formation_source === "confirmed-lineups-last-matches") return `последние составы ${percent(tactics.formation_confidence)}`;
-  return `оценка ${percent(tactics.formation_confidence)}`;
+function hideError() {
+  errorBox.hidden = true;
+  errorBox.textContent = "";
 }
 
-function tacticsBlock(tactics) {
-  const formationNote = tactics.formation_source === "manual"
-    ? "manual"
-    : `оценка ${percent(tactics.formation_confidence)}`;
-  return `
-    <p><strong>${escapeHtml(tactics.formation || "unknown")}</strong> · ${escapeHtml(tactics.style || "balanced")} · ${escapeHtml(formationNote)}</p>
-    <p class="sub">${escapeHtml(tactics.primary_attack || "mixed attack")} · ${escapeHtml(tactics.defensive_block || "mid")} block</p>
-    <table>
-      <tr><th>Владение</th><td>${percent(tactics.possession_intent)}</td><th>Прессинг</th><td>${percent(tactics.pressing)}</td></tr>
-      <tr><th>Защита</th><td>${percent(tactics.defensive_solidity)}</td><th>Темп</th><td>${percent(tactics.tempo)}</td></tr>
-      <tr><th>Фланги</th><td>${percent(tactics.attack_width)}</td><th>Стандарты</th><td>${percent(tactics.set_piece_threat)}</td></tr>
-    </table>
-  `;
+function formatKickoff(value) {
+  if (!value) return "Дата уточняется";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return escapeHtml(value);
+  return new Intl.DateTimeFormat("ru-RU", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Moscow" }).format(date) + " МСК";
+}
+
+function formatDate(value) {
+  if (!value) return "—";
+  const date = new Date(`${value}T12:00:00Z`);
+  return new Intl.DateTimeFormat("ru-RU", { day: "2-digit", month: "2-digit", year: "2-digit" }).format(date);
+}
+
+function marketName(key) {
+  return key.replace("over_", "ТБ ").replace("under_", "ТМ ").replaceAll("_", ".");
+}
+
+function number(value, digits = 1) {
+  return value == null || Number.isNaN(Number(value)) ? "—" : Number(value).toFixed(digits);
 }
 
 function percent(value) {
-  return `${Math.round(Number(value ?? 0.5) * 100)}%`;
+  return value == null || Number.isNaN(Number(value)) ? "—" : `${(Number(value) * 100).toFixed(1)}%`;
 }
 
-function probability(value) {
-  if (value == null || Number.isNaN(Number(value))) {
-    return "нет";
-  }
-  return `${(Number(value) * 100).toFixed(1)}%`;
-}
-
-function listText(items) {
-  return (items || []).map(escapeHtml).join(", ") || "нет";
+function signed(value) {
+  if (value == null) return "—";
+  return `${Number(value) >= 0 ? "+" : ""}${Number(value)}`;
 }
 
 function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;",
-  })[char]);
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
-async function runPrediction(remember) {
-  const requestId = ++activePredictionRequest;
-  const matchup = document.querySelector("#matchup").value;
-  prediction.innerHTML = `
-    <article class="card">
-      <h3>Обновляю прогноз</h3>
-      <p class="muted">Собираю матчи, тактику и дату.</p>
-    </article>
-  `;
-  try {
-    const data = await getJson(`/api/predict?matchup=${encodeURIComponent(matchup)}&remember=${remember}`);
-    if (requestId === activePredictionRequest) {
-      renderPrediction(data);
-    }
-  } catch (error) {
-    if (requestId === activePredictionRequest) {
-      prediction.innerHTML = `
-        <article class="card">
-          <h3>Не смог построить прогноз</h3>
-          <p class="warn">${escapeHtml(error.message)}</p>
-        </article>
-      `;
-    }
-  }
+function escapeAttribute(value) {
+  return escapeHtml(value).replaceAll("`", "&#096;");
 }
 
+loadOpponents();
 runPrediction(false);

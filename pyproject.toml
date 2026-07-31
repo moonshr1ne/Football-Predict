@@ -1,10 +1,11 @@
 [project]
-name = "national-football-predictor"
+name = "barcelona-match-lab"
 version = "0.1.0"
-description = "Local predictor for national football teams with match review and online learning."
+description = "Leak-free local predictor for FC Barcelona matches in La Liga and the UEFA Champions League."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["scikit-learn>=1.6,<2"]
 
 [project.scripts]
 nfp = "football_predictor.cli:main"
+barca-lab = "football_predictor.cli:main"

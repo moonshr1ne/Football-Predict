@@ -3,34 +3,47 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>National Football Predictor</title>
+    <meta name="theme-color" content="#101b35">
+    <title>Barça Match Lab</title>
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <main class="shell">
-      <section class="panel controls">
-        <div class="header-row">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand">
+          <img src="https://a.espncdn.com/i/teamlogos/soccer/500/83.png" alt="FC Barcelona" width="76" height="76">
           <div>
-            <p class="eyebrow">WORLD CUP 2026 · MATCH LAB</p>
-            <h1>Прогноз сборных</h1>
-            <p class="muted">Введите две команды через запятую.</p>
+            <p class="kicker">LA LIGA + UEFA CHAMPIONS LEAGUE</p>
+            <h1>BARÇA MATCH LAB</h1>
           </div>
-          <div class="auto-status"><span class="status-dot"></span>Автообучение активно</div>
         </div>
-        <form id="predict-form" class="row">
-          <input id="matchup" name="matchup" value="Уругвай, Испания" autocomplete="off">
-          <button type="submit">Прогноз</button>
-        </form>
+        <div class="system-state"><span class="live-dot"></span><span id="system-label">Автообновление активно</span></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="search-band">
+        <div class="content-width search-layout">
+          <form id="predict-form" class="search-form">
+            <label for="opponent">Соперник Барселоны</label>
+            <div class="search-row">
+              <input id="opponent" name="opponent" value="Реал Мадрид" list="opponents" autocomplete="off" spellcheck="false">
+              <datalist id="opponents"></datalist>
+              <button type="submit">Рассчитать</button>
+            </div>
+          </form>
+          <button id="auto-check" class="icon-button" type="button" title="Обновить результаты и модель" aria-label="Обновить результаты и модель">↻</button>
+        </div>
       </section>
 
-      <section id="prediction" class="grid"></section>
-
-      <section class="panel">
-        <h2>Автопроверка результатов</h2>
-        <button id="auto-check" type="button">Проверить сейчас</button>
-        <p id="review" class="muted">Прогнозы с найденной датой попадут в очередь. Сервер сам проверяет результаты примерно раз в час.</p>
+      <section id="loading" class="content-width loading" hidden>
+        <span class="loader"></span>
+        <span>Собираю протоколы и пересчитываю модель…</span>
       </section>
+      <section id="error" class="content-width error-banner" hidden></section>
+      <section id="prediction" aria-live="polite"></section>
     </main>
+
     <script src="/app.js"></script>
   </body>
 </html>

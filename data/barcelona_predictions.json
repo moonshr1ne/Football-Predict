@@ -1,0 +1,452 @@
+[
+  {
+    "prediction_available": true,
+    "fixture_id": "401882913",
+    "fixture": {
+      "fixture_id": "401882913",
+      "date": "2026-08-23",
+      "kickoff": "2026-08-23T19:30Z",
+      "home_team": "Elche",
+      "away_team": "Barcelona",
+      "actual_home_team": "Elche",
+      "actual_away_team": "Barcelona",
+      "home_goals": null,
+      "away_goals": null,
+      "home_corners": null,
+      "away_corners": null,
+      "home_possession": null,
+      "away_possession": null,
+      "home_shots": null,
+      "away_shots": null,
+      "home_shots_on_target": null,
+      "away_shots_on_target": null,
+      "home_fouls": null,
+      "away_fouls": null,
+      "referee": null,
+      "completed": false,
+      "in_progress": false,
+      "status": "STATUS_SCHEDULED",
+      "status_detail": "Sun, August 23rd at 3:30 PM EDT",
+      "competition": "Ла Лига",
+      "source": "espn-esp.1",
+      "home_team_id": "3751",
+      "away_team_id": "83",
+      "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
+      "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+      "competition_code": "esp.1",
+      "stage": "Тур 1",
+      "venue": "Estadio Martínez Valero",
+      "attendance": 0,
+      "details_loaded": false
+    },
+    "match_date": "2026-08-23",
+    "opponent": "Elche",
+    "competition": "Ла Лига",
+    "stage": "Тур 1",
+    "venue": "Estadio Martínez Valero",
+    "barcelona_side": "away",
+    "outcome": {
+      "pick": "barcelona",
+      "label": "Победа Барселоны",
+      "confidence": 0.5891,
+      "probabilities": {
+        "barcelona_win": 0.5891,
+        "draw": 0.2253,
+        "opponent_win": 0.1856,
+        "barcelona_not_lose": 0.8144,
+        "opponent_not_lose": 0.4109
+      }
+    },
+    "exact_score": {
+      "score": "2-1",
+      "probability": 0.1393,
+      "orientation": "Барселона — соперник"
+    },
+    "goals": {
+      "barcelona_expected": 1.94,
+      "opponent_expected": 0.99,
+      "total_expected": 2.93,
+      "point": 3,
+      "probabilities": {
+        "over_1_5": 0.7908,
+        "under_1_5": 0.2092,
+        "over_2_5": 0.5565,
+        "under_2_5": 0.4435,
+        "over_3_5": 0.3339,
+        "under_3_5": 0.6661,
+        "over_4_5": 0.1709,
+        "under_4_5": 0.8291
+      }
+    },
+    "corners": {
+      "point": 10,
+      "expected": 10.23,
+      "interval_70": [
+        6.5,
+        14.0
+      ],
+      "markets": {
+        "over_8_5": 0.6836,
+        "under_11_5": 0.6371
+      },
+      "label": "угловых"
+    },
+    "fouls": {
+      "point": 22,
+      "expected": 22.11,
+      "interval_70": [
+        17.6,
+        26.6
+      ],
+      "markets": {
+        "over_20_5": 0.6444,
+        "under_23_5": 0.6253
+      },
+      "label": "фолов"
+    },
+    "barcelona_profile": {
+      "team": "Barcelona",
+      "formation": "4-2-3-1",
+      "formation_source": "mode_last_matches",
+      "formation_sample": {
+        "4-2-3-1": 9,
+        "4-3-3": 1
+      },
+      "sample_size": 10,
+      "form": {
+        "sample": 10,
+        "points": 2.1,
+        "gf": 1.7,
+        "ga": 1.0,
+        "win_rate": 0.7,
+        "clean_rate": 0.3,
+        "over25": 0.5
+      },
+      "metrics": {
+        "possession": 69,
+        "pressing": 65,
+        "attack": 75,
+        "defense": 69,
+        "width": 71,
+        "tempo": 70
+      },
+      "style": "позиционный контроль, акцент на фланги",
+      "recent_matches": [
+        {
+          "date": "2026-05-23",
+          "opponent": "Valencia",
+          "score": "1-3",
+          "result": "L",
+          "competition": "Ла Лига",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-05-17",
+          "opponent": "Real Betis",
+          "score": "3-1",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": "4-3-3"
+        },
+        {
+          "date": "2026-05-13",
+          "opponent": "Alavés",
+          "score": "0-1",
+          "result": "L",
+          "competition": "Ла Лига",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-05-10",
+          "opponent": "Real Madrid",
+          "score": "2-0",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-05-02",
+          "opponent": "Osasuna",
+          "score": "2-1",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-04-25",
+          "opponent": "Getafe",
+          "score": "2-0",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-04-22",
+          "opponent": "Celta Vigo",
+          "score": "1-0",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-04-14",
+          "opponent": "Atlético Madrid",
+          "score": "2-1",
+          "result": "W",
+          "competition": "Лига чемпионов УЕФА",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-04-11",
+          "opponent": "Espanyol",
+          "score": "4-1",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": "4-2-3-1"
+        },
+        {
+          "date": "2026-04-08",
+          "opponent": "Atlético Madrid",
+          "score": "0-2",
+          "result": "L",
+          "competition": "Лига чемпионов УЕФА",
+          "formation": "4-2-3-1"
+        }
+      ],
+      "averages": {
+        "goals_for": 1.7,
+        "goals_against": 1.0,
+        "shots": 13.3,
+        "shots_on_target": 5.6,
+        "corners_for": 5.5,
+        "fouls_for": 9.6
+      }
+    },
+    "opponent_profile": {
+      "team": "Elche",
+      "formation": "нет данных",
+      "formation_source": "mode_last_matches",
+      "formation_sample": {},
+      "sample_size": 10,
+      "form": {
+        "sample": 10,
+        "points": 1.7,
+        "gf": 1.3,
+        "ga": 1.2,
+        "win_rate": 0.5,
+        "clean_rate": 0.2,
+        "over25": 0.5
+      },
+      "metrics": {
+        "possession": 45,
+        "pressing": 54,
+        "attack": 49,
+        "defense": 62,
+        "width": 41,
+        "tempo": 55
+      },
+      "style": "смешанный темп, комбинации через центр",
+      "recent_matches": [
+        {
+          "date": "2026-05-23",
+          "opponent": "Girona",
+          "score": "1-1",
+          "result": "D",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-05-17",
+          "opponent": "Getafe",
+          "score": "1-0",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-05-12",
+          "opponent": "Real Betis",
+          "score": "1-2",
+          "result": "L",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-05-09",
+          "opponent": "Alavés",
+          "score": "1-1",
+          "result": "D",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-05-03",
+          "opponent": "Celta Vigo",
+          "score": "1-3",
+          "result": "L",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-04-26",
+          "opponent": "Real Oviedo",
+          "score": "2-1",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-04-22",
+          "opponent": "Atlético Madrid",
+          "score": "3-2",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-04-11",
+          "opponent": "Valencia",
+          "score": "1-0",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-04-03",
+          "opponent": "Rayo Vallecano",
+          "score": "0-1",
+          "result": "L",
+          "competition": "Ла Лига",
+          "formation": null
+        },
+        {
+          "date": "2026-03-21",
+          "opponent": "Mallorca",
+          "score": "2-1",
+          "result": "W",
+          "competition": "Ла Лига",
+          "formation": null
+        }
+      ],
+      "averages": {
+        "goals_for": 1.3,
+        "goals_against": 1.2,
+        "shots": 9.0,
+        "shots_on_target": 3.0,
+        "corners_for": 2.5,
+        "fouls_for": 15.5
+      }
+    },
+    "lineups": {
+      "barcelona": {
+        "team": "Barcelona",
+        "confirmed": false,
+        "formation": "4-2-3-1",
+        "strength": null,
+        "starters": [],
+        "regular_core": [
+          "Gerard Martín",
+          "Gavi",
+          "Dani Olmo",
+          "Eric García",
+          "Joan García",
+          "João Cancelo",
+          "Pedri",
+          "Robert Lewandowski",
+          "Pau Cubarsí",
+          "Fermín López",
+          "Jules Koundé"
+        ],
+        "source": "not-released",
+        "message": "Состав еще не опубликован; используется ядро последних матчей."
+      },
+      "opponent": {
+        "team": "Elche",
+        "confirmed": false,
+        "formation": null,
+        "strength": null,
+        "starters": [],
+        "regular_core": [],
+        "source": "not-released",
+        "message": "Состав еще не опубликован; используется ядро последних матчей."
+      }
+    },
+    "referee": {
+      "name": null,
+      "matches": 0,
+      "avg_fouls": null,
+      "message": "Судья еще не назначен или не опубликован."
+    },
+    "h2h": {
+      "sample": 2,
+      "points": 3.0,
+      "gf": 3.0,
+      "ga": 1.0,
+      "matches": [
+        {
+          "date": "2026-01-31",
+          "score": "3-1",
+          "weight": 0.76
+        },
+        {
+          "date": "2025-11-02",
+          "score": "3-1",
+          "weight": 0.67
+        }
+      ],
+      "weighting": "Экспоненциальное затухание; матчи старше 2 лет имеют вспомогательный вес."
+    },
+    "strength": {
+      "barcelona_elo": 1778,
+      "opponent_elo": 1474,
+      "difference": 303
+    },
+    "recommended_bet": {
+      "label": "ТМ 27.5 фолов",
+      "code": "fouls_safe_under",
+      "model_probability": 0.8923,
+      "eligible": true,
+      "backtest_sample": 112,
+      "note": "Ставка показана только при расчетной вероятности не ниже 75%; это оценка модели, не гарантия."
+    },
+    "data_quality": {
+      "training_matches": 142,
+      "barcelona_last10": 10,
+      "opponent_last10": 10,
+      "lineups_confirmed": false,
+      "market_signal": false,
+      "backtest": {
+        "fingerprint": "142:748519",
+        "generated_at": "2026-07-31T23:34:11.076063+00:00",
+        "honest_walk_forward": true,
+        "sample_size": 112,
+        "training_matches": 142,
+        "outcome_accuracy": 0.7321,
+        "exact_score_accuracy": 0.125,
+        "goal_total_mae": 1.561,
+        "corner_mae": 2.652,
+        "foul_mae": 3.625,
+        "corners_within_1_5": 0.3214,
+        "fouls_within_2_5": 0.4018,
+        "evaluation": "Каждый матч предсказан только по данным, доступным до его стартового времени."
+      },
+      "leakage_guard": "Признаки обрезаны по времени стартового свистка; итог матча не входит в прогноз."
+    },
+    "fixture_status": {
+      "state": "scheduled",
+      "label": "Матч еще не начался",
+      "detail": "Sun, August 23rd at 3:30 PM EDT"
+    },
+    "result_summary": {
+      "prediction": null,
+      "actual": null,
+      "orientation": "Барселона — соперник",
+      "status": "scheduled"
+    },
+    "prediction_id": "1a91d4cb9e614911b0251aaa5d1d0c6e",
+    "created_at": "2026-07-31T23:36:05.976725+00:00",
+    "status": "pending",
+    "snapshot_type": "pre_match",
+    "immutable": true
+  }
+]
