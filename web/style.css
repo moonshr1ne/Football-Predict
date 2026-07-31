@@ -135,16 +135,31 @@ td:nth-child(2) { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
 .result.L { background: var(--garnet); }
 
 .detail-band { background: #e7ece9; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 30px 0; }
+.detail-layout { padding: 30px 0; }
+.lineup-grid, .support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.support-grid { margin-top: 14px; }
 .detail-panel { min-width: 0; padding: 20px; background: white; border: 1px solid #ccd5d0; border-radius: 5px; }
 .detail-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .detail-title h3 { margin: 0; font-size: 16px; }
 .status-label { padding: 4px 7px; background: #edf1ef; color: var(--muted); border-radius: 3px; font-size: 10px; font-weight: 850; text-transform: uppercase; }
 .status-label.confirmed { background: #d8f3e8; color: #076b57; }
+.status-label.pending { background: #fff1dc; color: #81520b; }
 .detail-panel p, .detail-panel small { color: var(--muted); }
 .detail-big { margin-top: 18px; font-size: 24px; font-weight: 850; overflow-wrap: anywhere; }
 .lineup-meta { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin: 14px 0; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.regular-list { columns: 2; margin: 0; padding-left: 18px; font-size: 12px; }
+.lineup-message { min-height: 38px; margin-bottom: 0; font-size: 13px; }
+.squad-list { list-style: none; margin: 0; padding: 0; }
+.squad-list li { min-height: 57px; display: grid; grid-template-columns: 30px minmax(0, 1fr) 48px; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.squad-list li:last-child { border-bottom: 0; }
+.formation-slot { width: 28px; height: 28px; display: grid; place-items: center; background: var(--navy); color: white; border-radius: 3px; font-size: 12px; font-weight: 850; font-variant-numeric: tabular-nums; }
+.player-identity { min-width: 0; }
+.player-identity strong, .player-identity span, .player-identity small { display: block; overflow-wrap: anywhere; }
+.player-identity strong { font-size: 13px; }
+.player-identity span { margin-top: 2px; color: var(--muted); font-size: 11px; }
+.player-identity small { margin-top: 3px; font-size: 10px; line-height: 1.25; }
+.player-probability { color: var(--teal); text-align: right; font-size: 11px; font-weight: 850; font-variant-numeric: tabular-nums; }
+.empty-lineup { display: block !important; min-height: 0 !important; padding: 16px 0 !important; color: var(--muted); font-size: 12px; }
+.lineup-method { display: block; margin-top: 13px; line-height: 1.4; }
 .h2h-list { list-style: none; margin: 14px 0; padding: 0; }
 .h2h-list li { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); }
 .h2h-list small { text-align: right; }
@@ -179,7 +194,7 @@ td:nth-child(2) { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
   .team-mark h2 { font-size: 16px; }
   .score-core { min-height: 94px; }
   .score-core strong { font-size: 37px; }
-  .primary-grid, .team-comparison, .history-grid, .detail-grid { grid-template-columns: 1fr; }
+  .primary-grid, .team-comparison, .history-grid, .lineup-grid, .support-grid { grid-template-columns: 1fr; }
   .validation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .validation-grid > div { border-bottom: 1px solid var(--line); }
 }
@@ -200,6 +215,9 @@ td:nth-child(2) { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
   .recommendation-layout, .section-title-row { align-items: flex-start; flex-direction: column; }
   .recommendation-probability { flex-basis: auto; text-align: left; }
   .profile-metric { grid-template-columns: 76px minmax(0, 1fr) 37px; }
+  .detail-title { align-items: flex-start; }
+  .detail-title h3 { font-size: 15px; }
+  .status-label { max-width: 108px; text-align: center; }
   .validation-grid { grid-template-columns: 1fr 1fr; }
   .result-layout { gap: 12px; }
 }

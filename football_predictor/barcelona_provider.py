@@ -281,9 +281,15 @@ class BarcelonaProvider:
 
     def _market_from_summary(self, summary: dict[str, Any]) -> dict[str, Any]:
         pickcenter = summary.get("pickcenter") or {}
+        if isinstance(pickcenter, list):
+            pickcenter = pickcenter[0] if pickcenter else {}
+        if not isinstance(pickcenter, dict):
+            pickcenter = {}
         if not pickcenter:
             odds = summary.get("odds") or []
-            pickcenter = odds[0] if odds else {}
+            pickcenter = odds[0] if isinstance(odds, list) and odds else odds
+        if not isinstance(pickcenter, dict):
+            return {}
         home = (pickcenter.get("homeTeamOdds") or {}).get("moneyLine")
         away = (pickcenter.get("awayTeamOdds") or {}).get("moneyLine")
         draw = (pickcenter.get("drawOdds") or {}).get("moneyLine")

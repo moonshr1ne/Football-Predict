@@ -75,10 +75,7 @@ class BarcelonaModel:
 
         barca_profile = self.team_profile(BARCELONA_NAME, fixture, history)
         opponent_profile = self.team_profile(opponent, fixture, history)
-        lineup = {
-            "barcelona": self._lineup_report(BARCELONA_NAME, fixture, history),
-            "opponent": self._lineup_report(opponent, fixture, history),
-        }
+        lineup = self._lineup_reports(fixture, history)
         referee = self._referee_report(fixture, history)
         backtest = self.store.load_backtest()
         payload = self._payload(
@@ -108,6 +105,18 @@ class BarcelonaModel:
             "message": "Предпросмотр без сохранения.",
         }
         return payload
+
+    def lineup_reports(self, fixture: dict[str, Any]) -> dict[str, Any]:
+        cutoff = str(fixture.get("kickoff") or fixture.get("date") or "")
+        history = self._history_before(self.store.load_universe(), cutoff)
+        return self._lineup_reports(fixture, history)
+
+    def _lineup_reports(self, fixture: dict[str, Any], history: list[dict[str, Any]]) -> dict[str, Any]:
+        opponent = self.opponent_name(fixture)
+        return {
+            "barcelona": self._lineup_report(BARCELONA_NAME, fixture, history),
+            "opponent": self._lineup_report(opponent, fixture, history),
+        }
 
     def result_payload(self, fixture: dict[str, Any], saved: dict[str, Any] | None = None) -> dict[str, Any]:
         if saved:
@@ -872,7 +881,8 @@ class BarcelonaModel:
     def _lineup_strength(self, team: str, fixture: dict[str, Any], history: list[dict[str, Any]]) -> float:
         current = self._fixture_lineup(fixture, team)
         if not current.get("confirmed"):
-            return 1.0
+            projection = self._projected_lineup(team, fixture, history)
+            return _clip(0.94 + 0.06 * float(projection.get("confidence", 0.0)), 0.94, 1.0)
         counts = self._regular_player_counts(team, history)
         if not counts:
             return 1.0
@@ -886,19 +896,222 @@ class BarcelonaModel:
         counts = self._regular_player_counts(team, history)
         regulars = sorted(counts.items(), key=lambda item: item[1], reverse=True)[:11]
         display_names = self._regular_player_names(team, history)
-        recent_formations = [self._team_formation(item, team) for item in self._team_matches(team, history)[:6]]
-        recent_formations = [value for value in recent_formations if value]
-        projected_formation = Counter(recent_formations).most_common(1)[0][0] if recent_formations else None
+        projection = self._projected_lineup(team, fixture, history)
+        official_players = self._prepared_confirmed_players(current.get("starters") or [])
+        official_available = bool(current.get("confirmed") and len(official_players) >= 11)
+        display_lineup = {
+            "type": "confirmed" if official_available else "predicted",
+            "players": official_players if official_available else projection["players"],
+            "formation": current.get("formation") if official_available else projection.get("formation"),
+            "confidence": 1.0 if official_available else projection.get("confidence", 0.0),
+        }
         return {
             "team": team,
-            "confirmed": bool(current.get("confirmed")),
-            "formation": current.get("formation") or projected_formation,
-            "strength": round(self._lineup_strength(team, fixture, history), 3) if current.get("confirmed") else None,
+            "confirmed": official_available,
+            "official_available": official_available,
+            "formation": display_lineup["formation"],
+            "strength": round(self._lineup_strength(team, fixture, history), 3) if official_available else None,
             "starters": current.get("starters", []),
             "regular_core": [display_names.get(key, key) for key, _ in regulars],
             "source": current.get("source", "not-released"),
-            "message": "Стартовый состав подтвержден ESPN." if current.get("confirmed") else "Состав еще не опубликован; используется ядро последних матчей.",
+            "official_lineup": {
+                "available": official_available,
+                "formation": current.get("formation") if official_available else None,
+                "players": official_players if official_available else [],
+                "source": current.get("source", "not-released"),
+            },
+            "predicted_lineup": projection,
+            "display_lineup": display_lineup,
+            "message": (
+                "Официальный стартовый состав опубликован ESPN."
+                if official_available
+                else "Официального состава пока нет. Ниже показан прогноз модели по последним 10 матчам."
+            ),
         }
+
+    def _projected_lineup(self, team: str, fixture: dict[str, Any], history: list[dict[str, Any]]) -> dict[str, Any]:
+        recent = self._team_matches(team, history)[:10]
+        target_competition = fixture.get("competition_code")
+        slot_scores: defaultdict[int, defaultdict[str, float]] = defaultdict(lambda: defaultdict(float))
+        player_scores: defaultdict[str, float] = defaultdict(float)
+        player_names: dict[str, str] = {}
+        slot_positions: defaultdict[tuple[int, str], Counter[str]] = defaultdict(Counter)
+        formation_scores: defaultdict[str, float] = defaultdict(float)
+        usable_matches = 0
+        total_match_weight = 0.0
+
+        for index, match in enumerate(recent):
+            lineup = self._fixture_lineup(match, team)
+            starters = lineup.get("starters") or []
+            if len(starters) < 8:
+                continue
+            usable_matches += 1
+            recency_weight = max(0.38, 1.0 - index * 0.07)
+            competition_weight = 1.12 if match.get("competition_code") == target_competition else 1.0
+            weight = recency_weight * competition_weight
+            total_match_weight += weight
+            if lineup.get("formation"):
+                formation_scores[str(lineup["formation"])] += weight
+            for player in starters:
+                name = str(player.get("name") or "").strip()
+                if not name:
+                    continue
+                key = normalize_provider_name(name)
+                slot = self._formation_slot(player)
+                player_names[key] = name
+                player_scores[key] += weight
+                if slot is None:
+                    continue
+                slot_scores[slot][key] += weight
+                raw_position = str(player.get("position") or "").strip()
+                if raw_position:
+                    slot_positions[(slot, key)][raw_position] += 1
+
+        formation = max(formation_scores, key=formation_scores.get) if formation_scores else None
+        assignments: dict[int, tuple[str, float]] = {}
+        assigned_players: set[str] = set()
+        ranked_pairs = sorted(
+            (
+                (score, slot, player)
+                for slot, candidates in slot_scores.items()
+                for player, score in candidates.items()
+            ),
+            reverse=True,
+        )
+        for score, slot, player in ranked_pairs:
+            if slot in assignments or player in assigned_players:
+                continue
+            assignments[slot] = (player, score)
+            assigned_players.add(player)
+
+        # ESPN occasionally omits formationPlace for one player. Fill remaining
+        # slots from the strongest unassigned regulars without duplicating names.
+        remaining_players = [
+            (score, player)
+            for player, score in sorted(player_scores.items(), key=lambda item: item[1], reverse=True)
+            if player not in assigned_players
+        ]
+        for slot in range(1, 12):
+            if slot in assignments or not remaining_players:
+                continue
+            score, player = remaining_players.pop(0)
+            assignments[slot] = (player, score)
+            assigned_players.add(player)
+
+        players = []
+        confidences = []
+        for slot in range(1, 12):
+            assigned = assignments.get(slot)
+            if not assigned:
+                continue
+            player, score = assigned
+            slot_total = sum(slot_scores.get(slot, {}).values()) or score or 1.0
+            slot_share = score / slot_total
+            appearance_rate = score / total_match_weight if total_match_weight else 0.0
+            probability = _clip(0.55 * slot_share + 0.45 * appearance_rate, 0.05, 0.98)
+            position_counts = slot_positions.get((slot, player), Counter())
+            raw_position = position_counts.most_common(1)[0][0] if position_counts else ""
+            alternatives = [
+                {
+                    "name": player_names.get(candidate, candidate),
+                    "probability": round(_clip(candidate_score / slot_total, 0.03, 0.95), 3),
+                }
+                for candidate, candidate_score in sorted(
+                    slot_scores.get(slot, {}).items(),
+                    key=lambda item: item[1],
+                    reverse=True,
+                )
+                if candidate != player
+            ][:2]
+            players.append(
+                {
+                    "name": player_names.get(player, player),
+                    "position": self._translated_position(raw_position, slot),
+                    "raw_position": raw_position,
+                    "formation_place": str(slot),
+                    "probability": round(probability, 3),
+                    "alternatives": alternatives,
+                    "source": "last-10-lineup-projection",
+                }
+            )
+            confidences.append(probability)
+
+        return {
+            "available": len(players) >= 8,
+            "formation": formation,
+            "players": players,
+            "confidence": round(mean(confidences), 3) if confidences else 0.0,
+            "sample_matches": usable_matches,
+            "method": "Взвешенная частота стартов по позиции: свежие матчи и текущий турнир имеют больший вес.",
+        }
+
+    def _prepared_confirmed_players(self, starters: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        prepared = []
+        for player in starters:
+            slot = self._formation_slot(player)
+            prepared.append(
+                {
+                    "name": player.get("name"),
+                    "position": self._translated_position(str(player.get("position") or ""), slot),
+                    "raw_position": player.get("position"),
+                    "formation_place": None if slot is None else str(slot),
+                    "probability": 1.0,
+                    "alternatives": [],
+                    "source": "espn-confirmed-lineup",
+                }
+            )
+        return sorted(prepared, key=lambda item: int(item.get("formation_place") or 99))
+
+    def _formation_slot(self, player: dict[str, Any]) -> int | None:
+        raw = player.get("formation_place")
+        try:
+            slot = int(str(raw))
+            return slot if 1 <= slot <= 11 else None
+        except (TypeError, ValueError):
+            return None
+
+    def _translated_position(self, raw_position: str, slot: int | None) -> str:
+        normalized = normalize_provider_name(raw_position)
+        if "goalkeeper" in normalized:
+            return "Вратарь"
+        if "right back" in normalized:
+            return "Правый защитник"
+        if "left back" in normalized:
+            return "Левый защитник"
+        if "center" in normalized and "defender" in normalized:
+            return "Центральный защитник"
+        if "defender" in normalized:
+            return "Защитник"
+        if "attacking midfielder left" in normalized:
+            return "Левый вингер"
+        if "attacking midfielder right" in normalized:
+            return "Правый вингер"
+        if "attacking midfielder" in normalized:
+            return "Атакующий полузащитник"
+        if "defensive midfielder" in normalized:
+            return "Опорный полузащитник"
+        if "left midfielder" in normalized:
+            return "Левый полузащитник"
+        if "right midfielder" in normalized:
+            return "Правый полузащитник"
+        if "midfielder" in normalized:
+            return "Центральный полузащитник"
+        if any(token in normalized for token in ("forward", "striker")):
+            return "Нападающий"
+        slot_labels = {
+            1: "Вратарь",
+            2: "Правый защитник",
+            3: "Левый защитник",
+            4: "Центральный полузащитник",
+            5: "Центральный защитник",
+            6: "Центральный защитник",
+            7: "Правый вингер",
+            8: "Центральный полузащитник",
+            9: "Нападающий",
+            10: "Атакующий полузащитник",
+            11: "Левый вингер",
+        }
+        return slot_labels.get(slot, raw_position or "Позиция не определена")
 
     def _regular_player_counts(self, team: str, history: list[dict[str, Any]]) -> dict[str, float]:
         counts: defaultdict[str, float] = defaultdict(float)

@@ -35,6 +35,7 @@ class BarcelonaService:
         saved = self.store.prediction_for_fixture(str(fixture.get("fixture_id")))
         if fixture_has_started(fixture):
             payload = self.model.result_payload(fixture, saved)
+            payload["lineups"] = self.model.lineup_reports(fixture)
             payload["sync"] = sync_info
             return payload
 
@@ -51,6 +52,7 @@ class BarcelonaService:
         self.model.train_and_backtest()
         if saved:
             payload = self.model.result_payload(fixture, saved)
+            payload["lineups"] = self.model.lineup_reports(fixture)
         else:
             payload = self.model.predict(fixture, remember=remember)
         payload["sync"] = sync_info

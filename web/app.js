@@ -150,11 +150,15 @@ function render(data) {
     </section>
 
     <section class="detail-band">
-      <div class="content-width detail-grid">
-        ${lineupPanel("Барселона", data.lineups?.barcelona)}
-        ${lineupPanel(data.opponent, data.lineups?.opponent)}
-        ${refereePanel(data.referee)}
-        ${h2hPanel(data.h2h, data.opponent)}
+      <div class="content-width detail-layout">
+        <div class="lineup-grid">
+          ${lineupPanel("Барселона", data.lineups?.barcelona)}
+          ${lineupPanel(data.opponent, data.lineups?.opponent)}
+        </div>
+        <div class="support-grid">
+          ${refereePanel(data.referee)}
+          ${h2hPanel(data.h2h, data.opponent)}
+        </div>
       </div>
     </section>
 
@@ -259,12 +263,36 @@ function recentTable(profile = {}) {
 }
 
 function lineupPanel(title, lineup = {}) {
-  const regulars = (lineup.regular_core || []).slice(0, 6).map((name) => `<li>${escapeHtml(name)}</li>`).join("");
-  return `<article class="detail-panel">
-    <div class="detail-title"><h3>Состав · ${escapeHtml(title || "")}</h3><span class="status-label ${lineup.confirmed ? "confirmed" : ""}">${lineup.confirmed ? "подтвержден" : "ожидается"}</span></div>
-    <p>${escapeHtml(lineup.message || "")}</p>
-    <div class="lineup-meta"><span>Сила состава</span><strong>${lineup.confirmed ? percent(lineup.strength) : "после публикации"}</strong><span>Схема</span><strong>${escapeHtml(lineup.formation || "—")}</strong></div>
-    <ul class="regular-list">${regulars}</ul>
+  const official = Boolean(lineup.official_available ?? lineup.confirmed);
+  const display = lineup.display_lineup || (official ? lineup.official_lineup : lineup.predicted_lineup) || {};
+  const players = display.players || [];
+  const sampleMatches = lineup.predicted_lineup?.sample_matches || 0;
+  const playerRows = players.map((player) => {
+    const alternatives = (player.alternatives || []).slice(0, 2);
+    const alternativeText = alternatives.length
+      ? `Альтернатива: ${alternatives.map((item) => `${escapeHtml(item.name)} ${percent(item.probability)}`).join(" · ")}`
+      : "";
+    return `<li>
+      <span class="formation-slot" aria-label="Позиция в схеме">${escapeHtml(player.formation_place || "—")}</span>
+      <div class="player-identity">
+        <strong>${escapeHtml(player.name || "Игрок не определен")}</strong>
+        <span>${escapeHtml(player.position || "Позиция не определена")}</span>
+        ${alternativeText ? `<small>${alternativeText}</small>` : ""}
+      </div>
+      <span class="player-probability">${official ? "старт" : percent(player.probability)}</span>
+    </li>`;
+  }).join("");
+  const emptyMessage = official
+    ? "В протоколе пока недостаточно данных о позициях игроков."
+    : "Недостаточно загруженных протоколов, чтобы надежно спрогнозировать 11 игроков.";
+  const metaValue = official ? "ESPN" : percent(display.confidence || 0);
+  const metaLabel = official ? "Источник" : "Уверенность XI";
+  return `<article class="detail-panel lineup-panel">
+    <div class="detail-title"><h3>${official ? "Официальный состав" : "Прогноз состава"} · ${escapeHtml(title || "")}</h3><span class="status-label ${official ? "confirmed" : "pending"}">${official ? "официальный" : "официального нет"}</span></div>
+    <p class="lineup-message">${escapeHtml(lineup.message || (official ? "Официальный состав опубликован." : "Официального состава пока нет. Ниже показан прогноз модели."))}</p>
+    <div class="lineup-meta"><span>Схема</span><strong>${escapeHtml(display.formation || lineup.formation || "не определена")}</strong><span>${metaLabel}</span><strong>${metaValue}</strong><span>Матчей в выборке</span><strong>${sampleMatches}</strong></div>
+    <ol class="squad-list">${playerRows || `<li class="empty-lineup">${emptyMessage}</li>`}</ol>
+    ${!official && lineup.predicted_lineup?.method ? `<small class="lineup-method">${escapeHtml(lineup.predicted_lineup.method)}</small>` : ""}
   </article>`;
 }
 

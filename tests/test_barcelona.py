@@ -40,6 +40,26 @@ def fixture(
     }
 
 
+def starters(prefix: str) -> list[dict]:
+    positions = [
+        "Goalkeeper",
+        "Right Back",
+        "Center Right Defender",
+        "Center Left Defender",
+        "Left Back",
+        "Defensive Midfielder",
+        "Right Midfielder",
+        "Attacking Midfielder",
+        "Attacking Midfielder Right",
+        "Forward",
+        "Attacking Midfielder Left",
+    ]
+    return [
+        {"name": f"{prefix} Player {slot}", "position": position, "formation_place": str(slot)}
+        for slot, position in enumerate(positions, start=1)
+    ]
+
+
 class BarcelonaModeTests(unittest.TestCase):
     def test_russian_opponent_alias_and_nearest_upcoming_fixture(self):
         provider = BarcelonaProvider()
@@ -51,6 +71,23 @@ class BarcelonaModeTests(unittest.TestCase):
         opponent = provider.resolve_opponent("Реал Мадрид", matches)
         self.assertEqual(opponent, "Real Madrid")
         self.assertEqual(provider.find_fixture(opponent, matches)["fixture_id"], "future")
+
+    def test_espn_list_pickcenter_does_not_break_summary_parsing(self):
+        provider = BarcelonaProvider()
+        market = provider._market_from_summary(
+            {
+                "pickcenter": [
+                    {
+                        "homeTeamOdds": {"moneyLine": -150},
+                        "drawOdds": {"moneyLine": 300},
+                        "awayTeamOdds": {"moneyLine": 450},
+                        "overUnder": 2.5,
+                    }
+                ]
+            }
+        )
+        self.assertEqual(market["total_line"], 2.5)
+        self.assertEqual(set(market["probabilities"]), {"home", "draw", "away"})
 
     def test_prediction_snapshot_is_one_per_fixture_and_immutable(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -111,6 +148,62 @@ class BarcelonaModeTests(unittest.TestCase):
             ]
             self.assertEqual(service._with_derived_stage(matches[1], matches)["stage"], "Тур 2")
 
+    def test_projected_lineup_has_unique_xi_positions_and_formation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            model = BarcelonaModel(BarcelonaStore(Path(tmp)))
+            base = datetime(2025, 1, 1, tzinfo=timezone.utc)
+            history = []
+            for index in range(10):
+                match = fixture(
+                    f"lineup-{index}",
+                    (base + timedelta(days=index * 7)).isoformat(),
+                    f"Opponent {index}",
+                    home_goals=2,
+                    away_goals=0,
+                )
+                match["lineups"] = {
+                    "Barcelona": {
+                        "confirmed": True,
+                        "formation": "4-3-3",
+                        "starters": starters("Barca"),
+                        "source": "espn-summary",
+                    }
+                }
+                history.append(match)
+            target = fixture("target-lineup", (base + timedelta(days=80)).isoformat(), "Real Madrid")
+
+            projected = model._projected_lineup("Barcelona", target, history)
+
+            self.assertTrue(projected["available"])
+            self.assertEqual(projected["formation"], "4-3-3")
+            self.assertEqual(len(projected["players"]), 11)
+            self.assertEqual(len({player["name"] for player in projected["players"]}), 11)
+            self.assertTrue(all(player["position"] for player in projected["players"]))
+            self.assertTrue(all(0 < player["probability"] <= 1 for player in projected["players"]))
+
+    def test_lineup_report_distinguishes_official_and_predicted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            model = BarcelonaModel(BarcelonaStore(Path(tmp)))
+            target = fixture("official-lineup", "2099-05-01T18:00:00Z", "Real Madrid")
+            target["lineups"] = {
+                "Barcelona": {
+                    "confirmed": True,
+                    "formation": "4-3-3",
+                    "starters": starters("Official"),
+                    "source": "espn-summary",
+                }
+            }
+
+            official = model._lineup_report("Barcelona", target, [])
+            predicted = model._lineup_report("Real Madrid", target, [])
+
+            self.assertTrue(official["official_available"])
+            self.assertEqual(official["display_lineup"]["type"], "confirmed")
+            self.assertEqual(len(official["display_lineup"]["players"]), 11)
+            self.assertFalse(predicted["official_available"])
+            self.assertEqual(predicted["display_lineup"]["type"], "predicted")
+            self.assertIn("Официального состава пока нет", predicted["message"])
+
     def test_web_uses_single_opponent_input(self):
         root = Path(__file__).resolve().parents[1]
         index = (root / "web" / "index.html").read_text(encoding="utf-8")
@@ -119,6 +212,8 @@ class BarcelonaModeTests(unittest.TestCase):
         self.assertNotIn('id="matchup"', index)
         self.assertIn("opponent=", app)
         self.assertNotIn("home_venue", app)
+        self.assertIn("squad-list", app)
+        self.assertIn("Официального состава пока нет", app)
 
 
 if __name__ == "__main__":
