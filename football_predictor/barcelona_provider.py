@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import html
 import re
 import urllib.parse
 import urllib.request
@@ -13,6 +14,8 @@ from .providers import EspnWorldCupProvider, ProviderError, normalize_provider_n
 
 BARCELONA_ID = "83"
 BARCELONA_NAME = "Barcelona"
+OFFICIAL_SQUAD_URL = "https://www.fcbarcelona.com/en/football/first-team/players"
+OFFICIAL_TRANSFERS_URL = "https://www.fcbarcelona.com/en/transfer-market/"
 
 LEAGUES = {
     "esp.1": "Ла Лига",
@@ -82,6 +85,60 @@ class BarcelonaProvider:
     def __init__(self, timeout: int = 25):
         self.timeout = timeout
         self.parser = EspnWorldCupProvider(timeout=timeout)
+        self._squad_cache: dict[str, Any] | None = None
+        self._squad_cached_at: datetime | None = None
+
+    def fetch_current_squad(self, force: bool = False) -> dict[str, Any]:
+        """Return the current first-team roster from FC Barcelona's site."""
+        now = datetime.now(timezone.utc)
+        if (
+            not force
+            and self._squad_cache
+            and self._squad_cached_at
+            and now - self._squad_cached_at < timedelta(hours=2)
+        ):
+            return dict(self._squad_cache)
+
+        page = self._get_text(OFFICIAL_SQUAD_URL, "official squad")
+        players = self._official_squad_from_html(page)
+        if len(players) < 18:
+            raise ProviderError("FC Barcelona official squad page returned an incomplete roster.")
+
+        recent_signings: list[str] = []
+        try:
+            transfers = self._get_text(OFFICIAL_TRANSFERS_URL, "official transfers")
+            recent_signings = self._recent_signings_from_html(transfers)
+        except ProviderError:
+            pass
+
+        indexed = {normalize_provider_name(player["name"]): player for player in players}
+        for name in recent_signings:
+            key = normalize_provider_name(name)
+            if key not in indexed:
+                player = {
+                    "name": name,
+                    "position": "Forward",
+                    "number": None,
+                    "source": "fcbarcelona-transfer-market",
+                    "recent_signing": True,
+                }
+                players.append(player)
+                indexed[key] = player
+            else:
+                indexed[key]["recent_signing"] = True
+
+        payload = {
+            "team": BARCELONA_NAME,
+            "players": players,
+            "active_names": [player["name"] for player in players],
+            "recent_signings": recent_signings,
+            "fetched_at": now.isoformat(),
+            "source": "FC Barcelona official first-team squad",
+            "source_url": OFFICIAL_SQUAD_URL,
+        }
+        self._squad_cache = payload
+        self._squad_cached_at = now
+        return dict(payload)
 
     def season_windows(self, today: date | None = None, seasons: int = 4) -> list[tuple[str, str]]:
         current = today or date.today()
@@ -233,6 +290,72 @@ class BarcelonaProvider:
                 return json.loads(response.read().decode("utf-8"))
         except Exception as exc:
             raise ProviderError(f"ESPN {label} unavailable: {exc}") from exc
+
+    def _get_text(self, url: str, label: str) -> str:
+        request = urllib.request.Request(url, headers={"User-Agent": self.user_agent})
+        try:
+            with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                return response.read().decode("utf-8", "replace")
+        except Exception as exc:
+            raise ProviderError(f"{label} unavailable: {exc}") from exc
+
+    def _official_squad_from_html(self, page: str) -> list[dict[str, Any]]:
+        blocks = re.findall(
+            r'<a[^>]+href="(?:https://www\.fcbarcelona\.com)?/en/football/first-team/players/[^\"]+"'
+            r'[^>]*class="team-person[^\"]*"[^>]*>(.*?)</a>',
+            page,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+        players: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for block in blocks:
+            first = self._class_text(block, "team-person__first-name")
+            last = self._class_text(block, "team-person__last-name")
+            position = self._class_text(block, "team-person__position-meta")
+            number_match = re.search(r'class="team-person__number"[^>]*aria-label="([^\"]*)"', block, re.IGNORECASE)
+            name = " ".join(value for value in (first, last) if value).strip()
+            key = normalize_provider_name(name)
+            if not key or not position or key in seen:
+                continue
+            seen.add(key)
+            players.append(
+                {
+                    "name": name,
+                    "position": position,
+                    "number": number_match.group(1).strip() if number_match else None,
+                    "source": "fcbarcelona-official-squad",
+                    "recent_signing": False,
+                }
+            )
+        return players
+
+    def _recent_signings_from_html(self, page: str) -> list[str]:
+        titles = [self._clean_html(value) for value in re.findall(r'class="thumbnail__title"[^>]*>(.*?)</div>', page, re.IGNORECASE | re.DOTALL)]
+        signings: list[str] = []
+        for title in titles:
+            name = None
+            match = re.fullmatch(r"FC Barcelona sign (.+)", title, re.IGNORECASE)
+            if match:
+                name = match.group(1).strip()
+            match = match or re.fullmatch(r"(.+) joins Barça", title, re.IGNORECASE)
+            if match and name is None:
+                name = match.group(1).strip()
+            if re.fullmatch(r"Adeyemi, second signing", title, re.IGNORECASE):
+                name = "Karim Adeyemi"
+            if name and normalize_provider_name(name) not in {normalize_provider_name(item) for item in signings}:
+                signings.append(name)
+        return signings
+
+    def _class_text(self, block: str, class_name: str) -> str:
+        match = re.search(
+            rf'class="{re.escape(class_name)}[^\"]*"[^>]*>(.*?)</(?:span|li)>',
+            block,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+        return self._clean_html(match.group(1)) if match else ""
+
+    def _clean_html(self, value: str) -> str:
+        return html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", value))).strip()
 
     def _summary_team_stats(self, summary: dict[str, Any]) -> dict[str, dict[str, float]]:
         result: dict[str, dict[str, float]] = {}

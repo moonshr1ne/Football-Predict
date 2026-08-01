@@ -148,6 +148,10 @@ td:nth-child(2) { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
 .detail-big { margin-top: 18px; font-size: 24px; font-weight: 850; overflow-wrap: anywhere; }
 .lineup-meta { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin: 14px 0; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .lineup-message { min-height: 38px; margin-bottom: 0; font-size: 13px; }
+.squad-context { margin: 0 0 12px; padding: 12px; background: #f4f7f5; border-left: 3px solid var(--teal); }
+.squad-context > div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; padding: 4px 0; }
+.squad-context strong { font-size: 11px; }
+.squad-context span { color: var(--muted); font-size: 10px; line-height: 1.4; overflow-wrap: anywhere; }
 .squad-list { list-style: none; margin: 0; padding: 0; }
 .squad-list li { min-height: 57px; display: grid; grid-template-columns: 30px minmax(0, 1fr) 48px; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .squad-list li:last-child { border-bottom: 0; }
@@ -159,7 +163,8 @@ td:nth-child(2) { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
 .player-identity small { margin-top: 3px; font-size: 10px; line-height: 1.25; }
 .player-probability { color: var(--teal); text-align: right; font-size: 11px; font-weight: 850; font-variant-numeric: tabular-nums; }
 .empty-lineup { display: block !important; min-height: 0 !important; padding: 16px 0 !important; color: var(--muted); font-size: 12px; }
-.lineup-method { display: block; margin-top: 13px; line-height: 1.4; }
+.selection-context { display: block; margin-top: 13px; padding: 9px 10px; background: #edf5f3; color: #096859 !important; line-height: 1.4; }
+.lineup-method { display: block; margin-top: 8px; line-height: 1.4; }
 .h2h-list { list-style: none; margin: 14px 0; padding: 0; }
 .h2h-list li { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); }
 .h2h-list small { text-align: right; }
@@ -218,6 +223,7 @@ td:nth-child(2) { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
   .detail-title { align-items: flex-start; }
   .detail-title h3 { font-size: 15px; }
   .status-label { max-width: 108px; text-align: center; }
+  .squad-context > div { grid-template-columns: 1fr; gap: 2px; }
   .validation-grid { grid-template-columns: 1fr 1fr; }
   .result-layout { gap: 12px; }
 }

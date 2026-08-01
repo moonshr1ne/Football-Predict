@@ -267,6 +267,9 @@ function lineupPanel(title, lineup = {}) {
   const display = lineup.display_lineup || (official ? lineup.official_lineup : lineup.predicted_lineup) || {};
   const players = display.players || [];
   const sampleMatches = lineup.predicted_lineup?.sample_matches || 0;
+  const squad = lineup.squad_context || {};
+  const signings = squad.recent_signings || [];
+  const filtered = squad.filtered_departures || [];
   const playerRows = players.map((player) => {
     const alternatives = (player.alternatives || []).slice(0, 2);
     const alternativeText = alternatives.length
@@ -287,11 +290,18 @@ function lineupPanel(title, lineup = {}) {
     : "Недостаточно загруженных протоколов, чтобы надежно спрогнозировать 11 игроков.";
   const metaValue = official ? "ESPN" : percent(display.confidence || 0);
   const metaLabel = official ? "Источник" : "Уверенность XI";
+  const squadInfo = squad.applied ? `<div class="squad-context">
+    <div><strong>Текущая первая команда</strong><span>${squad.active_players || 0} игроков · официальный ростер FC Barcelona</span></div>
+    ${signings.length ? `<div><strong>Новые подписания</strong><span>${signings.map(escapeHtml).join(" · ")}</span></div>` : ""}
+    ${filtered.length ? `<div><strong>Вне текущего ростера</strong><span>${filtered.map(escapeHtml).join(" · ")}</span></div>` : ""}
+  </div>` : "";
   return `<article class="detail-panel lineup-panel">
     <div class="detail-title"><h3>${official ? "Официальный состав" : "Прогноз состава"} · ${escapeHtml(title || "")}</h3><span class="status-label ${official ? "confirmed" : "pending"}">${official ? "официальный" : "официального нет"}</span></div>
     <p class="lineup-message">${escapeHtml(lineup.message || (official ? "Официальный состав опубликован." : "Официального состава пока нет. Ниже показан прогноз модели."))}</p>
     <div class="lineup-meta"><span>Схема</span><strong>${escapeHtml(display.formation || lineup.formation || "не определена")}</strong><span>${metaLabel}</span><strong>${metaValue}</strong><span>Матчей в выборке</span><strong>${sampleMatches}</strong></div>
+    ${squadInfo}
     <ol class="squad-list">${playerRows || `<li class="empty-lineup">${emptyMessage}</li>`}</ol>
+    ${!official && lineup.predicted_lineup?.selection_context ? `<small class="selection-context">${escapeHtml(lineup.predicted_lineup.selection_context)}</small>` : ""}
     ${!official && lineup.predicted_lineup?.method ? `<small class="lineup-method">${escapeHtml(lineup.predicted_lineup.method)}</small>` : ""}
   </article>`;
 }

@@ -89,6 +89,36 @@ class BarcelonaModeTests(unittest.TestCase):
         self.assertEqual(market["total_line"], 2.5)
         self.assertEqual(set(market["probabilities"]), {"home", "draw", "away"})
 
+    def test_official_squad_parser_uses_player_cards_not_stale_page_metadata(self):
+        provider = BarcelonaProvider()
+        page = """
+        <script>{"name":"Robert Lewandowski"}</script>
+        <a href="https://www.fcbarcelona.com/en/football/first-team/players/10/lamine-yamal"
+           class="team-person js-focus-container">
+          <span class="team-person__number" aria-label="10">10</span>
+          <span class="team-person__first-name js-team-list-player-first-name">Lamine</span>
+          <span class="team-person__last-name js-team-list-player-last-name">Yamal</span>
+          <li class="team-person__position-meta">Forward</li>
+        </a>
+        """
+        players = provider._official_squad_from_html(page)
+        self.assertEqual(players[0]["name"], "Lamine Yamal")
+        self.assertEqual(players[0]["position"], "Forward")
+        self.assertNotIn("Robert Lewandowski", [player["name"] for player in players])
+
+    def test_official_transfer_parser_finds_current_signings(self):
+        provider = BarcelonaProvider()
+        page = """
+        <div class="thumbnail__title">FC Barcelona sign Jesse Bisiwu</div>
+        <div class="thumbnail__title">Adeyemi, second signing</div>
+        <div class="thumbnail__title">Anthony Gordon joins Barça</div>
+        <div class="thumbnail__title">Ansu Fati joins AS Monaco</div>
+        """
+        self.assertEqual(
+            provider._recent_signings_from_html(page),
+            ["Jesse Bisiwu", "Karim Adeyemi", "Anthony Gordon"],
+        )
+
     def test_prediction_snapshot_is_one_per_fixture_and_immutable(self):
         with tempfile.TemporaryDirectory() as tmp:
             store = BarcelonaStore(Path(tmp))
@@ -180,6 +210,64 @@ class BarcelonaModeTests(unittest.TestCase):
             self.assertEqual(len({player["name"] for player in projected["players"]}), 11)
             self.assertTrue(all(player["position"] for player in projected["players"]))
             self.assertTrue(all(0 < player["probability"] <= 1 for player in projected["players"]))
+
+    def test_current_roster_removes_departure_and_classico_prefers_season_core(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            model = BarcelonaModel(BarcelonaStore(Path(tmp)))
+            base = datetime(2025, 1, 1, tzinfo=timezone.utc)
+            history = []
+            fixed = starters("Core")
+            fixed[8] = {"name": "Robert Lewandowski", "position": "Forward", "formation_place": "9"}
+            for index in range(20):
+                match = fixture(
+                    f"core-{index}",
+                    (base + timedelta(days=index * 7)).isoformat(),
+                    f"Opponent {index}",
+                    home_goals=2,
+                    away_goals=0,
+                )
+                lineup = copy.deepcopy(fixed)
+                lineup[6] = {
+                    "name": "Roony Bardghji" if index >= 17 else "Lamine Yamal",
+                    "position": "Attacking Midfielder Right",
+                    "formation_place": "7",
+                }
+                match["lineups"] = {
+                    "Barcelona": {"confirmed": True, "formation": "4-2-3-1", "starters": lineup}
+                }
+                history.append(match)
+
+            target = fixture("clasico", (base + timedelta(days=150)).isoformat(), "Real Madrid")
+            active = [
+                {"name": player["name"], "position": player["position"]}
+                for player in fixed
+                if player["name"] != "Robert Lewandowski"
+            ]
+            active.extend(
+                [
+                    {"name": "Lamine Yamal", "position": "Forward"},
+                    {"name": "Roony Bardghji", "position": "Forward"},
+                    {"name": "Ferran Torres", "position": "Forward"},
+                    {"name": "Anthony Gordon", "position": "Forward"},
+                    {"name": "Karim Adeyemi", "position": "Forward"},
+                ]
+            )
+            target["squad_context"] = {
+                "Barcelona": {
+                    "players": active,
+                    "source": "official-test-roster",
+                    "recent_signings": ["Anthony Gordon", "Karim Adeyemi"],
+                }
+            }
+
+            projected = model._projected_lineup("Barcelona", target, history)
+            names = [player["name"] for player in projected["players"]]
+            right_winger = next(player for player in projected["players"] if player["formation_place"] == "7")
+
+            self.assertNotIn("Robert Lewandowski", names)
+            self.assertEqual(right_winger["name"], "Lamine Yamal")
+            self.assertIn("Robert Lewandowski", projected["filtered_departures"])
+            self.assertTrue(projected["active_roster_applied"])
 
     def test_lineup_report_distinguishes_official_and_predicted(self):
         with tempfile.TemporaryDirectory() as tmp:

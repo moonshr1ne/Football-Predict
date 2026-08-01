@@ -922,49 +922,113 @@ class BarcelonaModel:
             },
             "predicted_lineup": projection,
             "display_lineup": display_lineup,
+            "squad_context": {
+                "applied": projection.get("active_roster_applied", False),
+                "active_players": projection.get("current_roster_size", 0),
+                "source": projection.get("roster_source"),
+                "source_url": projection.get("roster_source_url"),
+                "recent_signings": projection.get("recent_signings", []),
+                "filtered_departures": projection.get("filtered_departures", []),
+            },
             "message": (
                 "Официальный стартовый состав опубликован ESPN."
                 if official_available
-                else "Официального состава пока нет. Ниже показан прогноз модели по последним 10 матчам."
+                else (
+                    "Официального состава пока нет. Ниже показан прогноз по форме, сезонной основе и текущей заявке."
+                    if projection.get("active_roster_applied")
+                    else "Официального состава пока нет. Ниже показан прогноз модели по последним 10 матчам."
+                )
             ),
         }
 
     def _projected_lineup(self, team: str, fixture: dict[str, Any], history: list[dict[str, Any]]) -> dict[str, Any]:
         recent = self._team_matches(team, history)[:10]
         target_competition = fixture.get("competition_code")
+        squad = self._current_squad(fixture, team)
+        squad_players = squad.get("players") or []
+        active_players = {
+            normalize_provider_name(str(player.get("name") or "")): player
+            for player in squad_players
+            if player.get("name")
+        }
+        active_keys = set(active_players)
         slot_scores: defaultdict[int, defaultdict[str, float]] = defaultdict(lambda: defaultdict(float))
         player_scores: defaultdict[str, float] = defaultdict(float)
-        player_names: dict[str, str] = {}
+        player_names: dict[str, str] = {
+            key: str(player.get("name")) for key, player in active_players.items()
+        }
         slot_positions: defaultdict[tuple[int, str], Counter[str]] = defaultdict(Counter)
         formation_scores: defaultdict[str, float] = defaultdict(float)
+        filtered_players: Counter[str] = Counter()
         usable_matches = 0
         total_match_weight = 0.0
 
-        for index, match in enumerate(recent):
+        def add_lineup(match: dict[str, Any], weight: float, include_formation: bool = False) -> bool:
+            nonlocal total_match_weight
             lineup = self._fixture_lineup(match, team)
             starters = lineup.get("starters") or []
             if len(starters) < 8:
-                continue
-            usable_matches += 1
-            recency_weight = max(0.38, 1.0 - index * 0.07)
-            competition_weight = 1.12 if match.get("competition_code") == target_competition else 1.0
-            weight = recency_weight * competition_weight
+                return False
             total_match_weight += weight
-            if lineup.get("formation"):
+            if include_formation and lineup.get("formation"):
                 formation_scores[str(lineup["formation"])] += weight
             for player in starters:
                 name = str(player.get("name") or "").strip()
                 if not name:
                     continue
                 key = normalize_provider_name(name)
+                if active_keys and key not in active_keys:
+                    filtered_players[name] += 1
+                    continue
                 slot = self._formation_slot(player)
-                player_names[key] = name
+                player_names.setdefault(key, name)
                 player_scores[key] += weight
                 if slot is None:
                     continue
                 slot_scores[slot][key] += weight
                 raw_position = str(player.get("position") or "").strip()
                 if raw_position:
+                    slot_positions[(slot, key)][raw_position] += 1
+            return True
+
+        for index, match in enumerate(recent):
+            recency_weight = max(0.38, 1.0 - index * 0.07)
+            competition_weight = 1.12 if match.get("competition_code") == target_competition else 1.0
+            if add_lineup(match, recency_weight * competition_weight, include_formation=True):
+                usable_matches += 1
+
+        # Last-ten form can overvalue a short rotation spell. A lighter season
+        # prior keeps established starters ahead in important fixtures.
+        for index, match in enumerate(self._team_matches(team, history)[:30]):
+            season_weight = max(0.09, 0.18 - index * 0.003)
+            add_lineup(match, season_weight, include_formation=False)
+
+        high_stakes = self._is_high_stakes_fixture(fixture)
+        if high_stakes:
+            opponent = self._other_team(fixture, team)
+            head_to_head = [
+                match
+                for match in self._team_matches(team, history)
+                if self._fixture_has_team(match, opponent)
+            ][:6]
+            for index, match in enumerate(head_to_head):
+                add_lineup(match, max(0.18, 0.58 - index * 0.08), include_formation=False)
+
+        # New signings have no Barcelona start history yet. Keep them in the
+        # positional candidate pool with a conservative prior until match data
+        # replaces it.
+        if active_players:
+            newcomer_score = max(0.16, total_match_weight * 0.025)
+            for key, player in active_players.items():
+                if key in player_scores:
+                    continue
+                raw_position = str(player.get("position") or "")
+                compatible_slots = self._generic_position_slots(raw_position)
+                if not compatible_slots:
+                    continue
+                player_scores[key] = newcomer_score
+                for slot in compatible_slots:
+                    slot_scores[slot][key] += newcomer_score
                     slot_positions[(slot, key)][raw_position] += 1
 
         formation = max(formation_scores, key=formation_scores.get) if formation_scores else None
@@ -1042,8 +1106,65 @@ class BarcelonaModel:
             "players": players,
             "confidence": round(mean(confidences), 3) if confidences else 0.0,
             "sample_matches": usable_matches,
-            "method": "Взвешенная частота стартов по позиции: свежие матчи и текущий турнир имеют больший вес.",
+            "active_roster_applied": bool(active_players),
+            "current_roster_size": len(active_players),
+            "roster_source": squad.get("source"),
+            "roster_source_url": squad.get("source_url"),
+            "recent_signings": squad.get("recent_signings") or [],
+            "filtered_departures": [name for name, _ in filtered_players.most_common(8)],
+            "selection_context": (
+                "Класико или топ-матч: усилен вес сезонной основы и предыдущих очных встреч."
+                if high_stakes
+                else "Свежие старты дополнены сезонной частотой и актуальной заявкой."
+            ),
+            "method": (
+                "Текущий ростер фильтрует кандидатов; затем учитываются последние 10 матчей, сезонная основа и важность встречи."
+                if active_players
+                else "Учитываются последние 10 матчей, сезонная основа и важность встречи; актуальный ростер команды пока не загружен."
+            ),
         }
+
+    def _current_squad(self, fixture: dict[str, Any], team: str) -> dict[str, Any]:
+        contexts = fixture.get("squad_context") or {}
+        query = normalize_provider_name(team)
+        for name, payload in contexts.items():
+            if normalize_provider_name(str(name)) == query and isinstance(payload, dict):
+                return payload
+        return {}
+
+    def _generic_position_slots(self, raw_position: str) -> list[int]:
+        normalized = normalize_provider_name(raw_position)
+        if "goalkeeper" in normalized:
+            return [1]
+        if "defender" in normalized:
+            return [2, 3, 5, 6]
+        if "midfielder" in normalized:
+            return [4, 8, 10]
+        if any(token in normalized for token in ("forward", "striker", "winger")):
+            return [7, 9, 11]
+        return []
+
+    def _is_high_stakes_fixture(self, fixture: dict[str, Any]) -> bool:
+        teams = {
+            normalize_provider_name(str(fixture.get("home_team") or "")),
+            normalize_provider_name(str(fixture.get("away_team") or "")),
+        }
+        return teams == {"barcelona", "real madrid"} or (
+            fixture.get("competition_code") == "uefa.champions" and self._is_knockout(fixture)
+        )
+
+    def _other_team(self, fixture: dict[str, Any], team: str) -> str:
+        query = normalize_provider_name(team)
+        home = str(fixture.get("home_team") or "")
+        away = str(fixture.get("away_team") or "")
+        return away if normalize_provider_name(home) == query else home
+
+    def _fixture_has_team(self, fixture: dict[str, Any], team: str) -> bool:
+        query = normalize_provider_name(team)
+        return any(
+            normalize_provider_name(str(fixture.get(key) or "")) == query
+            for key in ("home_team", "away_team")
+        )
 
     def _prepared_confirmed_players(self, starters: list[dict[str, Any]]) -> list[dict[str, Any]]:
         prepared = []

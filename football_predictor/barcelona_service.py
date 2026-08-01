@@ -32,6 +32,8 @@ class BarcelonaService:
                 pass
             fixture = self._with_derived_stage(fixture, self.store.load_universe())
 
+        fixture = self._with_current_squad(fixture)
+
         saved = self.store.prediction_for_fixture(str(fixture.get("fixture_id")))
         if fixture_has_started(fixture):
             payload = self.model.result_payload(fixture, saved)
@@ -48,6 +50,7 @@ class BarcelonaService:
             fixture,
         )
         fixture = self._with_derived_stage(fixture, universe)
+        fixture = self._with_current_squad(fixture)
 
         self.model.train_and_backtest()
         if saved:
@@ -109,6 +112,15 @@ class BarcelonaService:
             return True
         kickoff = _parse_kickoff(fixture)
         return abs((kickoff - datetime.now(timezone.utc)).total_seconds()) <= 48 * 3600
+
+    def _with_current_squad(self, fixture: dict[str, Any]) -> dict[str, Any]:
+        enriched = dict(fixture)
+        try:
+            squad = self.provider.fetch_current_squad()
+        except ProviderError:
+            return enriched
+        enriched["squad_context"] = {BARCELONA_NAME: squad}
+        return enriched
 
     def _has_barcelona(self, fixture: dict[str, Any]) -> bool:
         return self._barca_home(fixture) or normalize_provider_name(str(fixture.get("away_team") or "")) == "barcelona"
